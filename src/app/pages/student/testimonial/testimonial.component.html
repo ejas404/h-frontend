@@ -1,0 +1,53 @@
+<section class="student-testimonial h-[100vh] w-full relative flex justify-center items-center text-center">
+    <div class="content">
+        <h1 class="text-3xl font-extrabold mb-20">Student Testimonial</h1>
+
+
+        <div class="container max-w-[30rem] p-3 rounded-[5rem] px-10 relative z-100 bg-white shadow-xl">
+            <p class="text-sm">{{userTestimonials[mainUser].message}}</p>
+            <div class="image-box h-[5rem] w-[5rem] rounded-full overflow-hidden inline-block my-3">
+                <img class="object-cover w-full h-full" src="{{userTestimonials[mainUser].img}}" alt="">
+            </div>
+            <h2 class="font-extrabold">{{userTestimonials[mainUser].name}}</h2>
+
+            <div
+                class="w-[calc(100%-10px)] h-full absolute bg-primary bottom-0 right-2 shadow-lg rounded-[5rem] -rotate-3 -z-50">
+            </div>
+
+            <div id="1" (click)="swapUsers(this)"
+                class="float-users h-[4rem] w-[4rem] absolute top-[50%] translate-y-[-50%] -left-[10rem] rounded-full overflow-hidden border-4 border-yellow">
+                <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
+            </div>
+
+            <div id="2" (click)="swapUsers(this)"
+                class="float-users h-[4rem] w-[4rem] absolute top-[50%] translate-y-[-50%] -right-[10rem] rounded-full overflow-hidden border-4 border-yellow">
+                <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
+            </div>
+
+            <div id="3" (click)="swapUsers(this)"
+                class="float-users h-[2.5rem] w-[2.5rem] absolute top-[20%]  -left-[5rem] rounded-full overflow-hidden border-4 border-yellow">
+                <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
+            </div>
+
+            <div id="4" (click)="swapUsers(this)"
+                class="float-users h-[2.5rem] w-[2.5rem] absolute top-[20%]  -right-[5rem] rounded-full overflow-hidden border-4 border-yellow">
+                <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
+            </div>
+
+            <div id="5" (click)="swapUsers(this)"
+                class="float-users h-[3rem] w-[3rem] absolute top-[70%]  -left-[7rem] rounded-full overflow-hidden border-4 border-yellow">
+                <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
+            </div>
+
+            <div id="6" (click)="swapUsers(this)"
+                class="float-users h-[3rem] w-[3rem] absolute top-[70%]  -right-[7rem] rounded-full overflow-hidden border-4 border-yellow">
+                <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</section>

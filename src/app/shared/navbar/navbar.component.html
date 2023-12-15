@@ -1,0 +1,18 @@
+<nav class="flex justify-between items-center px-5 py-3">
+    <div class="nav-logo">
+        <h1 class="text-2xl logo text-primary font-bold">horizon</h1>
+    </div>
+    <div class="nav-center">
+        <ul class="flex children:px-3">
+            <li><a routerLink="/" routerLinkActive >Home</a></li>
+            <li><a routerLink="/courses" >Courses</a></li>
+            <li><a routerLink="/about" >About</a></li>
+            <li><a routerLink="/contact" >Contact</a></li>
+        </ul>
+    </div>
+    <div class="nav-end children:hover:cursor-pointer">
+        <a routerLink="/login" class="text-sm hover:text-[#34359b] hover:underline" >Log in</a>
+        <a class="text-xs ms-2 bg-primary text-white p-1 rounded " routerLink="/signup">Signup</a>
+    </div>
+</nav>
+

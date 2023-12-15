@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: logoFont;
+    src: url(../src/assets/fonts/HammersmithOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: globalFont;
+    src: url(../src/assets/fonts/Poppins-Regular.ttf);
+}
+
+
+
+:root{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: globalFont;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.logo{
+    font-family: logoFont;
+}
+.shadow-box{
+    box-shadow: -3px 5px 10px  rgb(202, 202, 202);
+}

@@ -1,0 +1,28 @@
+<main class="px-[10rem] py-[5rem] w-full h-[100vh]">
+    <section class="login-page flex w-full h-full shadow-2xl shadow-box">
+        <div class="login-page-left basis-2/5 flex flex-col px-5 py-5">
+            <div class="login-form-top flex-1 flex items-center">
+                <div class="form px-5 ">
+                    <h2 class="text-[1.5rem] font-bold mb-8">Welcome Back</h2>
+                    <form-input [placeholder]="'Email'" [type]="'text'"></form-input>
+                    <form-input [placeholder]="'Password'" [type]="'text'"></form-input>
+
+                    <button class="w-full border border-light-gray py-2 rounded my-2 text-sm" type="button">
+                        <span><img class="h-3 w-auto inline" src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt=""> Sign up with Google</span>
+
+                        
+                    </button>
+                    <form-button [type]="'submit'" [value]="'Login'"
+                        [class]="'bg-primary font-bold text-white'"></form-button>
+
+                </div>
+            </div>
+            <div class="login-form-bottom text-center">
+                <p class="text-sm">Don't have an account yet ? <a class="text-primary" routerLink="/signup">Join Now</a></p>
+            </div>
+        </div>
+        <div class="login-page-right basis-3/5 bg-primary grid justify-items-center content-center">
+            <h1 class="logo text-white text-3xl">horizon</h1>
+        </div>
+    </section>
+</main>
