@@ -7,6 +7,13 @@ import { CoursesComponent } from './pages/student/courses/courses.component';
 import { AboutComponent } from './pages/student/about/about.component';
 import { ContactComponent } from './pages/student/contact/contact.component';
 import { HomepageComponent } from './pages/student/homepage/homepage.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
+import { AdminSettingsComponent } from './pages/admin/admin-settings/admin-settings.component';
+import { AdminStudentsComponent } from './pages/admin/admin-students/admin-students.component';
+import { AdminTutorsComponent } from './pages/admin/admin-tutors/admin-tutors.component';
+import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
+import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
 
 const routes: Routes = [
   {path:'login', component : LoginComponent},
@@ -19,7 +26,17 @@ const routes: Routes = [
       {path : 'contact', component : ContactComponent},
       {path :'',component : HomepageComponent}
     ]
-  }
+  },
+  {path : 'admin' , component : AdminPageComponent,
+   children : [
+    {path : 'dashboard', component : AdminDashboardComponent},
+    {path : 'students', component : AdminStudentsComponent},
+    {path : 'tutors', component : AdminTutorsComponent},
+    {path : 'settings', component : AdminSettingsComponent},
+    {path : 'courses', component : AdminCoursesComponent}
+   ]
+  },
+  {path : 'admin/login', component : AdminLoginComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,26 @@
+<main class="px-[10rem] py-[5rem] w-full h-[100vh]">
+    <section class="login-page flex w-full h-full shadow-2xl shadow-box rounded-lg overflow-hidden">
+        <div class="login-page-left basis-2/5 flex flex-col px-5 py-5">
+            <div class="login-form-top flex-1 flex items-center">
+                <div class="form px-5 ">
+                    <h2 class="text-[1.5rem] font-bold mb-8">Welcome Admin</h2>
+                    <form-input [placeholder]="'Email'" [type]="'text'"></form-input>
+                    <form-input [placeholder]="'Password'" [type]="'text'"></form-input>
+
+                    <button class="w-full border border-admin-primary py-2 rounded my-2 text-sm" type="button">
+                        <span>Login with otp</span>
+
+                        
+                    </button>
+                    <form-button [type]="'submit'" [value]="'Login'"
+                        [class]="'bg-admin-primary font-bold text-white'"></form-button>
+
+                </div>
+            </div>
+            
+        </div>
+        <div class="login-page-right basis-3/5 bg-admin-primary grid justify-items-center content-center">
+            <h1 class="logo text-white text-3xl"><a>horizon</a></h1>
+        </div>
+    </section>
+</main>

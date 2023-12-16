@@ -1,0 +1,13 @@
+<app-navbar [user]="'admin'"></app-navbar>
+<main class="w-full h-[calc(100vh-3rem)] px-[7rem] py-[2rem] ">
+    <section class="bg-admin-primary w-full h-full flex justify-between rounded-xl">
+        <div class="sidebar w-[8rem] flex items-center justify-center">
+            <app-admin-sidebar></app-admin-sidebar>
+        </div>
+        <div class="adminpages flex-1 p-4">
+            <section class="bg-white w-full h-full rounded-r-lg rounded-tl-lg">
+                <router-outlet></router-outlet>
+            </section>            
+        </div>
+    </section>
+</main>

@@ -1,5 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule} from '@angular/platform-browser';
+import { NgIconsModule } from '@ng-icons/core';
+import { bootstrapFileEarmarkMedicalFill, bootstrapGearFill, bootstrapGrid1x2Fill, bootstrapPeopleFill, bootstrapPersonFill } from '@ng-icons/bootstrap-icons';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +21,15 @@ import { TestimonialComponent } from './pages/student/testimonial/testimonial.co
 import { ContactComponent } from './pages/student/contact/contact.component';
 import { SubscribeComponent } from './pages/student/subscribe/subscribe.component';
 import { HomeCoursesComponent } from './pages/student/home-courses/home-courses.component';
+import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { AdminStudentsComponent } from './pages/admin/admin-students/admin-students.component';
+import { AdminTutorsComponent } from './pages/admin/admin-tutors/admin-tutors.component';
+import { AdminSettingsComponent } from './pages/admin/admin-settings/admin-settings.component';
+import { AdminSidebarComponent } from './pages/admin/admin-sidebar/admin-sidebar.component';
+import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
+import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
+
 
 @NgModule({
   declarations: [
@@ -33,12 +46,29 @@ import { HomeCoursesComponent } from './pages/student/home-courses/home-courses.
     TestimonialComponent,
     ContactComponent,
     SubscribeComponent,
-    HomeCoursesComponent 
+    HomeCoursesComponent,
+    AdminLoginComponent,
+    AdminDashboardComponent,
+    AdminStudentsComponent,
+    AdminTutorsComponent,
+    AdminSettingsComponent,
+    AdminSidebarComponent,
+    AdminPageComponent,
+    AdminCoursesComponent 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    NgIconsModule.withIcons(
+      {
+        bootstrapPersonFill,
+        bootstrapPeopleFill,
+        bootstrapGearFill,
+        bootstrapGrid1x2Fill,
+        bootstrapFileEarmarkMedicalFill   
+      })
+
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
