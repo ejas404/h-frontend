@@ -34,6 +34,7 @@ import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './core/state/auth/reducer';
 import { AuthEffects } from './core/state/auth/effect';
+import { ProfileComponent } from './pages/student/profile/profile.component';
 
 
 
@@ -60,7 +61,8 @@ import { AuthEffects } from './core/state/auth/effect';
     AdminSettingsComponent,
     AdminSidebarComponent,
     AdminPageComponent,
-    AdminCoursesComponent 
+    AdminCoursesComponent,
+    ProfileComponent 
   ],
   imports: [
     BrowserModule,

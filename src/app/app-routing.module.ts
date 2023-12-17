@@ -15,10 +15,12 @@ import { AdminTutorsComponent } from './pages/admin/admin-tutors/admin-tutors.co
 import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
 import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
 import { adminGuard } from './core/guards/admin_guard';
+import { ProfileComponent } from './pages/student/profile/profile.component';
 
 const routes: Routes = [
   {path:'login', component : LoginComponent},
   {path : 'signup',component : SignupComponent},
+  {path : 'profile', component : ProfileComponent},
   {
     path : '', component : HomeComponent , 
     children : [

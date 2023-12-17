@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BASE_URL } from "../constant/uri";
-import { LoginCredential } from "../models/auth";
+import { LoginCredential, RegisterModel } from "../models/auth";
 import { Observable } from "rxjs";
 
 
@@ -21,6 +21,14 @@ export class AuthService{
 
     tutorLogin(reqBody : LoginCredential) : Observable<any>{
         return this.http.post(`${BASE_URL}/tutor/login`,reqBody, {withCredentials : true})
+    }
+
+    studentRegister(reqBody : RegisterModel): Observable<any>{
+        return this.http.post(`${BASE_URL}/student/register`,reqBody, {withCredentials : true})
+    }
+
+    tutorRegister(reqBody : RegisterModel): Observable<any>{
+        return this.http.post(`${BASE_URL}/tutor/register`,reqBody, {withCredentials : true})
     }
 
 }

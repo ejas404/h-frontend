@@ -50,6 +50,12 @@ export class AuthEffects {
     )
 )
 
+
+
+
+
+// effect for after the login success
+
     loginSuccess$ = createEffect(
         () =>
           this.actions$.pipe(
@@ -67,6 +73,9 @@ export class AuthEffects {
           ),
         { dispatch: false }
       );
+
+
+      // effect for after the login
 
       loginFailure$ = this.actions$.pipe(
         ofType(AuthActions.loginFailure),
