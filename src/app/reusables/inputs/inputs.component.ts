@@ -8,4 +8,7 @@ import { Component, Input } from '@angular/core';
 export class InputsComponent {
   @Input()type !: string ;
   @Input()placeholder !: string ;
+  @Input()style !: string;
+  @Input()name !: string;
+  // @Input() control : any;
 }

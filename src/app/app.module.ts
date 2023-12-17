@@ -1,11 +1,12 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
 import { NgIconsModule } from '@ng-icons/core';
-import { bootstrapFileEarmarkMedicalFill, bootstrapGearFill, bootstrapGrid1x2Fill, bootstrapPeopleFill, bootstrapPersonFill } from '@ng-icons/bootstrap-icons';
-
-
-
+import { bootstrapFileEarmarkMedicalFill, bootstrapGearFill, bootstrapGrid1x2Fill, bootstrapPeopleFill, bootstrapPersonCircle } from '@ng-icons/bootstrap-icons';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
+
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -29,6 +30,11 @@ import { AdminSettingsComponent } from './pages/admin/admin-settings/admin-setti
 import { AdminSidebarComponent } from './pages/admin/admin-sidebar/admin-sidebar.component';
 import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
 import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
+import { FormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { authReducer } from './core/state/auth/reducer';
+import { AuthEffects } from './core/state/auth/effect';
+
 
 
 @NgModule({
@@ -60,14 +66,18 @@ import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses
     BrowserModule,
     AppRoutingModule,
     RouterModule,
+    HttpClientModule,
+    FormsModule,
     NgIconsModule.withIcons(
       {
-        bootstrapPersonFill,
         bootstrapPeopleFill,
         bootstrapGearFill,
         bootstrapGrid1x2Fill,
-        bootstrapFileEarmarkMedicalFill   
-      })
+        bootstrapFileEarmarkMedicalFill,
+        bootstrapPersonCircle   
+      }),
+    StoreModule.forRoot({auth : authReducer}),
+    EffectsModule.forRoot([AuthEffects])
 
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA ],

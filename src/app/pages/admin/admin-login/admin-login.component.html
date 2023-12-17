@@ -3,21 +3,28 @@
         <div class="login-page-left basis-2/5 flex flex-col px-5 py-5">
             <div class="login-form-top flex-1 flex items-center">
                 <div class="form px-5 ">
-                    <h2 class="text-[1.5rem] font-bold mb-8">Welcome Admin</h2>
-                    <form-input [placeholder]="'Email'" [type]="'text'"></form-input>
-                    <form-input [placeholder]="'Password'" [type]="'text'"></form-input>
+                    <form (ngSubmit)="onSubmitClick(f)" #f="ngForm">
+                        <h2 class="text-[1.5rem] font-bold mb-8">Welcome Admin</h2>
+                        <input ngModel name="email" class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded" type="email" placeholder="Email" #email="ngModel" required email >
 
-                    <button class="w-full border border-admin-primary py-2 rounded my-2 text-sm" type="button">
-                        <span>Login with otp</span>
+                        <span *ngIf="!email.valid && email.touched" class="text-sm text-red-600">Enter a valid email</span>
+                        <!-- <span class="text-sm">Enter  your email here</span> -->
 
+                        <input ngModel name="password" class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded" type="password" placeholder="Password" required 
+                        pattern="^[0-9a-zA-Z]+$" #password="ngModel">
+
+                        <span *ngIf="!password.valid && password.touched" class="text-sm text-red-600">Please enter your password</span>
                         
-                    </button>
-                    <form-button [type]="'submit'" [value]="'Login'"
-                        [class]="'bg-admin-primary font-bold text-white'"></form-button>
+                        <button  class="w-full border border-admin-primary py-2 rounded my-2 text-sm" type="button">
+                            <span>Login with otp</span>
+                        </button>
+                        <button type="submit" [disabled]="!f.valid"
 
+                            class="bg-admin-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Login</button>
+                    </form>
                 </div>
             </div>
-            
+
         </div>
         <div class="login-page-right basis-3/5 bg-admin-primary grid justify-items-center content-center">
             <h1 class="logo text-white text-3xl"><a>horizon</a></h1>

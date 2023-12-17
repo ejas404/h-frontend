@@ -14,6 +14,7 @@ import { AdminStudentsComponent } from './pages/admin/admin-students/admin-stude
 import { AdminTutorsComponent } from './pages/admin/admin-tutors/admin-tutors.component';
 import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
 import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
+import { adminGuard } from './core/guards/admin_guard';
 
 const routes: Routes = [
   {path:'login', component : LoginComponent},
@@ -27,7 +28,7 @@ const routes: Routes = [
       {path :'',component : HomepageComponent}
     ]
   },
-  {path : 'admin' , component : AdminPageComponent,
+  {path : 'admin' ,canActivate:[adminGuard], component : AdminPageComponent,
    children : [
     {path : 'dashboard', component : AdminDashboardComponent},
     {path : 'students', component : AdminStudentsComponent},

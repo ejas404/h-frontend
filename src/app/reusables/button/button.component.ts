@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'form-button',
@@ -9,4 +9,5 @@ export class ButtonComponent {
   @Input()value !: string;
   @Input()type !: string;
   @Input()class !: string;
+
 }
