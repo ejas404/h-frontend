@@ -1,1 +1,34 @@
-<p>admin-students works!</p>
+<div class="overflow-y-scroll h-full w-full">
+    <table class="min-w-full border border-gray-300">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Sl No</th>
+                <th class="py-2 px-4 border-b">Name</th>
+                <th class="py-2 px-4 border-b">Email</th>
+                <th class="py-2 px-4 border-b">Edit</th>
+                <th class="py-2 px-4 border-b">Restrict</th>
+                <th class="py-2 px-4 border-b">Delete</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="userList" class="text-center">
+            <tr *ngFor="let each of userList; index as i ">
+                <td class="py-2 px-4 border-b">{{ i + 1 }}</td>
+                <td class="py-2 px-4 border-b">{{ each.name }}</td>
+                <td class="py-2 px-4 border-b">{{ each.email }}</td>
+                <td class="py-2 px-4 border-b">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" >Edit</button>
+                </td>
+                <td *ngIf="!each.isBlocked" class="py-2 px-4 border-b">
+                    <button class="bg-white  text-primary border-primary border font-bold py-1 px-2 rounded" (click)="blockUser(each._id)" >Block</button>
+                </td>
+                <td *ngIf="each.isBlocked" class="py-2 px-4 border-b">
+                    <button class="bg-white border border-green-600  text-green-600 font-bold py-1 px-2 rounded" (click)="unblockUser(each._id)" >Unblock</button>
+                </td>
+                <td class="py-2 px-4 border-b">
+                    <button class="bg-admin-primary text-white font-bold py-1 px-2 rounded" (click)="deleteUser(each._id)">Delete</button>
+                </td>
+            </tr>
+            <!-- Add more rows with data here -->
+        </tbody>
+    </table>
+</div>

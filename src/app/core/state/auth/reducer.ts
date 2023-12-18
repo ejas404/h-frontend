@@ -36,6 +36,7 @@ const _authReducer = createReducer(
         }
     }),
     on(loginFailure , (state , {error})=>{
+        console.log('login failure')
         return {
             ...state,
             loginError : error,

@@ -5,6 +5,8 @@ import { bootstrapFileEarmarkMedicalFill, bootstrapGearFill, bootstrapGrid1x2Fil
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
+import { AuthEffects } from './core/state/auth/effect';
+import { dashboardReducer } from './core/state/admin/dashboard/reducer';
 
 
 import { AppComponent } from './app.component';
@@ -33,8 +35,8 @@ import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses
 import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './core/state/auth/reducer';
-import { AuthEffects } from './core/state/auth/effect';
 import { ProfileComponent } from './pages/student/profile/profile.component';
+import { DashboardEffects } from './core/state/admin/dashboard/effects';
 
 
 
@@ -78,8 +80,8 @@ import { ProfileComponent } from './pages/student/profile/profile.component';
         bootstrapFileEarmarkMedicalFill,
         bootstrapPersonCircle   
       }),
-    StoreModule.forRoot({auth : authReducer}),
-    EffectsModule.forRoot([AuthEffects])
+    StoreModule.forRoot({auth : authReducer,dashboard : dashboardReducer}),
+    EffectsModule.forRoot([AuthEffects, DashboardEffects])
 
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA ],

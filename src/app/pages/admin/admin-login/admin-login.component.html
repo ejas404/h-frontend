@@ -11,7 +11,7 @@
                         <!-- <span class="text-sm">Enter  your email here</span> -->
 
                         <input ngModel name="password" class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded" type="password" placeholder="Password" required 
-                        pattern="^[0-9a-zA-Z]+$" #password="ngModel">
+                        pattern="^[0-9a-zA-Z]+$" #password="ngModel" autocomplete="off">
 
                         <span *ngIf="!password.valid && password.touched" class="text-sm text-red-600">Please enter your password</span>
                         

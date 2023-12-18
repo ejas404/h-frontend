@@ -7,7 +7,8 @@ export interface UserModel{
     email : string | null,
     name : string | null,
     role ?: string,
-    _id ?: string
+    _id ?: string,
+    isBlocked ?: boolean
 }
 
 export interface RegisterModel{
