@@ -24,8 +24,10 @@ export class DashboardEffects{
                       }
                           
                       ),
-                      catchError((error) => of(DashboardActions.dashboardFailure({error})
-                        )
+                        catchError((error) => { 
+                            console.log(error)
+                            console.log('get user error occured')
+                            return of(DashboardActions.dashboardFailure({error}))}
                       )
                 )
             })

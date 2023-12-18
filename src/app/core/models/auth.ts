@@ -8,6 +8,7 @@ export interface UserModel{
     name : string | null,
     role ?: string,
     _id ?: string,
+    contact ?: string,
     isBlocked ?: boolean
 }
 

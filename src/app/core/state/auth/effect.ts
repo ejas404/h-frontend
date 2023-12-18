@@ -62,7 +62,7 @@ export class AuthEffects {
         tap(({ successResponse }) => {
           console.log(successResponse.user.role, 'role printing')
           if (successResponse.user.role === 'Admin') {
-            this.router.navigateByUrl('/admin/dashboard')
+            this.router.navigateByUrl('/admin')
           } else if (successResponse.user.role === 'Student') {
             this.router.navigateByUrl('/profile')
           } else if (successResponse.user.role === 'Tutor') {

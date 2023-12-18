@@ -15,9 +15,14 @@ import { AdminTutorsComponent } from './pages/admin/admin-tutors/admin-tutors.co
 import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
 import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
 import { adminGuard } from './core/guards/admin_guard';
-import { ProfileComponent } from './pages/student/profile/profile.component';
 import { studentGuard } from './core/guards/student_guard';
 import { SnotfoundComponent } from './pages/student/snotfound/snotfound.component';
+import { MainProfileComponent } from './pages/student/profile/main-profile/main-profile.component';
+import { CoursesProfileComponent } from './pages/student/profile/courses-profile/courses-profile.component';
+import { ConnectionProfileComponent } from './pages/student/profile/connection-profile/connection-profile.component';
+import { AccountProfileComponent } from './pages/student/profile/account-profile/account-profile.component';
+import { NotificationProfileComponent } from './pages/student/profile/notification-profile/notification-profile.component';
+import { StudentProfileComponent } from './pages/student/profile/student-profile/student-profile.component';
 
 const routes: Routes = [
   {path:'login', component : LoginComponent},
@@ -29,18 +34,27 @@ const routes: Routes = [
       {path : 'about', component : AboutComponent},
       {path : 'contact', component : ContactComponent},
       {path :'',component : HomepageComponent},
-      {path : 'profile',canActivate:[studentGuard] ,component : ProfileComponent},
     ]
   },
   {path : 'admin' ,canActivate:[adminGuard], component : AdminPageComponent,
    children : [
-    {path : 'dashboard', component : AdminDashboardComponent},
+    {path : '', component : AdminDashboardComponent},
     {path : 'students', component : AdminStudentsComponent},
     {path : 'tutors', component : AdminTutorsComponent},
     {path : 'settings', component : AdminSettingsComponent},
     {path : 'courses', component : AdminCoursesComponent}
    ]
   },
+  {path : 'profile',canActivate:[studentGuard] , component : MainProfileComponent,
+        children : [
+          {path : 'student', component : StudentProfileComponent},
+          {path : 'courses', component : CoursesProfileComponent },
+          {path : 'connection', component : ConnectionProfileComponent},
+          {path : 'account', component : AccountProfileComponent},
+          {path : 'notification', component : NotificationProfileComponent},
+        ]
+    
+      },
   {path : 'admin/login', component : AdminLoginComponent},
   {path : '**', component : SnotfoundComponent}
 ];

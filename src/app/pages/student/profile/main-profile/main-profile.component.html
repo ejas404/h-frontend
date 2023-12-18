@@ -1,0 +1,21 @@
+<app-navbar [user]="'profile'"></app-navbar>
+<main class="w-full h-[calc(100vh-3rem)] px-[7rem] py-[2rem] ">
+    <section class="bg-zinc-500 w-full h-full flex justify-between rounded-xl">
+        <div class="sidebar w-[12rem] flex flex-col items-center justify-center">
+            <div class="user-data text-center">
+                <div class="inline-block h-[6rem] w-[6rem] rounded-full overflow-hidden ">
+                    <img class="object-cover w-full h-full"
+                        src="../../../../../assets/student/faces/young-bearded-man-with-striped-shirt_273609-5677.avif"
+                        alt="">
+                </div>
+                <h1 class="my-2 font-semibold text-md text-black">Ejas Mohammad Sufiyan</h1>
+            </div>
+            <app-sidebar-profile></app-sidebar-profile>
+        </div>
+        <div class="adminpages flex-1 p-4">
+            <section class="bg-white w-full h-full rounded-r-lg rounded-tl-lg">
+                <router-outlet></router-outlet>
+            </section>
+        </div>
+    </section>
+</main>

@@ -32,12 +32,19 @@ import { AdminSettingsComponent } from './pages/admin/admin-settings/admin-setti
 import { AdminSidebarComponent } from './pages/admin/admin-sidebar/admin-sidebar.component';
 import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
 import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './core/state/auth/reducer';
-import { ProfileComponent } from './pages/student/profile/profile.component';
 import { DashboardEffects } from './core/state/admin/dashboard/effects';
 import { SnotfoundComponent } from './pages/student/snotfound/snotfound.component';
+import { StudentProfileComponent } from './pages/student/profile/student-profile/student-profile.component';
+import { ConnectionProfileComponent } from './pages/student/profile/connection-profile/connection-profile.component';
+import { AccountProfileComponent } from './pages/student/profile/account-profile/account-profile.component';
+import { MainProfileComponent } from './pages/student/profile/main-profile/main-profile.component';
+import { CoursesProfileComponent } from './pages/student/profile/courses-profile/courses-profile.component';
+import { SidebarProfileComponent } from './pages/student/profile/sidebar-profile/sidebar-profile.component';
+import { studProfReducer } from './core/state/student/profile_page/reducer';
+import { StudentProfileEffect } from './core/state/student/profile_page/effects';
 
 
 
@@ -65,8 +72,13 @@ import { SnotfoundComponent } from './pages/student/snotfound/snotfound.componen
     AdminSidebarComponent,
     AdminPageComponent,
     AdminCoursesComponent,
-    ProfileComponent,
-    SnotfoundComponent
+    SnotfoundComponent,
+    StudentProfileComponent,
+    ConnectionProfileComponent,
+    AccountProfileComponent,
+    MainProfileComponent,
+    CoursesProfileComponent,
+    SidebarProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +86,7 @@ import { SnotfoundComponent } from './pages/student/snotfound/snotfound.componen
     RouterModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgIconsModule.withIcons(
       {
         bootstrapPeopleFill,
@@ -82,8 +95,20 @@ import { SnotfoundComponent } from './pages/student/snotfound/snotfound.componen
         bootstrapFileEarmarkMedicalFill,
         bootstrapPersonCircle   
       }),
-    StoreModule.forRoot({auth : authReducer,dashboard : dashboardReducer}),
-    EffectsModule.forRoot([AuthEffects, DashboardEffects])
+    StoreModule.forRoot(
+      {
+        auth : authReducer,
+        dashboard : dashboardReducer , 
+        studProf : studProfReducer
+      }),
+    
+    EffectsModule.forRoot(
+      [
+        AuthEffects, 
+        DashboardEffects,
+        StudentProfileEffect
+      ]
+        )
 
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA ],
