@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './sidebar-profile.component.html',
   styleUrl: './sidebar-profile.component.scss'
 })
-export class SidebarProfileComponent {
-
-}
+export class SidebarProfileComponent{}

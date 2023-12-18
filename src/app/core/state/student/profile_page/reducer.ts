@@ -12,7 +12,7 @@ const _profileReducer = createReducer(
     on(getUserSuccess, (state, { userData }) => {
         return {
             ...state,
-            userData
+            userData : userData
         }
     })
 

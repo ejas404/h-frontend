@@ -36,8 +36,6 @@ export class StudentProfileEffect{
       this.actions$.pipe(
         ofType(StudProfActions.getUserSuccess),
         tap(({ userData }) => {
-          alert('registered successfully')
-          console.log(userData)
         })
       ),
     { dispatch: false }

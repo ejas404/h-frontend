@@ -1,1 +1,41 @@
-<p>account-profile works!</p>
+<section class="w-full h-full p-5">
+    <h1>Reset Password</h1>
+    <div class="reset-pass border rounded p-3">
+        <p class="text-xs text-gray">Change your current password to new one</p>
+        <form (ngSubmit)="resetPassword(resetpass)" #resetpass="ngForm">
+            <div class="max-w-[20rem]">
+                <input ngModel name="currentPassword"
+                    class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                    type="password" placeholder="Current password" autocomplete="off" required pattern="^[0-9a-zA-Z]+$"
+                    #current_password="ngModel">
+
+                <span *ngIf="!current_password.valid && current_password.touched" class="text-sm text-red-600">Please enter your
+                    password</span>
+
+
+                <input ngModel name="newPassword"
+                    class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                    type="password" placeholder="New Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$"
+                    #new_password="ngModel">
+
+                <span *ngIf="!new_password.valid && new_password.touched" class="text-sm text-red-600">Password must be 8 to 16
+                    characters and include at least one letter and one digit</span>
+
+
+                <input ngModel name="confirmPassword"
+                    class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                    type="password" placeholder="Confirm password" required pattern="{{new_password.value}}"
+                    #confirm="ngModel">
+
+                <span *ngIf="!confirm.valid && confirm.touched" class="text-sm text-red-600">Password does not
+                    match</span>
+
+                    <div>
+                        <button type="submit" [disabled]="!resetpass.valid"
+                        class="bg-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Update</button>
+                    </div>
+            </div>
+        </form>
+
+    </div>
+</section>
