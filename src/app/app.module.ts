@@ -37,6 +37,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './core/state/auth/reducer';
 import { ProfileComponent } from './pages/student/profile/profile.component';
 import { DashboardEffects } from './core/state/admin/dashboard/effects';
+import { SnotfoundComponent } from './pages/student/snotfound/snotfound.component';
 
 
 
@@ -64,7 +65,8 @@ import { DashboardEffects } from './core/state/admin/dashboard/effects';
     AdminSidebarComponent,
     AdminPageComponent,
     AdminCoursesComponent,
-    ProfileComponent 
+    ProfileComponent,
+    SnotfoundComponent
   ],
   imports: [
     BrowserModule,

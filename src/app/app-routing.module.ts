@@ -16,18 +16,20 @@ import { AdminPageComponent } from './pages/admin/admin-page/admin-page.componen
 import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
 import { adminGuard } from './core/guards/admin_guard';
 import { ProfileComponent } from './pages/student/profile/profile.component';
+import { studentGuard } from './core/guards/student_guard';
+import { SnotfoundComponent } from './pages/student/snotfound/snotfound.component';
 
 const routes: Routes = [
   {path:'login', component : LoginComponent},
   {path : 'signup',component : SignupComponent},
-  {path : 'profile', component : ProfileComponent},
   {
     path : '', component : HomeComponent , 
     children : [
       {path : 'courses', component : CoursesComponent},
       {path : 'about', component : AboutComponent},
       {path : 'contact', component : ContactComponent},
-      {path :'',component : HomepageComponent}
+      {path :'',component : HomepageComponent},
+      {path : 'profile',canActivate:[studentGuard] ,component : ProfileComponent},
     ]
   },
   {path : 'admin' ,canActivate:[adminGuard], component : AdminPageComponent,
@@ -39,7 +41,8 @@ const routes: Routes = [
     {path : 'courses', component : AdminCoursesComponent}
    ]
   },
-  {path : 'admin/login', component : AdminLoginComponent}
+  {path : 'admin/login', component : AdminLoginComponent},
+  {path : '**', component : SnotfoundComponent}
 ];
 
 @NgModule({
