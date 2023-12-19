@@ -23,40 +23,56 @@ import { ConnectionProfileComponent } from './pages/student/profile/connection-p
 import { AccountProfileComponent } from './pages/student/profile/account-profile/account-profile.component';
 import { NotificationProfileComponent } from './pages/student/profile/notification-profile/notification-profile.component';
 import { StudentProfileComponent } from './pages/student/profile/student-profile/student-profile.component';
+import { TutorProfilePageComponent } from './pages/tutor/tutor-profile-page/tutor-profile-page.component';
+import { TutorLoginComponent } from './pages/tutor/tutor-login/tutor-login.component';
+import { TutorSignupComponent } from './pages/tutor/tutor-signup/tutor-signup.component';
+import { TutorProfileComponent } from './pages/tutor/tutor-profile/tutor-profile.component';
+import { TutorAccountComponent } from './pages/tutor/tutor-account/tutor-account.component';
 
 const routes: Routes = [
-  {path:'login', component : LoginComponent},
-  {path : 'signup',component : SignupComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   {
-    path : '', component : HomeComponent , 
-    children : [
-      {path : 'courses', component : CoursesComponent},
-      {path : 'about', component : AboutComponent},
-      {path : 'contact', component : ContactComponent},
-      {path :'',component : HomepageComponent},
+    path: '', component: HomeComponent,
+    children: [
+      { path: 'courses', component: CoursesComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: '', component: HomepageComponent },
     ]
   },
-  {path : 'admin' ,canActivate:[adminGuard], component : AdminPageComponent,
-   children : [
-    {path : '', component : AdminDashboardComponent},
-    {path : 'students', component : AdminStudentsComponent},
-    {path : 'tutors', component : AdminTutorsComponent},
-    {path : 'settings', component : AdminSettingsComponent},
-    {path : 'courses', component : AdminCoursesComponent}
-   ]
+  {
+    path: 'admin', canActivate: [adminGuard], component: AdminPageComponent,
+    children: [
+      { path: '', component: AdminDashboardComponent },
+      { path: 'students', component: AdminStudentsComponent },
+      { path: 'tutors', component: AdminTutorsComponent },
+      { path: 'settings', component: AdminSettingsComponent },
+      { path: 'courses', component: AdminCoursesComponent }
+    ]
   },
-  {path : 'profile',canActivate:[studentGuard] , component : MainProfileComponent,
-        children : [
-          {path : 'student', component : StudentProfileComponent},
-          {path : 'courses', component : CoursesProfileComponent },
-          {path : 'connection', component : ConnectionProfileComponent},
-          {path : 'account', component : AccountProfileComponent},
-          {path : 'notification', component : NotificationProfileComponent},
-        ]
-    
-      },
-  {path : 'admin/login', component : AdminLoginComponent},
-  {path : '**', component : SnotfoundComponent}
+  {
+    path: 'profile', canActivate: [studentGuard], component: MainProfileComponent,
+    children: [
+      { path: 'student', component: StudentProfileComponent },
+      { path: 'courses', component: CoursesProfileComponent },
+      { path: 'connection', component: ConnectionProfileComponent },
+      { path: 'account', component: AccountProfileComponent },
+      { path: 'notification', component: NotificationProfileComponent },
+    ]
+
+  },
+  {
+    path: 'tutor', component: TutorProfilePageComponent,
+    children:[
+      {path : 'about',component: TutorProfileComponent},
+      {path : 'account', component : TutorAccountComponent}
+    ]
+  },
+  { path: 'admin/login', component: AdminLoginComponent },
+  {path : 'tutor/login', component : TutorLoginComponent},
+  {path : 'tutor/signup', component : TutorSignupComponent},
+  { path: '**', component: SnotfoundComponent }
 ];
 
 @NgModule({

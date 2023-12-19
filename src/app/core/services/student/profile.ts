@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { UserModel } from "../../models/auth";
 import { getStudentHeaders } from "../../utils/header";
 import { PasswordUpdate, StudentUpdateModel } from "../../models/student";
+import { Router } from "@angular/router";
 
 
 
@@ -12,7 +13,7 @@ import { PasswordUpdate, StudentUpdateModel } from "../../models/student";
     providedIn : 'root'
 })
 export class StudentProfileService{
-    constructor(private http : HttpClient){}
+    constructor(private http : HttpClient, private router : Router){}
 
     getData() : Observable<UserModel>{
         let headers = getStudentHeaders()
@@ -27,5 +28,10 @@ export class StudentProfileService{
     resetPassword(Data : PasswordUpdate){
         let headers = getStudentHeaders()
         return this.http.put(`${BASE_URL}/student/reset-password`,Data,{headers})
+    }
+
+    logout(){
+        sessionStorage.removeItem('student-token')
+        this.router.navigateByUrl('/login')
     }
 }

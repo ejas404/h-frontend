@@ -1,0 +1,44 @@
+<main class="px-[10rem] py-[5rem] w-full h-[100vh]">
+    <section class="login-page flex w-full h-full shadow-2xl shadow-box rounded-lg overflow-hidden">
+        <div class="login-page-left basis-2/5 flex flex-col px-5 py-5">
+            <div class="login-form-top flex-1 flex items-center">
+                <div class="form px-5 ">
+                    <form (ngSubmit)="onSubmitClick(login)" #login="ngForm">
+                        <h2 class="text-[1.5rem] font-bold mb-8">Welcome Back</h2>
+                        <input ngModel name="email"
+                            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                            type="email" placeholder="Email" #email="ngModel" required email>
+
+                        <span *ngIf="!email.valid && email.touched" class="text-sm text-red-600">Enter a valid
+                            email</span>
+                        <!-- <span class="text-sm">Enter  your email here</span> -->
+
+                        <input ngModel name="password"
+                            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                            type="password" placeholder="Password" autocomplete="off" required pattern="^[0-9a-zA-Z]+$"
+                            #password="ngModel">
+
+                        <span *ngIf="!password.valid && password.touched" class="text-sm text-red-600">Please enter your
+                            password</span>
+
+                        <button class="w-full border border-light-gray py-2 rounded my-2 text-sm" type="button">
+                            <span><img class="h-3 w-auto inline"
+                                    src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
+                                    alt=""> Sign up with Google</span>
+
+                        </button>
+                        <button type="submit" [disabled]="!login.valid"
+                            class="bg-tutor-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Login</button>
+                    </form>
+                </div>
+            </div>
+            <div class="login-form-bottom text-center">
+                <p class="text-sm">Don't have an account yet ? <a class="text-primary" routerLink="/tutor/signup">Join Now</a>
+                </p>
+            </div>
+        </div>
+        <div class="login-page-right basis-3/5 bg-tutor-primary grid justify-items-center content-center">
+            <h1 class="logo text-white text-3xl"><a>horizon<span class="text-tutor-secondary">tutor</span></a></h1>
+        </div>
+    </section>
+</main>

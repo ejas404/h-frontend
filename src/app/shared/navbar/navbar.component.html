@@ -5,11 +5,11 @@
         {{user === 'student' || user === 'profile' ? 'text-primary':''}}
         {{user === 'tutor'? 'text-tutor-primary':''}}
 
-        ">horizon</h1>
+        ">horizon<span *ngIf="user === 'tutor'" class="text-tutor-secondary">tutor</span></h1>
     </div>
 
     <div class="nav-center">
-        <ul *ngIf="user === 'student'"  class="flex children:px-3">
+        <ul *ngIf="user === 'student'" class="flex children:px-3">
             <li><a routerLink="/" routerLinkActive>Home</a></li>
             <li><a routerLink="/courses">Courses</a></li>
             <li><a routerLink="/about">About</a></li>
@@ -22,16 +22,19 @@
             <a class="text-xs ms-2 bg-primary text-white p-1 rounded " routerLink="/signup">Signup</a>
         </div>
 
-        <div *ngIf="user === 'admin'" 
-                    class="h-[2.5rem] w-[2.5rem] rounded-full 
+        <div *ngIf="user === 'admin'" class="h-[2.5rem] w-[2.5rem] rounded-full 
                     bg-admin-primary flex justify-center items-center ">
             <p class="text-xs text-white font-bold">Admin</p>
         </div>
 
-        <div *ngIf="user === 'profile'" 
-                    class="h-[2.5rem] w-[2.5rem] rounded-full 
+        <div *ngIf="user === 'profile'" class="h-[2.5rem] w-[2.5rem] rounded-full 
                     bg-primary flex justify-center items-center ">
             <p class="text-xs text-white font-bold">Profile</p>
+        </div>
+
+        <div *ngIf="user === 'tutor'" class="h-[2.5rem] w-[2.5rem] rounded-full 
+        bg-tutor-primary flex justify-center items-center ">
+            <p class="text-xs text-white font-bold">tutor</p>
         </div>
 
 

@@ -17,7 +17,8 @@ module.exports = {
         'yellow': '#FFF500',
         'gray-bg':'#F4F4F4',
         'admin-primary':'#11333D',
-        'tutor-primary':'#470808'
+        'tutor-primary':'#470808',
+        'tutor-secondary':'#FBBC04'
       }
     }
   },

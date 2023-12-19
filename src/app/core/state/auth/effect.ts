@@ -55,6 +55,29 @@ export class AuthEffects {
     )
   );
 
+  tutorLoginReq$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AuthActions.tutorLoginReq),
+    exhaustMap((action) =>
+      this.service
+        .tutorLogin(action.credentials)
+        .pipe(
+          map((successResponse) => {
+            console.log('got a success response')
+            console.log(successResponse)
+            return AuthActions.loginSuccess({ successResponse })
+          }
+
+          ),
+          catchError((err) =>{
+            let error = err.error.message
+            alert(err.error.message)
+            return of(AuthActions.loginFailure({error}))})
+        )
+    )
+  )
+);
+
   loginSuccess$ = createEffect(
     () =>
       this.actions$.pipe(

@@ -1,0 +1,49 @@
+<app-navbar [user]="'tutor'"></app-navbar>
+<main class="w-full h-[calc(100vh-3rem)] px-[7rem] py-[2rem] ">
+    <div class="tutor_profile flex h-full w-full">
+        <div class="tutor-profile-left basis-1/5">
+            <div class="inline-block h-[6rem] w-[6rem] rounded overflow-hidden ">
+                <img class="object-cover w-full h-full" src="../../../../assets/student/faces/tutor.jpg" alt="">
+            </div>
+            <p class="text-sm">“the pulse of the globe is in mathematics, without mathematics globe is a big zero”</p>
+
+            <div class="languages">
+                <h1 class=" text-xs text-gray">Languages</h1>
+                <span class="bg-tutor-primary text-white me-1 px-2">English</span>
+                <span class="bg-tutor-primary text-white me-1 px-2">Hindi</span>
+            </div>
+
+            <div class="field">
+                <h1 class=" text-xs text-gray">field</h1>
+                <span class="bg-tutor-primary text-white me-1 px-2">Computer Science</span>
+            </div>
+            <div class="teaches">
+                <h1 class=" text-xs text-gray">Teaches</h1>
+                <span class="bg-tutor-primary text-white me-1 px-2">Python</span>
+                <span class="bg-tutor-primary text-white me-1 px-2">C++</span>
+            </div>
+        </div>
+        <div class="tutor-profile-right basis-4/5 px-10 h-full">
+            <div class="top border-y-2 border-stone-400">
+                <div class="my-3">
+                    <h1 class="text-xl font-semibold">Master Chacko</h1>
+                    <p class="text-stone-500">masterchackgmail.com</p>
+                    <span>*****</span>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="border-b-2 border-stone-400">
+                    <ul class="flex children:mx-2 my-3">
+                       <a routerLink="/tutor/about" routerLinkActive="text-primary font-semibold children:border-b-2"> <li>About</li></a>
+                        <li>Courses</li>
+                        <li>Students</li>
+                        <a routerLink="/tutor/account" routerLinkActive="text-primary font-semibold children:border-b-2"> <li>Account</li></a>
+                    </ul>
+                </div>
+            </div>
+            <div class="routers">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</main>

@@ -21,9 +21,13 @@ export class AccountProfileComponent {
       newPassword : data.value.newPassword
     }
 
-    this.service.resetPassword(toUpdate).subscribe((res)=>{
-      console.log(res)
+    this.service.resetPassword(toUpdate).subscribe((res  : any)=>{
+      alert(res.message)
     })
 
+  }
+
+  logout(){
+    this.service.logout()
   }
 }

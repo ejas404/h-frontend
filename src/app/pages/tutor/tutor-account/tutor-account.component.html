@@ -1,6 +1,6 @@
-<section class="w-full h-full p-5">
+<section class="w-full h-full my-2">
     <h1>Reset Password</h1>
-    <div class="reset-pass border rounded p-3">
+    <div class="reset-pass  rounded ">
         <p class="text-xs text-gray">Change your current password to new one</p>
         <form (ngSubmit)="resetPassword(resetpass)" #resetpass="ngForm">
             <div class="max-w-[20rem]">
@@ -32,13 +32,13 @@
 
                     <div>
                         <button type="submit" [disabled]="!resetpass.valid"
-                        class="bg-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Update</button>
+                        class="bg-tutor-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Update</button>
                     </div>
             </div>
         </form>
 
     </div>
     <div class="logout-btn my-3">
-        <button class="text-white bg-admin-primary px-5 py-1 rounded" (click)="logout()">Logout</button>
+        <button class="text-tutor-secondary bg-tutor-primary px-5 py-1 rounded" (click)="logOut()">Logout</button>
     </div>
 </section>

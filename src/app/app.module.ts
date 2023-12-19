@@ -45,6 +45,13 @@ import { CoursesProfileComponent } from './pages/student/profile/courses-profile
 import { SidebarProfileComponent } from './pages/student/profile/sidebar-profile/sidebar-profile.component';
 import { studProfReducer } from './core/state/student/profile_page/reducer';
 import { StudentProfileEffect } from './core/state/student/profile_page/effects';
+import { TutorSignupComponent } from './pages/tutor/tutor-signup/tutor-signup.component';
+import { TutorLoginComponent } from './pages/tutor/tutor-login/tutor-login.component';
+import { TutorProfilePageComponent } from './pages/tutor/tutor-profile-page/tutor-profile-page.component';
+import { TutorProfileComponent } from './pages/tutor/tutor-profile/tutor-profile.component';
+import { TutorAccountComponent } from './pages/tutor/tutor-account/tutor-account.component';
+import { TutorProfileEffect } from './core/state/tutor/profile/effects';
+import { tutorProfReducer } from './core/state/tutor/profile/reducer';
 
 
 
@@ -78,7 +85,12 @@ import { StudentProfileEffect } from './core/state/student/profile_page/effects'
     AccountProfileComponent,
     MainProfileComponent,
     CoursesProfileComponent,
-    SidebarProfileComponent
+    SidebarProfileComponent,
+    TutorSignupComponent,
+    TutorLoginComponent,
+    TutorProfilePageComponent,
+    TutorProfileComponent,
+    TutorAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -99,14 +111,16 @@ import { StudentProfileEffect } from './core/state/student/profile_page/effects'
       {
         auth : authReducer,
         dashboard : dashboardReducer , 
-        studProf : studProfReducer
+        studProf : studProfReducer,
+        tutorProf : tutorProfReducer
       }),
     
     EffectsModule.forRoot(
       [
         AuthEffects, 
         DashboardEffects,
-        StudentProfileEffect
+        StudentProfileEffect,
+        TutorProfileEffect
       ]
         )
 
