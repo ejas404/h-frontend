@@ -3,12 +3,20 @@
     <section class="bg-zinc-500 w-full h-full flex justify-between rounded-xl">
         <div class="sidebar w-[12rem] flex flex-col items-center justify-center">
             <div class="user-data text-center">
-                <div class="inline-block h-[6rem] w-[6rem] rounded-full overflow-hidden ">
+                <div class="group inline-block h-[6rem] w-[6rem] rounded-full overflow-hidden relative bg-white">
                     <img class="object-cover w-full h-full"
-                        src="../../../../../assets/student/faces/young-bearded-man-with-striped-shirt_273609-5677.avif"
+                        src="{{profileUrl}}"
                         alt="">
+
+                    <div class=" transition-[hover] ease-in-out delay-1000 
+                                absolute w-full h-full top-0 left-0 flex 
+                                justify-center items-center invisible 
+                                group-hover:visible bg-light-gray opacity-60">
+                        
+                        <ng-icon class="text-black block cursor-pointer" (click)="openDialog()" name="bootstrapPencilSquare"></ng-icon>
+                    </div>
                 </div>
-                <h1 class="my-2 font-semibold text-md text-black">{{name}}</h1>
+                <h1 class="my-2 font-semibold text-md text-black">{{name | titlecase}}</h1>
             </div>
             <app-sidebar-profile></app-sidebar-profile>
         </div>

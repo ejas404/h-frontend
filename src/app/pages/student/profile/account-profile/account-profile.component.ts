@@ -10,24 +10,30 @@ import { StudentProfileService } from '../../../../core/services/student/profile
 })
 export class AccountProfileComponent {
 
-  constructor(private service : StudentProfileService ){
+  constructor(private service: StudentProfileService) {
 
   }
 
-  resetPassword(data : NgForm){
+  resetPassword(data: NgForm) {
     console.log(data.value)
-    let toUpdate : PasswordUpdate = {
-      currentPassword : data.value.currentPassword,
-      newPassword : data.value.newPassword
+    let toUpdate: PasswordUpdate = {
+      currentPassword: data.value.currentPassword,
+      newPassword: data.value.newPassword
     }
 
-    this.service.resetPassword(toUpdate).subscribe((res  : any)=>{
-      alert(res.message)
-    })
+    this.service.resetPassword(toUpdate).subscribe(
+      (res: any) => {
+        alert(res.message)
+
+      },
+      (err : any)=>{
+        alert(err.message)
+      }
+    )
 
   }
 
-  logout(){
+  logout() {
     this.service.logout()
   }
 }

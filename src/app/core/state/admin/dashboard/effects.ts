@@ -52,23 +52,7 @@ export class DashboardEffects{
         )
     )
 
-    updateUser$ = createEffect(()=>
-        this.action$.pipe(
-            ofType(DashboardActions.updateRequest),
-            exhaustMap((action)=>{
-               return this.service.updateUser(action.userData)
-                .pipe(
-                    map((user) =>{
-                        return  DashboardActions.updateSuccess({ user })
-                      }
-                          
-                      ),
-                      catchError((error) => of(DashboardActions.updateFailure({error}))
-                      )
-                )
-            })
-        )
-    )
+  
 
     
     blockUser$ = createEffect(()=>
@@ -83,6 +67,7 @@ export class DashboardEffects{
                       
                   ),
                   catchError((error) => {
+                    console.log(error)
                     alert('some error occured')
                     return of(DashboardActions.blockFailure({error}))}
                   )

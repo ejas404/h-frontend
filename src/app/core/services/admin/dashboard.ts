@@ -6,6 +6,13 @@ import { UserModel } from '../../models/auth';
 import { getAdminHeaders } from '../../utils/header';
 
 
+interface UserLists{
+  userlist : UserModel[],
+  tutorlist : UserModel[]
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,9 +22,9 @@ export class DashboardService {
 
   
 
-  getUsers() : Observable<UserModel[]>{
+  getUsers() : Observable<UserLists>{
     let headers = getAdminHeaders()
-    return this.http.get<UserModel[]>(`${BASE_URL}/admin/users`,{headers})
+    return this.http.get<UserLists>(`${BASE_URL}/admin/users`,{headers})
   }
 
   deleteUser(id : string): Observable<UserModel>{
@@ -31,13 +38,13 @@ export class DashboardService {
   }
 
   blockUser(id : string): Observable<UserModel>{
-    let headers = getAdminHeaders()
-    return this.http.put<UserModel>(`${BASE_URL}/admin/users/block/${id}`,{headers})
+    let headers = getAdminHeaders();
+    return this.http.put<UserModel>(`${BASE_URL}/admin/users/block/${id}`, {}, { headers})
   }
 
   unblockUser(id : string): Observable<UserModel>{
     let headers = getAdminHeaders()
-    return this.http.put<UserModel>(`${BASE_URL}/admin/users/unblock/${id}`,{headers})
+    return this.http.put<UserModel>(`${BASE_URL}/admin/users/unblock/${id}`,{}, {headers})
   }
 
 }

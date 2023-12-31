@@ -1,4 +1,4 @@
-import {Component } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -6,4 +6,15 @@ import {Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent  {}
+export class HomeComponent  implements OnInit{
+  user : string = 'student'
+
+  ngOnInit(): void {
+    let isLogged = sessionStorage.getItem('student-token')
+
+    if(isLogged){
+      console.log('student token',isLogged)
+      this.user = 'profile'
+    }
+  }
+}

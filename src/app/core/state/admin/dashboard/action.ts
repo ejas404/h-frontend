@@ -1,5 +1,11 @@
 import { createAction , props } from "@ngrx/store"
 import { UserModel } from "../../../models/auth"
+import { TutorModel } from "../../../models/tutor"
+
+interface UserLists{
+    userlist : UserModel[],
+    tutorlist : TutorModel[]
+}
 
 export const dashboardRequest = createAction(
     '[Dashboard] dashboard request'
@@ -8,7 +14,7 @@ export const dashboardRequest = createAction(
 
 export const dashboardSuccess = createAction(
     '[Dashboard] dashboard success',
-    props<{list : UserModel[]}>()
+    props<{list : UserLists}>()
 )
 
 export const dashboardFailure = createAction(
@@ -23,7 +29,7 @@ export const deleteUser = createAction(
 
 export const deleteSuccess = createAction(
     '[Dashboard] delete success',
-    props<{user : UserModel}>()
+    props<{user : UserModel | TutorModel}>()
 )
 
 export const deletefailure = createAction(
@@ -31,20 +37,7 @@ export const deletefailure = createAction(
     props<{error : string}>()
 )
 
-export const updateRequest = createAction(
-    '[Dashboard] update user',
-    props<{userData : UserModel}>()
-)
 
-export const updateSuccess = createAction(
-    '[Dashboard] update success',
-    props<{user : UserModel}>()
-)
-
-export const updateFailure = createAction(
-    '[Dashboard] update failure',
-    props<{error : string}>()
-)
 
 
 /// actions for blocking a student
@@ -57,7 +50,7 @@ export const blockRequest = createAction(
 
 export const blockSuccess = createAction(
     '[Dashboard] block success',
-    props<{user : UserModel}>()
+    props<{user : UserModel | TutorModel}>()
 )
 
 export const blockFailure = createAction(
@@ -76,7 +69,7 @@ export const unblockRequest = createAction(
 
 export const unblockSuccess = createAction(
     '[Dashboard] unblock success',
-    props<{user : UserModel}>()
+    props<{user : UserModel | TutorModel}>()
 )
 
 export const unblockFailure = createAction(

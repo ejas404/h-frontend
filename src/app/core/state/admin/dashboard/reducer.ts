@@ -1,109 +1,113 @@
 
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { blockSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, unblockSuccess, updateSuccess } from "./action";
+import { blockSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, unblockSuccess } from "./action";
 import { UserModel } from "../../../models/auth";
 import { state } from "@angular/animations";
+import { TutorModel } from "../../../models/tutor";
 
-interface DashboardState {
-    list : UserModel[],
-    errormessage : string,
-    userObj : UserModel
+interface UserLists {
+    userlist: UserModel[],
+    tutorlist: TutorModel[]
 }
 
-const initialState : DashboardState = {
-    list : [],
-    errormessage : "",
-    userObj : {
-        name : '',
-        email : "",
-        role : "",
-        _id : ""
-    }
+interface DashboardState {
+    list: UserLists,
+    errormessage: string
+}
+
+const initialState: DashboardState = {
+    list: { userlist: [], tutorlist: [] },
+    errormessage: "",
+
 }
 
 
 const _dashboardReducer = createReducer(
     initialState,
-    on(dashboardSuccess, (state ,action )=>{
-        return{
+    on(dashboardSuccess, (state, action) => {
+        console.log('b4 action')
+        console.log(action)
+        return {
             ...state,
-            list : [...action.list],
-            errormessage : ""
+            list: {
+                userlist: [...action.list.userlist],
+                tutorlist: [...action.list.tutorlist],
+                errormessage: ""
+            }
+
         }
     }),
 
     on(dashboardFailure , (state , action)=>{
         return{
             ...state,
-            list : [],
-            errormessage : action.error
         }
     }),
 
-    on(deleteSuccess, (state, {user})=>{
-        const newList = state.list.filter(data => data._id !== user._id)
-        return{
+    on(deleteSuccess, (state, { user }) => {
+        const newList = state.list.userlist.filter(data => data._id !== user._id)
+        return {
             ...state,
-            list : newList,
-            errormessage : ""
+            list: {
+                ...state.list,
+                userlist: newList,
+            },
+            errormessage: ""
         }
     }),
 
-    on(blockSuccess, (state, {user})=>{
-        const newList = state.list.map(data => {
-            if(data._id === user._id){
-                return {...data, isBlocked:true}
+    on(blockSuccess, (state, { user }) => {
+        const newList = state.list.userlist.map(data => {
+            if (data._id === user._id) {
+                return { ...data, isBlocked: true }
             }
             return data
         })
-        return{
+        return {
             ...state,
-            list : newList,
-            errormessage : ""
+            list: {
+                ...state.list,
+                userlist : newList
+            },
+            errormessage: ""
         }
     }),
 
-    on(unblockSuccess, (state, {user})=>{
-        const newList = state.list.map(data => {
-            if(data._id === user._id){
-                return {...data, isBlocked:false }
+    on(unblockSuccess, (state, { user }) => {
+        const newList = state.list.userlist.map(data => {
+            if (data._id === user._id) {
+                return { ...data, isBlocked: false }
             }
             return data
         })
-        return{
+        return {
             ...state,
-            list : newList,
-            errormessage : ""
-        }
-    }),
-
-    on(updateSuccess, (state,{user})=>{
-        const updatedList = state.list.map(data=>{
-            if(data._id === user._id){
-                return{...user,...data}
-            }else{
-                return data
-            }
-        })
-
-        return{
-            ...state,
-            list : updatedList,
-            errormessage : ""
+            list: {
+                ...state.list,
+                userlist : newList
+            },
+            errormessage: ""
         }
     })
 )
 
-export function dashboardReducer(state : any , action : any){
-    return _dashboardReducer(state , action)
+export function dashboardReducer(state: any, action: any) {
+    return _dashboardReducer(state, action)
 }
 
 export const selectDashboardState = createFeatureSelector<DashboardState>('dashboard');
 
 export const getUsersList = createSelector(
-  selectDashboardState,
-  (state) => state.list
+    selectDashboardState,
+    (state) => state.list.userlist
 );
+
+export const getTutorList = createSelector(
+    selectDashboardState,
+    (state) => state.list.tutorlist
+);
+
+
 
 // export const getState = createSelector(
 //     selectAuthState,

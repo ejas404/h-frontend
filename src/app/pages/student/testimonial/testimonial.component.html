@@ -14,32 +14,32 @@
                 class="w-[calc(100%-10px)] h-full absolute bg-primary bottom-0 right-2 shadow-lg rounded-[5rem] -rotate-3 -z-50">
             </div>
 
-            <div id="1" (click)="swapUsers(this)"
+            <div #div1 id="1" (click)="swapUsers(div1.id)"
                 class="float-users h-[4rem] w-[4rem] absolute top-[50%] translate-y-[-50%] -left-[10rem] rounded-full overflow-hidden border-4 border-yellow">
                 <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
             </div>
 
-            <div id="2" (click)="swapUsers(this)"
+            <div #div2 id="2" (click)="swapUsers(div2.id)"
                 class="float-users h-[4rem] w-[4rem] absolute top-[50%] translate-y-[-50%] -right-[10rem] rounded-full overflow-hidden border-4 border-yellow">
                 <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
             </div>
 
-            <div id="3" (click)="swapUsers(this)"
+            <div #div3 id="3" (click)="swapUsers(div3.id)"
                 class="float-users h-[2.5rem] w-[2.5rem] absolute top-[20%]  -left-[5rem] rounded-full overflow-hidden border-4 border-yellow">
                 <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
             </div>
 
-            <div id="4" (click)="swapUsers(this)"
+            <div #div4 id="4" (click)="swapUsers(div4.id)"
                 class="float-users h-[2.5rem] w-[2.5rem] absolute top-[20%]  -right-[5rem] rounded-full overflow-hidden border-4 border-yellow">
                 <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
             </div>
 
-            <div id="5" (click)="swapUsers(this)"
+            <div #div5 id="5" (click)="swapUsers(div5.id)"
                 class="float-users h-[3rem] w-[3rem] absolute top-[70%]  -left-[7rem] rounded-full overflow-hidden border-4 border-yellow">
                 <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
             </div>
 
-            <div id="6" (click)="swapUsers(this)"
+            <div #div6  id="6" (click)="swapUsers(div6.id)"
                 class="float-users h-[3rem] w-[3rem] absolute top-[70%]  -right-[7rem] rounded-full overflow-hidden border-4 border-yellow">
                 <img class="object-cover w-full h-full" src="{{userTestimonials[1].img}}" alt="">
             </div>
@@ -47,7 +47,4 @@
 
         </div>
     </div>
-
-
-
 </section>

@@ -9,8 +9,11 @@ export interface UserModel{
     role ?: string,
     _id ?: string,
     contact ?: string,
-    isBlocked ?: boolean
+    isBlocked ?: boolean,
+    profile?:string
 }
+
+
 
 export interface RegisterModel{
     email : string | null | undefined,

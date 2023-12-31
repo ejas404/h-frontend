@@ -1,12 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
-import { NgIconsModule } from '@ng-icons/core';
-import { bootstrapFileEarmarkMedicalFill, bootstrapGearFill, bootstrapGrid1x2Fill, bootstrapPeopleFill, bootstrapPersonCircle } from '@ng-icons/bootstrap-icons';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { AuthEffects } from './core/state/auth/effect';
 import { dashboardReducer } from './core/state/admin/dashboard/reducer';
+import {MatDialogModule} from '@angular/material/dialog'
+import { CustomIconModule } from './modules/icon_modules';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { AppComponent } from './app.component';
@@ -52,6 +57,17 @@ import { TutorProfileComponent } from './pages/tutor/tutor-profile/tutor-profile
 import { TutorAccountComponent } from './pages/tutor/tutor-account/tutor-account.component';
 import { TutorProfileEffect } from './core/state/tutor/profile/effects';
 import { tutorProfReducer } from './core/state/tutor/profile/reducer';
+import { PopupComponent } from './shared/popup/popup.component';
+import { CustomAlertsModule } from './modules/custom_alerts_modules';
+import { MessageService } from 'primeng/api';
+import { ProfileImageComponent } from './pages/student/profile/profile-image/profile-image.component';
+import { TutorCourseComponent } from './pages/tutor/tutor-course/tutor-course.component';
+import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-students.component';
+import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tutor-notification.component';
+import { TutorPopupComponent } from './shared/tutor-popup/tutor-popup.component';
+import { TutorProfileImageComponent } from './pages/tutor/profile-image/profile-image.component';
+import { TagsPopupTutorComponent } from './shared/tags-popup-tutor/tags-popup-tutor.component';
+
 
 
 
@@ -90,23 +106,31 @@ import { tutorProfReducer } from './core/state/tutor/profile/reducer';
     TutorLoginComponent,
     TutorProfilePageComponent,
     TutorProfileComponent,
-    TutorAccountComponent
+    TutorAccountComponent,
+    PopupComponent,
+    ProfileImageComponent,
+    TutorCourseComponent,
+    TutorStudentsComponent,
+    TutorNotificationComponent,
+    TutorPopupComponent,
+    TutorProfileImageComponent,
+    TagsPopupTutorComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgIconsModule.withIcons(
-      {
-        bootstrapPeopleFill,
-        bootstrapGearFill,
-        bootstrapGrid1x2Fill,
-        bootstrapFileEarmarkMedicalFill,
-        bootstrapPersonCircle   
-      }),
+    CustomIconModule,
+    CustomAlertsModule,
+    MatDialogModule,
+    ImageCropperModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
     StoreModule.forRoot(
       {
         auth : authReducer,
@@ -126,7 +150,7 @@ import { tutorProfReducer } from './core/state/tutor/profile/reducer';
 
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

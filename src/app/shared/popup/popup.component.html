@@ -1,0 +1,44 @@
+<main class="w-[70vw] h-[70vh] p-4">
+    <div class="flex justify-between">
+        <p>{{data.calledFor}}</p>
+        <h1 class="inline-block">Upload Your Profile</h1>
+        <button mat-button mat-dialog-close class="inline-block">x</button>
+    </div>
+    <div>
+        <section class="file-upload">
+            <br>
+            <div class="my-3">
+
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" for="file_input">Upload
+                    file</label>
+                <input
+                    class="block w-full text-md  border border-gray-300 rounded-lg cursor-pointer  focus:outline-none"
+                    aria-describedby="file_input_help" id="file_input" type="file" (change)="inputUpload($event)">
+            </div>
+
+        </section>
+        <section class="preview-crop flex">
+            <div class="cropper basis-2/3">
+                <image-cropper 
+                [imageChangedEvent]="inputEvent" 
+                [aspectRatio]="4/4" 
+                [maintainAspectRatio]="true"
+                (imageCropped)="imageCropped($event)" 
+                (loadImageFailed)="loadImageFailed()">
+
+                </image-cropper>
+            </div>
+
+            <div class="preview w-[50%] basis-1/3">
+                <h1>Image Preview</h1>
+                <img class="" [src]="cropPreview" alt="">
+                <button mat-button mat-dialog-close class="bg-black text-sm px-3 py-1 text-white rounded" [disabled]="button" (click)="uploadImage()">Save</button>
+            </div>
+        </section>
+    </div>
+</main>
+
+
+<!-- image cropper config -->
+  <!-- (imageLoaded)="imageLoaded($event)"
+                (cropperReady)="cropperReady()"  -->

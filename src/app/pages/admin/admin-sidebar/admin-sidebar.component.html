@@ -1,7 +1,7 @@
 <aside>
     <ul class="text-center children:my-2 text-gray">
         <li>
-            <a routerLink="/admin/dashboard" routerLinkActive="text-white">
+            <a routerLink="/admin" [routerLinkActiveOptions]="{exact : true}" routerLinkActive="text-white">
                 <ng-icon class="text-[2rem] block" name="bootstrapGrid1x2Fill"></ng-icon>
                 <p>dashboard</p>
             </a>

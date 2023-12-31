@@ -15,13 +15,8 @@ export class AdminStudentsComponent implements OnInit{
 
   constructor(private store: Store) { }
 
-  updateForm = new FormGroup({
-    'name': new FormControl(),
-    'email': new FormControl()
-  })
 
   ngOnInit(): void {
-    console.log('initialised')
     this.store.dispatch(DashboardActions.dashboardRequest());
 
     this.store.select(getUsersList).subscribe((state) => {
@@ -36,27 +31,8 @@ export class AdminStudentsComponent implements OnInit{
     }
   }
 
-  editUser(id : string | undefined){
-    if(id){
-      this.store.select(getUsersList).subscribe((state) => {
-        let userData = state.filter((data)=>data._id === id)
-        
-        this.updateForm.setValue({name : userData[0].name, email : userData[0].email})
+  
 
-      })
-    }
-    
-  }
-
-  updateUser(){
-
-     let userData : UserModel = {
-        name : this.updateForm.value.name,
-        email : this.updateForm.value.email,
-        role : 'Student'
-     }
-     this.store.dispatch(DashboardActions.updateRequest({userData}))
-  }
 
   blockUser(id : string | undefined){
     if(id){

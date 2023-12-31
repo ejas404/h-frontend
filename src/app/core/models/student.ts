@@ -1,11 +1,7 @@
 import { UserModel } from "./auth";
 
 export interface StudProfState {
-    userData : UserModel | null
-}
-
-export interface TutorProfState {
-    tutorData : UserModel | null
+    userData : UserModel
 }
 
 export interface StudentUpdateModel{

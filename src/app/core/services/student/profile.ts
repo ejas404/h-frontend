@@ -20,9 +20,29 @@ export class StudentProfileService{
         return this.http.get<UserModel>(`${BASE_URL}/student/profile`,{headers})
     }
 
+    isBlocked() : boolean | void  {
+        let headers = getStudentHeaders()
+        this.http.get<UserModel>(`${BASE_URL}/student/profile`,{headers})
+            .subscribe({
+                next : (data)=>{
+                    return true
+                },
+                error : (err)=>{
+                    console.log('error printed')
+                    console.log(err)
+                    return false
+                }
+            })
+    }
+
     updateProfile(Data : StudentUpdateModel){
         let headers = getStudentHeaders()
         return this.http.put(`${BASE_URL}/student/update`,Data,{headers})
+    }
+
+    updateProfilePic(Data : FormData):Observable<{msg : string , path : string}> {
+        let headers = getStudentHeaders()
+        return this.http.put<{msg : string , path : string}>(`${BASE_URL}/student/update-pic`,Data,{headers})
     }
 
     resetPassword(Data : PasswordUpdate){

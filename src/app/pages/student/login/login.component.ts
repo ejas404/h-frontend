@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { studentLoginReq } from '../../../core/state/auth/action';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,9 @@ import { studentLoginReq } from '../../../core/state/auth/action';
 })
 export class LoginComponent {
 
-  constructor(private store : Store){}
+  constructor(
+              private store : Store 
+              ){}
 
   onSubmitClick(form : NgForm){
 
@@ -18,4 +21,5 @@ export class LoginComponent {
 
     this.store.dispatch(studentLoginReq({credentials}))
   }
+
 }

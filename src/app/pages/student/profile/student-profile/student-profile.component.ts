@@ -33,9 +33,9 @@ export class StudentProfileComponent implements OnInit{
   setFormValues() {
     // Using patchValue to update only the provided form controls
     this.profileUpdate.patchValue({
-      'name': this.userData$.name,
-      'email': this.userData$.email,
-      'contact': this.userData$.contact
+      'name': this.userData$?.name,
+      'email': this.userData$?.email,
+      'contact': this.userData$?.contact
     });
   }
 

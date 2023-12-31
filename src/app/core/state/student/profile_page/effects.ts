@@ -23,7 +23,6 @@ export class StudentProfileEffect{
             }),
             catchError((res : any) =>{ 
               console.log(res.error.message, 'error printing')
-              alert('some error occured try later')
               return of(StudProfActions.getUserFail({error : res.error.message}))})
           )
 

@@ -1,0 +1,22 @@
+<section class="min-w-[30rem] mt-2">
+    <mat-form-field class="w-full h-full">
+        <mat-label>{{title}}</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter eachs">
+            @for (each of tutorTag; track each) {
+            <mat-chip-row (removed)="remove(each)" [editable]="true" (edited)="edit(each, $event)"
+                [aria-description]="'press enter to edit ' + each.name">
+                {{each.name}}
+                <button matChipRemove [attr.aria-label]="'remove ' + each.name">
+                   <ng-icon name="bootstrapXCircleFill"></ng-icon>
+                </button>
+            </mat-chip-row>
+            }
+            <input placeholder="New tag.." [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)" />
+        </mat-chip-grid>
+    </mat-form-field>
+    <div class="save-button my-2 text-end px-2">
+        <button  mat-button mat-dialog-close  class="bg-blue-900 text-white px-2 rounded" (click)="onSave()" >Save</button>
+    </div>
+</section>

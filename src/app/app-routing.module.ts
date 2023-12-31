@@ -15,7 +15,7 @@ import { AdminTutorsComponent } from './pages/admin/admin-tutors/admin-tutors.co
 import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
 import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
 import { adminGuard } from './core/guards/admin_guard';
-import { studentGuard } from './core/guards/student_guard';
+import { studentBlockGuard, studentGuard } from './core/guards/student_guard';
 import { SnotfoundComponent } from './pages/student/snotfound/snotfound.component';
 import { MainProfileComponent } from './pages/student/profile/main-profile/main-profile.component';
 import { CoursesProfileComponent } from './pages/student/profile/courses-profile/courses-profile.component';
@@ -28,6 +28,10 @@ import { TutorLoginComponent } from './pages/tutor/tutor-login/tutor-login.compo
 import { TutorSignupComponent } from './pages/tutor/tutor-signup/tutor-signup.component';
 import { TutorProfileComponent } from './pages/tutor/tutor-profile/tutor-profile.component';
 import { TutorAccountComponent } from './pages/tutor/tutor-account/tutor-account.component';
+import { tutorGuard } from './core/guards/tutor_guard';
+import { TutorCourseComponent } from './pages/tutor/tutor-course/tutor-course.component';
+import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-students.component';
+import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tutor-notification.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -52,9 +56,9 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'profile', canActivate: [studentGuard], component: MainProfileComponent,
+    path: 'profile', canActivate: [studentGuard , studentBlockGuard], component: MainProfileComponent,
     children: [
-      { path: 'student', component: StudentProfileComponent },
+      { path: '', component: StudentProfileComponent },
       { path: 'courses', component: CoursesProfileComponent },
       { path: 'connection', component: ConnectionProfileComponent },
       { path: 'account', component: AccountProfileComponent },
@@ -63,10 +67,14 @@ const routes: Routes = [
 
   },
   {
-    path: 'tutor', component: TutorProfilePageComponent,
+    path: 'tutor',canActivate : [tutorGuard], component: TutorProfilePageComponent,
     children:[
-      {path : 'about',component: TutorProfileComponent},
-      {path : 'account', component : TutorAccountComponent}
+      {path : '',component: TutorProfileComponent},
+      {path : 'account', component : TutorAccountComponent},
+      {path : 'courses', component : TutorCourseComponent},
+      {path : 'students', component : TutorStudentsComponent},
+      {path : 'notification', component : TutorNotificationComponent},
+
     ]
   },
   { path: 'admin/login', component: AdminLoginComponent },

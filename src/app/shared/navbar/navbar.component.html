@@ -1,19 +1,22 @@
-<nav class="flex justify-between items-center px-5 h-[3rem]">
+<nav class="flex justify-between items-center px-5 h-[3rem] sticky top-0 bg-white">
     <div class="nav-logo">
-        <h1 class="text-2xl logo  font-bold 
+        <a routerLink="/">
+            <h1 class="text-2xl logo  font-bold 
         {{user === 'admin'? 'text-admin-primary':''}}
         {{user === 'student' || user === 'profile' ? 'text-primary':''}}
         {{user === 'tutor'? 'text-tutor-primary':''}}
 
         ">horizon<span *ngIf="user === 'tutor'" class="text-tutor-secondary">tutor</span></h1>
+        </a>
     </div>
 
     <div class="nav-center">
-        <ul *ngIf="user === 'student'" class="flex children:px-3">
-            <li><a routerLink="/" routerLinkActive>Home</a></li>
-            <li><a routerLink="/courses">Courses</a></li>
-            <li><a routerLink="/about">About</a></li>
-            <li><a routerLink="/contact">Contact</a></li>
+        <ul *ngIf="user !== 'admin' && user !== 'tutor' && !isLogged" class="flex children:px-3">
+            <li><a class="text-md" routerLink="/" routerLinkActive="text-xl"
+                    [routerLinkActiveOptions]="{exact : true}">Home</a></li>
+            <li><a class="text-md" routerLink="/courses" routerLinkActive="text-xl">Courses</a></li>
+            <li><a class="text-md" routerLink="/about" routerLinkActive="text-xl">About</a></li>
+            <li><a class="text-md" routerLink="/contact" routerLinkActive="text-xl">Contact</a></li>
         </ul>
     </div>
     <div class="nav-end children:hover:cursor-pointer">
@@ -28,15 +31,14 @@
         </div>
 
         <div *ngIf="user === 'profile'" class="h-[2.5rem] w-[2.5rem] rounded-full 
-                    bg-primary flex justify-center items-center ">
-            <p class="text-xs text-white font-bold">Profile</p>
+                 flex justify-center items-center overflow-hidden bg-slate-200">
+            <a routerLink="/profile"><student-profile-image></student-profile-image></a>
         </div>
 
         <div *ngIf="user === 'tutor'" class="h-[2.5rem] w-[2.5rem] rounded-full 
-        bg-tutor-primary flex justify-center items-center ">
-            <p class="text-xs text-white font-bold">tutor</p>
+                 flex justify-center items-center overflow-hidden bg-slate-200">
+            <a routerLink="/profile"> <tutor-profile-image></tutor-profile-image> </a>
         </div>
-
 
     </div>
     <!-- 

@@ -1,0 +1,36 @@
+<section class="max-w-[25rem] p-5">
+    <form #addEducation="ngForm" (ngSubmit)="onFormSubmit(addEducation)">
+        <h2 class="text-[1.5rem] font-bold mb-8">Add Education</h2>
+
+        <input ngModel name="university"
+            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+            type="text" placeholder="University" #university="ngModel" required pattern="^[a-zA-Z]+$">
+
+        <span *ngIf="!university.valid && university.touched" class="text-sm text-red-600">Enter a universityname</span>
+
+        <input ngModel name="stream"
+            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+            type="text" placeholder="Stream" #stream="ngModel" required pattern="^[a-zA-Z]+$">
+
+        <span *ngIf="!stream.valid && stream.touched" class="text-sm text-red-600">Enter your stream </span>
+
+        <input ngModel name="year"
+            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+            type="text" placeholder="Year of Graduation" #year="ngModel" required pattern="^(?:19|20)\d{2}$">
+
+        <span *ngIf="!year.valid && year.touched" class="text-sm text-red-600">Enter a year eg : '2023'</span>
+
+        <input ngModel name="country"
+            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+            type="text" placeholder="Country" #country="ngModel" required pattern="^[a-zA-Z]+$">
+
+        <span *ngIf="!country.valid && country.touched" class="text-sm text-red-600">Enter a country name</span>
+
+
+
+
+        <button type="submit" [disabled]="!addEducation.valid"  mat-button mat-dialog-close 
+            class="bg-tutor-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Save</button>
+
+    </form>
+</section>

@@ -30,10 +30,13 @@
                 <span *ngIf="!confirm.valid && confirm.touched" class="text-sm text-red-600">Password does not
                     match</span>
 
-                    <div>
-                        <button type="submit" [disabled]="!resetpass.valid"
-                        class="bg-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Update</button>
-                    </div>
+                   
+            </div>
+
+
+            <div class="text-end">
+                <button type="submit" [disabled]="!resetpass.valid"
+                class="bg-primary font-bold text-white w-[6rem] border border-light-gray py-1 rounded my-2">Update</button>
             </div>
         </form>
 
