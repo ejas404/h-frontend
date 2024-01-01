@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as DashboardActions from '../../../../app/core/state/admin/dashboard/action' 
 import { getTutorList } from '../../../core/state/admin/dashboard/reducer';
 import { Store } from '@ngrx/store';
+import { TutorModel } from '../../../core/models/tutor';
 
 @Component({
   selector: 'app-admin-tutors',
@@ -9,7 +10,7 @@ import { Store } from '@ngrx/store';
   styleUrl: './admin-tutors.component.scss'
 })
 export class AdminTutorsComponent {
-  userList : any[] = []
+  userList : TutorModel[] = []
   constructor(private store: Store) { }
 
 

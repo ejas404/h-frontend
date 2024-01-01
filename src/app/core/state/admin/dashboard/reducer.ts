@@ -1,22 +1,32 @@
 
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { blockSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, unblockSuccess } from "./action";
+import { blockSuccess, courseDetailsSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, unblockSuccess } from "./action";
 import { UserModel } from "../../../models/auth";
 import { state } from "@angular/animations";
 import { TutorModel } from "../../../models/tutor";
+import { CourseDetailsResponse, TutorDetailsWithCourse } from "../../../models/course";
 
 interface UserLists {
     userlist: UserModel[],
     tutorlist: TutorModel[]
 }
 
+interface CourseModel{
+    courseDetails : CourseDetailsResponse[],
+    tutorCourses : TutorDetailsWithCourse[]
+}
+
+
+
 interface DashboardState {
     list: UserLists,
+    course : CourseModel
     errormessage: string
 }
 
 const initialState: DashboardState = {
     list: { userlist: [], tutorlist: [] },
+    course : {courseDetails : [] , tutorCourses : []},
     errormessage: "",
 
 }
@@ -88,6 +98,17 @@ const _dashboardReducer = createReducer(
             },
             errormessage: ""
         }
+    }),
+
+    on(courseDetailsSuccess , (state, {successResponse})=>{
+        return{
+            ...state,
+            course : {
+                ...state.course,
+                tutorCourses : successResponse.tutorCourses,
+                courseDetails : successResponse.courseDetails
+            }
+        }
     })
 )
 
@@ -106,6 +127,11 @@ export const getTutorList = createSelector(
     selectDashboardState,
     (state) => state.list.tutorlist
 );
+
+export const getCourseList = createSelector(
+    selectDashboardState,
+    (state) => state.course
+)
 
 
 

@@ -67,6 +67,7 @@ import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tut
 import { TutorPopupComponent } from './shared/tutor-popup/tutor-popup.component';
 import { TutorProfileImageComponent } from './pages/tutor/profile-image/profile-image.component';
 import { TagsPopupTutorComponent } from './shared/tags-popup-tutor/tags-popup-tutor.component';
+import { PopupAddCourseComponent } from './pages/admin/popup-add-course/popup-add-course.component';
 
 
 
@@ -114,7 +115,8 @@ import { TagsPopupTutorComponent } from './shared/tags-popup-tutor/tags-popup-tu
     TutorNotificationComponent,
     TutorPopupComponent,
     TutorProfileImageComponent,
-    TagsPopupTutorComponent
+    TagsPopupTutorComponent,
+    PopupAddCourseComponent
   ],
   imports: [
     BrowserModule,

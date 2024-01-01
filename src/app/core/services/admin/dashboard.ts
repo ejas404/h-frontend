@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/auth';
 import { getAdminHeaders } from '../../utils/header';
+import { CourseDetails, CourseDetailsResponse, TutorDetailsWithCourse } from '../../models/course';
 
 
 interface UserLists{
@@ -47,4 +48,19 @@ export class DashboardService {
     return this.http.put<UserModel>(`${BASE_URL}/admin/users/unblock/${id}`,{}, {headers})
   }
 
+  addCourse(data : CourseDetails){
+    let headers = getAdminHeaders()
+    return this.http.post<CourseDetails>(`${BASE_URL}/admin/add-course`,data, {headers})
+  }
+
+  getCourses(){
+    let headers = getAdminHeaders()
+
+     interface Resonse  {
+      courseDetails : CourseDetailsResponse[] , 
+      tutorCourses : TutorDetailsWithCourse []
+    }
+
+    return this.http.get<Resonse>(`${BASE_URL}/admin/courses`,{headers})
+  }
 }
