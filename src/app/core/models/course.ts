@@ -1,7 +1,7 @@
 export interface CourseDetails {
     _id ?: string,
     title : string,
-    tutor : string,
+    tutor ?: string,
     fee : number,
     description : string
 }
@@ -13,7 +13,11 @@ export interface CourseDetailsResponse{
     fee : number,
     description : string,
     tutor : TutorDetailsWithCourse,
-    isAvailable : boolean
+    isAvailable : boolean,
+    cover ?: string,
+    isTutorMade ?: boolean,
+    isApproved ?: boolean,
+    request ?: string
 }
 
 export interface TutorDetailsWithCourse{

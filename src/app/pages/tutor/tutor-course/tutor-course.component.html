@@ -1,1 +1,22 @@
-<p>tutor-course works!</p>
+<div class="addCourseBtn my-2 text-end px-2">
+    <button class="bg-tutor-primary px-2 text-white rounded" (click)="requestCourse()" >Request Course</button>
+</div>
+<section class="py-4 grid grid-cols-3">
+    <div *ngFor="let each of tutorCourses"
+        class=" mx-5 course-card w-[13rem] h-[15rem] border border-light-gray rounded-xl overflow-hidden bg-white">
+        <div class="card-img w-full h-[9rem] relative">
+            <img class="object-cover w-full h-full" src="{{each.cover | customImageUrl}}" alt="">
+            <div *ngIf="each.isTutorMade && !each.isApproved" class="absolute bg-primary text-center text-white w-full py-1 top-[50%] traslate-y-[-50%]">Not Approved</div>
+        </div>
+        <div class="card-bottom">
+            <div class="course-title p-2">
+                <h1 class="font-bold text-xl">{{each.title}}</h1>
+            </div>
+
+            <div class="course-detail-bottom p-2 ">
+                <p class="text-sm text-gray inline my-auto">{{each.fee | addPriceTag}}</p>
+                <a class="text-sm ms-2 bg-primary font-bold float-right text-white p-1 px-2 rounded">More</a>
+            </div>
+        </div>
+    </div>
+</section>

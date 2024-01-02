@@ -1,17 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule} from '@angular/platform-browser';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { AuthEffects } from './core/state/auth/effect';
 import { dashboardReducer } from './core/state/admin/dashboard/reducer';
-import {MatDialogModule} from '@angular/material/dialog'
+import { MatDialogModule } from '@angular/material/dialog'
 import { CustomIconModule } from './modules/icon_modules';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 
 import { AppComponent } from './app.component';
@@ -59,7 +59,7 @@ import { TutorProfileEffect } from './core/state/tutor/profile/effects';
 import { tutorProfReducer } from './core/state/tutor/profile/reducer';
 import { PopupComponent } from './shared/popup/popup.component';
 import { CustomAlertsModule } from './modules/custom_alerts_modules';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProfileImageComponent } from './pages/student/profile/profile-image/profile-image.component';
 import { TutorCourseComponent } from './pages/tutor/tutor-course/tutor-course.component';
 import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-students.component';
@@ -68,6 +68,13 @@ import { TutorPopupComponent } from './shared/tutor-popup/tutor-popup.component'
 import { TutorProfileImageComponent } from './pages/tutor/profile-image/profile-image.component';
 import { TagsPopupTutorComponent } from './shared/tags-popup-tutor/tags-popup-tutor.component';
 import { PopupAddCourseComponent } from './pages/admin/popup-add-course/popup-add-course.component';
+import { SingleCourseAdminComponent } from './pages/admin/single-course-admin/single-course-admin.component';
+import { CourseImagePopupComponent } from './pages/admin/course-image-popup/course-image-popup.component';
+import { singleCourseReducer } from './core/state/admin/courses/reducer';
+import { PopupEditCourseComponent } from './pages/admin/popup-edit-course/popup-edit-course.component';
+import { CustomImageUrl } from './shared/pipes/image-url.pipe';
+import { CustomPricePipe } from './shared/pipes/price.pipe';
+import { RequestCoursePopupComponent } from './pages/tutor/request-course-popup/request-course-popup.component';
 
 
 
@@ -116,7 +123,13 @@ import { PopupAddCourseComponent } from './pages/admin/popup-add-course/popup-ad
     TutorPopupComponent,
     TutorProfileImageComponent,
     TagsPopupTutorComponent,
-    PopupAddCourseComponent
+    PopupAddCourseComponent,
+    SingleCourseAdminComponent,
+    CourseImagePopupComponent,
+    PopupEditCourseComponent,
+    CustomImageUrl,
+    CustomPricePipe,
+    RequestCoursePopupComponent
   ],
   imports: [
     BrowserModule,
@@ -135,24 +148,28 @@ import { PopupAddCourseComponent } from './pages/admin/popup-add-course/popup-ad
     MatIconModule,
     StoreModule.forRoot(
       {
-        auth : authReducer,
-        dashboard : dashboardReducer , 
-        studProf : studProfReducer,
-        tutorProf : tutorProfReducer
+        auth: authReducer,
+        dashboard: dashboardReducer,
+        studProf: studProfReducer,
+        tutorProf: tutorProfReducer,
+        singleCourse : singleCourseReducer
       }),
-    
+
     EffectsModule.forRoot(
       [
-        AuthEffects, 
+        AuthEffects,
         DashboardEffects,
         StudentProfileEffect,
         TutorProfileEffect
       ]
-        )
+    )
 
   ],
-  schemas:[ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [MessageService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    MessageService,
+    ConfirmationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

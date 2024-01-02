@@ -1,6 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { UserModel } from "../../../models/auth";
 import { TutorEducation, TutorModel, TutorTagResponse } from "../../../models/tutor";
+import { CourseDetailsResponse } from "../../../models/course";
 
 export const getTutorData = createAction(
     '[Tutor] get data'
@@ -48,4 +49,10 @@ export const tutorTagUpdateSuccess = createAction(
 export const tutorEducationDeleteSuccess = createAction(
     '[Tutor] education delete success',
     props<{ successResponse :{ toDelete : TutorEducation} }>()
+)
+
+
+export const tutorCourseSuccess = createAction(
+    '[Tutor] course success',
+    props<{ tutorCourses : CourseDetailsResponse[] }>()
 )

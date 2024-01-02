@@ -1,6 +1,6 @@
 
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { blockSuccess, courseDetailsSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, unblockSuccess } from "./action";
+import { blockSuccess, blockTutorSuccess, courseAddSuccess, courseDetailsSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, deleteTutorSuccess, unblockSuccess, unblockTutorSuccess } from "./action";
 import { UserModel } from "../../../models/auth";
 import { state } from "@angular/animations";
 import { TutorModel } from "../../../models/tutor";
@@ -109,7 +109,64 @@ const _dashboardReducer = createReducer(
                 courseDetails : successResponse.courseDetails
             }
         }
-    })
+    }),
+    on(courseAddSuccess , (state , {newCourse})=>{
+        let existingCourses = state.course.courseDetails.slice()
+        existingCourses.push(newCourse)
+        return{
+            ...state,
+            course : {
+                ...state.course,
+                courseDetails : existingCourses
+
+            }
+        }
+    }),
+    on(deleteTutorSuccess, (state, { tutor }) => {
+        const newList = state.list.tutorlist.filter(data => data._id !== tutor._id)
+        return {
+            ...state,
+            list: {
+                ...state.list,
+                tutorlist: newList,
+            },
+            errormessage: ""
+        }
+    }),
+    on(blockTutorSuccess, (state, { tutor }) => {
+        const newList = state.list.tutorlist.map(data => {
+            if (data._id === tutor._id) {
+                return { ...data, isBlocked: true }
+            }
+            return data
+        })
+        return {
+            ...state,
+            list: {
+                ...state.list,
+                tutorlist : newList
+            },
+            errormessage: ""
+        }
+    }),
+
+    on(unblockTutorSuccess, (state, { tutor }) => {
+        const newList = state.list.userlist.map(data => {
+            if (data._id === tutor._id) {
+                return { ...data, isBlocked: false }
+            }
+            return data
+        })
+        return {
+            ...state,
+            list: {
+                ...state.list,
+                tutorlist : newList
+            },
+            errormessage: ""
+        }
+    }),
+
 )
 
 export function dashboardReducer(state: any, action: any) {

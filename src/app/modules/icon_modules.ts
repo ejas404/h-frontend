@@ -10,7 +10,10 @@ import {
     bootstrapLockFill,
     bootstrapUnlockFill,
     bootstrapPencilSquare,
-    bootstrapXCircleFill
+    bootstrapXCircleFill,
+    bootstrapStarFill,
+    bootstrapStar,
+    bootstrapExclamationOctagonFill
 
 } from '@ng-icons/bootstrap-icons';
 
@@ -28,7 +31,10 @@ import {
                 bootstrapLockFill,
                 bootstrapUnlockFill,
                 bootstrapPencilSquare,
-                bootstrapXCircleFill
+                bootstrapXCircleFill,
+                bootstrapStarFill,
+                bootstrapStar,
+                bootstrapExclamationOctagonFill
             })
     ],
     exports: [

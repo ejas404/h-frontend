@@ -1,7 +1,7 @@
 import { createAction , props } from "@ngrx/store"
 import { UserModel } from "../../../models/auth"
 import { TutorModel } from "../../../models/tutor"
-import { CourseGetResponse } from "../../../models/course"
+import { CourseDetailsResponse, CourseGetResponse } from "../../../models/course"
 
 interface UserLists{
     userlist : UserModel[],
@@ -78,10 +78,33 @@ export const unblockFailure = createAction(
     props<{error : string}>()
 )
 
+
+
+export const courseAddSuccess = createAction(
+    '[Dashboard] course add success',
+    props<{newCourse : CourseDetailsResponse}>()
+)
+
+
+
 export const courseDetailsSuccess = createAction(
     '[Dashboard] course details success',
     props<{successResponse : CourseGetResponse}>()
 )
 
 
+export const deleteTutorSuccess = createAction(
+    '[Dashboard] delete tutor success',
+    props<{tutor : TutorModel}>()
+)
 
+
+export const blockTutorSuccess = createAction(
+    '[Dashboard] block success',
+    props<{tutor : TutorModel}>()
+)
+
+export const unblockTutorSuccess = createAction(
+    '[Dashboard] unblock success',
+    props<{tutor : TutorModel}>()
+)

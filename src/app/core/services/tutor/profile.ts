@@ -6,6 +6,7 @@ import { Observable } from "rxjs"
 import { BASE_URL } from "../../constant/uri"
 import { PasswordUpdate, TutorUpdateModel } from "../../models/student"
 import { TutorEducation, TutorModel, TutorTagResponse} from "../../models/tutor"
+import { CourseDetails, CourseDetailsResponse } from "../../models/course"
 
 
 
@@ -55,5 +56,16 @@ export class TutorProfileService{
     deleteEducation(id : string){
         let headers = getTutorHeaders()
         return this.http.delete<{toDelete : TutorEducation}>(`${BASE_URL}/tutor/delete-education/${id}`,{headers})
+    }
+
+
+    getCourses(){
+        let headers = getTutorHeaders()
+        return this.http.get<{tutorCourses : CourseDetailsResponse[]}>(`${BASE_URL}/tutor/courses`, { headers })
+    }
+
+    requestCourse(data : CourseDetails){
+        let headers = getTutorHeaders()
+        return this.http.post<{ newCourse: CourseDetailsResponse }>(`${BASE_URL}/tutor/request-course`, data, { headers })
     }
 }

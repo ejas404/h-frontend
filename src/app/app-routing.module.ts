@@ -32,6 +32,7 @@ import { tutorGuard } from './core/guards/tutor_guard';
 import { TutorCourseComponent } from './pages/tutor/tutor-course/tutor-course.component';
 import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-students.component';
 import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tutor-notification.component';
+import { SingleCourseAdminComponent } from './pages/admin/single-course-admin/single-course-admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -78,6 +79,7 @@ const routes: Routes = [
     ]
   },
   { path: 'admin/login', component: AdminLoginComponent },
+  { path: 'admin/course/:id', component: SingleCourseAdminComponent},
   {path : 'tutor/login', component : TutorLoginComponent},
   {path : 'tutor/signup', component : TutorSignupComponent},
   { path: '**', component: SnotfoundComponent }

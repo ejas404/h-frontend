@@ -1,18 +1,22 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { TutorEducation, TutorModel, TutorProfState } from "../../../models/tutor";
-import { getTutorSuccess, profilePicUpdateSuccess, tutorEducationDeleteSuccess, tutorTagUpdateSuccess, updateEducationSuccess } from "./action";
+import { getTutorSuccess, profilePicUpdateSuccess, tutorCourseSuccess, tutorEducationDeleteSuccess, tutorTagUpdateSuccess, updateEducationSuccess } from "./action";
+import { CourseDetailsResponse } from "../../../models/course";
 
+interface TutorState extends TutorModel{
+    courses ?: CourseDetailsResponse[]
+}
 
-const initialState: TutorModel = {
+const initialState: TutorState = {
     email: '',
-    name: ''
+    name: '',
+    courses : []
 }
 
 const _profileReducer = createReducer(
     initialState,
     on(getTutorSuccess, (state, { tutorData }) => {
-        console.log('tutor reducer')
-        console.log('state', state)
+
         return {
             ...state, ...tutorData
         }
@@ -58,6 +62,12 @@ const _profileReducer = createReducer(
             ...state,
             education : arr
         }
+    }),
+    on(tutorCourseSuccess, (state,action)=>{
+        return{
+            ...state,
+            courses : action.tutorCourses
+        }
     })
 
 
@@ -83,7 +93,7 @@ export function tutorProfReducer(state: any, action: any) {
     return _profileReducer(state, action)
 }
 
-export const selectTutorProfState = createFeatureSelector<TutorModel>('tutorProf')
+export const selectTutorProfState = createFeatureSelector<TutorState>('tutorProf')
 
 export const getTutorStoreData = createSelector(
     selectTutorProfState,
