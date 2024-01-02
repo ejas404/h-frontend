@@ -55,7 +55,6 @@ export class PopupEditCourseComponent {
   setCourseData(){
     this.store.select(getSingleCourseData).subscribe({
       next : data =>{
-      console.log('befor setting course data', data)
        this.courseDetail = data
 
       },

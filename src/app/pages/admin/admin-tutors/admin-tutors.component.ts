@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { TutorModel } from '../../../core/models/tutor';
 import { DashboardService } from '../../../core/services/admin/dashboard';
 import { MessageService } from 'primeng/api';
+import { ConfirmBoxComponent, ConfirmDialogModel } from '../../../shared/confirm-box/confirm-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin-tutors',
@@ -16,7 +18,8 @@ export class AdminTutorsComponent {
   constructor(
     private store: Store,
     private service: DashboardService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public dialog: MatDialog
   ) { }
 
 
@@ -92,4 +95,20 @@ export class AdminTutorsComponent {
       detail: `failed to ${data} tutor`
     })
   }
+
+  confirmDialog(): void {
+    const message = `Are you sure you want to do this?`;
+
+    const dialogData = new ConfirmDialogModel("Confirm Action", message);
+
+    const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      alert(dialogResult)
+    });
+  }
+
 }

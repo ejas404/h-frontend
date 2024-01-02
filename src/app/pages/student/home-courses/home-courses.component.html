@@ -4,29 +4,34 @@
     </div>
 
     <div class="courses-list h-[80%] w-full flex justify-center items-center">
-       
-        <div class="items flex overflow-x-scroll px-5">
-            <div *ngFor="let i of arr"
+
+        <div class="items flex overflow-x-scroll px-5 no-scrollbar">
+            <div *ngFor="let each of courses"
                 class="flex-none mx-5 course-card w-[18rem] h-[22rem] border border-light-gray rounded-xl overflow-hidden bg-white">
-                <div class="card-img w-full h-[10rem]">
-                    <img class="object-contain" src="assets/student/fixed-images/angular.jpg" alt="">
-                </div>
-                <div class="card-bottom">
-                    <div class="course-details-top text-gray p-2
-                            children:text-sm children:inline">
-                        <p class="">Angular</p>
-                        <p class="float-right">4:00 hrs</p>
 
-                    </div>
-                    <div class="course-title p-2">
-                        <h1 class="font-bold text-3xl">Angular for Begginers</h1>
-                    </div>
+                <a routerLink="/course/{{each._id}}">
 
-                    <div class="course-detail-bottom p-2 ">
-                        <p class="text-sm text-gray inline my-auto">44Videos</p>
-                        <a class="text-sm ms-2 bg-primary font-bold float-right text-white p-1 px-2 rounded">Buy Now</a>
+                    <div class="card-img w-full h-[12rem]">
+                        <img class="object-contain" src="{{each.cover | customImageUrl}}" alt="">
                     </div>
-                </div>
+                    <div class="card-bottom  flex flex-col justify-between">
+                        <div class="course-details-top text-gray p-2
+                        children:text-sm children:inline">
+                            <p class="">Angular</p>
+                            <p class="float-right">4:00 hrs</p>
+
+                        </div>
+                        <div class="course-title p-2">
+                            <h1 class="font-bold text-3xl">{{each.title}}</h1>
+                        </div>
+
+                        <div class="course-detail-bottom p-2 ">
+                            <p class="text-sm text-gray inline my-auto">44Videos</p>
+                            <a class="text-sm ms-2 bg-primary font-bold float-right text-white p-1 px-2 rounded">Buy
+                                Now</a>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

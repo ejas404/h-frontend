@@ -27,7 +27,7 @@
 
         <div *ngIf="user === 'admin'" class="h-[2.5rem] w-[2.5rem] rounded-full 
                     bg-admin-primary flex justify-center items-center ">
-            <p class="text-xs text-white font-bold">Admin</p>
+            <a routerLink="/admin"><p class="text-xs text-white font-bold">Admin</p></a>
         </div>
 
         <div *ngIf="user === 'profile'" class="h-[2.5rem] w-[2.5rem] rounded-full 

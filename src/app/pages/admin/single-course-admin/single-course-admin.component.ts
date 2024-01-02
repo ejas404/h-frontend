@@ -8,10 +8,11 @@ import { getCourseList } from '../../../core/state/admin/dashboard/reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { CourseImagePopupComponent } from '../course-image-popup/course-image-popup.component';
 import { BASE_URL } from '../../../core/constant/uri';
-import { singleCourseDetailsSuccess } from '../../../core/state/admin/courses/action';
+import { courseApproveSuccess, singleCourseDetailsSuccess } from '../../../core/state/admin/courses/action';
 import { getSingleCourseData } from '../../../core/state/admin/courses/reducer';
 import { PopupAddCourseComponent } from '../popup-add-course/popup-add-course.component';
 import { PopupEditCourseComponent } from '../popup-edit-course/popup-edit-course.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-single-course-admin',
@@ -36,7 +37,8 @@ export class SingleCourseAdminComponent {
     private activateRoute : ActivatedRoute,
     private store : Store,
     private service : DashboardService,
-    private dialogRef : MatDialog
+    private dialogRef : MatDialog,
+    private messageService : MessageService
   ){}
 
   ngOnInit(){
@@ -91,4 +93,37 @@ export class SingleCourseAdminComponent {
     }
   })
  }
+
+ approveCourse(){
+    this.service.approveCourseRequest(this.course_id).subscribe({
+        next : data =>{
+          this.store.dispatch(courseApproveSuccess(data))
+          this.successMessage('Course approval successfully completed')
+        },
+        error : data =>{
+          this.failureMessage('Course approval failed to complete')
+        }
+    })
+ }
+
+ cancelApprove(){
+
+ }
+
+ successMessage(msg : string) {
+  this.messageService.add({
+    severity: 'success',
+    summary: 'Success',
+    detail: msg
+  })
+}
+
+failureMessage(msg : string) {
+  this.messageService.add({
+    severity: 'error',
+    summary: 'Failed',
+    detail: msg
+  })
+}
+
 }

@@ -75,6 +75,8 @@ import { PopupEditCourseComponent } from './pages/admin/popup-edit-course/popup-
 import { CustomImageUrl } from './shared/pipes/image-url.pipe';
 import { CustomPricePipe } from './shared/pipes/price.pipe';
 import { RequestCoursePopupComponent } from './pages/tutor/request-course-popup/request-course-popup.component';
+import { SingleCourseHomeComponent } from './pages/student/single-course-home/single-course-home.component';
+import { ConfirmBoxComponent } from './shared/confirm-box/confirm-box.component';
 
 
 
@@ -129,7 +131,9 @@ import { RequestCoursePopupComponent } from './pages/tutor/request-course-popup/
     PopupEditCourseComponent,
     CustomImageUrl,
     CustomPricePipe,
-    RequestCoursePopupComponent
+    RequestCoursePopupComponent,
+    SingleCourseHomeComponent,
+    ConfirmBoxComponent
   ],
   imports: [
     BrowserModule,

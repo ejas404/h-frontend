@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HomePageCourseService } from '../../../core/services/home/homepage-course';
+import { CourseDetailsResponse } from '../../../core/models/course';
 
 @Component({
   selector: 'app-home-courses',
@@ -6,5 +8,23 @@ import { Component } from '@angular/core';
   styleUrl: './home-courses.component.scss'
 })
 export class HomeCoursesComponent {
-  arr = [1,2,3,4,5,6,7,8,9,10]
+
+  courses !: CourseDetailsResponse[];
+
+  constructor(private service : HomePageCourseService){}
+
+  ngOnInit(){
+    this.fertchCourseDetails()
+  }
+
+  fertchCourseDetails(){
+    this.service.getCourses().subscribe({
+      next : data =>{
+        this.courses = data.courses
+      },
+      error : err =>{
+
+      }
+    })
+  }
 }

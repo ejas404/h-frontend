@@ -94,17 +94,17 @@ export const courseDetailsSuccess = createAction(
 
 
 export const deleteTutorSuccess = createAction(
-    '[Dashboard] delete tutor success',
+    '[DashboardTutor] delete tutor success',
     props<{tutor : TutorModel}>()
 )
 
 
 export const blockTutorSuccess = createAction(
-    '[Dashboard] block success',
+    '[DashboardTutor] block tutor success',
     props<{tutor : TutorModel}>()
 )
 
 export const unblockTutorSuccess = createAction(
-    '[Dashboard] unblock success',
+    '[DashboardTutor] unblock tutor success',
     props<{tutor : TutorModel}>()
 )

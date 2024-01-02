@@ -16,3 +16,8 @@ export const courseUpdateSuccess = createAction(
     '[Admin] update course success',
     props<{updatedCourse : CourseDetailsResponse}>()
 )
+
+export const courseApproveSuccess = createAction(
+    '[Admin] approve course success',
+    props<{courseDetails : CourseDetailsResponse}>()
+)

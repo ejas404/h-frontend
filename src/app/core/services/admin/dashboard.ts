@@ -95,4 +95,9 @@ export class DashboardService {
     return this.http.put<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/unblock/${id}`, {}, { headers })
   }
 
+  approveCourseRequest(id : string){
+    let headers = getAdminHeaders()
+    return this.http.put<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course-approve/${id}`, {}, { headers })
+  }
+
 }

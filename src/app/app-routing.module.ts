@@ -33,10 +33,12 @@ import { TutorCourseComponent } from './pages/tutor/tutor-course/tutor-course.co
 import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-students.component';
 import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tutor-notification.component';
 import { SingleCourseAdminComponent } from './pages/admin/single-course-admin/single-course-admin.component';
+import { SingleCourseHomeComponent } from './pages/student/single-course-home/single-course-home.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  {path : 'course/:id', component : SingleCourseHomeComponent},
   {
     path: '', component: HomeComponent,
     children: [

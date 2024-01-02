@@ -1,6 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { CourseDetailsResponse, CourseGetResponse } from "../../../models/course";
-import { courseCoverUpdateSuccess, courseUpdateSuccess, singleCourseDetailsSuccess } from "./action";
+import { courseApproveSuccess, courseCoverUpdateSuccess, courseUpdateSuccess, singleCourseDetailsSuccess } from "./action";
 
 const initialState : CourseDetailsResponse = {
     title : '',
@@ -32,8 +32,14 @@ const _singleCourseReducer = createReducer(
             ...state,
             ...action.updatedCourse
         }
-    })
+    }),
 
+    on(courseApproveSuccess, (state,action)=>{
+        return{
+            ...state,
+            ...action.courseDetails
+        }
+    })
 )
 
 

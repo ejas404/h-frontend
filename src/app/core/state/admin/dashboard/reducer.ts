@@ -151,7 +151,7 @@ const _dashboardReducer = createReducer(
     }),
 
     on(unblockTutorSuccess, (state, { tutor }) => {
-        const newList = state.list.userlist.map(data => {
+        const newList = state.list.tutorlist.map(data => {
             if (data._id === tutor._id) {
                 return { ...data, isBlocked: false }
             }
