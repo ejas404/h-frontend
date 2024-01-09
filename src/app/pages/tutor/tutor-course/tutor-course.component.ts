@@ -8,6 +8,7 @@ import { BASE_URL } from '../../../core/constant/uri';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupAddCourseComponent } from '../../admin/popup-add-course/popup-add-course.component';
 import { RequestCoursePopupComponent } from '../request-course-popup/request-course-popup.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tutor-course',
@@ -15,6 +16,8 @@ import { RequestCoursePopupComponent } from '../request-course-popup/request-cou
   styleUrl: './tutor-course.component.scss'
 })
 export class TutorCourseComponent {
+
+  private destroy$ = new Subject<void>();
 
   url : string = BASE_URL
 
@@ -33,7 +36,9 @@ export class TutorCourseComponent {
       }
 
       fetchCourses(){
-        this.service.getCourses().subscribe({
+        this.service.getCourses()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
           next : data =>{
             this.store.dispatch(tutorCourseSuccess(data))
           },
@@ -44,7 +49,9 @@ export class TutorCourseComponent {
       }
 
       setTutorCourse(){
-        this.store.select(getTutorStoreData).subscribe({
+        this.store.select(getTutorStoreData)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
           next : data =>{
             this.tutorCourses = data.courses as CourseDetailsResponse[]
           },
@@ -56,6 +63,11 @@ export class TutorCourseComponent {
 
       requestCourse(){
         this.dialogRef.open(RequestCoursePopupComponent)
+      }
+
+      ngOnDestroy(){
+        this.destroy$.next()
+        this.destroy$.complete()
       }
 
 }

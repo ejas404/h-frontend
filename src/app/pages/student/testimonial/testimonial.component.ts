@@ -33,14 +33,12 @@ export class TestimonialComponent {
   ) { }
 
   swapUsers(id: string) {
-    console.log(id)
-    console.log('id printed')
+    
     let div = this.elem.nativeElement.querySelector(`[id='${id}']`)
     let img = div.querySelector('img')
 
     if(img){
       this.renderer.setAttribute(img,'src',this.userTestimonials[this.mainUser].img)
-
       this.renderer.setAttribute(div,'id',this.mainUser.toString())
     }
 

@@ -4,12 +4,16 @@ import { Store } from '@ngrx/store';
 import { BASE_URL } from '../../../core/constant/uri';
 import { getTutorData } from '../../../core/state/tutor/profile/action';
 import { getTutorStoreData } from '../../../core/state/tutor/profile/reducer';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'tutor-profile-image',
   templateUrl: './profile-image.component.html'
 })
-export class TutorProfileImageComponent implements OnInit{
+export class TutorProfileImageComponent implements OnInit {
+
+  private destroy$ = new Subject<void>();
+
   tutorData$ !: TutorModel;
   profileUrl$ !: string;
 
@@ -20,11 +24,18 @@ export class TutorProfileImageComponent implements OnInit{
   ngOnInit(): void {
 
     // the user data will be fetched from the server store
-    this.store.select(getTutorStoreData).subscribe((data) => {
+    this.store.select(getTutorStoreData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.tutorData$ = data as TutorModel
+        }
+      })
+  }
 
-      this.tutorData$ = data as TutorModel
-
-    })
+  ngOnDestroy() {
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
 }

@@ -3,6 +3,7 @@ import { TutorProfileService } from '../../../core/services/tutor/profile';
 import { MessageService } from 'primeng/api';
 import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-request-course-popup',
@@ -10,44 +11,50 @@ import { NgForm } from '@angular/forms';
   styleUrl: './request-course-popup.component.scss'
 })
 export class RequestCoursePopupComponent {
+
+  private destroy$ = new Subject<void>();
+
   constructor(
-    private service : TutorProfileService,
-    private store : Store,
-    private messageService : MessageService
-    ){}
+    private service: TutorProfileService,
+    private store: Store,
+    private messageService: MessageService
+  ) { }
 
 
-  
-  ngOnInit(): void {
-    
-
-  }
-
-  onFormSubmit(formData : NgForm){
-    this.service.requestCourse(formData.value).subscribe({
-      next : data =>{
+  onFormSubmit(formData: NgForm) {
+    this.service.requestCourse(formData.value)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: data => {
         this.successMessage()
       },
-      error : err =>{
+      error: err => {
         this.failureMessage()
       }
     })
   }
 
-  successMessage(){
+  successMessage() {
     this.messageService.add({
-      severity : 'success',
-      summary : 'Success',
-      detail : 'Course Requested Successfully'
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Course Requested Successfully'
     })
   }
 
-  failureMessage(){
+  failureMessage() {
     this.messageService.add({
-      severity : 'error',
-      summary : 'Failed',
-      detail : 'Failed to request course'
+      severity: 'error',
+      summary: 'Failed',
+      detail: 'Failed to request course'
     })
   }
+
+  
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
 
 }

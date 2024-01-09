@@ -3,6 +3,7 @@ import { BASE_URL } from '../../../core/constant/uri';
 import { ActivatedRoute } from '@angular/router';
 import { CourseDetailsResponse } from '../../../core/models/course';
 import { HomePageCourseService } from '../../../core/services/home/homepage-course';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-single-course-home',
@@ -10,6 +11,9 @@ import { HomePageCourseService } from '../../../core/services/home/homepage-cour
   styleUrl: './single-course-home.component.scss'
 })
 export class SingleCourseHomeComponent {
+
+  private destroy$ = new Subject<void>();
+
   selectedSection !: number ;
 
   sections = [
@@ -33,7 +37,9 @@ export class SingleCourseHomeComponent {
   }
 
   fetchCourseData(id : string){
-    this.service.getSingleCourse(id).subscribe({
+    this.service.getSingleCourse(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next : data =>{
         this.courseDetails = data.courseDetails
       },
@@ -50,5 +56,11 @@ export class SingleCourseHomeComponent {
   getCourse(){
 
   }
+
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
   
 }

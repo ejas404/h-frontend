@@ -2,6 +2,7 @@ import { Component, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { StudentProfileService } from '../../../core/services/student/profile';
 import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login-otp',
@@ -9,6 +10,9 @@ import { MessageService } from 'primeng/api';
   styleUrl: './login-otp.component.scss'
 })
 export class LoginOtpComponent {
+
+  private destroy$ = new Subject<void>();
+
   emailEntered: boolean = false
   userEmail !: string;
   otpEmail !: string;
@@ -19,7 +23,9 @@ export class LoginOtpComponent {
 
   emailAdded(email: string) {
     this.userEmail = email
-    this.service.getOtp(email).subscribe({
+    this.service.getOtp(email)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next: data => {
         this.emailEntered = true
         this.messageService.add({
@@ -44,7 +50,9 @@ export class LoginOtpComponent {
       otp
     }
 
-    this.service.submitOtp(reqBody).subscribe({
+    this.service.submitOtp(reqBody)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next: data => {
         this.emailEntered = true
         this.messageService.add({
@@ -62,4 +70,12 @@ export class LoginOtpComponent {
       }
     })
   }
+
+  
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
+
 }

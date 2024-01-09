@@ -7,6 +7,7 @@ import { TutorProfileService } from '../../core/services/tutor/profile';
 import { Store } from '@ngrx/store';
 import { profilePicUpdateSuccess } from '../../core/state/tutor/profile/action';
 import { studentPicUpdateSuccess } from '../../core/state/student/profile_page/action';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-popup',
@@ -14,6 +15,8 @@ import { studentPicUpdateSuccess } from '../../core/state/student/profile_page/a
   styleUrl: './popup.component.scss'
 })
 export class PopupComponent {
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private studService: StudentProfileService,
@@ -62,25 +65,30 @@ export class PopupComponent {
     uploadForm.append('profile', file, file.name)
 
     if (this.data.calledFor === 'student') {
-      this.studService.updateProfilePic(uploadForm).subscribe(
-        (data) => {
+      this.studService.updateProfilePic(uploadForm)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next :  (data) => {
           this.serverUploadSuccess()
           this.store.dispatch(studentPicUpdateSuccess(data))
         },
-        (err)=>{
+        error : (err)=>{
           this.serverUploadFail()
         }
-        )
+      })
     } else if (this.data.calledFor === 'tutor') {
-      this.tutorService.updateProfilePic(uploadForm).subscribe(
-        (data) => {
+      this.tutorService.updateProfilePic(uploadForm)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next : (data) => {
           this.serverUploadSuccess()
           this.store.dispatch(profilePicUpdateSuccess(data))
         },
-        (err)=>{
+        error : (err)=>{
           this.serverUploadFail()
         }
-       )
+       
+      })
     }
 
   }
@@ -99,6 +107,11 @@ export class PopupComponent {
       summary : 'Failed',
       detail : 'Profile Image Failed to Update'
     })
+  }
+
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
 

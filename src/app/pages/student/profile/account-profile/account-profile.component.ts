@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PasswordUpdate } from '../../../../core/models/student';
 import { StudentProfileService } from '../../../../core/services/student/profile';
+import { SuccessMessage } from '../../../../core/models/server_response_model';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-account-profile',
@@ -10,9 +12,11 @@ import { StudentProfileService } from '../../../../core/services/student/profile
 })
 export class AccountProfileComponent {
 
-  constructor(private service: StudentProfileService) {
+  private destroy$ = new Subject<void>();
 
-  }
+  constructor(
+    private service: StudentProfileService
+    ) {}
 
   resetPassword(data: NgForm) {
     console.log(data.value)
@@ -21,19 +25,29 @@ export class AccountProfileComponent {
       newPassword: data.value.newPassword
     }
 
-    this.service.resetPassword(toUpdate).subscribe(
-      (res: any) => {
-        alert(res.message)
+    this.service.resetPassword(toUpdate)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next :  (res) => {
+        const response =  res as SuccessMessage
+        alert(response.message)
 
       },
-      (err : any)=>{
+      error : err =>{
         alert(err.message)
       }
-    )
+    })
 
   }
 
   logout() {
     this.service.logout()
   }
+
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
+
 }

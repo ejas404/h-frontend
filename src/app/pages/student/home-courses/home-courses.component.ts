@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HomePageCourseService } from '../../../core/services/home/homepage-course';
 import { CourseDetailsResponse } from '../../../core/models/course';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-home-courses',
@@ -8,6 +9,8 @@ import { CourseDetailsResponse } from '../../../core/models/course';
   styleUrl: './home-courses.component.scss'
 })
 export class HomeCoursesComponent {
+
+  private destroy$ = new Subject<void>();
 
   courses !: CourseDetailsResponse[];
 
@@ -18,7 +21,9 @@ export class HomeCoursesComponent {
   }
 
   fertchCourseDetails(){
-    this.service.getCourses().subscribe({
+    this.service.getCourses()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next : data =>{
         this.courses = data.courses
       },
@@ -27,4 +32,11 @@ export class HomeCoursesComponent {
       }
     })
   }
+
+  
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
 }

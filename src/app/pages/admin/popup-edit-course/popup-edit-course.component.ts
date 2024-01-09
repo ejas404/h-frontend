@@ -10,6 +10,7 @@ import * as DashboardActions from '../../../../app/core/state/admin/dashboard/ac
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { courseUpdateSuccess, singleCourseDetailsSuccess } from '../../../core/state/admin/courses/action';
 import { getSingleCourseData } from '../../../core/state/admin/courses/reducer';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-popup-edit-course',
@@ -17,6 +18,8 @@ import { getSingleCourseData } from '../../../core/state/admin/courses/reducer';
   styleUrl: './popup-edit-course.component.scss'
 })
 export class PopupEditCourseComponent {
+
+  private destroy$ = new Subject<void>();
 
   tutorList !: TutorModel[];
   courseDetail !: CourseDetailsResponse;
@@ -33,8 +36,12 @@ export class PopupEditCourseComponent {
   ngOnInit(): void {
     this.store.dispatch(DashboardActions.dashboardRequest());
 
-    this.store.select(getTutorList).subscribe((state) => {
-      this.tutorList = state
+    this.store.select(getTutorList)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : state => {
+        this.tutorList = state
+      }
     })
 
     this.fetchCourseData(this.data.id)
@@ -42,7 +49,9 @@ export class PopupEditCourseComponent {
   }
 
   fetchCourseData(id : string){
-    this.service.getSingleCourse(id).subscribe({
+    this.service.getSingleCourse(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next : data =>{
         this.store.dispatch(singleCourseDetailsSuccess(data))
       },
@@ -53,7 +62,9 @@ export class PopupEditCourseComponent {
   }
 
   setCourseData(){
-    this.store.select(getSingleCourseData).subscribe({
+    this.store.select(getSingleCourseData)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next : data =>{
        this.courseDetail = data
 
@@ -66,7 +77,9 @@ export class PopupEditCourseComponent {
 
 
   onFormSubmit(formData: NgForm) {
-    this.service.updateCourse(formData.value , this.courseDetail._id as string).subscribe({
+    this.service.updateCourse(formData.value , this.courseDetail._id as string)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next: data => {
         this.store.dispatch(courseUpdateSuccess(data))
         this.successMessage()
@@ -92,5 +105,11 @@ export class PopupEditCourseComponent {
       detail: 'Failed to update course'
     })
   }
+
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
 
 }

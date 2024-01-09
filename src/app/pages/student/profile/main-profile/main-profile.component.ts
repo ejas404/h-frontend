@@ -6,6 +6,7 @@ import { getStudData } from '../../../../core/state/student/profile_page/reducer
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../../../../shared/popup/popup.component';
 import { BASE_URL } from '../../../../core/constant/uri';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-main-profile',
@@ -13,9 +14,10 @@ import { BASE_URL } from '../../../../core/constant/uri';
 })
 export class MainProfileComponent implements OnInit {
 
+  private destroy$ = new Subject<void>();
+
   name: string = ''
-  userData$ !: UserModel;
-  profileUrl !: string;
+  userData !: UserModel;
 
   constructor(
     private store: Store,
@@ -28,14 +30,14 @@ export class MainProfileComponent implements OnInit {
     this.store.dispatch(getUserData())
 
      // the user data will be fetched from the server store
-    this.store.select(getStudData).subscribe((data) => {
+    this.store.select(getStudData)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : data => {
       
-      this.userData$ = data as UserModel
-      this.name = this.userData$?.name || ''
-      if (this.userData$?.profile) {
-        this.profileUrl = `${BASE_URL}/${this.userData$.profile?.slice(7)}`
-      }else{
-        this.profileUrl =  '../../../../../assets/student/fixed-images/634682.png'
+        this.userData = data as UserModel
+        this.name = this.userData?.name || ''
+  
       }
     })
   }
@@ -45,6 +47,13 @@ export class MainProfileComponent implements OnInit {
       data : {calledFor : 'student'}
     })
   }
+
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
+
 }
 
 

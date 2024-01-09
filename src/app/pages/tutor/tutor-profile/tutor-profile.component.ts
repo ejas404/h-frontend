@@ -8,6 +8,7 @@ import { TutorEducation } from '../../../core/models/tutor';
 import { TutorProfileService } from '../../../core/services/tutor/profile';
 import { MessageService } from 'primeng/api';
 import { ConfirmBoxService } from '../../../core/services/shared/confirm-dialog';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tutor-profile',
@@ -15,6 +16,8 @@ import { ConfirmBoxService } from '../../../core/services/shared/confirm-dialog'
   styleUrl: './tutor-profile.component.scss'
 })
 export class TutorProfileComponent implements OnInit {
+
+  private destroy$ = new Subject<void>();
 
   educationDetails !: TutorEducation[];
 
@@ -27,8 +30,12 @@ export class TutorProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.store.select(getTutorStoreData).subscribe((data) => {
-      this.educationDetails = data.education as TutorEducation[]
+    this.store.select(getTutorStoreData)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : data => {
+        this.educationDetails = data.education as TutorEducation[]
+      }
     })
   }
 
@@ -40,10 +47,13 @@ export class TutorProfileComponent implements OnInit {
 
     this.confirmService
       .confirmDialog('Are your sure about deleting the education details')
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: data => {
           if (data) {
-            this.service.deleteEducation(id).subscribe({
+            this.service.deleteEducation(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
               next: data => {
                 this.store.dispatch(tutorEducationDeleteSuccess({ successResponse: { toDelete: data.toDelete } }))
 
@@ -61,4 +71,10 @@ export class TutorProfileComponent implements OnInit {
         }
       })
   }
+
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
 }

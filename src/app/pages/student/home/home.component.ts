@@ -10,7 +10,7 @@ export class HomeComponent  implements OnInit{
   user : string = 'student'
 
   ngOnInit(): void {
-    let isLogged = sessionStorage.getItem('student-token')
+    let isLogged = sessionStorage.getItem('auth_token')
 
     if(isLogged){
       console.log('student token',isLogged)

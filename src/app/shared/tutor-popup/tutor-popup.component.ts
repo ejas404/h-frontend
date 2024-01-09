@@ -14,10 +14,6 @@ export class TutorPopupComponent {
 
   onFormSubmit(form : NgForm){
     let educationDetails = form.value
-
-    console.log('education form value')
-    console.log(educationDetails)
-    
     this.store.dispatch(updateEducationDetails({educationDetails}))
   }
 }

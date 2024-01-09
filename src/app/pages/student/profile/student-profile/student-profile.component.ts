@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { getStudData } from '../../../../core/state/student/profile_page/reducer';
 import { StudentProfileService } from '../../../../core/services/student/profile';
 import { StudentUpdateModel } from '../../../../core/models/student';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-student-profile',
@@ -12,6 +13,9 @@ import { StudentUpdateModel } from '../../../../core/models/student';
   styleUrl: './student-profile.component.scss'
 })
 export class StudentProfileComponent implements OnInit{
+
+  private destroy$ = new Subject<void>();
+
   edit : boolean = false
   userData$ !: UserModel 
 
@@ -24,9 +28,13 @@ export class StudentProfileComponent implements OnInit{
   constructor(private store : Store ,private service : StudentProfileService){}
 
   ngOnInit(): void {
-    this.store.select(getStudData).subscribe((data) => {
-      this.userData$ = data as UserModel;
-      this.setFormValues();
+    this.store.select(getStudData)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : data => {
+        this.userData$ = data as UserModel;
+        this.setFormValues();
+      }
     });
   }
 
@@ -47,8 +55,20 @@ export class StudentProfileComponent implements OnInit{
   updateUser(){
     this.edit = false
     let userData : StudentUpdateModel = this.profileUpdate.value as StudentUpdateModel
-    this.service.updateProfile(userData).subscribe((res)=>{
-      console.log(res)
+    this.service.updateProfile(userData)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res=>{
+        console.log(res)
+      }
     })
   }
+
+  
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
+
 }

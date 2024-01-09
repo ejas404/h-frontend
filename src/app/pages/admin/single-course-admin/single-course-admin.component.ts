@@ -10,6 +10,7 @@ import { courseApproveSuccess, singleCourseDetailsSuccess } from '../../../core/
 import { getSingleCourseData } from '../../../core/state/admin/courses/reducer';
 import { PopupEditCourseComponent } from '../popup-edit-course/popup-edit-course.component';
 import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-single-course-admin',
@@ -17,27 +18,31 @@ import { MessageService } from 'primeng/api';
   styleUrl: './single-course-admin.component.scss'
 })
 export class SingleCourseAdminComponent {
-  selectedSection !: number ;
+
+  private destroy$ = new Subject<void>();
+
+
+  selectedSection !: number;
   course_id !: string;
 
   sections = [
-    {title : 'Section 1', class : '10'}, 
-    {title : 'Section 2', class : '4'},
-    {title : 'Section 3', class : '4'},
-    {title : 'Section 4', class : '4'}
+    { title: 'Section 1', class: '10' },
+    { title: 'Section 2', class: '4' },
+    { title: 'Section 3', class: '4' },
+    { title: 'Section 4', class: '4' }
   ]
 
   courseDetails !: CourseDetailsResponse;
 
   constructor(
-    private activateRoute : ActivatedRoute,
-    private store : Store,
-    private service : DashboardService,
-    private dialogRef : MatDialog,
-    private messageService : MessageService
-  ){}
+    private activateRoute: ActivatedRoute,
+    private store: Store,
+    private service: DashboardService,
+    private dialogRef: MatDialog,
+    private messageService: MessageService
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     const search = this.activateRoute.snapshot.params['id']
 
     this.course_id = search
@@ -46,75 +51,87 @@ export class SingleCourseAdminComponent {
     this.setCourseData(search)
   }
 
-  fetchCourseData(id : string){
-    this.service.getSingleCourse(id).subscribe({
-      next : data =>{
-        this.store.dispatch(singleCourseDetailsSuccess(data))
-      },
-      error  : err =>{
-        console.log(err)
-      }
-    })
-  }
-  
-  setCourseData(id : string){
-    this.store.select(getSingleCourseData).subscribe({
-      next : data =>{
-       this.courseDetails = data
-
-      },
-      error  : err =>{
-        console.log(err)
-      }
-    })
+  fetchCourseData(id: string) {
+    this.service.getSingleCourse(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.store.dispatch(singleCourseDetailsSuccess(data))
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
   }
 
- updateCover(){
+  setCourseData(id: string) {
+    this.store.select(getSingleCourseData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.courseDetails = data
+
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
+  }
+
+  updateCover() {
     const id = this.course_id
-    
-    this.dialogRef.open(CourseImagePopupComponent,{
-      data : {id}
+
+    this.dialogRef.open(CourseImagePopupComponent, {
+      data: { id }
     })
- }
+  }
 
- editCourse(){
-  this.dialogRef.open(PopupEditCourseComponent,{
-    data : {
-     id : this.course_id
-    }
-  })
- }
+  editCourse() {
+    this.dialogRef.open(PopupEditCourseComponent, {
+      data: {
+        id: this.course_id
+      }
+    })
+  }
 
- approveCourse(){
-    this.service.approveCourseRequest(this.course_id).subscribe({
-        next : data =>{
+  approveCourse() {
+    this.service.approveCourseRequest(this.course_id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
           this.store.dispatch(courseApproveSuccess(data))
           this.successMessage('Course approval successfully completed')
         },
-        error : data =>{
+        error: data => {
           this.failureMessage('Course approval failed to complete')
         }
+      })
+  }
+
+  cancelApprove() {
+
+  }
+
+  successMessage(msg: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: msg
     })
- }
+  }
 
- cancelApprove(){
+  failureMessage(msg: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Failed',
+      detail: msg
+    })
+  }
 
- }
+  ngOnDestroy() {
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
 
- successMessage(msg : string) {
-  this.messageService.add({
-    severity: 'success',
-    summary: 'Success',
-    detail: msg
-  })
-}
-
-failureMessage(msg : string) {
-  this.messageService.add({
-    severity: 'error',
-    summary: 'Failed',
-    detail: msg
-  })
-}
 
 }

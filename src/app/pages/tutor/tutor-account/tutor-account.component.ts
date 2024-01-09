@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PasswordUpdate } from '../../../core/models/student';
 import { TutorProfileService } from '../../../core/services/tutor/profile';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tutor-account',
@@ -9,6 +10,8 @@ import { TutorProfileService } from '../../../core/services/tutor/profile';
   styleUrl: './tutor-account.component.scss'
 })
 export class TutorAccountComponent {
+
+  private destroy$ = new Subject<void>();
 
   constructor(private service : TutorProfileService){}
  
@@ -19,7 +22,9 @@ export class TutorAccountComponent {
       newPassword : data.value.newPassword
     }
 
-    this.service.resetPassword(toUpdate).subscribe((res  : any)=>{
+    this.service.resetPassword(toUpdate)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((res  : any)=>{
       alert(res.message)
     })
 
@@ -28,4 +33,10 @@ export class TutorAccountComponent {
   logOut(){
     this.service.logout()
   }
+
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
 }

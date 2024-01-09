@@ -12,9 +12,7 @@ export class TutorLoginComponent {
   constructor(private store: Store) { }
 
   onSubmitClick(form: NgForm) {
-
     let credentials = form.value
-
     this.store.dispatch(tutorLoginReq({ credentials }))
   }
 }

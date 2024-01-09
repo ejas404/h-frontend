@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'primeng/api';
 import { Store } from '@ngrx/store';
 import { courseCoverUpdateSuccess } from '../../../core/state/admin/courses/action';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-course-image-popup',
@@ -12,10 +13,13 @@ import { courseCoverUpdateSuccess } from '../../../core/state/admin/courses/acti
   styleUrl: './course-image-popup.component.scss'
 })
 export class CourseImagePopupComponent {
+
+  private destroy$ = new Subject<void>();
+
   constructor(
     private service: DashboardService,
     private messageService: MessageService,
-    private store : Store,
+    private store: Store,
     @Inject(MAT_DIALOG_DATA) public data: { id: string }
   ) { }
 
@@ -57,30 +61,39 @@ export class CourseImagePopupComponent {
     let uploadForm = new FormData()
     uploadForm.append('cover', file, file.name)
 
-    this.service.updateCourseCover(uploadForm, this.data.id).subscribe({
-      next : data =>{
-        this.serverUploadSuccess()
-        this.store.dispatch(courseCoverUpdateSuccess(data))
-      },
-      error : err =>{
-        this.serverUploadFail()
-      }
+    this.service.updateCourseCover(uploadForm, this.data.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.serverUploadSuccess()
+          this.store.dispatch(courseCoverUpdateSuccess(data))
+        },
+        error: err => {
+          this.serverUploadFail()
+        }
+      })
+  }
+
+  serverUploadSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Cover Image updated successfully'
     })
   }
 
-  serverUploadSuccess(){
+  serverUploadFail() {
     this.messageService.add({
-      severity : 'success',
-      summary : 'Success',
-      detail : 'Cover Image updated successfully'
+      severity: 'error',
+      summary: 'Failed',
+      detail: 'Cover Image Failed to Update'
     })
   }
 
-  serverUploadFail(){
-    this.messageService.add({
-      severity : 'error',
-      summary : 'Failed',
-      detail : 'Cover Image Failed to Update'
-    })
+
+  ngOnDestroy() {
+    this.destroy$.next()
+    this.destroy$.complete()
   }
+
 }

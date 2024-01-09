@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../../../shared/popup/popup.component';
 import { TagsPopupTutorComponent } from '../../../shared/tags-popup-tutor/tags-popup-tutor.component';
 import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tutor-profile-page',
@@ -19,10 +20,11 @@ import { MessageService } from 'primeng/api';
   providers:[TutorProfileService]
 })
 export class TutorProfilePageComponent implements OnInit{
+
+  private destroy$ = new Subject<void>();
+
   tutorData !: TutorModel ;
   edit : boolean = false;
-  profileUrl !: string ;
-
   constructor(
     private store : Store , 
     private service : TutorProfileService,
@@ -40,9 +42,13 @@ export class TutorProfilePageComponent implements OnInit{
   ngOnInit(): void {
     this.store.dispatch(getTutorData())
 
-    this.store.select(getTutorStoreData).subscribe((data)=>{
-      this.tutorData = data as unknown as TutorModel
-      this.setFormValues()
+    this.store.select(getTutorStoreData)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : data =>{
+        this.tutorData = data as unknown as TutorModel
+        this.setFormValues()
+      }
     })
 
   }
@@ -71,7 +77,9 @@ export class TutorProfilePageComponent implements OnInit{
   updateUser(){
     this.edit = false
     let userData : StudentUpdateModel = this.profileUpdate.value as StudentUpdateModel
-    this.service.updateProfile(userData).subscribe({
+    this.service.updateProfile(userData)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next : data =>{
         this.makeToast('success', 'Success','Updated successfully')
       },
@@ -100,4 +108,12 @@ export class TutorProfilePageComponent implements OnInit{
       detail : msg
     })
   }
+
+  
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
+
 }

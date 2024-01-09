@@ -18,9 +18,7 @@ export class LoginComponent {
               ){}
 
   onSubmitClick(form : NgForm){
-
     let credentials = form.value
-
     this.store.dispatch(studentLoginReq({credentials}))
   }
 
