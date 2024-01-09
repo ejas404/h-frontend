@@ -2,6 +2,7 @@ import { createAction , props } from "@ngrx/store"
 import { UserModel } from "../../../models/auth"
 import { TutorModel } from "../../../models/tutor"
 import { CourseDetailsResponse, CourseGetResponse } from "../../../models/course"
+import { UserDetailsTableModel } from "../../../models/table.model"
 
 interface UserLists{
     userlist : UserModel[],

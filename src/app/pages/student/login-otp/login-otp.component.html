@@ -1,0 +1,30 @@
+<section class="min-w-[25rem] p-5">
+    <form #login="ngForm">
+        <h2 class="text-[1.5rem] font-bold mb-8">{{emailEntered?'Send Otp':'Enter email'}}</h2>
+        <div *ngIf="!emailEntered">
+            <input ngModel name="email"
+                class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                type="email" placeholder="Email" #email="ngModel" required email>
+
+            <span *ngIf="!email.valid && email.touched" class="text-sm text-red-600">Enter a valid
+                email</span><br>
+
+
+            <button (click)="emailAdded(email.value)"  type="submit" [disabled]="!email.valid"
+                class="bg-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Get
+                Otp</button>
+        </div>
+        <div *ngIf="emailEntered">
+            <input ngModel name="otp"
+                class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                type="text" placeholder="Enter OTP" #otp="ngModel" required pattern="[0-9]*">
+
+            <span *ngIf="!otp.valid && otp.touched" class="text-sm text-red-600">Enter a valid
+                otp</span><br>
+                
+                
+                <button type="submit" (click)="otpEntered(otp.value)" [disabled]="!otp.valid"
+                class="bg-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Submit</button>
+            </div>
+    </form>
+</section>

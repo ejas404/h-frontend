@@ -28,7 +28,7 @@ import { TutorLoginComponent } from './pages/tutor/tutor-login/tutor-login.compo
 import { TutorSignupComponent } from './pages/tutor/tutor-signup/tutor-signup.component';
 import { TutorProfileComponent } from './pages/tutor/tutor-profile/tutor-profile.component';
 import { TutorAccountComponent } from './pages/tutor/tutor-account/tutor-account.component';
-import { tutorGuard } from './core/guards/tutor_guard';
+import { tutorBlockGuard, tutorGuard } from './core/guards/tutor_guard';
 import { TutorCourseComponent } from './pages/tutor/tutor-course/tutor-course.component';
 import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-students.component';
 import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tutor-notification.component';
@@ -70,7 +70,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'tutor',canActivate : [tutorGuard], component: TutorProfilePageComponent,
+    path: 'tutor',canActivate : [tutorGuard ,tutorBlockGuard], component: TutorProfilePageComponent,
     children:[
       {path : '',component: TutorProfileComponent},
       {path : 'account', component : TutorAccountComponent},
@@ -81,7 +81,7 @@ const routes: Routes = [
     ]
   },
   { path: 'admin/login', component: AdminLoginComponent },
-  { path: 'admin/course/:id', component: SingleCourseAdminComponent},
+  { path: 'admin/course/:id',canActivate : [adminGuard], component: SingleCourseAdminComponent},
   {path : 'tutor/login', component : TutorLoginComponent},
   {path : 'tutor/signup', component : TutorSignupComponent},
   { path: '**', component: SnotfoundComponent }

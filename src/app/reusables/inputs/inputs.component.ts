@@ -10,5 +10,6 @@ export class InputsComponent {
   @Input()placeholder !: string ;
   @Input()style !: string;
   @Input()name !: string;
+  @Input() required !: boolean;
   // @Input() control : any;
 }

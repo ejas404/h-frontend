@@ -42,5 +42,13 @@ export class SingleCourseHomeComponent {
       }
     })
   }
+
+  subscribeCourse(){
+
+  }
+
+  getCourse(){
+
+  }
   
 }

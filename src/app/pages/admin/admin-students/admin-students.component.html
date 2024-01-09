@@ -1,30 +1,9 @@
 <div class="overflow-y-scroll h-full w-full">
-    <table class="min-w-full border border-gray-300">
-        <thead>
-            <tr>
-                <th class="py-2 px-4 border-b">Sl No</th>
-                <th class="py-2 px-4 border-b">Name</th>
-                <th class="py-2 px-4 border-b">Email</th>
-                <th class="py-2 px-4 border-b">Restrict</th>
-                <th class="py-2 px-4 border-b">Delete</th>
-            </tr>
-        </thead>
-        <tbody *ngIf="userList" class="text-center">
-            <tr *ngFor="let each of userList; index as i " class="{{each.isBlocked ? 'bg-light-gray':''}}">
-                <td class="py-2 px-4 border-b">{{ i + 1 }}</td>
-                <td class="py-2 px-4 border-b">{{ each.name }}</td>
-                <td class="py-2 px-4 border-b">{{ each.email }}</td>
-                <td *ngIf="!each.isBlocked" class="py-2 px-4 border-b">
-                    <ng-icon class="text-admin-primary  hover:cursor-pointer" (click)="blockUser(each._id)" name="bootstrapUnlockFill" title="block user"></ng-icon> 
-                </td>
-                <td *ngIf="each.isBlocked" class="py-2 px-4 border-b">
-                    <ng-icon class="text-admin-primary hover:cursor-pointer" (click)="unblockUser(each._id)" name="bootstrapLockFill" title="unblock user"></ng-icon>
-                </td>
-                <td class="py-2 px-4 border-b">
-                     <ng-icon class="text-admin-primary hover:cursor-pointer" name="bootstrapTrash3Fill" (click)="deleteUser(each._id)"></ng-icon> 
-                </td>
-            </tr>
-            <!-- Add more rows with data here -->
-        </tbody>
-    </table>
+   <admin-table 
+   [tHeaders]="tableHeaders" 
+   [tBody]="userList"
+   (block)="blockUser($event)"
+   (unblock)="unblockUser($event)"
+   (delete)="deleteUser($event)"
+   ></admin-table>
 </div>

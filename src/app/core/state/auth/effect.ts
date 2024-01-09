@@ -81,11 +81,13 @@ export class AuthEffects {
 
           ),
           catchError((err) =>{
+            console.log(err)
+            console.log('error printed')
             let error = err.error.message
             this.messageService.add({
               severity : 'error',
               summary : 'Login Failed',
-              detail : error
+              detail : error || 'login failed'
             })
             return of(AuthActions.loginFailure({error}))})
         )

@@ -11,7 +11,7 @@ export const studentGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
  
 
-  let check = sessionStorage.getItem('student-token')
+  let check = sessionStorage.getItem('auth_token')
   if (!check) {
     router.navigateByUrl('**')
     return false

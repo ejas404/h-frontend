@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { AuthEffects } from './core/state/auth/effect';
@@ -77,6 +77,17 @@ import { CustomPricePipe } from './shared/pipes/price.pipe';
 import { RequestCoursePopupComponent } from './pages/tutor/request-course-popup/request-course-popup.component';
 import { SingleCourseHomeComponent } from './pages/student/single-course-home/single-course-home.component';
 import { ConfirmBoxComponent } from './shared/confirm-box/confirm-box.component';
+import { LoginOtpComponent } from './pages/student/login-otp/login-otp.component';
+import { TablesReusableComponent } from './reusables/tables/tables.component';
+import { AdminAddBtnReusableComponent } from './reusables/admin-add-btn/admin-add-btn.component';
+import { DeleteBtnReusableComponent } from './reusables/delete-btn/delete-btn.component';
+import { BlockBtnReusableComponent } from './reusables/block-btn/block-btn.component';
+import { UnblockBtnReusableComponent } from './reusables/unblock-btn/unblock-btn.component';
+import { DropdownFilterReusableComponent } from './reusables/filter-dropdown/filer-dropdown.component';
+import { CourseLinkReusableComponent } from './reusables/course-link/course-link.component';
+import { SingleCourseReusableComponent } from './reusables/single-course/single-course.component';
+import { TutorCourseSinglePageComponent } from './pages/tutor/tutor-course-single-page/tutor-course-single-page.component';
+import { AuthTokenInterceptor } from './core/interceptors/auth-token-interceptor';
 
 
 
@@ -133,7 +144,17 @@ import { ConfirmBoxComponent } from './shared/confirm-box/confirm-box.component'
     CustomPricePipe,
     RequestCoursePopupComponent,
     SingleCourseHomeComponent,
-    ConfirmBoxComponent
+    ConfirmBoxComponent,
+    LoginOtpComponent,
+    TablesReusableComponent,
+    AdminAddBtnReusableComponent,
+    DeleteBtnReusableComponent,
+    BlockBtnReusableComponent,
+    UnblockBtnReusableComponent,
+    DropdownFilterReusableComponent,
+    CourseLinkReusableComponent,
+    SingleCourseReusableComponent,
+    TutorCourseSinglePageComponent
   ],
   imports: [
     BrowserModule,
@@ -172,7 +193,8 @@ import { ConfirmBoxComponent } from './shared/confirm-box/confirm-box.component'
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

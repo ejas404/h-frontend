@@ -5,6 +5,7 @@ import { UserModel } from "../../../models/auth";
 import { state } from "@angular/animations";
 import { TutorModel } from "../../../models/tutor";
 import { CourseDetailsResponse, TutorDetailsWithCourse } from "../../../models/course";
+import { UserDetailsTableModel } from "../../../models/table.model";
 
 interface UserLists {
     userlist: UserModel[],

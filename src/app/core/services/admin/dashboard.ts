@@ -6,6 +6,8 @@ import { UserModel } from '../../models/auth';
 import { getAdminHeaders } from '../../utils/header';
 import { CourseDetails, CourseDetailsResponse, TutorDetailsWithCourse } from '../../models/course';
 import { TutorModel } from '../../models/tutor';
+import { AdminCourseTutorResponse } from '../../models/admin_model';
+
 
 
 interface UserLists {
@@ -25,79 +27,59 @@ export class DashboardService {
 
 
   getUsers(): Observable<UserLists> {
-    let headers = getAdminHeaders()
-    return this.http.get<UserLists>(`${BASE_URL}/admin/users`, { headers })
+    return this.http.get<UserLists>(`${BASE_URL}/admin/users`)
   }
 
   deleteUser(id: string): Observable<UserModel> {
-    let headers = getAdminHeaders()
-    return this.http.delete<UserModel>(`${BASE_URL}/admin/users/${id}`, { headers })
+    return this.http.delete<UserModel>(`${BASE_URL}/admin/users/${id}`)
   }
 
   updateUser(userData: UserModel): Observable<UserModel> {
-    let headers = getAdminHeaders()
-    return this.http.put<UserModel>(`${BASE_URL}/admin/users/update`, userData, { headers })
+    return this.http.put<UserModel>(`${BASE_URL}/admin/users/update`, userData)
   }
 
   blockUser(id: string): Observable<UserModel> {
-    let headers = getAdminHeaders();
-    return this.http.put<UserModel>(`${BASE_URL}/admin/users/block/${id}`, {}, { headers })
+    return this.http.put<UserModel>(`${BASE_URL}/admin/users/block/${id}`, {})
   }
 
   unblockUser(id: string): Observable<UserModel> {
-    let headers = getAdminHeaders()
-    return this.http.put<UserModel>(`${BASE_URL}/admin/users/unblock/${id}`, {}, { headers })
+    return this.http.put<UserModel>(`${BASE_URL}/admin/users/unblock/${id}`, {})
   }
 
   addCourse(data: CourseDetails) {
-    let headers = getAdminHeaders()
-    return this.http.post<{ newCourse: CourseDetailsResponse }>(`${BASE_URL}/admin/add-course`, data, { headers })
+    return this.http.post<{ newCourse: CourseDetailsResponse }>(`${BASE_URL}/admin/add-course`, data)
   }
 
   getCourses() {
-    let headers = getAdminHeaders()
-
-    interface Response {
-      courseDetails: CourseDetailsResponse[],
-      tutorCourses: TutorDetailsWithCourse[]
-    }
-
-    return this.http.get<Response>(`${BASE_URL}/admin/courses`, { headers })
+    return this.http.get<AdminCourseTutorResponse>(`${BASE_URL}/admin/courses`)
   }
 
   updateCourseCover(Data: FormData, id: string): Observable<{ msg: string, path: string }> {
-    let headers = getAdminHeaders()
-    return this.http.put<{ msg: string, path: string }>(`${BASE_URL}/admin/course-cover/${id}`, Data, { headers })
+    return this.http.put<{ msg: string, path: string }>(`${BASE_URL}/admin/course-cover/${id}`, Data)
   }
 
   getSingleCourse(id : string){
-    let headers = getAdminHeaders()
-    return this.http.get<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course/${id}`, { headers })
+    return this.http.get<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course/${id}`)
   }
 
   updateCourse(data : CourseDetails , id : string){
-    let headers = getAdminHeaders()
-    return this.http.put<{ updatedCourse: CourseDetailsResponse }>(`${BASE_URL}/admin/update-course/${id}`, data, { headers })
+    return this.http.put<{ updatedCourse: CourseDetailsResponse }>(`${BASE_URL}/admin/update-course/${id}`, data)
   }
 
   deleteTutor(id: string): Observable<{tutor : TutorModel}> {
-    let headers = getAdminHeaders()
-    return this.http.delete<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/${id}`, { headers })
+    return this.http.delete<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/${id}`)
   }
 
   blockTutor(id: string): Observable<{tutor : TutorModel}> {
-    let headers = getAdminHeaders();
-    return this.http.put<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/block/${id}`, {}, { headers })
+    return this.http.put<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/block/${id}`,{})
   }
 
   unblockTutor(id: string) {
-    let headers = getAdminHeaders()
-    return this.http.put<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/unblock/${id}`, {}, { headers })
+    return this.http.put<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/unblock/${id}`, {})
   }
 
   approveCourseRequest(id : string){
-    let headers = getAdminHeaders()
-    return this.http.put<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course-approve/${id}`, {}, { headers })
+    return this.http.put<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course-approve/${id}`, {})
   }
 
 }

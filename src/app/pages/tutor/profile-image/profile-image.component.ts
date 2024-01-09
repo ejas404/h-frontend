@@ -23,13 +23,6 @@ export class TutorProfileImageComponent implements OnInit{
     this.store.select(getTutorStoreData).subscribe((data) => {
 
       this.tutorData$ = data as TutorModel
-      if (this.tutorData$?.profile) {
-        console.log(this.tutorData$.profile , 'tutor profile data')
-        this.profileUrl$ = `${BASE_URL}/${this.tutorData$.profile?.slice(7)}`
-      }else{
-        this.profileUrl$ =  '../../../../../assets/student/fixed-images/634682.png'
-      }
-
 
     })
   }

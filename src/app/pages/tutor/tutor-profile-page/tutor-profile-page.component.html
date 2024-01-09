@@ -4,7 +4,7 @@
 
         <div class="tutor-profile-left max-w-[15rem] basis-1/4">
             <div class="group relative inline-block h-[6rem] w-[6rem] rounded overflow-hidden border border-light-gray">
-                <img class="object-cover w-full h-full" src="{{profileUrl}}" alt="">
+                <img class="object-cover w-full h-full" src="{{tutorData.profile | customImageUrl}}" alt="">
                 <div class="absolute left-0 bottom-0 bg-light-gray right-0 opacity-80 text-end px-2 py-1
                             invisible group-hover:visible"> 
                     <ng-icon class="text-black block cursor-pointer" (click)="editProfImage()" name="bootstrapPencilSquare"></ng-icon>

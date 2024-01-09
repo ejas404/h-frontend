@@ -20,13 +20,7 @@ export const initialState : State = {
 const _authReducer = createReducer(
     initialState,
     on(loginSuccess , (state , {successResponse} )=>{
-        if(successResponse.user.role === 'Student'){
-            sessionStorage.setItem('student-token', successResponse.token)
-        }else if(successResponse.user.role === 'Admin'){
-            sessionStorage.setItem('admin-token', successResponse.token)
-        }else if(successResponse.user.role === 'Tutor'){
-            sessionStorage.setItem('tutor-token', successResponse.token)
-        }
+        sessionStorage.setItem('auth_token', successResponse.token)
         
         return {
             ...state,

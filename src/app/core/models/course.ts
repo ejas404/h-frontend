@@ -20,6 +20,8 @@ export interface CourseDetailsResponse{
     request ?: string
 }
 
+
+
 export interface TutorDetailsWithCourse{
     _id : string , 
     name  : string

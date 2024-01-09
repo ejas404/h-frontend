@@ -1,0 +1,58 @@
+<table class="min-w-full border border-gray-300">
+    <thead>
+        <tr>
+            <th class="py-2 px-4 border-b">Sl No</th>
+            <ng-container *ngFor="let head of tHeaders">
+                <th class="py-2 px-4 border-b" *ngIf="head.title !== 'add' && head.title !== 'filter'">{{head.title}}
+                </th>
+
+                <th class="py-2 px-4 border-b" *ngIf="head.title === 'add'">
+                    <admin-add-btn (click)="addEventEmitted()"></admin-add-btn>
+                </th>
+
+                <th class="py-2 px-4 border-b" *ngIf="head.title === 'filter'">
+                    <dropdown-filter (change)="onFilter($event)" [dropList]="dropFilterList"></dropdown-filter>
+                </th>
+
+
+            </ng-container>
+
+
+
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr *ngFor="let row of tBody; index as i " class="{{row.isBlocked ? 'bg-light-gray':''}}">
+            <td class="py-2 px-4 border-b">{{ i + 1 }}</td>
+
+            <ng-container *ngFor="let head of tHeaders">
+
+                <!-- conditionally check for the restrict button / delete button and for tutor else will be printed -->
+    
+                <td *ngIf="head.tBodyKey !== 'restrict' &&  head.tBodyKey !== 'delete' && head.tBodyKey !== 'tutor' &&  head.tBodyKey !== 'courseLink'"
+                            
+                class="py-2 px-4 border-b">{{row[head.tBodyKey] }}</td>
+
+                 <!-- if theres any delete restrict and tutor then it will goes below -->
+
+                <td *ngIf=" head.tBodyKey === 'tutor'" class="py-2 px-4 border-b">{{tutorNames[i]}}</td>
+
+                <td *ngIf="head.tBodyKey === 'restrict' && !row.isBlocked" class="py-2 px-4 border-b">
+                    <app-block-btn (click)="blockEvent(row._id)"></app-block-btn>
+                </td>
+                <td *ngIf="head.tBodyKey === 'restrict' && row.isBlocked" class="py-2 px-4 border-b">
+                    <app-unblock-btn (click)="unblockEvent(row._id)"></app-unblock-btn>
+                </td>
+                <td *ngIf="head.tBodyKey === 'delete'" class="py-2 px-4 border-b">
+                    <app-delete-btn (click)="deleteEvent(row._id)"></app-delete-btn>
+                </td>
+                <td *ngIf="head.tBodyKey === 'courseLink'" class="py-2 px-4 border-b">
+                    <course-link [course_id]="row._id" [title]="'more'"></course-link>
+                </td>
+
+            </ng-container>
+
+        </tr>
+        <!-- Add more rows with data here -->
+    </tbody>
+</table>

@@ -1,46 +1,12 @@
 <div class="overflow-y-scroll h-full w-full">
-    <table class="min-w-full border border-gray-300">
-        <thead>
-            <tr>
-                <th class="py-2 px-4 border-b">Sl No</th>
-                <th class="py-2 px-4 border-b">Title</th>
-                <th class="py-2 px-4 border-b">
-
-                    <select id="countries" #selectTutor (change)="filterCourse(selectTutor.value)"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
-                        children:cursor-pointer cursor-pointer">
-                        <option selected value="all" >All</option>
-                        <option *ngFor="let each of tutorCourse" value="{{each._id}}" >{{each.name}}</option>
-                    </select>
-
-                </th>
-                <th class="py-2 px-4 border-b">Restrict</th>
-                <th class="py-2 px-4 border-b">Delete</th>
-                <th class="py-2 px-4 border-b"><button class="bg-admin-primary text-white px-[11px] py-1 font-bold rounded-full" (click)="addCourse()">+</button></th>
-            </tr>
-        </thead>
-        <tbody *ngIf="courseList" class="text-center">
-            <tr *ngFor="let each of courseList; index as i " class="{{!each.isAvailable ? 'bg-light-gray':''}}{{each.isTutorMade && !each.isApproved ? 'text-primary':'' }}">
-                <td class="py-2 px-4 border-b">{{ i + 1 }}</td>
-                <td class="py-2 px-4 border-b">{{ each.title }} <ng-icon *ngIf="each.isTutorMade && !each.isApproved" class="mx-1 mt-1 text-primary" name="bootstrapExclamationOctagonFill"></ng-icon> </td>
-                <td class="py-2 px-4 border-b">{{ each.tutor.name }}</td>
-                <td *ngIf="each.isAvailable" class="py-2 px-4 border-b">
-                    <ng-icon class="text-admin-primary  hover:cursor-pointer" (click)="blockCourse(each._id)"
-                        name="bootstrapUnlockFill" title="block course"></ng-icon>
-                </td>
-                <td *ngIf="!each.isAvailable" class="py-2 px-4 border-b">
-                    <ng-icon class="text-admin-primary hover:cursor-pointer" (click)="blockCourse(each._id)"
-                        name="bootstrapLockFill" title="unblock course"></ng-icon>
-                </td>
-                <td class="py-2 px-4 border-b">
-                    <ng-icon class="text-admin-primary hover:cursor-pointer" name="bootstrapTrash3Fill"
-                        (click)="deleteCourse(each._id)"></ng-icon>
-                </td>
-                <td class="py-2 px-4 border-b">
-                    <a class="text-sm hover:underline hover:text-blue-700" routerLink="/admin/course/{{each._id}}">more</a>
-                </td>
-            </tr>
-            <!-- Add more rows with data here -->
-        </tbody>
-    </table>
+        <admin-table 
+        [tHeaders]="tableHeaders" 
+        [tBody]="courseList"
+        [dropFilterList]="tutorCourse"
+        [tutorNames]="tutorNameList"
+        (addEvent)="addCourse()"
+        (block)="blockCourse($event)"
+        (unblock)="unblockCourse($event)"
+        (filter)="filterCourse($event)"
+        ></admin-table>  
 </div>

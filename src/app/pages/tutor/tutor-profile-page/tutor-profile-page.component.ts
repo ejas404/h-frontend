@@ -9,13 +9,14 @@ import { titleCase } from 'title-case';
 import { TutorModel } from '../../../core/models/tutor';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../../../shared/popup/popup.component';
-import { BASE_URL } from '../../../core/constant/uri';
 import { TagsPopupTutorComponent } from '../../../shared/tags-popup-tutor/tags-popup-tutor.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-tutor-profile-page',
   templateUrl: './tutor-profile-page.component.html',
-  styleUrl: './tutor-profile-page.component.scss'
+  styleUrl: './tutor-profile-page.component.scss',
+  providers:[TutorProfileService]
 })
 export class TutorProfilePageComponent implements OnInit{
   tutorData !: TutorModel ;
@@ -25,7 +26,8 @@ export class TutorProfilePageComponent implements OnInit{
   constructor(
     private store : Store , 
     private service : TutorProfileService,
-    private dialogRef : MatDialog
+    private dialogRef : MatDialog,
+    private messageService : MessageService
     ){}
 
   profileUpdate = new FormGroup({
@@ -41,7 +43,6 @@ export class TutorProfilePageComponent implements OnInit{
     this.store.select(getTutorStoreData).subscribe((data)=>{
       this.tutorData = data as unknown as TutorModel
       this.setFormValues()
-      this.setProfileImage()
     })
 
   }
@@ -58,15 +59,6 @@ export class TutorProfilePageComponent implements OnInit{
     });
   }
 
-  setProfileImage(){
-    console.log('tutor data profile url', this.tutorData)
-   
-    if (this.tutorData?.profile) {
-      this.profileUrl = `${BASE_URL}/${this.tutorData.profile?.slice(7)}`      
-    }else{
-      this.profileUrl =  '../../../../../assets/student/fixed-images/634682.png'
-    }
-  }
 
   onEditClick(){
     this.edit = true
@@ -79,8 +71,13 @@ export class TutorProfilePageComponent implements OnInit{
   updateUser(){
     this.edit = false
     let userData : StudentUpdateModel = this.profileUpdate.value as StudentUpdateModel
-    this.service.updateProfile(userData).subscribe((res)=>{
-      console.log(res)
+    this.service.updateProfile(userData).subscribe({
+      next : data =>{
+        this.makeToast('success', 'Success','Updated successfully')
+      },
+      error : err =>{
+        this.makeToast('error', 'Failed','failed to update')
+      }
     })
   }
 
@@ -93,6 +90,14 @@ export class TutorProfilePageComponent implements OnInit{
   editTag(data : string){
     this.dialogRef.open(TagsPopupTutorComponent,{
       data : {tagFor : data}
+    })
+  }
+
+  makeToast(s1 : string , s2 : string, msg : string){
+    this.messageService.add({
+      severity : s1,
+      summary : s2,
+      detail : msg
     })
   }
 }

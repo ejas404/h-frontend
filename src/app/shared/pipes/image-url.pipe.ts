@@ -8,7 +8,7 @@ import { BASE_URL } from "../../core/constant/uri";
 export class CustomImageUrl implements PipeTransform{
     transform(value: string | undefined, ...args: any[]) {
         if(typeof(value) === 'string'){
-            return `${BASE_URL}/${value.slice(7)}`
+            return `${BASE_URL}/${value.slice(11)}`
         }
 
         return '../../../../assets/fixed/depositphotos_132018592-stock-photo-online-courses-concept-with-hand.jpg'

@@ -2,8 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BASE_URL } from "../../constant/uri";
 import { Observable } from "rxjs";
-import { UserModel } from "../../models/auth";
-import { getStudentHeaders } from "../../utils/header";
+import { OtpModel, UserModel } from "../../models/auth";
 import { PasswordUpdate, StudentUpdateModel } from "../../models/student";
 import { Router } from "@angular/router";
 
@@ -16,13 +15,11 @@ export class StudentProfileService{
     constructor(private http : HttpClient, private router : Router){}
 
     getData() : Observable<UserModel>{
-        let headers = getStudentHeaders()
-        return this.http.get<UserModel>(`${BASE_URL}/student/profile`,{headers})
+        return this.http.get<UserModel>(`${BASE_URL}/student/profile`)
     }
 
     isBlocked() : boolean | void  {
-        let headers = getStudentHeaders()
-        this.http.get<UserModel>(`${BASE_URL}/student/profile`,{headers})
+        this.http.get<UserModel>(`${BASE_URL}/student/profile`)
             .subscribe({
                 next : (data)=>{
                     return true
@@ -36,22 +33,29 @@ export class StudentProfileService{
     }
 
     updateProfile(Data : StudentUpdateModel){
-        let headers = getStudentHeaders()
-        return this.http.put(`${BASE_URL}/student/update`,Data,{headers})
+        return this.http.put(`${BASE_URL}/student/update`,Data)
     }
 
     updateProfilePic(Data : FormData):Observable<{msg : string , path : string}> {
-        let headers = getStudentHeaders()
-        return this.http.put<{msg : string , path : string}>(`${BASE_URL}/student/update-pic`,Data,{headers})
+        return this.http.put<{msg : string , path : string}>(`${BASE_URL}/student/update-pic`,Data)
     }
 
     resetPassword(Data : PasswordUpdate){
-        let headers = getStudentHeaders()
-        return this.http.put(`${BASE_URL}/student/reset-password`,Data,{headers})
+        return this.http.put(`${BASE_URL}/student/reset-password`,Data)
     }
 
     logout(){
-        sessionStorage.removeItem('student-token')
+        sessionStorage.removeItem('auth_token')
         this.router.navigateByUrl('/login')
+    }
+
+    getOtp(email : string){
+        return this.http.get<{msg : string}>(`${BASE_URL}/student/otp/${email}`)
+    }
+
+    
+
+    submitOtp(reqBody : OtpModel){
+        return this.http.post<{msg : string}>(`${BASE_URL}/student/otp-login`,reqBody,{withCredentials : true})
     }
 }

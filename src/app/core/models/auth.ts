@@ -13,7 +13,10 @@ export interface UserModel{
     profile?:string
 }
 
-
+export interface OtpModel{
+    email : string,
+    otp : string
+}
 
 export interface RegisterModel{
     email : string | null | undefined,

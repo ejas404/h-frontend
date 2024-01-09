@@ -13,7 +13,7 @@ export interface TutorModel extends UserModel{
     education ?: TutorEducation[] , 
     language ?: string[],
     field ?: string[],
-    teaches ?: string[],
+    teaches ?: string[]
 
 }
 
