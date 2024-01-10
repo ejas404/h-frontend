@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ConfirmBoxComponent, ConfirmDialogModel } from "../../../shared/confirm-box/confirm-box.component";
+import { ConfirmBoxComponent, ConfirmDialogModel } from "../../../shared/popups/confirm-box/confirm-box.component";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
 

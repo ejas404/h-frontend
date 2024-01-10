@@ -1,14 +1,13 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DashboardService } from '../../../core/services/admin/dashboard';
 import { CourseDetailsResponse } from '../../../core/models/course';
 import { MatDialog } from '@angular/material/dialog';
-import { CourseImagePopupComponent } from '../course-image-popup/course-image-popup.component';
-import { BASE_URL } from '../../../core/constant/uri';
+import { CourseImagePopupComponent } from '../../../shared/popups/course-popups/course-image-popup/course-image-popup.component';
 import { courseApproveSuccess, singleCourseDetailsSuccess } from '../../../core/state/admin/courses/action';
 import { getSingleCourseData } from '../../../core/state/admin/courses/reducer';
-import { PopupEditCourseComponent } from '../popup-edit-course/popup-edit-course.component';
+import { PopupEditCourseComponent } from '../../../shared/popups/course-popups/popup-edit-course/popup-edit-course.component';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 

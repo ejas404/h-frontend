@@ -18,20 +18,6 @@ export class StudentProfileService{
         return this.http.get<UserModel>(`${BASE_URL}/student/profile`)
     }
 
-    isBlocked() : boolean | void  {
-        this.http.get<UserModel>(`${BASE_URL}/student/profile`)
-            .subscribe({
-                next : (data)=>{
-                    return true
-                },
-                error : (err)=>{
-                    console.log('error printed')
-                    console.log(err)
-                    return false
-                }
-            })
-    }
-
     updateProfile(Data : StudentUpdateModel){
         return this.http.put(`${BASE_URL}/student/update`,Data)
     }

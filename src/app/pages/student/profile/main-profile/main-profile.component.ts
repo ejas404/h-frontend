@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { getUserData } from '../../../../core/state/student/profile_page/action';
 import { getStudData } from '../../../../core/state/student/profile_page/reducer';
 import { MatDialog } from '@angular/material/dialog';
-import { PopupComponent } from '../../../../shared/popup/popup.component';
+import { ProfileImagePopupComponent } from '../../../../shared/popups/profile-image-popup/popup.component';
 import { BASE_URL } from '../../../../core/constant/uri';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -43,7 +43,7 @@ export class MainProfileComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogRef.open(PopupComponent,{
+    this.dialogRef.open(ProfileImagePopupComponent,{
       data : {calledFor : 'student'}
     })
   }

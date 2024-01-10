@@ -49,8 +49,6 @@ export class AuthEffects {
           .studentLogin(action.credentials)
           .pipe(
             map((successResponse) => {
-              console.log('got a success response')
-              console.log(successResponse)
               return AuthActions.loginSuccess({ successResponse })
             }
 
@@ -81,8 +79,6 @@ export class AuthEffects {
 
           ),
           catchError((err) =>{
-            console.log(err)
-            console.log('error printed')
             let error = err.error.message
             this.messageService.add({
               severity : 'error',

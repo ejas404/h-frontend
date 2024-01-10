@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/student/login/login.component';
-import { SignupComponent } from './pages/student/signup/signup.component';
-import { HomeComponent } from './pages/student/home/home.component';
-import { CoursesComponent } from './pages/student/courses/courses.component';
-import { AboutComponent } from './pages/student/about/about.component';
-import { ContactComponent } from './pages/student/contact/contact.component';
-import { HomepageComponent } from './pages/student/homepage/homepage.component';
+import { LoginComponent } from './pages/student/auth-page-components/login/login.component';
+import { SignupComponent } from './pages/student/auth-page-components/signup/signup.component';
+import { HomeComponent } from './pages/student/home-page-components/home/home.component';
+import { CoursesComponent } from './pages/student/home-page-components/courses/courses.component';
+import { AboutComponent } from './pages/student/home-page-components/about/about.component';
+import { ContactComponent } from './pages/student/home-page-components/contact/contact.component';
+import { HomepageComponent } from './pages/student/home-page-components/homepage/homepage.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
 import { AdminSettingsComponent } from './pages/admin/admin-settings/admin-settings.component';
@@ -16,7 +16,7 @@ import { AdminPageComponent } from './pages/admin/admin-page/admin-page.componen
 import { AdminCoursesComponent } from './pages/admin/admin-courses/admin-courses.component';
 import { adminGuard } from './core/guards/admin_guard';
 import { studentBlockGuard, studentGuard } from './core/guards/student_guard';
-import { SnotfoundComponent } from './pages/student/snotfound/snotfound.component';
+import { SnotfoundComponent } from './pages/student/auth-page-components/snotfound/snotfound.component';
 import { MainProfileComponent } from './pages/student/profile/main-profile/main-profile.component';
 import { CoursesProfileComponent } from './pages/student/profile/courses-profile/courses-profile.component';
 import { ConnectionProfileComponent } from './pages/student/profile/connection-profile/connection-profile.component';
@@ -33,7 +33,8 @@ import { TutorCourseComponent } from './pages/tutor/tutor-course/tutor-course.co
 import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-students.component';
 import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tutor-notification.component';
 import { SingleCourseAdminComponent } from './pages/admin/single-course-admin/single-course-admin.component';
-import { SingleCourseHomeComponent } from './pages/student/single-course-home/single-course-home.component';
+import { SingleCourseHomeComponent } from './pages/student/home-page-components/single-course-home/single-course-home.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -91,7 +92,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers : []
 })
 export class AppRoutingModule {
   static forRoot(appRoutes: any): any[] | import("@angular/core").Type<any> | import("@angular/core").ModuleWithProviders<{}> {

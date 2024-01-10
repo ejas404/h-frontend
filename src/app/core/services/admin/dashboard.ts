@@ -7,6 +7,7 @@ import { getAdminHeaders } from '../../utils/header';
 import { CourseDetails, CourseDetailsResponse, TutorDetailsWithCourse } from '../../models/course';
 import { TutorModel } from '../../models/tutor';
 import { AdminCourseTutorResponse } from '../../models/admin_model';
+import { AdminPageComponent } from '../../../pages/admin/admin-page/admin-page.component';
 
 
 
@@ -16,10 +17,7 @@ interface UserLists {
 }
 
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn : 'root'})
 export class DashboardService {
 
   constructor(private http: HttpClient) { }

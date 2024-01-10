@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TutorPopupComponent } from '../../../shared/tutor-popup/tutor-popup.component';
+import { TutorPopupComponent } from '../../../shared/popups/tutor-popup/tutor-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { getTutorData, tutorEducationDeleteSuccess } from '../../../core/state/tutor/profile/action';
+import {  tutorEducationDeleteSuccess } from '../../../core/state/tutor/profile/action';
 import { getTutorStoreData } from '../../../core/state/tutor/profile/reducer';
 import { TutorEducation } from '../../../core/models/tutor';
 import { TutorProfileService } from '../../../core/services/tutor/profile';

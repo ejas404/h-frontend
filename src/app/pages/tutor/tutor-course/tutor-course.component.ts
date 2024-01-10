@@ -6,8 +6,7 @@ import { CourseDetailsResponse } from '../../../core/models/course';
 import { getTutorStoreData } from '../../../core/state/tutor/profile/reducer';
 import { BASE_URL } from '../../../core/constant/uri';
 import { MatDialog } from '@angular/material/dialog';
-import { PopupAddCourseComponent } from '../../admin/popup-add-course/popup-add-course.component';
-import { RequestCoursePopupComponent } from '../request-course-popup/request-course-popup.component';
+import { RequestCoursePopupComponent } from '../../../shared/popups/course-popups/request-course-popup/request-course-popup.component';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

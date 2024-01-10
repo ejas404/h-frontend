@@ -10,7 +10,7 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'student-profile-image',
   templateUrl: './profile-image.component.html',
 })
-export class ProfileImageComponent implements OnInit {
+export class StudentProfileImageComponent implements OnInit {
 
   private destroy$ = new Subject<void>();
 

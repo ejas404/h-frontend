@@ -6,6 +6,7 @@ import { getStudData } from '../../../../core/state/student/profile_page/reducer
 import { StudentProfileService } from '../../../../core/services/student/profile';
 import { StudentUpdateModel } from '../../../../core/models/student';
 import { Subject, takeUntil } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-student-profile',
@@ -25,7 +26,11 @@ export class StudentProfileComponent implements OnInit{
     'contact': new FormControl('',[Validators.pattern(/^\d{10}$/)])
   })
 
-  constructor(private store : Store ,private service : StudentProfileService){}
+  constructor(
+    private store : Store ,
+    private service : StudentProfileService,
+    private messageService: MessageService
+    ){}
 
   ngOnInit(): void {
     this.store.select(getStudData)
@@ -59,7 +64,10 @@ export class StudentProfileComponent implements OnInit{
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : res=>{
-        console.log(res)
+        this.serverUploadSuccess()
+      },
+      error : err =>{
+        this.serverUploadFail()
       }
     })
   }
@@ -68,6 +76,22 @@ export class StudentProfileComponent implements OnInit{
   ngOnDestroy(){
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  serverUploadSuccess(){
+    this.messageService.add({
+      severity : 'success',
+      summary : 'Success',
+      detail : 'Profile details updated successfully'
+    })
+  }
+
+  serverUploadFail(){
+    this.messageService.add({
+      severity : 'error',
+      summary : 'Failed',
+      detail : 'failed to update details'
+    })
   }
 
 

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PopupAddCourseComponent } from '../popup-add-course/popup-add-course.component';
+import { PopupAddCourseComponent } from '../../../shared/popups/course-popups/popup-add-course/popup-add-course.component';
 import { DashboardService } from '../../../core/services/admin/dashboard';
 import { TutorDetailsWithCourse } from '../../../core/models/course';
 import { Store } from '@ngrx/store';

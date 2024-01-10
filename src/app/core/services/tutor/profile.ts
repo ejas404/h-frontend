@@ -17,20 +17,6 @@ export class TutorProfileService{
         return this.http.get<TutorModel>(`${BASE_URL}/tutor/profile`)
     }
 
-    isBlocked() : boolean | void  {
-        this.http.get<TutorModel>(`${BASE_URL}/student/profile`)
-            .subscribe({
-                next : (data)=>{
-                    return true
-                },
-                error : (err)=>{
-                    console.log('error printed')
-                    console.log(err)
-                    return false
-                }
-            })
-    }
-
     updateProfile(Data : TutorUpdateModel){
         return this.http.put(`${BASE_URL}/tutor/update`,Data)
     }

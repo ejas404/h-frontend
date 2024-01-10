@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { PasswordUpdate } from '../../../core/models/student';
 import { TutorProfileService } from '../../../core/services/tutor/profile';
 import { Subject, takeUntil } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-tutor-account',
@@ -13,10 +14,12 @@ export class TutorAccountComponent {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private service : TutorProfileService){}
+  constructor(
+    private service : TutorProfileService,
+    private messageService : MessageService
+    ){}
  
   resetPassword(data : NgForm){
-    console.log(data.value)
     let toUpdate : PasswordUpdate = {
       currentPassword : data.value.currentPassword,
       newPassword : data.value.newPassword
@@ -24,8 +27,14 @@ export class TutorAccountComponent {
 
     this.service.resetPassword(toUpdate)
     .pipe(takeUntil(this.destroy$))
-    .subscribe((res  : any)=>{
-      alert(res.message)
+    .subscribe({
+      next :  (res) => {
+        this.serverUploadSuccess()
+
+      },
+      error : err =>{
+        this.serverUploadFail(err.error.message)
+      }
     })
 
   }
@@ -38,5 +47,22 @@ export class TutorAccountComponent {
     this.destroy$.next()
     this.destroy$.complete()
   }
+
+  serverUploadSuccess(){
+    this.messageService.add({
+      severity : 'success',
+      summary : 'Success',
+      detail : 'Password changed successfully'
+    })
+  }
+
+  serverUploadFail(msg : string){
+    this.messageService.add({
+      severity : 'error',
+      summary : 'Failed',
+      detail : msg || 'failed to update password'
+    })
+  }
+
 
 }

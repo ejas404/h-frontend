@@ -8,8 +8,8 @@ import { StudentUpdateModel } from '../../../core/models/student';
 import { titleCase } from 'title-case';
 import { TutorModel } from '../../../core/models/tutor';
 import { MatDialog } from '@angular/material/dialog';
-import { PopupComponent } from '../../../shared/popup/popup.component';
-import { TagsPopupTutorComponent } from '../../../shared/tags-popup-tutor/tags-popup-tutor.component';
+import { ProfileImagePopupComponent } from '../../../shared/popups/profile-image-popup/popup.component';
+import { TagsPopupTutorComponent } from '../../../shared/popups/tags-popup-tutor/tags-popup-tutor.component';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -90,7 +90,7 @@ export class TutorProfilePageComponent implements OnInit{
   }
 
   editProfImage(){
-    this.dialogRef.open(PopupComponent,{
+    this.dialogRef.open(ProfileImagePopupComponent,{
       data : {calledFor : 'tutor'}
     })
   }
