@@ -28,11 +28,13 @@ import { UserProfileModule } from './modules/feature_modules/user_profile_module
 import { SharedComponentsModule } from './modules/custom_modules/shared_components_modules';
 import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
 import { SharedModules } from './modules/shared_modules';
+import { VideoUploadPopupComponent } from './shared/popups/video-upload-popup/video-upload-popup.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VideoUploadPopupComponent
   ],
   imports: [
     BrowserModule,

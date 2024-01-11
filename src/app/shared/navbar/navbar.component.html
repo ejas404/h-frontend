@@ -1,4 +1,4 @@
-<nav class="flex justify-between items-center px-5 h-[3rem] sticky top-0 bg-white">
+<nav class="flex justify-between items-center px-5 h-[3rem] sticky top-0 bg-white z-10">
     <div class="nav-logo">
         <a routerLink="/">
             <h1 class="text-2xl logo  font-bold 
@@ -12,11 +12,11 @@
 
     <div class="nav-center">
         <ul *ngIf="user !== 'admin' && user !== 'tutor' && !isLogged" class="flex children:px-3">
-            <li><a class="text-md" routerLink="/" routerLinkActive="text-xl"
+            <li><a class="text-sm" routerLink="/" routerLinkActive="text-xl font-semibold "
                     [routerLinkActiveOptions]="{exact : true}">Home</a></li>
-            <li><a class="text-md" routerLink="/courses" routerLinkActive="text-xl">Courses</a></li>
-            <li><a class="text-md" routerLink="/about" routerLinkActive="text-xl">About</a></li>
-            <li><a class="text-md" routerLink="/contact" routerLinkActive="text-xl">Contact</a></li>
+            <li><a class="text-sm" routerLink="/courses" routerLinkActive="text-xl font-semibold">Courses</a></li>
+            <li><a class="text-sm" routerLink="/about" routerLinkActive="text-xl font-semibold">About</a></li>
+            <li><a class="text-sm" routerLink="/contact" routerLinkActive="text-xl font-semibold">Contact</a></li>
         </ul>
     </div>
     <div class="nav-end children:hover:cursor-pointer">

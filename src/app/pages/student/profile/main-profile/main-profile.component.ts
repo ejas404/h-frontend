@@ -5,7 +5,6 @@ import { getUserData } from '../../../../core/state/student/profile_page/action'
 import { getStudData } from '../../../../core/state/student/profile_page/reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileImagePopupComponent } from '../../../../shared/popups/profile-image-popup/popup.component';
-import { BASE_URL } from '../../../../core/constant/uri';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

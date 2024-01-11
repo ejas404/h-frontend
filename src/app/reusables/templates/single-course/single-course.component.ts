@@ -25,6 +25,7 @@ export class SingleCourseReusableComponent {
   @Output()cover = new EventEmitter()
   @Output()sub = new EventEmitter()
   @Output()buy = new EventEmitter()
+  @Output()video = new EventEmitter()
 
 
   approve(){
@@ -45,5 +46,8 @@ export class SingleCourseReusableComponent {
   }
   buyNow(){
     this.buy.emit(null)
+  }
+  addVideo(){
+    this.video.emit(null)
   }
 }

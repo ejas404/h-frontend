@@ -10,6 +10,7 @@ import { getSingleCourseData } from '../../../core/state/admin/courses/reducer';
 import { PopupEditCourseComponent } from '../../../shared/popups/course-popups/popup-edit-course/popup-edit-course.component';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
+import { VideoUploadPopupComponent } from 'app/shared/popups/video-upload-popup/video-upload-popup.component';
 
 @Component({
   selector: 'app-single-course-admin',
@@ -105,6 +106,13 @@ export class SingleCourseAdminComponent {
           this.failureMessage('Course approval failed to complete')
         }
       })
+  }
+
+  addCourseVideo() {
+    this.dialogRef.open(VideoUploadPopupComponent,{
+      height : '90vh',
+      width : '90%'
+    })
   }
 
   cancelApprove() {
