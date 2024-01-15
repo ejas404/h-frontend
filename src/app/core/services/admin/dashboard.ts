@@ -80,4 +80,8 @@ export class DashboardService {
     return this.http.put<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course-approve/${id}`, {})
   }
 
+  uploadVideo(Data: FormData): Observable<{ msg: string, path: string }> {
+    return this.http.put<{ msg: string, path: string }>(`${BASE_URL}/admin/add-video`, Data)
+  }
+
 }

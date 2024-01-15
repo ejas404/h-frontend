@@ -30,4 +30,10 @@ export interface TutorDetailsWithCourse{
 export interface CourseGetResponse  {
     courseDetails : CourseDetailsResponse[] , 
     tutorCourses : TutorDetailsWithCourse []
-  }
+}
+
+export interface SectionFormDetails{
+    title : string,
+    description : string,
+    course : string
+}

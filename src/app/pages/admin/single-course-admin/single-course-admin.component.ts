@@ -111,7 +111,10 @@ export class SingleCourseAdminComponent {
   addCourseVideo() {
     this.dialogRef.open(VideoUploadPopupComponent,{
       height : '90vh',
-      width : '90%'
+      width : '90%',
+      data : {
+        course_id : this.course_id
+      }
     })
   }
 
