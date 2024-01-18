@@ -1,3 +1,5 @@
+import { SectionResponse, VideoResponseModel } from "./section_video_model"
+
 export interface CourseDetails {
     _id ?: string,
     title : string,
@@ -32,12 +34,7 @@ export interface CourseGetResponse  {
     tutorCourses : TutorDetailsWithCourse []
 }
 
-export interface SectionFormDetails{
-    title : string,
-    description : string,
-    course : string
+export interface CourseVideoResponseList extends SectionResponse {
+    courseVideos : VideoResponseModel[]
 }
 
-export interface SectionResponse extends SectionFormDetails{
-    _id : string
-}

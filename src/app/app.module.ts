@@ -29,16 +29,14 @@ import { SharedComponentsModule } from './modules/custom_modules/shared_componen
 import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
 import { SharedModules } from './modules/shared_modules';
 import { VideoUploadPopupComponent } from './shared/popups/video-upload-popup/video-upload-popup.component';
-import { SectionPopupComponent } from './shared/popups/course-popups/section-popup/section-popup.component';
-import { CourseReusablePopupComponent } from './reusables/templates/course-reusable-popup/course-reusable-popup.component';
+import { SectionPopupComponent } from './shared/popups/course-popups/section-popup/section-popup.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     VideoUploadPopupComponent,
-    SectionPopupComponent,
-    CourseReusablePopupComponent
+    SectionPopupComponent
   ],
   imports: [
     BrowserModule,

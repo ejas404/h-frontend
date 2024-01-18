@@ -12,28 +12,34 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class SectionPopupComponent {
 
+  course_id: string = ""
+
   private destroy$ = new Subject<void>()
 
   constructor(
-    private courseService : CourseService,
-    private toastService : ToastService,
-    @Inject(MAT_DIALOG_DATA) public data : {id : string}
-  ){}
+    private courseService: CourseService,
+    private toastService: ToastService,
+    @Inject(MAT_DIALOG_DATA) public data: { id: string }
+  ) { }
 
-  onFormSubmit(form : NgForm){
-    this.courseService.addSection(form.value, 'admin')
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : res =>{
-        this.toastService.success('course section added successfully')
-      },
-      error : err =>{
-        this.toastService.fail('failed to update course section')
-      }
-    })
+  ngOnInIt() {
+    this.course_id = this.data.id
   }
 
-  ngOnDestroy(){
+  onFormSubmit(form: NgForm) {
+    this.courseService.addSection(form.value, 'admin')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          this.toastService.success('course section added successfully')
+        },
+        error: err => {
+          this.toastService.fail(err.error.message)
+        }
+      })
+  }
+
+  ngOnDestroy() {
     this.destroy$.next()
     this.destroy$.complete()
   }

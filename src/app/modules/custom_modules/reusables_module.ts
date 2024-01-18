@@ -16,6 +16,8 @@ import { CustomPipeModule } from "./custom_pipe_module";
 import { CommonModule } from "@angular/common";
 import { CustomAlertsModule } from "./custom_alerts_modules";
 import { CloseBtnReusableComponet } from "app/reusables/buttons/dialog-close-btn.component";
+import { CourseReusablePopupComponent } from "app/reusables/templates/course-reusable-popup/course-reusable-popup.component";
+import { FormsModule } from "@angular/forms";
 
 
 
@@ -29,7 +31,8 @@ import { CloseBtnReusableComponet } from "app/reusables/buttons/dialog-close-btn
         DropdownFilterReusableComponent,
         CourseLinkReusableComponent,
         SingleCourseReusableComponent,
-        CloseBtnReusableComponet
+        CloseBtnReusableComponet,
+        CourseReusablePopupComponent
 
 
     ],
@@ -42,7 +45,8 @@ import { CloseBtnReusableComponet } from "app/reusables/buttons/dialog-close-btn
         DropdownFilterReusableComponent,
         CourseLinkReusableComponent,
         SingleCourseReusableComponent,
-        CloseBtnReusableComponet
+        CloseBtnReusableComponet,
+        CourseReusablePopupComponent
 
     ],
     imports :[
@@ -51,7 +55,8 @@ import { CloseBtnReusableComponet } from "app/reusables/buttons/dialog-close-btn
         RouterModule,
         CustomPipeModule,
         AppRoutingModule,
-        CustomAlertsModule
+        CustomAlertsModule,
+        FormsModule
     ]
 })
 export class ReusableComponentsModule{}

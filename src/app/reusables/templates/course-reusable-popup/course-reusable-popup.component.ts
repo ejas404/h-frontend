@@ -7,11 +7,12 @@ import { NgForm } from '@angular/forms';
   styleUrl: './course-reusable-popup.component.scss'
 })
 export class CourseReusablePopupComponent {
-  @Input()id !: string; 
+  @Input()id : string = '' 
 
   @Output() submit = new EventEmitter()
 
-  onFormSubmit(form : NgForm){
+  onFormSubmit(form : NgForm, event : Event){
+    event.stopPropagation()
     this.submit.emit(form)
   }
 }

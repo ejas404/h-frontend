@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CourseDetailsResponse } from '../../../core/models/course';
+import { CourseDetailsResponse, CourseVideoResponseList } from '../../../core/models/course';
 
 @Component({
   selector: 'single-course-reusable',
@@ -17,6 +17,7 @@ export class SingleCourseReusableComponent {
 
 
   @Input()courseDetails !: CourseDetailsResponse
+  @Input()videoList !:  CourseVideoResponseList[] 
   @Input()sections !: {title : string, class : string}[]
 
   @Output()approveCourse = new EventEmitter()

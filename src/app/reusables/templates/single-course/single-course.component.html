@@ -16,7 +16,8 @@
             <div class="creator">
                 <p class="">Created by : {{courseDetails.tutor.name | titlecase}}</p>
             </div>
-            <div class="approval my-2" *ngIf="courseDetails.isTutorMade && !courseDetails.isApproved && user !== 'student'">
+            <div class="approval my-2"
+                *ngIf="courseDetails.isTutorMade && !courseDetails.isApproved && user !== 'student'">
                 <button class="bg-white text-admin-primary rounded py-1 px-2 me-3 font-semibold"
                     (click)="approve()">Approve</button>
                 <button class="bg-primary text-white rounded py-1 px-2 font-semibold"
@@ -24,21 +25,25 @@
             </div>
         </div>
     </div>
-    <div class="course-images basis-2/5 ps-[10rem]">
+    <div class="course-images basis-2/5 ps-[10rem] {{text}}">
         <div class="h-[70%] relative group">
             <img class="w-full h-full object-fill" src="{{courseDetails.cover | customImageUrl}}" alt="">
-            <div *ngIf="user !== 'student'" class="absolute bottom-0 left-0 w-full bg-gray text-end px-2 py-1 invisible group-hover:visible">
+            <div *ngIf="user !== 'student'"
+                class="absolute bottom-0 left-0 w-full bg-gray text-end px-2 py-1 invisible group-hover:visible">
                 <ng-icon class="hover:cursor-pointer" (click)="updateCoverEvent()"
-                    name="bootstrapPencilSquare"></ng-icon> </div>
+                    name="bootstrapPencilSquare"></ng-icon>
+            </div>
             <div *ngIf="courseDetails.isTutorMade && !courseDetails.isApproved"
                 class="absolute bg-primary text-center text-white w-full py-1 top-[50%] traslate-y-[-50%]">
                 {{courseDetails.request}}</div>
         </div>
-        <p class=" my-2">Rs.{{courseDetails.fee}}/-</p>
+        <p class="my-2">Rs.{{courseDetails.fee}}/-</p>
 
         <div class="buttons" *ngIf="user === 'student' else editDelete;">
-            <button class="px-2 bg-white text-admin-primary text-sm font-semibold" (click)="subscribe()" >Subscribe</button>
-            <button class="px-2 bg-white text-primary text-sm font-semibold float-right" (click)="buyNow()" >Get Course</button>
+            <button class="px-2 bg-white text-admin-primary text-sm font-semibold"
+                (click)="subscribe()">Subscribe</button>
+            <button class="px-2 bg-white text-primary text-sm font-semibold float-right" (click)="buyNow()">Get
+                Course</button>
         </div>
 
         <ng-template #editDelete>
@@ -57,48 +62,51 @@
         <div class="flex justify-between">
             <h1 class="text-xl font-semibold my-2">Course Content</h1>
             <div class="py-2">
-                <button *ngIf="user !== 'student'" class="{{bg}} px-2 text-white rounded text-sm py-1 inline-block my-auto ms-2" (click)="addVideo()" >Add Video +</button>
+                <button *ngIf="user !== 'student'"
+                    class="{{bg}} px-2 text-white rounded text-sm py-1 inline-block my-auto ms-2"
+                    (click)="addVideo()">Add Video +</button>
             </div>
         </div>
         <div class="section-lists">
-            <div *ngFor="let each of sections; let i = index" class="section">
-                <div class="group section-title flex justify-between px-2 py-3 border-b border-b-white relative {{bg}} {{text}}"
-                    (click)="selectedSection = i">
-                    <h1 class="text-xl">{{each.title}} : Beggining</h1>
-                    <p class="text-xl">{{each.class}} classes - 6hrs</p>
+            <ng-container *ngIf="videoList else noVideoList">
+                <div *ngFor="let each of videoList; let i = index" class="section">
+                    <div class="group section-title flex justify-between px-2 py-3 border-b border-b-white relative {{bg}} {{text}}"
+                        (click)="selectedSection = i">
+                        <h1 class="text-md">{{each.title}} : Beggining</h1>
+                        <p class="text-md">{{each.courseVideos.length}} classes - 6hrs</p>
 
-                    <div
-                        class="absolute right-[-3rem] invisible text-admin-primary group-hover:visible children:cursor-pointer">
-                        <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
-                            name="bootstrapTrash3Fill"></ng-icon></div>
+                        <div
+                            class="absolute right-[-3rem] invisible text-admin-primary group-hover:visible children:cursor-pointer">
+                            <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
+                                name="bootstrapTrash3Fill"></ng-icon>
+                        </div>
+                    </div>
+                    <ul *ngIf="selectedSection === i" class="{{bg_section_list}}">
+                        <ng-container *ngIf="each.courseVideos.length else noVideos">
+                            <li *ngFor="let video of each.courseVideos ; let k = index"
+                                class="p-2 flex justify-between border-b border-b-black">
+                                <p>{{k+1}} <span
+                                        class="hover:text-blue-700 hover:underline cursor-pointer">{{video.title}}</span>
+                                </p>
+                                <p>{{video.duration}} </p>
+                            </li>
+                        </ng-container>
+                        <ng-template #noVideos>
+                            <li class="p-2 flex justify-between border-b border-b-black">
+                                <p><span class="hover:text-blue-700 hover:underline cursor-pointer">No videos are
+                                        available</span></p>
+
+                            </li>
+                        </ng-template>
+                    </ul>
                 </div>
-                <ul *ngIf="selectedSection === i" class="{{bg_section_list}}">
-                    <li class="p-2 flex justify-between border-b border-b-black">
-                        <p>1. <span class="hover:text-blue-700 hover:underline cursor-pointer">This is a simple text for
-                                the demo</span></p>
-                        <p>10 min <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
-                                name="bootstrapTrash3Fill"></ng-icon></p>
-                    </li>
-                    <li class="p-2 flex justify-between border-b border-b-black">
-                        <p>2. <span class="hover:text-blue-700 hover:underline cursor-pointer">This is a simple text for
-                                the demo</span></p>
-                        <p>10 min <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
-                                name="bootstrapTrash3Fill"></ng-icon></p>
-                    </li>
-                    <li class="p-2 flex justify-between border-b border-b-black">
-                        <p>3. <span class="hover:text-blue-700 hover:underline cursor-pointer">This is a simple text for
-                                the demo</span></p>
-                        <p>10 min <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
-                                name="bootstrapTrash3Fill"></ng-icon></p>
-                    </li>
-                    <li class="p-2 flex justify-between border-b border-b-black">
-                        <p>4. <span class="hover:text-blue-700 hover:underline cursor-pointer">This is a simple text for
-                                the demo</span></p>
-                        <p>10 min <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
-                                name="bootstrapTrash3Fill"></ng-icon></p>
-                    </li>
-                </ul>
-            </div>
+            </ng-container>
+            <ng-template #noVideoList>
+                <h1 *ngIf="user !== 'student' else studentCoursePage" class="text-lg text-gray">Add classes in the course</h1>
+                <ng-template #studentCoursePage>
+                    <h1 class="text-lg text-gray">No classes yet provided in the course</h1>
+                </ng-template>
+            </ng-template>
 
         </div>
     </div>

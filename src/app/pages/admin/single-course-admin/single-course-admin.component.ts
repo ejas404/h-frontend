@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DashboardService } from '../../../core/services/admin/dashboard';
-import { CourseDetailsResponse } from '../../../core/models/course';
+import { CourseDetailsResponse, CourseVideoResponseList } from '../../../core/models/course';
 import { MatDialog } from '@angular/material/dialog';
 import { CourseImagePopupComponent } from '../../../shared/popups/course-popups/course-image-popup/course-image-popup.component';
 import { courseApproveSuccess, singleCourseDetailsSuccess } from '../../../core/state/admin/courses/action';
@@ -11,6 +11,7 @@ import { PopupEditCourseComponent } from '../../../shared/popups/course-popups/p
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { VideoUploadPopupComponent } from 'app/shared/popups/video-upload-popup/video-upload-popup.component';
+import { CourseService } from 'app/core/services/course_service';
 
 @Component({
   selector: 'app-single-course-admin',
@@ -21,9 +22,12 @@ export class SingleCourseAdminComponent {
 
   private destroy$ = new Subject<void>();
 
+  courseDetails !: CourseDetailsResponse;
+  courseVideoList !: CourseVideoResponseList[] ;
 
   selectedSection !: number;
   course_id !: string;
+
 
   sections = [
     { title: 'Section 1', class: '10' },
@@ -32,23 +36,23 @@ export class SingleCourseAdminComponent {
     { title: 'Section 4', class: '4' }
   ]
 
-  courseDetails !: CourseDetailsResponse;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private store: Store,
     private service: DashboardService,
+    private courseService : CourseService,
     private dialogRef: MatDialog,
     private messageService: MessageService
   ) { }
 
   ngOnInit() {
     const search = this.activateRoute.snapshot.params['id']
-
     this.course_id = search
 
     this.fetchCourseData(search)
     this.setCourseData(search)
+    this.fetchCourseVideoList(search)
   }
 
   fetchCourseData(id: string) {
@@ -70,12 +74,24 @@ export class SingleCourseAdminComponent {
       .subscribe({
         next: data => {
           this.courseDetails = data
-
         },
         error: err => {
           console.log(err)
         }
       })
+  }
+
+  fetchCourseVideoList(id : string){
+    this.courseService.getCourseVideoList(id,'admin')
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res =>{
+        this.courseVideoList = res.courseVideoList
+      },
+      error : err =>{
+        console.log(err)
+      }
+    })
   }
 
   updateCover() {

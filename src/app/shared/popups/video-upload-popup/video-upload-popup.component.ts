@@ -6,7 +6,7 @@ import { ToastService } from 'app/core/services/shared/toast_service';
 import { Subject, takeUntil } from 'rxjs';
 import { SectionPopupComponent } from '../course-popups/section-popup/section-popup.component';
 import { CourseService } from 'app/core/services/course_service';
-import { SectionResponse } from 'app/core/models/course';
+import { SectionResponse } from 'app/core/models/section_video_model';
 
 @Component({
   selector: 'app-video-upload-popup',
@@ -55,10 +55,10 @@ export class VideoUploadPopupComponent {
 
     this.file = file
 
-    if(file.size > 20000000) {
-      this.toast.fail('maximum 20 mb is allowed','max size limited')
-      return
-    }
+    // if(file.size > 20000000) {
+    //   this.toast.fail('maximum 20 mb is allowed','max size limited')
+    //   return
+    // }
 
     reader.readAsDataURL(file)
 
@@ -74,7 +74,7 @@ export class VideoUploadPopupComponent {
 
       const media = new Audio(reader.result as string);
       media.onloadedmetadata = () => {
-         console.log(media.duration + 1)
+         this.duration = Number(media.duration)
       }
     }
 
@@ -87,6 +87,7 @@ export class VideoUploadPopupComponent {
     const formData = new FormData()
     formData.append('file', this.file)
     formData.append('details', JSON.stringify(form.value))
+    formData.append('duration',this.duration.toString())
 
     this.dashboardService.uploadVideo(formData)
     .pipe(takeUntil(this.destroy$))
@@ -105,7 +106,7 @@ export class VideoUploadPopupComponent {
   onAddSection(){
     this.dialogRef.open(SectionPopupComponent,{
       data : {
-        course_id : this.data.course_id
+        id : this.data.course_id
       }
     })
   }
