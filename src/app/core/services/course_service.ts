@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { SectionFormDetails } from "../models/course";
+import { SectionFormDetails, SectionResponse } from "../models/course";
 import { HttpClient } from "@angular/common/http";
 import { BASE_URL } from "../constant/uri";
 
@@ -18,5 +18,9 @@ export class CourseService{
 
     editSection(Data : SectionFormDetails,id : string,route : string){
         return this.http.put<{ msg: string }>(`${BASE_URL}/${route}/edit-section/${id}`, Data)
+    }
+
+    getSections(id : string){
+        return this.http.get<{sectionLists : SectionResponse[]}>(`${BASE_URL}/course/get-sections/${id}`)
     }
 }

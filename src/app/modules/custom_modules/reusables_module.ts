@@ -15,6 +15,7 @@ import { RouterModule } from "@angular/router";
 import { CustomPipeModule } from "./custom_pipe_module";
 import { CommonModule } from "@angular/common";
 import { CustomAlertsModule } from "./custom_alerts_modules";
+import { CloseBtnReusableComponet } from "app/reusables/buttons/dialog-close-btn.component";
 
 
 
@@ -28,6 +29,8 @@ import { CustomAlertsModule } from "./custom_alerts_modules";
         DropdownFilterReusableComponent,
         CourseLinkReusableComponent,
         SingleCourseReusableComponent,
+        CloseBtnReusableComponet
+
 
     ],
     exports : [
@@ -39,6 +42,7 @@ import { CustomAlertsModule } from "./custom_alerts_modules";
         DropdownFilterReusableComponent,
         CourseLinkReusableComponent,
         SingleCourseReusableComponent,
+        CloseBtnReusableComponet
 
     ],
     imports :[

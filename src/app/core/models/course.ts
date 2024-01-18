@@ -37,3 +37,7 @@ export interface SectionFormDetails{
     description : string,
     course : string
 }
+
+export interface SectionResponse extends SectionFormDetails{
+    _id : string
+}
