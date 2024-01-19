@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CourseDetailsResponse, CourseVideoResponseList } from '../../../core/models/course';
+import { VideoResponseModel } from 'app/core/models/section_video_model';
 
 @Component({
   selector: 'single-course-reusable',
@@ -28,6 +29,20 @@ export class SingleCourseReusableComponent {
   @Output()buy = new EventEmitter()
   @Output()video = new EventEmitter()
 
+  totalSectionDuration(videoList :VideoResponseModel[] ) : string{
+    if(!videoList[0]){
+      return '0'
+    }
+
+    let res = 0
+
+    videoList.forEach(each =>{
+      res+=each.duration
+    })
+
+    return Math.floor(res)+''
+
+  }
 
   approve(){
     this.approveCourse.emit(null)

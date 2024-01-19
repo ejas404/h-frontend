@@ -69,11 +69,11 @@
         </div>
         <div class="section-lists">
             <ng-container *ngIf="videoList else noVideoList">
-                <div *ngFor="let each of videoList; let i = index" class="section">
+                <div *ngFor="let each of videoList; let i = index ;" class="section">
                     <div class="group section-title flex justify-between px-2 py-3 border-b border-b-white relative {{bg}} {{text}}"
                         (click)="selectedSection = i">
                         <h1 class="text-md">{{each.title}} : Beggining</h1>
-                        <p class="text-md">{{each.courseVideos.length}} classes - 6hrs</p>
+                        <p class="text-md">{{each.courseVideos.length}} classes - {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
 
                         <div
                             class="absolute right-[-3rem] invisible text-admin-primary group-hover:visible children:cursor-pointer">
@@ -88,7 +88,7 @@
                                 <p>{{k+1}} <span
                                         class="hover:text-blue-700 hover:underline cursor-pointer">{{video.title}}</span>
                                 </p>
-                                <p>{{video.duration}} </p>
+                                <p>{{video.duration | customDuration}} </p>
                             </li>
                         </ng-container>
                         <ng-template #noVideos>

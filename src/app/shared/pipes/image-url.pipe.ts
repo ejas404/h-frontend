@@ -6,7 +6,7 @@ import { BASE_URL } from "../../core/constant/uri";
 })
 
 export class CustomImageUrlPipe implements PipeTransform{
-    transform(value: string | undefined, ...args: any[]) {
+    transform(value: string | undefined) {
         if(typeof(value) === 'string'){
             return `${BASE_URL}/${value.slice(11)}`
         }
