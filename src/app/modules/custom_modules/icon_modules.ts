@@ -14,8 +14,9 @@ import {
     bootstrapStarFill,
     bootstrapExclamationOctagonFill,
     bootstrapExclamationOctagon,
-    bootstrapStar
-    
+    bootstrapStar,
+    bootstrapFileEarmarkText,
+    bootstrapBookmarkFill
 
 } from '@ng-icons/bootstrap-icons';
 
@@ -37,7 +38,9 @@ import {
                 bootstrapStarFill,
                 bootstrapStar,
                 bootstrapExclamationOctagonFill,
-                bootstrapExclamationOctagon
+                bootstrapExclamationOctagon,
+                bootstrapFileEarmarkText,
+                bootstrapBookmarkFill
             })
     ],
     exports: [

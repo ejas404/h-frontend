@@ -44,7 +44,7 @@ export class DashboardService {
     return this.http.put<UserModel>(`${BASE_URL}/admin/users/unblock/${id}`, {})
   }
 
-  addCourse(data: CourseDetails) {
+  addCourse(data: FormData) {
     return this.http.post<{ newCourse: CourseDetailsResponse }>(`${BASE_URL}/admin/add-course`, data)
   }
 

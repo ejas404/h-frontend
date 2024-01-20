@@ -8,6 +8,9 @@ import * as DashboardActions from '../../../../core/state/admin/dashboard/action
 import { MessageService } from 'primeng/api';
 import { CourseDetailsResponse } from '../../../../core/models/course';
 import { Subject, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageCropperService } from 'app/core/services/image_crop_service';
+import { CourseImagePopupComponent } from '../course-image-popup/course-image-popup.component';
 
 @Component({
   selector: 'app-popup-add-course',
@@ -20,11 +23,14 @@ export class PopupAddCourseComponent {
 
   tutorList !: TutorModel[];
   courseDetail !: CourseDetailsResponse;
+  coverFile !: File 
 
   constructor(
     private service: DashboardService,
     private store: Store,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dialogRef : MatDialog,
+    private cropRequestService : ImageCropperService
   ) { }
 
 
@@ -39,11 +45,30 @@ export class PopupAddCourseComponent {
         this.tutorList = state
       })
 
+  }
 
+  inputUpload(event : Event){
+    this.dialogRef.open(CourseImagePopupComponent,{
+      data : {
+        calledFor : 'addCourse',
+        imageInput : event
+      }
+    })
 
+    this.cropRequestService.isCropped
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : data =>{
+        this.coverFile = data
+      },
+      error : err =>{
+        console.log('failed to crop image')
+      }
+    })
   }
 
   onFormSubmit(formData: NgForm) {
+
     this.service.addCourse(formData.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

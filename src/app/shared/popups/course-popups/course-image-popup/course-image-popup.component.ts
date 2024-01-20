@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { Store } from '@ngrx/store';
 import { courseCoverUpdateSuccess } from '../../../../core/state/admin/courses/action';
 import { Subject, takeUntil } from 'rxjs';
+import { ImageCropperService } from 'app/core/services/image_crop_service';
 
 @Component({
   selector: 'app-course-image-popup',
@@ -20,7 +21,8 @@ export class CourseImagePopupComponent {
     private service: DashboardService,
     private messageService: MessageService,
     private store: Store,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string }
+    private croppedRespone : ImageCropperService,
+    @Inject(MAT_DIALOG_DATA) public data: { id: string , calledFor : string , imageInput : Event}
   ) { }
 
   inputEvent !: Event;
@@ -28,6 +30,12 @@ export class CourseImagePopupComponent {
   name !: string;
   cropPreview: any;
   button: boolean = false
+
+  ngOnInit(){
+    if(this.data.calledFor === 'addCourse'){
+      this.inputUpload(this.data.imageInput)
+    }
+  }
 
 
   inputUpload(event: any) {
@@ -57,6 +65,11 @@ export class CourseImagePopupComponent {
     let blob: any = this.cropResponse.blob
 
     let file = new File([blob], `${this.name}-${Date.now()}.jpg`, { type: blob.type })
+
+    if(this.data.calledFor === 'addCourse'){
+      this.croppedRespone.setCropped(file)
+      return
+    }
 
     let uploadForm = new FormData()
     uploadForm.append('cover', file, file.name)

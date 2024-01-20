@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './courses.component.scss'
 })
 export class CoursesComponent {
+  selectedFilter : string = 'new'
 
+  filter(val : string){
+    this.selectedFilter = val
+  }
 }

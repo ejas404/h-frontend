@@ -10,14 +10,14 @@ import { TestimonialComponent } from "app/pages/student/home-page-components/tes
 import { ReusableComponentsModule } from "../custom_modules/reusables_module";
 import { FooterComponent } from "app/pages/student/home-page-components/footer/footer.component";
 import { SharedComponentsModule } from "../custom_modules/shared_components_modules";
-import { CustomPipeModule } from "../custom_modules/custom_pipe_module";
-import { CommonModule } from "@angular/common";
 import { LoginComponent } from "app/pages/student/auth-page-components/login/login.component";
 import { SignupComponent } from "app/pages/student/auth-page-components/signup/signup.component";
 import { LoginOtpComponent } from "app/pages/student/auth-page-components/login-otp/login-otp.component";
-import { CustomAlertsModule } from "../custom_modules/custom_alerts_modules";
-import { FormsModule } from "@angular/forms";
 import { SharedModules } from "../shared_modules";
+import { CoursesComponent } from "app/pages/student/home-page-components/courses/courses.component";
+import { CourseListComponent } from "app/pages/student/home-page-components/course-list/course-list.component";
+import { CourseSidebarComponent } from "app/pages/student/home-page-components/course-sidebar/course-sidebar.component";
+
 
 
 @NgModule({
@@ -29,10 +29,13 @@ import { SharedModules } from "../shared_modules";
         HomepageComponent,
         TestimonialComponent,
         ContactComponent,
+        CoursesComponent,
         SingleCourseHomeComponent,
         SubscribeComponent,
         HomeCoursesComponent,
-        FooterComponent
+        FooterComponent,
+        CourseListComponent,
+        CourseSidebarComponent
     ],
     exports : [
         LoginComponent,
@@ -42,10 +45,13 @@ import { SharedModules } from "../shared_modules";
         HomepageComponent,
         TestimonialComponent,
         ContactComponent,
+        CoursesComponent,
         SingleCourseHomeComponent,
         SubscribeComponent,
         HomeCoursesComponent,
-        FooterComponent
+        FooterComponent,
+        CourseListComponent,
+        CourseSidebarComponent
     ],
     imports : [
         SharedModules,

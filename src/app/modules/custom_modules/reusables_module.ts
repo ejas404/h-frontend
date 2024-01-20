@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "../../app-routing.module";
-import { CustomIconModule } from "./icon_modules";
+import { SharedModules } from "../shared_modules";
+import { RouterModule } from "@angular/router";
 
 
 import { TablesReusableComponent } from "../../reusables/templates/tables/tables.component";
@@ -11,13 +12,11 @@ import { UnblockBtnReusableComponent } from "../../reusables/buttons/unblock-btn
 import { DropdownFilterReusableComponent } from "../../reusables/filter-dropdown/filer-dropdown.component";
 import { CourseLinkReusableComponent } from "../../reusables/buttons/course-link/course-link.component";
 import { SingleCourseReusableComponent } from "../../reusables/templates/single-course/single-course.component";
-import { RouterModule } from "@angular/router";
-import { CustomPipeModule } from "./custom_pipe_module";
-import { CommonModule } from "@angular/common";
-import { CustomAlertsModule } from "./custom_alerts_modules";
 import { CloseBtnReusableComponet } from "app/reusables/buttons/dialog-close-btn.component";
 import { CourseReusablePopupComponent } from "app/reusables/templates/course-reusable-popup/course-reusable-popup.component";
-import { FormsModule } from "@angular/forms";
+import { CourseFilterBtnReusableComponent } from "app/reusables/buttons/course-filter-btn/course-filter-btn.component";
+import { CourseSearchBarComponent } from "app/reusables/templates/course-search-bar/course-search-bar.component";
+import { BookmarkIconReusableComponent } from "app/reusables/templates/book-mark-icon";
 
 
 
@@ -32,7 +31,10 @@ import { FormsModule } from "@angular/forms";
         CourseLinkReusableComponent,
         SingleCourseReusableComponent,
         CloseBtnReusableComponet,
-        CourseReusablePopupComponent
+        CourseReusablePopupComponent,
+        CourseFilterBtnReusableComponent,
+        CourseSearchBarComponent,
+        BookmarkIconReusableComponent
 
 
     ],
@@ -46,17 +48,16 @@ import { FormsModule } from "@angular/forms";
         CourseLinkReusableComponent,
         SingleCourseReusableComponent,
         CloseBtnReusableComponet,
-        CourseReusablePopupComponent
+        CourseReusablePopupComponent,
+        CourseFilterBtnReusableComponent,
+        CourseSearchBarComponent,
+        BookmarkIconReusableComponent
 
     ],
     imports :[
-        CommonModule,
-        CustomIconModule,
         RouterModule,
-        CustomPipeModule,
         AppRoutingModule,
-        CustomAlertsModule,
-        FormsModule
+        SharedModules
     ]
 })
 export class ReusableComponentsModule{}

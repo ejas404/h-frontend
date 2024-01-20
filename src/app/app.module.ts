@@ -17,7 +17,7 @@ import { StudentProfileEffect } from './core/state/student/profile_page/effects'
 import { TutorProfileEffect } from './core/state/tutor/profile/effects';
 import { tutorProfReducer } from './core/state/tutor/profile/reducer';
 
-import { CustomAlertsModule } from './modules/custom_modules/custom_alerts_modules';
+
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { singleCourseReducer } from './core/state/admin/courses/reducer';
 import { AuthTokenInterceptor } from './core/interceptors/auth-token-interceptor';
@@ -29,14 +29,15 @@ import { SharedComponentsModule } from './modules/custom_modules/shared_componen
 import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
 import { SharedModules } from './modules/shared_modules';
 import { VideoUploadPopupComponent } from './shared/popups/video-upload-popup/video-upload-popup.component';
-import { SectionPopupComponent } from './shared/popups/course-popups/section-popup/section-popup.component'
+import { SectionPopupComponent } from './shared/popups/course-popups/section-popup/section-popup.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     VideoUploadPopupComponent,
-    SectionPopupComponent
+    SectionPopupComponent,
+ 
   ],
   imports: [
     BrowserModule,
@@ -44,9 +45,6 @@ import { SectionPopupComponent } from './shared/popups/course-popups/section-pop
     HttpClientModule,
     AppRoutingModule,
     HomePageModule,
-    AdminDashboardModule,
-    TutorModule,
-    UserProfileModule,
     SharedComponentsModule,
     ReusableComponentsModule,
     SharedModules,
