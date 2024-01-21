@@ -8,7 +8,8 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-single-course-home',
   templateUrl: './single-course-home.component.html',
-  styleUrl: './single-course-home.component.scss'
+  styleUrl: './single-course-home.component.scss',
+  providers : [HomePageCourseService]
 })
 export class SingleCourseHomeComponent {
 

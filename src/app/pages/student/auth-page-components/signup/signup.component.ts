@@ -11,7 +11,6 @@ import { studentSignup } from '../../../../core/state/auth/action';
 export class SignupComponent {
   constructor(private store : Store){}
   onSubmitClick(form : NgForm){
-
     const studentData = form.value
     this.store.dispatch(studentSignup({studentData}))
   }

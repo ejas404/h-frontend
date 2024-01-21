@@ -11,7 +11,7 @@ import { LoginOtpComponent } from '../login-otp/login-otp.component';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-
+  passwordVal = ''
   constructor(
               private store : Store,
               private dialogRef : MatDialog
@@ -19,7 +19,8 @@ export class LoginComponent {
 
   onSubmitClick(form : NgForm){
     let credentials = form.value
-    this.store.dispatch(studentLoginReq({credentials}))
+    console.log('credentials print', credentials)
+    // this.store.dispatch(studentLoginReq({credentials}))
   }
 
   loginWithOtp(){

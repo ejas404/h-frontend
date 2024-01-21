@@ -8,46 +8,7 @@
         <div class="signup-page-right basis-2/5 flex flex-col px-5 py-5">
             <div class="signup-form-top flex-1 flex items-center">
                 <div class="form px-5 ">
-                    <form (ngSubmit)="onSubmitClick(signup)" #signup="ngForm">
-                        <h2 class="text-[1.5rem] font-bold mb-8">Sign Up Now</h2>
-
-                        <input ngModel name="name"
-                            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-                            type="text" placeholder="Name" #name="ngModel" required pattern="^[a-zA-Z]+$">
-
-                        <span *ngIf="!name.valid && name.touched" class="text-sm text-red-600">Enter a valid name</span>
-
-                        <input ngModel name="email"
-                            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-                            type="email" placeholder="Email" #email="ngModel" required email>
-
-                        <span *ngIf="!email.valid && email.touched" class="text-sm text-red-600">Enter a valid
-                            email</span>
-                        <!-- <span class="text-sm">Enter  your email here</span> -->
-
-                        <input ngModel name="password"
-                            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-                            type="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$"
-                            #password="ngModel">
-
-                        <span *ngIf="!password.valid && password.touched" class="text-sm text-red-600">Password must be 8 to 16 characters and include at least one letter and one digit</span>
-
-
-                        <input ngModel name="confirmPassword"
-                            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-                            type="password" placeholder="Confirm password" required pattern="{{password.value}}"
-                            #confirm="ngModel">
-
-                        <span *ngIf="!confirm.valid && confirm.touched" class="text-sm text-red-600">Password does not
-                            match</span>
-
-
-
-                            <button type="submit" [disabled]="!signup.valid"
-
-                            class="bg-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Sign Up</button>
-
-                    </form>
+                    <reusable-signup-template [usedFor]="'student'" (submitEvent)="onSubmitClick($event)"></reusable-signup-template>
                 </div>
             </div>
             <div class="signup-form-bottom text-center">
