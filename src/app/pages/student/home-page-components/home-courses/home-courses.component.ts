@@ -6,7 +6,8 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-home-courses',
   templateUrl: './home-courses.component.html',
-  styleUrl: './home-courses.component.scss'
+  styleUrl: './home-courses.component.scss',
+  providers : [HomePageCourseService]
 })
 export class HomeCoursesComponent {
 

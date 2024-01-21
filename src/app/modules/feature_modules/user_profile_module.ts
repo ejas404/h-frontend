@@ -19,14 +19,14 @@ import { SharedModules } from "../shared_modules";
         CoursesProfileComponent,
         SidebarProfileComponent,
     ],
-    exports : [
-        StudentProfileComponent,
-        ConnectionProfileComponent,
-        AccountProfileComponent,
-        MainProfileComponent,
-        CoursesProfileComponent,
-        SidebarProfileComponent,
-    ],
+    // exports : [
+    //     StudentProfileComponent,
+    //     ConnectionProfileComponent,
+    //     AccountProfileComponent,
+    //     MainProfileComponent,
+    //     CoursesProfileComponent,
+    //     SidebarProfileComponent,
+    // ],
     imports : [
         SharedModules,
         SharedComponentsModule,

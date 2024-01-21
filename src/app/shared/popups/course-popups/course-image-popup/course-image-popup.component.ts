@@ -6,7 +6,7 @@ import { MessageService } from 'primeng/api';
 import { Store } from '@ngrx/store';
 import { courseCoverUpdateSuccess } from '../../../../core/state/admin/courses/action';
 import { Subject, takeUntil } from 'rxjs';
-import { ImageCropperService } from 'app/core/services/image_crop_service';
+import { ImageCropperService } from 'app/core/services/shared/image_crop_service';
 
 @Component({
   selector: 'app-course-image-popup',

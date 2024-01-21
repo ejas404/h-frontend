@@ -14,9 +14,10 @@ import { LoginComponent } from "app/pages/student/auth-page-components/login/log
 import { SignupComponent } from "app/pages/student/auth-page-components/signup/signup.component";
 import { LoginOtpComponent } from "app/pages/student/auth-page-components/login-otp/login-otp.component";
 import { SharedModules } from "../shared_modules";
-import { CoursesComponent } from "app/pages/student/home-page-components/courses/courses.component";
-import { CourseListComponent } from "app/pages/student/home-page-components/course-list/course-list.component";
-import { CourseSidebarComponent } from "app/pages/student/home-page-components/course-sidebar/course-sidebar.component";
+import { CoursesComponent } from "app/pages/student/home-page-components/course-page-components/courses-main/courses.component";
+import { CourseListComponent } from "app/pages/student/home-page-components/course-page-components/course-list/course-list.component";
+import { CourseSidebarComponent } from "app/pages/student/home-page-components/course-page-components/course-sidebar/course-sidebar.component";
+import { CourseTopFilterBtnsComponent } from "app/pages/student/home-page-components/course-page-components/course-top-filter-btns/course-top-filter-btns.component";
 
 
 
@@ -35,24 +36,25 @@ import { CourseSidebarComponent } from "app/pages/student/home-page-components/c
         HomeCoursesComponent,
         FooterComponent,
         CourseListComponent,
-        CourseSidebarComponent
+        CourseSidebarComponent,
+        CourseTopFilterBtnsComponent
     ],
-    exports : [
-        LoginComponent,
-        SignupComponent,
-        LoginOtpComponent,
-        HomeComponent,
-        HomepageComponent,
-        TestimonialComponent,
-        ContactComponent,
-        CoursesComponent,
-        SingleCourseHomeComponent,
-        SubscribeComponent,
-        HomeCoursesComponent,
-        FooterComponent,
-        CourseListComponent,
-        CourseSidebarComponent
-    ],
+    // exports : [
+    //     LoginComponent,
+    //     SignupComponent,
+    //     LoginOtpComponent,
+    //     HomeComponent,
+    //     HomepageComponent,
+    //     TestimonialComponent,
+    //     ContactComponent,
+    //     CoursesComponent,
+    //     SingleCourseHomeComponent,
+    //     SubscribeComponent,
+    //     HomeCoursesComponent,
+    //     FooterComponent,
+    //     CourseListComponent,
+    //     CourseSidebarComponent
+    // ],
     imports : [
         SharedModules,
         ReusableComponentsModule,

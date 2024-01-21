@@ -1,0 +1,6 @@
+<div class="course-filter-buttons flex justify-between px-2 sticky top-[9%] bg-white">
+    <course-filter-btn *ngFor="let each of topFilterBtns" [iconName]="'bootstrapFileEarmarkText'"
+        [bg]="each.bg" [title]="each.title" [border]="each.border"
+        [class]="selectedFilter === each.title?'scale-[1.2]  shadow-md' : ''"
+        (click)="filter(each.title)"></course-filter-btn>
+</div>

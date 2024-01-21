@@ -1,0 +1,9 @@
+<section class="min-h-screen w-full flex mb-5 pt-10">
+    <section class="course-filter w-[70vw] px-5 ps-10">
+        <course-top-filter-btns (filterEvent)="filterCourse($event)"></course-top-filter-btns>
+        <home-course-list [courseList]="previewCourse"></home-course-list>
+    </section>
+    <aside class="sticky top-[5rem] w-[30vw] h-[80vh] px-10">
+        <app-course-sidebar></app-course-sidebar>
+    </aside>
+</section>

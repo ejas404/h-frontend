@@ -17,6 +17,9 @@ import { PopupEditCourseComponent } from "app/shared/popups/course-popups/popup-
 import { RequestCoursePopupComponent } from "app/shared/popups/course-popups/request-course-popup/request-course-popup.component";
 import { SnotfoundComponent } from "app/pages/student/auth-page-components/snotfound/snotfound.component";
 import { SharedModules } from "../shared_modules";
+import { VideoUploadPopupComponent } from "app/shared/popups/video-upload-popup/video-upload-popup.component";
+import { SectionPopupComponent } from "app/shared/popups/course-popups/section-popup/section-popup.component";
+import { ReusableComponentsModule } from "./reusables_module";
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { SharedModules } from "../shared_modules";
         PopupAddCourseComponent,
         PopupEditCourseComponent,
         RequestCoursePopupComponent,
-        SnotfoundComponent
+        SnotfoundComponent,
+        VideoUploadPopupComponent,
+        SectionPopupComponent,
+     
 
     ],
     exports: [
@@ -54,8 +60,8 @@ import { SharedModules } from "../shared_modules";
         MatFormFieldModule,
         MatChipsModule,
         MatIconModule,
-        MatDialogModule,
-        SharedModules
+        SharedModules,
+        ReusableComponentsModule
     ]
 })
 export class SharedComponentsModule {

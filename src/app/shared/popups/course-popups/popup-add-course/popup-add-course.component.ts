@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
 import { CourseDetailsResponse } from '../../../../core/models/course';
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ImageCropperService } from 'app/core/services/image_crop_service';
+import { ImageCropperService } from 'app/core/services/shared/image_crop_service';
 import { CourseImagePopupComponent } from '../course-image-popup/course-image-popup.component';
 
 @Component({
@@ -68,7 +68,7 @@ export class PopupAddCourseComponent {
   }
 
   onFormSubmit(formData: NgForm) {
-
+    
     this.service.addCourse(formData.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

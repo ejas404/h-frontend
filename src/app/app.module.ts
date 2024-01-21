@@ -21,33 +21,29 @@ import { tutorProfReducer } from './core/state/tutor/profile/reducer';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { singleCourseReducer } from './core/state/admin/courses/reducer';
 import { AuthTokenInterceptor } from './core/interceptors/auth-token-interceptor';
+import { SharedModules } from './modules/shared_modules';
 import { HomePageModule } from './modules/feature_modules/home_page_module';
 import { AdminDashboardModule } from './modules/feature_modules/admin_dashboard_module';
 import { TutorModule } from './modules/feature_modules/tutor_module';
 import { UserProfileModule } from './modules/feature_modules/user_profile_module';
 import { SharedComponentsModule } from './modules/custom_modules/shared_components_modules';
 import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
-import { SharedModules } from './modules/shared_modules';
-import { VideoUploadPopupComponent } from './shared/popups/video-upload-popup/video-upload-popup.component';
-import { SectionPopupComponent } from './shared/popups/course-popups/section-popup/section-popup.component';
+import { CourseTopFilterBtnsComponent } from './pages/student/home-page-components/course-page-components/course-top-filter-btns/course-top-filter-btns.component';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    VideoUploadPopupComponent,
-    SectionPopupComponent,
- 
+    AppComponent
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    HomePageModule,
-    SharedComponentsModule,
-    ReusableComponentsModule,
     SharedModules,
+    SharedComponentsModule,
     StoreModule.forRoot(
       {
         auth: authReducer,
