@@ -1,4 +1,4 @@
-<section class="max-w-[25rem] p-5">
+<section class="max-w-[25rem] max-h-[100vh] p-5 overflow-y-scroll">
     <form #addCourse="ngForm" (ngSubmit)="onFormSubmit(addCourse)">
         <h2 class="text-[1.5rem] font-bold mb-8">Add Course</h2>
 
@@ -22,6 +22,28 @@
             <option *ngFor="let each of tutorList" value="{{ each._id}}">{{each.name}}</option>
 
         </select>
+
+        <div class="category">
+            <select ngModel name="category"
+                class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-[85%]  my-2 rounded"
+                #category="ngModel" required>
+                <option value="" disabled selected>category</option>
+                <option *ngFor="let each of categoryList" value="{{ each._id}}">{{each.name}}</option>
+
+            </select>
+            <button type="button" class=" bg-black text-white ms-1 text-sm p-2 rounded" (click)="addCategory()" >Add</button>
+        </div>
+
+        <div class="sub-category">
+            <select [disabled]="!category.dirty" ngModel name="subCategory"
+                class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-[85%]  my-2 rounded"
+                #sub="ngModel" required>
+                <option value="" disabled selected>sub category</option>
+                <option *ngFor="let each of tutorList" value="{{ each._id}}">{{each.name}}</option>
+
+            </select>
+            <button type="button" [disabled]="!category.dirty" class=" bg-black text-white ms-1 text-sm p-2 rounded">Add</button>
+        </div>
 
         <textarea ngModel name="description"
             class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"

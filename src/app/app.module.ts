@@ -28,16 +28,10 @@ import { TutorModule } from './modules/feature_modules/tutor_module';
 import { UserProfileModule } from './modules/feature_modules/user_profile_module';
 import { SharedComponentsModule } from './modules/custom_modules/shared_components_modules';
 import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
-import { CourseTopFilterBtnsComponent } from './pages/student/home-page-components/course-page-components/course-top-filter-btns/course-top-filter-btns.component';
-import { SignupReusableTempComponent } from './reusables/templates/signup-reusable-temp/signup-reusable-temp.component';
-import { LoginReusableTempComponent } from './reusables/templates/login-reusable-temp/login-reusable-temp.component';
-
-
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+
+<select ngModel name="category" (change)="categorySelected($event)"
+class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2  my-2 rounded"
+#tutor="ngModel" required>
+<option value="" disabled selected>category</option>
+<option *ngFor="let each of categoryList" value="{{ each._id}}">{{each.name}}</option>
+
+</select>
+
+<button>Add</button>

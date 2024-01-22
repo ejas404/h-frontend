@@ -8,7 +8,6 @@ import { ImageCropperModule } from "ngx-image-cropper";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatIconModule } from "@angular/material/icon";
-import { MatDialogModule } from "@angular/material/dialog";
 import { TutorProfileImageComponent } from "app/pages/tutor/profile-image/profile-image.component";
 import { StudentProfileImageComponent } from "app/pages/student/profile/profile-image/profile-image.component";
 import { CourseImagePopupComponent } from "app/shared/popups/course-popups/course-image-popup/course-image-popup.component";
@@ -20,6 +19,8 @@ import { SharedModules } from "../shared_modules";
 import { VideoUploadPopupComponent } from "app/shared/popups/video-upload-popup/video-upload-popup.component";
 import { SectionPopupComponent } from "app/shared/popups/course-popups/section-popup/section-popup.component";
 import { ReusableComponentsModule } from "./reusables_module";
+import { SelectCategoryComponentComponent } from "app/shared/select-category-component/select-category-component.component";
+import { CategoryPopupComponent } from "app/shared/popups/course-popups/category-popup/category-popup.component";
 
 
 @NgModule({
@@ -38,7 +39,10 @@ import { ReusableComponentsModule } from "./reusables_module";
         SnotfoundComponent,
         VideoUploadPopupComponent,
         SectionPopupComponent,
-     
+        SelectCategoryComponentComponent,
+        CategoryPopupComponent
+
+
 
     ],
     exports: [
@@ -53,7 +57,10 @@ import { ReusableComponentsModule } from "./reusables_module";
         PopupAddCourseComponent,
         PopupEditCourseComponent,
         RequestCoursePopupComponent,
-        SnotfoundComponent
+        SnotfoundComponent,
+        SelectCategoryComponentComponent,
+        CategoryPopupComponent
+
     ],
     imports: [
         ImageCropperModule,

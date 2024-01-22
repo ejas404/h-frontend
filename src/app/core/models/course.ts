@@ -38,3 +38,15 @@ export interface CourseVideoResponseList extends SectionResponse {
     courseVideos : VideoResponseModel[]
 }
 
+
+export interface CategoryModel{
+    _id ?: string
+    name : string
+    description : string
+}
+
+export interface SubCategoryModel extends CategoryModel{
+    category : string
+}
+
+
