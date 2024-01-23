@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { VideoUploadPopupComponent } from 'app/shared/popups/video-upload-popup/video-upload-popup.component';
 import { CourseService } from 'app/core/services/course_service';
+import { ToastService } from 'app/core/services/shared/toast_service';
 
 @Component({
   selector: 'app-single-course-admin',
@@ -24,17 +25,8 @@ export class SingleCourseAdminComponent {
 
   courseDetails !: CourseDetailsResponse;
   courseVideoList !: CourseVideoResponseList[] ;
-
   selectedSection !: number;
   course_id !: string;
-
-
-  sections = [
-    { title: 'Section 1', class: '10' },
-    { title: 'Section 2', class: '4' },
-    { title: 'Section 3', class: '4' },
-    { title: 'Section 4', class: '4' }
-  ]
 
 
   constructor(
@@ -43,7 +35,7 @@ export class SingleCourseAdminComponent {
     private service: DashboardService,
     private courseService : CourseService,
     private dialogRef: MatDialog,
-    private messageService: MessageService
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -116,10 +108,10 @@ export class SingleCourseAdminComponent {
       .subscribe({
         next: data => {
           this.store.dispatch(courseApproveSuccess(data))
-          this.successMessage('Course approval successfully completed')
+          this.toastService.success('Course approval successfully completed')
         },
-        error: data => {
-          this.failureMessage('Course approval failed to complete')
+        error: err => {
+          this.toastService.fail(err.error.message || 'Course approval failed to complete')
         }
       })
   }
@@ -136,22 +128,6 @@ export class SingleCourseAdminComponent {
 
   cancelApprove() {
 
-  }
-
-  successMessage(msg: string) {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: msg
-    })
-  }
-
-  failureMessage(msg: string) {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Failed',
-      detail: msg
-    })
   }
 
   ngOnDestroy() {

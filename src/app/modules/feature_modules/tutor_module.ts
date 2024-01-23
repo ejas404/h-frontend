@@ -24,17 +24,6 @@ import { SharedModules } from "../shared_modules";
         TutorNotificationComponent,
         TutorCourseSinglePageComponent,
     ],
-    // exports : [
-    //     TutorSignupComponent,
-    //     TutorLoginComponent,
-    //     TutorProfilePageComponent,
-    //     TutorProfileComponent,
-    //     TutorAccountComponent,
-    //     TutorCourseComponent,
-    //     TutorStudentsComponent,
-    //     TutorNotificationComponent,
-    //     TutorCourseSinglePageComponent,
-    // ],
     imports : [
         SharedModules,
         SharedComponentsModule,

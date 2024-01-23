@@ -34,6 +34,8 @@ import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-stude
 import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tutor-notification.component';
 import { SingleCourseAdminComponent } from './pages/admin/single-course-admin/single-course-admin.component';
 import { SingleCourseHomeComponent } from './pages/student/home-page-components/single-course-home/single-course-home.component';
+import { CartProfileComponent } from './pages/student/profile/cart-profile/cart-profile.component';
+import { StudentVideoPreviewComponent } from './pages/student/student-video-preview/student-video-preview.component';
 
 
 const routes: Routes = [
@@ -68,8 +70,10 @@ const routes: Routes = [
       { path: 'account', component: AccountProfileComponent },
       { path: 'notification', component: NotificationProfileComponent },
     ]
-
+    
   },
+  {path : 'cart',canActivate : [studentGuard , studentBlockGuard], component : CartProfileComponent},
+  {path : 'course/:id/:video',canActivate: [studentGuard , studentBlockGuard], component : StudentVideoPreviewComponent},
   {
     path: 'tutor',canActivate : [tutorGuard ,tutorBlockGuard], component: TutorProfilePageComponent,
     children:[

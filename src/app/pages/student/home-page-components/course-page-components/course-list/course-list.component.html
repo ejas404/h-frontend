@@ -4,30 +4,34 @@
         <p class="text-light-gray">Courses are coming soon...</p>
     </div>
     <div *ngFor="let each of courseList"
-                class="course-card w-[15rem] h-[18rem] border border-light-gray rounded-xl overflow-hidden bg-white">
+        class="course-card w-[15rem] h-[18rem] border border-light-gray rounded-xl overflow-hidden bg-white">
 
-                <a routerLink="/course/{{each._id}}">
 
-                    <div class="card-img w-full h-[10rem]">
-                        <img class="object-contain" src="{{ each.cover| customImageUrl}}" alt="">
-                    </div>
-                    <div class="card-bottom h-[8rem] flex flex-col justify-between">
-                        <div class="course-details-top text-gray p-2
+        <div class="card-img w-full h-[10rem]">
+            <a routerLink="/course/{{each._id}}">
+                <img class="object-contain" src="{{ each.cover| customImageUrl}}" alt="">
+            </a>
+        </div>
+        <div class="card-bottom h-[8rem] flex flex-col justify-between">
+            <div class="course-details-top text-gray p-2
                         children:text-sm children:inline">
-                            <p class="text-xs">Angular</p>
-                            <p class="text-xs float-right">4:00 hrs</p>
+                <p class="text-xs">Angular</p>
+                <p class="text-xs float-right">4:00 hrs</p>
 
-                        </div>
-                        <div class="course-title p-2 overflow-hidden">
-                            <h1 class="font-bold [font-size:_clamp(20px,2vw-2rem,5rem)]">{{each.title}}</h1>
-                        </div>
-
-                        <div class="course-detail-bottom p-2 ">
-                            <p class="text-xs text-black font-semibold inline my-auto">{{each.fee | currency : 'INR'}}</p>
-                            <a class="text-xs ms-2 bg-primary font-bold float-right text-white p-1 px-2 rounded">Buy
-                                Now</a>
-                        </div>
-                    </div>
-                </a>
             </div>
+            <div class="course-title p-2 overflow-hidden">
+                <h1 class="font-bold [font-size:_clamp(20px,2vw-2rem,5rem)]">{{each.title}}</h1>
+            </div>
+
+            <div class="course-detail-bottom p-2 ">
+                <p class="text-xs text-black font-semibold inline my-auto">{{each.fee | currency : 'INR'}}</p>
+
+                <button  #addToCartBtn (click)="addToCart(each._id)"
+                    class="text-xs ms-2 bg-primary font-bold float-right text-white p-1 px-2 rounded">Add to Cart</button>
+                
+                <!-- <button *ngIf="inCart" #addToCartBtn (click)="addToCart(each._id)"
+                    class="text-xs ms-2 bg-black font-bold float-right text-white p-1 px-2 rounded">Go to Cart</button> -->
+            </div>
+        </div>
+    </div>
 </div>

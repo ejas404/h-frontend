@@ -15,12 +15,12 @@
     <span *ngIf="!password.valid && password.touched" class="text-sm text-red-600">Please enter your
         password</span>
 
-    <button *ngIf="usedFor === 'admin'" class="w-full border border-admin-primary py-2 rounded my-2 text-sm" type="button">
+    <button (click)="otpLogin()" *ngIf="usedFor === 'admin'" class="w-full border border-admin-primary py-2 rounded my-2 text-sm" type="button">
         <span>Login with otp</span>
     </button>
 
 
-    <button *ngIf="usedFor !== 'admin'" class="w-full border border-light-gray py-2 rounded my-2 text-sm" type="button">
+    <button (click)="googleSign()" *ngIf="usedFor !== 'admin'" class="w-full border border-light-gray py-2 rounded my-2 text-sm" type="button">
         <span><img class="h-3 w-auto inline"
                 src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
                 alt=""> Sign up with Google</span>

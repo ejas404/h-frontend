@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BASE_URL } from "../../constant/uri";
-import { CourseDetailsResponse } from "../../models/course";
+import { CourseDetailsResponse, CourseVideoResponseList } from "../../models/course";
 
 @Injectable()
 export class HomePageCourseService {
@@ -14,4 +14,5 @@ export class HomePageCourseService {
     getSingleCourse(id: string) {
         return this.http.get<{ courseDetails: CourseDetailsResponse }>(`${BASE_URL}/course/${id}`)
     }
+
 }

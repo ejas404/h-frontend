@@ -1,7 +1,9 @@
 <section class="max-w-[25rem] max-h-[100vh] p-5 overflow-y-scroll">
     <form #addCourse="ngForm" (ngSubmit)="onFormSubmit(addCourse)">
-        <h2 class="text-[1.5rem] font-bold mb-8">Add Course</h2>
-
+        <div class="flex justify-between content-center">
+            <h2 class="text-[1.5rem] font-bold mb-4">Add Course</h2>
+            <close-btn mat-button mat-dialog-close></close-btn>
+        </div>
         <input ngModel name="title"
             class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
             type="text" placeholder="Title" #title="ngModel" required pattern=".*[a-zA-Z].*">
@@ -31,7 +33,8 @@
                 <option *ngFor="let each of categoryList" value="{{ each._id}}">{{each.name}}</option>
 
             </select>
-            <button type="button" class=" bg-black text-white ms-1 text-sm p-2 rounded" (click)="addCategory()" >Add</button>
+            <button type="button" class=" bg-black text-white ms-1 text-sm p-2 rounded"
+                (click)="addCategory()">Add</button>
         </div>
 
         <div class="sub-category">
@@ -42,8 +45,8 @@
                 <option *ngFor="let each of filteredSubCat" value="{{ each._id}}">{{each.name}}</option>
 
             </select>
-            <button type="button" [disabled]="!category.dirty" 
-            class=" bg-black text-white ms-1 text-sm p-2 rounded" (click)="addSubCat()" >Add</button>
+            <button type="button" [disabled]="!category.dirty" class=" bg-black text-white ms-1 text-sm p-2 rounded"
+                (click)="addSubCat()">Add</button>
         </div>
 
         <textarea ngModel name="description"
@@ -59,7 +62,7 @@
         <input class="block w-full text-md  border border-gray-300 rounded-lg cursor-pointer  focus:outline-none"
             aria-describedby="file_input_help" id="file_input" type="file" (change)="inputUpload($event)">
 
-        <button type="submit" [disabled]="!addCourse.valid" mat-button mat-dialog-close
+        <button type="submit" [disabled]="!addCourse.valid"
             class="bg-admin-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Save</button>
 
     </form>

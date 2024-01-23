@@ -24,17 +24,6 @@ import { SharedModules } from "../shared_modules";
         AdminCoursesComponent,
         SingleCourseAdminComponent,
     ],
-    // exports : [
-    //     AdminLoginComponent,
-    //     AdminDashboardComponent,
-    //     AdminStudentsComponent,
-    //     AdminTutorsComponent,
-    //     AdminSettingsComponent,
-    //     AdminSidebarComponent,
-    //     AdminPageComponent,
-    //     AdminCoursesComponent,
-    //     SingleCourseAdminComponent
-    // ], 
     imports : [
         SharedModules,
         SharedComponentsModule,

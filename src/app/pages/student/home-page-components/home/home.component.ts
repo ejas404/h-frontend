@@ -13,7 +13,6 @@ export class HomeComponent  implements OnInit{
     let isLogged = sessionStorage.getItem('auth_token')
 
     if(isLogged){
-      console.log('student token',isLogged)
       this.user = 'profile'
     }
   }

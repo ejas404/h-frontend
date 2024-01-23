@@ -1,0 +1,16 @@
+
+    <div *ngIf="video && course else fakeVideo" class="video-view">
+        <h1 class="text-2xl font-bold mt-2">{{course.title | titlecase}}</h1>
+        <p>By : {{course.tutor.name | titlecase }}</p>
+        <div class="video">
+            <video src="{{video.url}}" class="rounded-md aspect-video border border-light-gray" width="700" controls></video>
+        </div>
+        <p class="my-3">{{video.title}}</p>
+        <p class="my-3">{{video.description}}</p>
+    </div>
+
+    <ng-template #fakeVideo>
+        <div class="video">
+            <video src="" class="rounded-md" height="400" width="700" controls></video>
+        </div>
+    </ng-template>

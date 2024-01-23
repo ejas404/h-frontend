@@ -1,4 +1,4 @@
-<section class="course-bar h-[15rem] py-5 px-10 flex {{bg}}">
+<section *ngIf="courseDetails" class="course-bar h-[15rem] py-5 px-10 flex {{bg}}">
     <div class="course-details py-5 flex items-center basis-3/5">
         <div class="{{text}}">
             <h1 class="text-4xl font-bold">{{courseDetails.title}} : The Perfect Guide</h1>
@@ -72,10 +72,11 @@
                 <div *ngFor="let each of videoList; let i = index ;" class="section">
                     <div class="group section-title flex justify-between px-2 py-3 border-b border-b-white relative {{bg}} {{text}}"
                         (click)="selectedSection = i">
-                        <h1 class="text-md">{{each.title}} : Beggining</h1>
-                        <p class="text-md">{{each.courseVideos.length}} classes - {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
+                        <h1 class="text-md">{{each.title}}</h1>
+                        <p class="text-md">{{each.courseVideos.length}} classes -
+                            {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
 
-                        <div
+                        <div  *ngIf="user !== 'student'"
                             class="absolute right-[-3rem] invisible text-admin-primary group-hover:visible children:cursor-pointer">
                             <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
                                 name="bootstrapTrash3Fill"></ng-icon>
@@ -85,9 +86,11 @@
                         <ng-container *ngIf="each.courseVideos.length else noVideos">
                             <li *ngFor="let video of each.courseVideos ; let k = index"
                                 class="p-2 flex justify-between border-b border-b-black">
-                                <p>{{k+1}} <span
-                                        class="hover:text-blue-700 hover:underline cursor-pointer">{{video.title}}</span>
-                                </p>
+                                <a routerLink="/course/{{courseDetails._id}}/{{video._id}}">
+                                    <p>{{k+1}}. <span
+                                            class="hover:text-blue-700 hover:underline cursor-pointer">{{video.title}}</span>
+                                    </p>
+                                </a>
                                 <p>{{video.duration | customDuration}} </p>
                             </li>
                         </ng-container>
@@ -102,7 +105,8 @@
                 </div>
             </ng-container>
             <ng-template #noVideoList>
-                <h1 *ngIf="user !== 'student' else studentCoursePage" class="text-lg text-gray">Add classes in the course</h1>
+                <h1 *ngIf="user !== 'student' else studentCoursePage" class="text-lg text-gray">Add classes in the
+                    course</h1>
                 <ng-template #studentCoursePage>
                     <h1 class="text-lg text-gray">No classes yet provided in the course</h1>
                 </ng-template>

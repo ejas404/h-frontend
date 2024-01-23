@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { courseCoverUpdateSuccess } from '../../../../core/state/admin/courses/action';
 import { Subject, takeUntil } from 'rxjs';
 import { ImageCropperService } from 'app/core/services/shared/image_crop_service';
+import { ToastService } from 'app/core/services/shared/toast_service';
 
 @Component({
   selector: 'app-course-image-popup',
@@ -19,9 +20,9 @@ export class CourseImagePopupComponent {
 
   constructor(
     private service: DashboardService,
-    private messageService: MessageService,
     private store: Store,
     private croppedRespone : ImageCropperService,
+    private toastService : ToastService,
     @Inject(MAT_DIALOG_DATA) public data: { id: string , calledFor : string , imageInput : Event}
   ) { }
 
@@ -53,11 +54,7 @@ export class CourseImagePopupComponent {
 
   loadImageFailed() {
     this.button = true
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Load Fail',
-      detail: 'Image failed to load'
-    })
+    this.toastService.fail('failed to load image')
   }
 
 
@@ -78,29 +75,13 @@ export class CourseImagePopupComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: data => {
-          this.serverUploadSuccess()
+          this.toastService.success('Cover Image updated successfully')
           this.store.dispatch(courseCoverUpdateSuccess(data))
         },
         error: err => {
-          this.serverUploadFail()
+          this.toastService.fail('Cover Image Failed to Update')
         }
       })
-  }
-
-  serverUploadSuccess() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Cover Image updated successfully'
-    })
-  }
-
-  serverUploadFail() {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Failed',
-      detail: 'Cover Image Failed to Update'
-    })
   }
 
 

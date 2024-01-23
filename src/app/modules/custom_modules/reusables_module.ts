@@ -21,6 +21,8 @@ import { AuthFormButtonComponent } from "app/reusables/buttons/auth-form-btn.com
 import { FormInputReusableComponent } from "app/reusables/inputs/form-input.component";
 import { SignupReusableTempComponent } from "app/reusables/templates/signup-reusable-temp/signup-reusable-temp.component";
 import { LoginReusableTempComponent } from "app/reusables/templates/login-reusable-temp/login-reusable-temp.component";
+import { VideoPreviewComponent } from "app/reusables/templates/video-preview/video-preview.component";
+import { CourseSectionsListComponent } from "app/reusables/templates/course-sections-list/course-sections-list.component";
 
 
 
@@ -42,7 +44,9 @@ import { LoginReusableTempComponent } from "app/reusables/templates/login-reusab
         AuthFormButtonComponent,
         FormInputReusableComponent,
         SignupReusableTempComponent,
-        LoginReusableTempComponent
+        LoginReusableTempComponent,
+        VideoPreviewComponent,
+        CourseSectionsListComponent
 
 
     ],
@@ -63,7 +67,9 @@ import { LoginReusableTempComponent } from "app/reusables/templates/login-reusab
         AuthFormButtonComponent,
         FormInputReusableComponent,
         SignupReusableTempComponent,
-        LoginReusableTempComponent
+        LoginReusableTempComponent,
+        VideoPreviewComponent,
+        CourseSectionsListComponent
 
     ],
     imports :[

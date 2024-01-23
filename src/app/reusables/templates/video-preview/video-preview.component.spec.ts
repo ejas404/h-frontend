@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PopupAddCourseComponent } from './popup-add-course.component';
+import { VideoPreviewComponent } from './video-preview.component';
 
-describe('PopupAddCourseComponent', () => {
-  let component: PopupAddCourseComponent;
-  let fixture: ComponentFixture<PopupAddCourseComponent>;
+describe('VideoPreviewComponent', () => {
+  let component: VideoPreviewComponent;
+  let fixture: ComponentFixture<VideoPreviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PopupAddCourseComponent]
+      declarations: [VideoPreviewComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PopupAddCourseComponent);
+    fixture = TestBed.createComponent(VideoPreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

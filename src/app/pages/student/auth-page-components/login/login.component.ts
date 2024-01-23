@@ -19,8 +19,7 @@ export class LoginComponent {
 
   onSubmitClick(form : NgForm){
     let credentials = form.value
-    console.log('credentials print', credentials)
-    // this.store.dispatch(studentLoginReq({credentials}))
+    this.store.dispatch(studentLoginReq({credentials}))
   }
 
   loginWithOtp(){

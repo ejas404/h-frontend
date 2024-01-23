@@ -28,6 +28,11 @@ import { TutorModule } from './modules/feature_modules/tutor_module';
 import { UserProfileModule } from './modules/feature_modules/user_profile_module';
 import { SharedComponentsModule } from './modules/custom_modules/shared_components_modules';
 import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
+import { CartProductTemplateComponent } from './pages/student/profile/cart-product-template/cart-product-template.component';
+import { VideoPreviewComponent } from './reusables/templates/video-preview/video-preview.component';
+import { CourseSectionsListComponent } from './reusables/templates/course-sections-list/course-sections-list.component';
+import { StudentVideoPreviewComponent } from './pages/student/student-video-preview/student-video-preview.component';
+
 
 @NgModule({
   declarations: [

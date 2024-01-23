@@ -39,22 +39,6 @@ import { CourseTopFilterBtnsComponent } from "app/pages/student/home-page-compon
         CourseSidebarComponent,
         CourseTopFilterBtnsComponent
     ],
-    // exports : [
-    //     LoginComponent,
-    //     SignupComponent,
-    //     LoginOtpComponent,
-    //     HomeComponent,
-    //     HomepageComponent,
-    //     TestimonialComponent,
-    //     ContactComponent,
-    //     CoursesComponent,
-    //     SingleCourseHomeComponent,
-    //     SubscribeComponent,
-    //     HomeCoursesComponent,
-    //     FooterComponent,
-    //     CourseListComponent,
-    //     CourseSidebarComponent
-    // ],
     imports : [
         SharedModules,
         ReusableComponentsModule,

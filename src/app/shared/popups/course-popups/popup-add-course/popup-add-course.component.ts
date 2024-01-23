@@ -13,17 +13,17 @@ import { ImageCropperService } from 'app/core/services/shared/image_crop_service
 import { CourseImagePopupComponent } from '../course-image-popup/course-image-popup.component';
 import { CategoryPopupComponent } from '../category-popup/category-popup.component';
 import { CategoryService } from 'app/core/services/category_service';
+import { ToastService } from 'app/core/services/shared/toast_service';
 
 
 @Component({
   selector: 'app-popup-add-course',
   templateUrl: './popup-add-course.component.html',
-  styleUrl: './popup-add-course.component.scss',
   providers : [CategoryService]
 })
 export class PopupAddCourseComponent {
 
-  private destroy$ = new Subject<void>();
+  destroy$ = new Subject<void>();
 
   routeFor !: 'admin'| 'tutor'
   tutorList !: TutorModel[];
@@ -37,10 +37,10 @@ export class PopupAddCourseComponent {
   constructor(
     private service: DashboardService,
     private store: Store,
-    private messageService: MessageService,
     private dialogRef: MatDialog,
     private cropRequestService: ImageCropperService,
-    private categoryService : CategoryService
+    private categoryService : CategoryService,
+    private toastService : ToastService
   ) { }
 
 
@@ -63,7 +63,9 @@ export class PopupAddCourseComponent {
   }
 
   fetchCategoryList(){
-    this.categoryService.getCategory(this.routeFor).subscribe({
+    this.categoryService.getCategory(this.routeFor)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next : res =>{
         this.categoryList = res.categories
       },
@@ -74,7 +76,9 @@ export class PopupAddCourseComponent {
   }
 
   fetchSubCategoryList(){
-    this.categoryService.getSubCategory(this.routeFor).subscribe({
+    this.categoryService.getSubCategory(this.routeFor)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next : res =>{
         console.log('sub category list', res.subCategories)
         this.subCategoryList = res.subCategories
@@ -115,11 +119,11 @@ export class PopupAddCourseComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: data => {
+          this.toastService.success('course added successfully')
           this.store.dispatch(DashboardActions.courseAddSuccess(data))
-          this.successMessage()
         },
         error: err => {
-          this.failureMessage()
+          this.toastService.fail(err.error.message || 'failed to add course')
         }
       })
   }
@@ -131,14 +135,21 @@ export class PopupAddCourseComponent {
         route: this.routeFor
       }
     })
+
+    this.categoryService.isCategoryAdded.subscribe({
+      next : res =>{
+        alert('category')
+        console.log(res)
+        console.log('category added')
+      }
+    })
   }
 
   categoryChange(event : Event){
     const selectElem = event.target as HTMLSelectElement
     this.selectedCategory = selectElem.value
 
-    this.filteredSubCat = this.subCategoryList
-                              .filter(each => each.category === selectElem.value)
+    this.filteredSubCat = this.subCategoryList.filter(each => each.category === selectElem.value)
     
   }
 
@@ -150,21 +161,13 @@ export class PopupAddCourseComponent {
         id : this.selectedCategory
       }
     })
-  }
 
-  successMessage() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Course Updated Successfully'
-    })
-  }
-
-  failureMessage() {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Failed',
-      detail: 'Failed to update course'
+    this.categoryService.isCategoryAdded.subscribe({
+      next : res =>{
+        alert('category')
+        console.log(res)
+        console.log('category added')
+      }
     })
   }
 

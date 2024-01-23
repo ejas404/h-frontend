@@ -20,3 +20,7 @@ export interface VideoModel {
 export interface VideoResponseModel extends VideoModel{
     _id : string
 }
+
+export interface VideoWithUrl extends VideoResponseModel{
+    url : string
+}
