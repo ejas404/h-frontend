@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { getTutorList } from '../../../../core/state/admin/dashboard/reducer';
 import * as DashboardActions from '../../../../core/state/admin/dashboard/action'
 import { MessageService } from 'primeng/api';
-import { CategoryModel, CourseDetailsResponse } from '../../../../core/models/course';
+import { CategoryModel, CourseDetailsResponse, SubCategoryModel } from '../../../../core/models/course';
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageCropperService } from 'app/core/services/shared/image_crop_service';
@@ -25,10 +25,14 @@ export class PopupAddCourseComponent {
 
   private destroy$ = new Subject<void>();
 
+  routeFor !: 'admin'| 'tutor'
   tutorList !: TutorModel[];
-  categoryList !: CategoryModel[]
+  categoryList !: CategoryModel[];
+  subCategoryList !: SubCategoryModel[];
+  filteredSubCat !: SubCategoryModel[];
   courseDetail !: CourseDetailsResponse;
-  coverFile !: File
+  coverFile !: File;
+  selectedCategory !: string;
 
   constructor(
     private service: DashboardService,
@@ -42,8 +46,10 @@ export class PopupAddCourseComponent {
 
 
   ngOnInit(): void {
+    this.routeFor = 'admin'
     this.fetchTutorList()
     this.fetchCategoryList()
+    this.fetchSubCategoryList()
   }
 
   fetchTutorList() {
@@ -57,9 +63,21 @@ export class PopupAddCourseComponent {
   }
 
   fetchCategoryList(){
-    this.categoryService.getCategory('admin').subscribe({
+    this.categoryService.getCategory(this.routeFor).subscribe({
       next : res =>{
         this.categoryList = res.categories
+      },
+      error : err =>{
+        console.log(err)
+      }
+    })
+  }
+
+  fetchSubCategoryList(){
+    this.categoryService.getSubCategory(this.routeFor).subscribe({
+      next : res =>{
+        console.log('sub category list', res.subCategories)
+        this.subCategoryList = res.subCategories
       },
       error : err =>{
         console.log(err)
@@ -87,9 +105,13 @@ export class PopupAddCourseComponent {
       })
   }
 
-  onFormSubmit(formData: NgForm) {
+  onFormSubmit(form: NgForm) {
 
-    this.service.addCourse(formData.value)
+    const formData = new FormData()
+    formData.append('cover', this.coverFile,this.coverFile.name)
+    formData.append('details', JSON.stringify(form.value))
+
+    this.service.addCourse(formData)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: data => {
@@ -106,16 +128,26 @@ export class PopupAddCourseComponent {
     this.dialogRef.open(CategoryPopupComponent, {
       data: {
         calledFor: 'mainCategory',
-        route: 'admin'
+        route: this.routeFor
       }
     })
+  }
+
+  categoryChange(event : Event){
+    const selectElem = event.target as HTMLSelectElement
+    this.selectedCategory = selectElem.value
+
+    this.filteredSubCat = this.subCategoryList
+                              .filter(each => each.category === selectElem.value)
+    
   }
 
   addSubCat(){
     this.dialogRef.open(CategoryPopupComponent,{
       data : {
         calledFor : 'subCat',
-        route : 'admin'
+        route : this.routeFor,
+        id : this.selectedCategory
       }
     })
   }

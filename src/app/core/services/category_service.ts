@@ -21,16 +21,16 @@ export class CategoryService{
         return this.http.post(`${BASE_URL}/${route}/add-category`,data)
     }
 
-    addSubCategory(data : SubCategoryModel, route : string, id : string){
-        return this.http.post(`${BASE_URL}/${route}/add-sub-category/${id}`,data)
+    addSubCategory(data : SubCategoryModel, route : string){
+        return this.http.post(`${BASE_URL}/${route}/add-sub-category`,data)
     }
 
     getCategory(route : string){
         return this.http.get<{categories : CategoryModel[]}>(`${BASE_URL}/${route}/category`)
     }
 
-    getSubCategory(route : string, id : string){
-        return this.http.get(`${BASE_URL}/${route}/sub-category/${id}`)
+    getSubCategory(route : string){
+        return this.http.get<{subCategories : SubCategoryModel[]}>(`${BASE_URL}/${route}/sub-category`)
     }
     
 }

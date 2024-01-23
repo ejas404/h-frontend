@@ -24,7 +24,7 @@ export class CategoryPopupComponent {
         }
       })
     }else if(this.data.calledFor === 'subCat'){
-      this.categoryService.addSubCategory(form.value, this.data.route, this.data.id).subscribe({
+      this.categoryService.addSubCategory(form.value, this.data.route).subscribe({
         next : res =>{
           console.log(res)
         }

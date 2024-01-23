@@ -24,7 +24,7 @@
         </select>
 
         <div class="category">
-            <select ngModel name="category"
+            <select (change)="categoryChange($event)" ngModel name="category"
                 class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-[85%]  my-2 rounded"
                 #category="ngModel" required>
                 <option value="" disabled selected>category</option>
@@ -39,10 +39,11 @@
                 class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-[85%]  my-2 rounded"
                 #sub="ngModel" required>
                 <option value="" disabled selected>sub category</option>
-                <option *ngFor="let each of tutorList" value="{{ each._id}}">{{each.name}}</option>
+                <option *ngFor="let each of filteredSubCat" value="{{ each._id}}">{{each.name}}</option>
 
             </select>
-            <button type="button" [disabled]="!category.dirty" class=" bg-black text-white ms-1 text-sm p-2 rounded">Add</button>
+            <button type="button" [disabled]="!category.dirty" 
+            class=" bg-black text-white ms-1 text-sm p-2 rounded" (click)="addSubCat()" >Add</button>
         </div>
 
         <textarea ngModel name="description"
