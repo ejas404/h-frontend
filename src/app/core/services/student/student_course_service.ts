@@ -13,9 +13,13 @@ export class StudentCourseService{
     addToCart(id : string){
         return this.http.put<{msg : string}>(`${BASE_URL}/student/add-to-cart/${id}`,{})
     }
+
+    removeFromCart(id : string){
+        return this.http.delete<{msg : string}>(`${BASE_URL}/student/cart/remove/${id}`)
+    }
     
     getCartData(){
-        return this.http.get<{cartItems : CartModel[]}>(`${BASE_URL}/student/cart`)
+        return this.http.get<{cartItems : CartModel[] , cartTotal : number }>(`${BASE_URL}/student/cart`)
     }
 
     getVideo(id : string){

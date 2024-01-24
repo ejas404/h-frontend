@@ -10,18 +10,17 @@
                 <div
                     class="flex justify-between text-base font-medium text-gray-900">
                     <h3>
-                        <a href="#">{{each.details[0].title}}</a>
+                        <a routerLink="/course/{{each.course_id}}">{{each.details[0].title}}</a>
                     </h3>
                     <p class="ml-4">{{each.details[0].fee | currency : 'INR'}}</p>
                 </div>
                 <p class="mt-1 text-sm text-gray-500"></p>
             </div>
-            <div class="flex flex-1 items-end justify-between text-sm">
+            <div class="flex flex-1 items-end justify-end text-sm">
                 <div class="flex">
-                    <button type="button"
+                    <button type="button" (click)="removeItem(each.course_id)"
                     class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
                 </div>
-                <p class="text-gray-500"><quantity-counter [count]="each.quantity" ></quantity-counter> </p>
             </div>
         </div>
     </li>
