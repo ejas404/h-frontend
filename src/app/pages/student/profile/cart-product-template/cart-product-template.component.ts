@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CartModel } from 'app/core/models/cart_model';
 
 @Component({
   selector: 'cart-product-template',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './cart-product-template.component.scss'
 })
 export class CartProductTemplateComponent {
-  arr = [1,2,3,4,6,6,7]
+  @Input()cartProducts !: CartModel[]
 }

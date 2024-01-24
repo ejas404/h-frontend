@@ -16,13 +16,10 @@ import {
     bootstrapExclamationOctagon,
     bootstrapStar,
     bootstrapFileEarmarkText,
-    bootstrapBookmarkFill
+    bootstrapBookmarkFill,
+    bootstrapCart3
 
 } from '@ng-icons/bootstrap-icons';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { CommonModule } from "@angular/common";
-import { SharedModules } from "../shared_modules";
-
 
 @NgModule({
     imports: [
@@ -43,7 +40,8 @@ import { SharedModules } from "../shared_modules";
                 bootstrapExclamationOctagonFill,
                 bootstrapExclamationOctagon,
                 bootstrapFileEarmarkText,
-                bootstrapBookmarkFill
+                bootstrapBookmarkFill,
+                bootstrapCart3
             })
     ],
     exports: [

@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BASE_URL } from "app/core/constant/uri";
+import { CartModel } from "app/core/models/cart_model";
 import { VideoWithUrl } from "app/core/models/section_video_model";
 
 @Injectable()
@@ -13,6 +14,10 @@ export class StudentCourseService{
         return this.http.put<{msg : string}>(`${BASE_URL}/student/add-to-cart/${id}`,{})
     }
     
+    getCartData(){
+        return this.http.get<{cartItems : CartModel[]}>(`${BASE_URL}/student/cart`)
+    }
+
     getVideo(id : string){
         return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/student/get-video/${id}`)
     }

@@ -23,6 +23,7 @@ import { SignupReusableTempComponent } from "app/reusables/templates/signup-reus
 import { LoginReusableTempComponent } from "app/reusables/templates/login-reusable-temp/login-reusable-temp.component";
 import { VideoPreviewComponent } from "app/reusables/templates/video-preview/video-preview.component";
 import { CourseSectionsListComponent } from "app/reusables/templates/course-sections-list/course-sections-list.component";
+import { CartBtnReusableComponent } from "app/reusables/buttons/cart-btn-component";
 
 
 
@@ -46,7 +47,8 @@ import { CourseSectionsListComponent } from "app/reusables/templates/course-sect
         SignupReusableTempComponent,
         LoginReusableTempComponent,
         VideoPreviewComponent,
-        CourseSectionsListComponent
+        CourseSectionsListComponent,
+        CartBtnReusableComponent
 
 
     ],
@@ -69,7 +71,8 @@ import { CourseSectionsListComponent } from "app/reusables/templates/course-sect
         SignupReusableTempComponent,
         LoginReusableTempComponent,
         VideoPreviewComponent,
-        CourseSectionsListComponent
+        CourseSectionsListComponent,
+        CartBtnReusableComponent
 
     ],
     imports :[

@@ -1,10 +1,8 @@
 <ul role="list" class="-my-6 divide-y divide-gray-200">
-    <li *ngFor="let each of arr" class="flex py-6">
+    <li *ngFor="let each of cartProducts" class="flex py-6">
         <div
             class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-            <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
-                alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
-                class="h-full w-full object-cover object-center">
+            <img class="object-cover w-full h-full" src="{{each.details[0].cover | customImageUrl}}">
         </div>
 
         <div class="ml-4 flex flex-1 flex-col">
@@ -12,14 +10,14 @@
                 <div
                     class="flex justify-between text-base font-medium text-gray-900">
                     <h3>
-                        <a href="#">Throwback Hip Bag</a>
+                        <a href="#">{{each.details[0].title}}</a>
                     </h3>
-                    <p class="ml-4">$90.00</p>
+                    <p class="ml-4">{{each.details[0].fee | currency : 'INR'}}</p>
                 </div>
-                <p class="mt-1 text-sm text-gray-500">Salmon</p>
+                <p class="mt-1 text-sm text-gray-500"></p>
             </div>
             <div class="flex flex-1 items-end justify-between text-sm">
-                <p class="text-gray-500">Qty 1</p>
+                <p class="text-gray-500">Qty {{each.quantity}}</p>
 
                 <div class="flex">
                     <button type="button"
