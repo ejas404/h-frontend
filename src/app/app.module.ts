@@ -32,6 +32,7 @@ import { CartProductTemplateComponent } from './pages/student/profile/cart-produ
 import { VideoPreviewComponent } from './reusables/templates/video-preview/video-preview.component';
 import { CourseSectionsListComponent } from './reusables/templates/course-sections-list/course-sections-list.component';
 import { StudentVideoPreviewComponent } from './pages/student/student-video-preview/student-video-preview.component';
+import { QuantityCounterComponent } from './reusables/templates/quantity-counter/quantity-counter.component';
 
 
 @NgModule({

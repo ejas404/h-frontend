@@ -1,0 +1,17 @@
+<div class="flex items-center justify-center">
+    <button id="decrement-btn"  (click)="decrement()"
+        class="flex justify-center items-center w-5 h-5 rounded-full text-white focus:outline-none  bg-indigo-500 hover:bg-indigo-600">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+        </svg>
+    </button>
+    <span id="counter" class="text-md font-bold mx-2 rounded border px-2 py-1">{{count}}</span>
+    <button id="increment-btn" (click)="increment()"
+        class="flex justify-center items-center w-5 h-5 rounded-full text-white focus:outline-none bg-indigo-500 hover:bg-indigo-600">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12"></path>
+        </svg>
+    </button>
+</div>
