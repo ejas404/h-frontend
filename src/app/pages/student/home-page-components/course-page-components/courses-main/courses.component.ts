@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CourseDetailsResponse } from 'app/core/models/course';
 import { HomePageCourseService } from 'app/core/services/home/homepage-course';
-import { Subject, takeUntil } from 'rxjs';
+import { StudentCourseService } from 'app/core/services/student/student_course_service';
+import { Subject, take, takeUntil } from 'rxjs';
 
 
 
@@ -9,17 +10,22 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss',
-  providers: [HomePageCourseService]
+  providers: [HomePageCourseService , StudentCourseService]
 })
 export class CoursesComponent {
   private destroy$ = new Subject<void>();
 
   courses !: CourseDetailsResponse[];
   previewCourse !: CourseDetailsResponse[];
+  cartList !: string[];
 
-  constructor(private service: HomePageCourseService) { }
+  constructor(
+    private service: HomePageCourseService,
+    private studentCourseService : StudentCourseService
+    ) { }
 
   ngOnInit() {
+    this.checkUserCart()
     this.fertchCourseDetails()
   }
 
@@ -52,6 +58,22 @@ export class CoursesComponent {
       this.previewCourse = this.courses
     }
     
+  }
+
+  checkUserCart(){
+    let isLogged = sessionStorage.getItem('auth_token')
+    if(isLogged){
+      this.studentCourseService.getCartList()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next : res =>{
+         this.cartList = res.cartList
+        },
+        error : err =>{
+          console.log(err.error.message)
+        }
+      })
+    }
   }
 
 

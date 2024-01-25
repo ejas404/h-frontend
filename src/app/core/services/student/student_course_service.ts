@@ -22,6 +22,10 @@ export class StudentCourseService{
         return this.http.get<{cartItems : CartModel[] , cartTotal : number }>(`${BASE_URL}/student/cart`)
     }
 
+    getCartList(){
+        return this.http.get<{cartList : string[] }>(`${BASE_URL}/student/cart-list`)
+    }
+
     getVideo(id : string){
         return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/student/get-video/${id}`)
     }

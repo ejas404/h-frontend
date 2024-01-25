@@ -13,7 +13,6 @@ import { Subject, takeUntil } from 'rxjs';
 export class CourseListComponent {
 
   destroy$ = new Subject<void>()
-  inCart = false;
 
   constructor(
     private studentCourseService : StudentCourseService,
@@ -21,6 +20,7 @@ export class CourseListComponent {
   ){}
 
   @Input()courseList !: CourseDetailsResponse[];
+  @Input()cartList !: string[] 
   @ViewChild('addToCartBtn',{static : false})cartBtn !: ElementRef
 
 
@@ -28,6 +28,7 @@ export class CourseListComponent {
   addToCart(course_id : string | undefined){
     if(typeof(course_id) !== 'string') return;
 
+    this.cartList.push(course_id)
     this.studentCourseService.addToCart(course_id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
