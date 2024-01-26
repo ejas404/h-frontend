@@ -19,7 +19,19 @@ export interface CourseDetailsResponse{
     cover ?: string,
     isTutorMade ?: boolean,
     isApproved ?: boolean,
-    request ?: string
+    request ?: string,
+    category ?: string,
+    subCategory ?: string
+}
+
+export interface UpcomingCourse{
+    _id ?: string,
+    title : string,
+    description : string,
+    tutor : TutorDetailsWithCourse,
+    cover ?: string,
+    category : string,
+    subCategory : string
 }
 
 

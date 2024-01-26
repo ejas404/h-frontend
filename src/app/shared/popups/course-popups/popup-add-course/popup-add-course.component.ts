@@ -5,27 +5,30 @@ import { TutorModel } from '../../../../core/models/tutor';
 import { Store } from '@ngrx/store';
 import { getTutorList } from '../../../../core/state/admin/dashboard/reducer';
 import * as DashboardActions from '../../../../core/state/admin/dashboard/action'
-import { MessageService } from 'primeng/api';
-import { CategoryModel, CourseDetailsResponse, SubCategoryModel } from '../../../../core/models/course';
-import { Subject, takeUntil } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { CategoryModel, CourseDetailsResponse, SubCategoryModel, UpcomingCourse } from '../../../../core/models/course';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ImageCropperService } from 'app/core/services/shared/image_crop_service';
 import { CourseImagePopupComponent } from '../course-image-popup/course-image-popup.component';
 import { CategoryPopupComponent } from '../category-popup/category-popup.component';
 import { CategoryService } from 'app/core/services/category_service';
 import { ToastService } from 'app/core/services/shared/toast_service';
+import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
+import { ComponetCommunicationService } from 'app/core/services/shared/communicate_service';
 
 
 @Component({
   selector: 'app-popup-add-course',
   templateUrl: './popup-add-course.component.html',
-  providers : [CategoryService]
+  providers: [CategoryService, DashboardCourseService, DashboardService]
 })
 export class PopupAddCourseComponent {
 
+
+
   destroy$ = new Subject<void>();
 
-  routeFor !: 'admin'| 'tutor'
+  routeFor !: 'admin' | 'tutor'
   tutorList !: TutorModel[];
   categoryList !: CategoryModel[];
   subCategoryList !: SubCategoryModel[];
@@ -36,58 +39,78 @@ export class PopupAddCourseComponent {
 
   constructor(
     private service: DashboardService,
+    private dbcService: DashboardCourseService,
     private store: Store,
     private dialogRef: MatDialog,
+    private communicateService: ComponetCommunicationService,
     private cropRequestService: ImageCropperService,
-    private categoryService : CategoryService,
-    private toastService : ToastService
+    private categoryService: CategoryService,
+    private toastService: ToastService,
+    @Inject(MAT_DIALOG_DATA) public data: { calledFor: string }
   ) { }
 
 
 
   ngOnInit(): void {
     this.routeFor = 'admin'
-    this.fetchTutorList()
-    this.fetchCategoryList()
-    this.fetchSubCategoryList()
+    this.fetchDatas()
   }
 
-  fetchTutorList() {
+  fetchDatas() {
+    //dispatches the action to get the dashboard datas
     this.store.dispatch(DashboardActions.dashboardRequest());
+    // fetching tutor datas
+    this.fetchList((): Observable<TutorModel[]> => this.store.select(getTutorList), 'tutorList')
+    // fetching category
+    this.fetchList((): Observable<{ categories: CategoryModel[] }> => this.categoryService.getCategory(this.routeFor), 'categoryList', 'categories')
+    //fetching subcategory
+    this.fetchList((): Observable<{ subCategories: SubCategoryModel[] }> => this.categoryService.getSubCategory(this.routeFor), 'subCategoryList', 'subCategories')
 
-    this.store.select(getTutorList)
+  }
+
+  //  fetchlist function to common subscriptions
+  fetchList<T>(listFunction: () => Observable<T>, listKey: keyof PopupAddCourseComponent, resKey?: string) {
+    listFunction()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((state) => {
-        this.tutorList = state
+      .subscribe({
+        next: res => {
+          if (resKey) {
+            this[listKey] = (res as any)[resKey]
+          } else {
+            this.tutorList = res as TutorModel[]
+          }
+        },
+        error: err => {
+          console.log(err, 'error printing')
+        }
+      })
+
+  }
+
+  onFormSubmit(form: NgForm) {
+
+    const formData = new FormData()
+    formData.append('cover', this.coverFile, this.coverFile.name)
+    formData.append('details', JSON.stringify(form.value))
+
+    const submitFunction : Observable<{ newCourse : CourseDetailsResponse} | {newCourse : UpcomingCourse}> = this.data.calledFor === 'upcoming' ?
+      this.dbcService.addUpcoming(formData) : this.service.addCourse(formData);
+
+    submitFunction
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.toastService.success('added the course successfully')
+          if (this.data.calledFor !== 'upcoming') {
+            this.store.dispatch(DashboardActions.courseAddSuccess(data as {newCourse : CourseDetailsResponse}))
+          }
+        },
+        error: err => {
+          this.toastService.fail(err.error.message || 'failed to add course')
+        }
       })
   }
 
-  fetchCategoryList(){
-    this.categoryService.getCategory(this.routeFor)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : res =>{
-        this.categoryList = res.categories
-      },
-      error : err =>{
-        console.log(err)
-      }
-    })
-  }
-
-  fetchSubCategoryList(){
-    this.categoryService.getSubCategory(this.routeFor)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : res =>{
-        console.log('sub category list', res.subCategories)
-        this.subCategoryList = res.subCategories
-      },
-      error : err =>{
-        console.log(err)
-      }
-    })
-  }
 
   inputUpload(event: Event) {
     this.dialogRef.open(CourseImagePopupComponent, {
@@ -109,25 +132,6 @@ export class PopupAddCourseComponent {
       })
   }
 
-  onFormSubmit(form: NgForm) {
-
-    const formData = new FormData()
-    formData.append('cover', this.coverFile,this.coverFile.name)
-    formData.append('details', JSON.stringify(form.value))
-
-    this.service.addCourse(formData)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: data => {
-          this.toastService.success('course added successfully')
-          this.store.dispatch(DashboardActions.courseAddSuccess(data))
-        },
-        error: err => {
-          this.toastService.fail(err.error.message || 'failed to add course')
-        }
-      })
-  }
-
   addCategory() {
     this.dialogRef.open(CategoryPopupComponent, {
       data: {
@@ -136,39 +140,41 @@ export class PopupAddCourseComponent {
       }
     })
 
-    this.categoryService.isCategoryAdded.subscribe({
-      next : res =>{
-        alert('category')
-        console.log(res)
-        console.log('category added')
-      }
-    })
+    this.communicateService.isDone
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          this.categoryList = [...this.categoryList.slice(), res]
+        }
+      })
   }
 
-  categoryChange(event : Event){
+  categoryChange(event: Event) {
     const selectElem = event.target as HTMLSelectElement
     this.selectedCategory = selectElem.value
 
     this.filteredSubCat = this.subCategoryList.filter(each => each.category === selectElem.value)
-    
+
   }
 
-  addSubCat(){
-    this.dialogRef.open(CategoryPopupComponent,{
-      data : {
-        calledFor : 'subCat',
-        route : this.routeFor,
-        id : this.selectedCategory
+  addSubCat() {
+    this.dialogRef.open(CategoryPopupComponent, {
+      data: {
+        calledFor: 'subCat',
+        route: this.routeFor,
+        id: this.selectedCategory
       }
     })
 
-    this.categoryService.isCategoryAdded.subscribe({
-      next : res =>{
-        alert('category')
-        console.log(res)
-        console.log('category added')
-      }
-    })
+    this.communicateService.isDone
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          this.filteredSubCat = [...this.filteredSubCat.slice(), res]
+          this.subCategoryList = [...this.subCategoryList.slice(), res]
+        }
+      })
+
   }
 
 

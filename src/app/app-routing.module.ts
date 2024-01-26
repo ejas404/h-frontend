@@ -9,7 +9,7 @@ import { ContactComponent } from './pages/student/home-page-components/contact/c
 import { HomepageComponent } from './pages/student/home-page-components/homepage/homepage.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
-import { AdminSettingsComponent } from './pages/admin/admin-settings/admin-settings.component';
+import { AdminOthersComponent } from './pages/admin/admin-others/admin-settings.component';
 import { AdminStudentsComponent } from './pages/admin/admin-students/admin-students.component';
 import { AdminTutorsComponent } from './pages/admin/admin-tutors/admin-tutors.component';
 import { AdminPageComponent } from './pages/admin/admin-page/admin-page.component';
@@ -36,12 +36,15 @@ import { SingleCourseAdminComponent } from './pages/admin/single-course-admin/si
 import { SingleCourseHomeComponent } from './pages/student/home-page-components/single-course-home/single-course-home.component';
 import { CartProfileComponent } from './pages/student/profile/cart-profile/cart-profile.component';
 import { StudentVideoPreviewComponent } from './pages/student/student-video-preview/student-video-preview.component';
+import { UpcomingCoursesComponent } from './pages/admin/admin-others-componets/upcoming-courses/upcoming-courses.component';
+import { AdminAccountComponent } from './pages/admin/admin-others-componets/account/account.component';
+import { BannerComponent } from './pages/admin/admin-others-componets/banner/banner.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  {path : 'course/:id', component : SingleCourseHomeComponent},
+  { path: 'course/:id', component: SingleCourseHomeComponent },
   {
     path: '', component: HomeComponent,
     children: [
@@ -57,12 +60,20 @@ const routes: Routes = [
       { path: '', component: AdminDashboardComponent },
       { path: 'students', component: AdminStudentsComponent },
       { path: 'tutors', component: AdminTutorsComponent },
-      { path: 'settings', component: AdminSettingsComponent },
-      { path: 'courses', component: AdminCoursesComponent }
+      { path: 'courses', component: AdminCoursesComponent },
+      {
+        path: 'others', component: AdminOthersComponent,
+        children : [
+          {path : 'upcoming-courses',component : UpcomingCoursesComponent},
+          {path : 'account',component : AdminAccountComponent},
+          {path : 'banner',component : BannerComponent},
+          {path : '', redirectTo : 'upcoming-courses', pathMatch : 'full'},
+        ]
+      }
     ]
   },
   {
-    path: 'profile', canActivate: [studentGuard , studentBlockGuard], component: MainProfileComponent,
+    path: 'profile', canActivate: [studentGuard, studentBlockGuard], component: MainProfileComponent,
     children: [
       { path: '', component: StudentProfileComponent },
       { path: 'courses', component: CoursesProfileComponent },
@@ -70,25 +81,25 @@ const routes: Routes = [
       { path: 'account', component: AccountProfileComponent },
       { path: 'notification', component: NotificationProfileComponent },
     ]
-    
+
   },
-  {path : 'cart',canActivate : [studentGuard , studentBlockGuard], component : CartProfileComponent},
-  {path : 'course/:id/:video',canActivate: [studentGuard , studentBlockGuard], component : StudentVideoPreviewComponent},
+  { path: 'cart', canActivate: [studentGuard, studentBlockGuard], component: CartProfileComponent },
+  { path: 'course/:id/:video', canActivate: [studentGuard, studentBlockGuard], component: StudentVideoPreviewComponent },
   {
-    path: 'tutor',canActivate : [tutorGuard ,tutorBlockGuard], component: TutorProfilePageComponent,
-    children:[
-      {path : '',component: TutorProfileComponent},
-      {path : 'account', component : TutorAccountComponent},
-      {path : 'courses', component : TutorCourseComponent},
-      {path : 'students', component : TutorStudentsComponent},
-      {path : 'notification', component : TutorNotificationComponent},
+    path: 'tutor', canActivate: [tutorGuard, tutorBlockGuard], component: TutorProfilePageComponent,
+    children: [
+      { path: '', component: TutorProfileComponent },
+      { path: 'account', component: TutorAccountComponent },
+      { path: 'courses', component: TutorCourseComponent },
+      { path: 'students', component: TutorStudentsComponent },
+      { path: 'notification', component: TutorNotificationComponent },
 
     ]
   },
   { path: 'admin/login', component: AdminLoginComponent },
-  { path: 'admin/course/:id',canActivate : [adminGuard], component: SingleCourseAdminComponent},
-  {path : 'tutor/login', component : TutorLoginComponent},
-  {path : 'tutor/signup', component : TutorSignupComponent},
+  { path: 'admin/course/:id', canActivate: [adminGuard], component: SingleCourseAdminComponent },
+  { path: 'tutor/login', component: TutorLoginComponent },
+  { path: 'tutor/signup', component: TutorSignupComponent },
   { path: '**', component: SnotfoundComponent }
 ];
 
@@ -97,7 +108,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers : []
+  providers: []
 })
 export class AppRoutingModule {
   static forRoot(appRoutes: any): any[] | import("@angular/core").Type<any> | import("@angular/core").ModuleWithProviders<{}> {

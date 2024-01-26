@@ -7,14 +7,7 @@ import { Subject } from "rxjs";
 @Injectable()
 export class CategoryService{
 
-    isCategoryAddedSubject = new Subject<any>()
-    isCategoryAdded = this.isCategoryAddedSubject.asObservable()
-
     constructor(private http : HttpClient){}
-
-    public setAddedCategory(data : any){
-        this.isCategoryAddedSubject.next(data)
-    }
 
     addCategory(data : CategoryModel, route : string){
         return this.http.post<{newCategory : CategoryModel}>(`${BASE_URL}/${route}/add-category`,data)

@@ -22,17 +22,12 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { singleCourseReducer } from './core/state/admin/courses/reducer';
 import { AuthTokenInterceptor } from './core/interceptors/auth-token-interceptor';
 import { SharedModules } from './modules/shared_modules';
-import { HomePageModule } from './modules/feature_modules/home_page_module';
+import { SharedComponentsModule } from './modules/custom_modules/shared_components_modules';
 import { AdminDashboardModule } from './modules/feature_modules/admin_dashboard_module';
+import { HomePageModule } from './modules/feature_modules/home_page_module';
 import { TutorModule } from './modules/feature_modules/tutor_module';
 import { UserProfileModule } from './modules/feature_modules/user_profile_module';
-import { SharedComponentsModule } from './modules/custom_modules/shared_components_modules';
-import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
-import { CartProductTemplateComponent } from './pages/student/profile/cart-product-template/cart-product-template.component';
-import { VideoPreviewComponent } from './reusables/templates/video-preview/video-preview.component';
-import { CourseSectionsListComponent } from './reusables/templates/course-sections-list/course-sections-list.component';
-import { StudentVideoPreviewComponent } from './pages/student/student-video-preview/student-video-preview.component';
-import { QuantityCounterComponent } from './reusables/templates/quantity-counter/quantity-counter.component';
+import { AdminOtherTopbarComponent } from './pages/admin/admin-others-componets/admin-other-topbar/admin-other-topbar.component';
 
 
 @NgModule({
@@ -46,6 +41,10 @@ import { QuantityCounterComponent } from './reusables/templates/quantity-counter
     AppRoutingModule,
     SharedModules,
     SharedComponentsModule,
+    AdminDashboardModule,
+    HomePageModule,
+    TutorModule,
+    UserProfileModule,
     StoreModule.forRoot(
       {
         auth: authReducer,

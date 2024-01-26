@@ -19,14 +19,11 @@ export class DashboardEffects{
                return this.service.getUsers()
                 .pipe(
                     map((list) =>{
-                        console.log('success req')
                         return  DashboardActions.dashboardSuccess({ list })
                       }
                           
                       ),
                         catchError((error) => { 
-                            console.log(error)
-                            console.log('get user error occured')
                             return of(DashboardActions.dashboardFailure({error}))}
                       )
                 )
@@ -67,8 +64,6 @@ export class DashboardEffects{
                       
                   ),
                   catchError((error) => {
-                    console.log(error)
-                    alert('some error occured')
                     return of(DashboardActions.blockFailure({error}))}
                   )
             )
@@ -89,7 +84,6 @@ this.action$.pipe(
                   
               ),
               catchError((error) => {
-                alert('some error occured')
                 return of(DashboardActions.unblockFailure({error}))}
               )
         )

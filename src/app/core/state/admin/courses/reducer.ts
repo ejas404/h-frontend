@@ -1,5 +1,5 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { CourseDetailsResponse, CourseGetResponse } from "../../../models/course";
+import { CourseDetailsResponse} from "../../../models/course";
 import { courseApproveSuccess, courseCoverUpdateSuccess, courseUpdateSuccess, singleCourseDetailsSuccess } from "./action";
 
 const initialState : CourseDetailsResponse = {

@@ -1,0 +1,21 @@
+<section>
+    <div class="add-btn text-end mt-1">
+        <admin-add-btn (click)="addBtnClicked()" [size]="'6'" ></admin-add-btn>
+    </div>
+    <div class="grid grid-cols-3 gap-x-2">
+        <div *ngFor="let each of arr" class="relative group my-2 flex border border-white hover:border-light-gray rounded">
+            
+            <!-- delete button to remove course -->
+            <app-delete-btn class="absolute right-1 invisible group-hover:visible" [font_size]="'text-sm text-primary'" ></app-delete-btn>
+
+
+            <div class="img-template w-[7rem] h-[5rem] rounded overflow-hidden">
+                <img class="w-full h-full object-cover" src="{{img | customImageUrl}}" alt="">
+            </div>
+            <div class="ms-1 my-1 flex flex-col justify-between">
+                <p class="font-bold">Learn Angular</p>
+                <p>tutor</p>
+            </div>
+        </div>
+    </div>
+</section>

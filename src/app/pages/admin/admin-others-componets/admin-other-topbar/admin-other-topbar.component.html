@@ -1,0 +1,6 @@
+<section class="border-b border-light-gray">
+    <ul class="flex children:px-2 children:py-2 children:text-sm">
+        <a *ngFor="let each of otherComponents" routerLink="/admin/others/{{each.path}}" routerLinkActive="shadow text-link-blue border-b-2 border-b-link-blue font-semibold"><li>{{each.title}}</li></a>
+    </ul>
+</section>
+

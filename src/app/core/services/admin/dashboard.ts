@@ -3,12 +3,9 @@ import { BASE_URL } from '../../constant/uri';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/auth';
-import { getAdminHeaders } from '../../utils/header';
-import { CourseDetails, CourseDetailsResponse, TutorDetailsWithCourse } from '../../models/course';
+import { CourseDetails, CourseDetailsResponse } from '../../models/course';
 import { TutorModel } from '../../models/tutor';
 import { AdminCourseTutorResponse } from '../../models/admin_model';
-import { AdminPageComponent } from '../../../pages/admin/admin-page/admin-page.component';
-
 
 
 interface UserLists {
@@ -21,8 +18,6 @@ interface UserLists {
 export class DashboardService {
 
   constructor(private http: HttpClient) { }
-
-
 
   getUsers(): Observable<UserLists> {
     return this.http.get<UserLists>(`${BASE_URL}/admin/users`)

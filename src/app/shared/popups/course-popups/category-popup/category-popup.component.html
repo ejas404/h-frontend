@@ -1,6 +1,9 @@
 <section class="max-w-[25rem] p-5">
     <form #cat="ngForm" (ngSubmit)="onFormSubmit(cat)">
-        <h2 class="text-[1.5rem] font-bold mb-8">Add Category</h2>
+        <div class="flex justify-between content-center">
+            <h2 class="text-[1.5rem] font-bold mb-4">Add Category</h2>
+            <close-btn #closeBtn mat-dialog-close></close-btn>
+        </div>
 
         <input ngModel name="title"
             class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
@@ -21,7 +24,7 @@
         <span *ngIf="!description.valid && description.touched" class="text-sm text-red-600">Enter a description for
             your section</span>
 
-        <button type="submit" [disabled]="!cat.valid" mat-button mat-dialog-close
+        <button type="submit" [disabled]="!cat.valid"
             class="bg-admin-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Save</button>
 
     </form>

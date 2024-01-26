@@ -107,7 +107,11 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   }
 
   addCourse() {
-    this.dialogRef.open(PopupAddCourseComponent)
+    this.dialogRef.open(PopupAddCourseComponent,{
+      data : {
+        calledFor : 'courseAdd'
+      }
+    })
   }
   deleteCourse(arg0: any) {
 

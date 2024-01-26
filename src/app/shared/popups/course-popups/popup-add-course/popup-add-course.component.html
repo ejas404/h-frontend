@@ -2,7 +2,7 @@
     <form #addCourse="ngForm" (ngSubmit)="onFormSubmit(addCourse)">
         <div class="flex justify-between content-center">
             <h2 class="text-[1.5rem] font-bold mb-4">Add Course</h2>
-            <close-btn mat-button mat-dialog-close></close-btn>
+            <close-btn mat-dialog-close></close-btn>
         </div>
         <input ngModel name="title"
             class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
@@ -10,11 +10,13 @@
 
         <span *ngIf="!title.valid && title.touched" class="text-sm text-red-600">Enter a title for the course</span>
 
-        <input ngModel name="fee"
-            class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-            type="text" placeholder="fee" #fee="ngModel" required pattern="^(?:0|[1-9]\d{0,5})$">
+        <ng-container *ngIf="data.calledFor !== 'upcoming'">
+            <input ngModel name="fee"
+                class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                type="text" placeholder="fee" #fee="ngModel" required pattern="^(?:0|[1-9]\d{0,5})$">
 
-        <span *ngIf="!fee.valid && fee.touched" class="text-sm text-red-600">fee should be a number</span>
+            <span *ngIf="!fee.valid && fee.touched" class="text-sm text-red-600">fee should be a number</span>
+        </ng-container>
 
 
         <select ngModel name="tutor"
@@ -49,12 +51,14 @@
                 (click)="addSubCat()">Add</button>
         </div>
 
-        <textarea ngModel name="description"
-            class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-            placeholder="Course description" #description="ngModel" required maxlength="255"></textarea>
+        <ng-container *ngIf="data.calledFor !== 'upcoming'">
+            <textarea ngModel name="description"
+                class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                placeholder="Course description" #description="ngModel" required maxlength="255"></textarea>
 
-        <span *ngIf="!description.valid && description.touched" class="text-sm text-red-600">Enter a description for
-            your course</span>
+            <span *ngIf="!description.valid && description.touched" class="text-sm text-red-600">Enter a description for
+                your course</span>
+        </ng-container>
 
 
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" for="file_input">Upload

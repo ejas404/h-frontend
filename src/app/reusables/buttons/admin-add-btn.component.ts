@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'admin-add-btn',
-  template:`<button class="bg-admin-primary text-white px-[11px] py-1 font-bold rounded-full">+</button>`
+  template:`<button type="button" class="bg-admin-primary text-white text-sm w-{{size}} h-{{size}} font-bold rounded-full">+</button>`
 })
 export class AdminAddBtnReusableComponent {
+  @Input()size !: string
+
+  ngOnInit(){
+    if(!this.size){
+      this.size = '8'
+    }
+  }
 }
 
 

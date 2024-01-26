@@ -3,7 +3,7 @@ import { AdminCoursesComponent } from "app/pages/admin/admin-courses/admin-cours
 import { AdminDashboardComponent } from "app/pages/admin/admin-dashboard/admin-dashboard.component";
 import { AdminLoginComponent } from "app/pages/admin/admin-login/admin-login.component";
 import {  AdminPageComponent } from "app/pages/admin/admin-page/admin-page.component";
-import { AdminSettingsComponent } from "app/pages/admin/admin-settings/admin-settings.component";
+import { AdminOthersComponent } from "app/pages/admin/admin-others/admin-settings.component";
 import { AdminSidebarComponent } from "app/pages/admin/admin-sidebar/admin-sidebar.component";
 import {  AdminStudentsComponent } from "app/pages/admin/admin-students/admin-students.component";
 import { AdminTutorsComponent } from "app/pages/admin/admin-tutors/admin-tutors.component";
@@ -11,6 +11,11 @@ import { SingleCourseAdminComponent } from "app/pages/admin/single-course-admin/
 import { SharedComponentsModule } from "../custom_modules/shared_components_modules";
 import { ReusableComponentsModule } from "../custom_modules/reusables_module";
 import { SharedModules } from "../shared_modules";
+import { UpcomingCoursesComponent } from "app/pages/admin/admin-others-componets/upcoming-courses/upcoming-courses.component";
+import { AdminAccountComponent } from "app/pages/admin/admin-others-componets/account/account.component";
+import { BannerComponent } from "app/pages/admin/admin-others-componets/banner/banner.component";
+import { AdminOtherTopbarComponent } from "app/pages/admin/admin-others-componets/admin-other-topbar/admin-other-topbar.component";
+import {TabViewModule} from "primeng/tabview"
 
 @NgModule({
     declarations : [
@@ -18,16 +23,21 @@ import { SharedModules } from "../shared_modules";
         AdminDashboardComponent,
         AdminStudentsComponent,
         AdminTutorsComponent,
-        AdminSettingsComponent,
+        AdminOthersComponent,
         AdminSidebarComponent,
         AdminPageComponent,
         AdminCoursesComponent,
         SingleCourseAdminComponent,
+        UpcomingCoursesComponent,
+        AdminAccountComponent,
+        BannerComponent,
+        AdminOtherTopbarComponent
     ],
     imports : [
         SharedModules,
         SharedComponentsModule,
-        ReusableComponentsModule
+        ReusableComponentsModule,
+        TabViewModule
     ]
 })
 export class AdminDashboardModule{

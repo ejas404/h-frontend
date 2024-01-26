@@ -2,10 +2,9 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { blockSuccess, blockTutorSuccess, courseAddSuccess, courseDetailsSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, deleteTutorSuccess, unblockSuccess, unblockTutorSuccess } from "./action";
 import { UserModel } from "../../../models/auth";
-import { state } from "@angular/animations";
 import { TutorModel } from "../../../models/tutor";
 import { CourseDetailsResponse, TutorDetailsWithCourse } from "../../../models/course";
-import { UserDetailsTableModel } from "../../../models/table.model";
+
 
 interface UserLists {
     userlist: UserModel[],
@@ -36,8 +35,6 @@ const initialState: DashboardState = {
 const _dashboardReducer = createReducer(
     initialState,
     on(dashboardSuccess, (state, action) => {
-        console.log('b4 action')
-        console.log(action)
         return {
             ...state,
             list: {

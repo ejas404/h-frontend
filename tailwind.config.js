@@ -18,7 +18,8 @@ module.exports = {
         'gray-bg':'#F4F4F4',
         'admin-primary':'#11333D',
         'tutor-primary':'#470808',
-        'tutor-secondary':'#FBBC04'
+        'tutor-secondary':'#FBBC04',
+        'link-blue':'#3366CC'
       }
     }
   },

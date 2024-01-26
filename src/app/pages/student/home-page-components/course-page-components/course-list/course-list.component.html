@@ -28,7 +28,7 @@
         
                 <button *ngIf="each._id && cartList && cartList.includes(each._id) else addToCartElse"
                 routerLink="/cart"
-                class="text-xs ms-2 bg-black font-bold float-right text-white p-1 px-2 rounded">Go to Cart</button>
+                class="text-xs ms-2 bg-indigo-600 font-bold float-right text-white p-1 px-2 rounded">Go to Cart</button>
 
                 <ng-template #addToCartElse>
                     <button  (click)="addToCart(each._id)"
