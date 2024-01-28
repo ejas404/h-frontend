@@ -1,5 +1,7 @@
+import { coerceStringArray } from '@angular/cdk/coercion';
 import { Component } from '@angular/core';
 import { CartModel } from 'app/core/models/cart_model';
+import { ProgressSpinnerService } from 'app/core/services/shared/progress_spinner_service';
 import { ToastService } from 'app/core/services/shared/toast_service';
 import { StudentCourseService } from 'app/core/services/student/student_course_service';
 
@@ -17,7 +19,8 @@ export class CartProfileComponent {
 
   constructor(
     private studentCourseService: StudentCourseService,
-    private toastService : ToastService
+    private toastService : ToastService,
+    private progressService : ProgressSpinnerService
   ) { }
 
   ngOnInit() {
@@ -62,6 +65,15 @@ export class CartProfileComponent {
         this.toastService.fail(err.error.message || 'failed to remove item from cart try later')
       }
     })
+  }
+
+  onProgress(){
+    console.log('on progress clicked')
+    this.progressService.startSpinner(true)
+  }
+
+  offProgress(){
+    this.progressService.startSpinner(false)
   }
 
   checkOut(){

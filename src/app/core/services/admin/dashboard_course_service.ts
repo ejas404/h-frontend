@@ -41,5 +41,5 @@ export class DashboardCourseService {
 
     approveCourseRequest(id : string){
         return this.http.put<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course-approve/${id}`, {})
-      }
+    }
 }

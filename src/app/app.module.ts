@@ -29,6 +29,8 @@ import { TutorModule } from './modules/feature_modules/tutor_module';
 import { UserProfileModule } from './modules/feature_modules/user_profile_module';
 import { AdminOtherTopbarComponent } from './pages/admin/admin-others-componets/admin-other-topbar/admin-other-topbar.component';
 import { AdminVideoPreviewComponent } from './pages/admin/admin-video-preview/admin-video-preview.component';
+import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
+import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner_interceptor';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { AdminVideoPreviewComponent } from './pages/admin/admin-video-preview/ad
     AppRoutingModule,
     SharedModules,
     SharedComponentsModule,
+    ReusableComponentsModule,
     AdminDashboardModule,
     HomePageModule,
     TutorModule,
@@ -69,7 +72,9 @@ import { AdminVideoPreviewComponent } from './pages/admin/admin-video-preview/ad
   providers: [
     MessageService,
     ConfirmationService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ProgressSpinnerInterceptor, multi: true },
+
   ],
   bootstrap: [AppComponent]
 })

@@ -8,7 +8,7 @@ button component
 
 <!-- enable button-->
 
-<div *ngIf="!disabled else disabledBtn" class="enable-container">
+<div *ngIf="!disabled && !isSignup else disabledBtn" class="enable-container">
     <button type="button" (click)="onClick()" class="enable-button">
         <ng-content></ng-content>
     </button>
@@ -17,7 +17,7 @@ button component
 <!-- disable button-->
 
 <ng-template #disabledBtn>
-    <div class="disable-container">
+    <div *ngIf="!isSignup" class="disable-container">
         <button type="button" (click)="onClick()" class="disable-button">
             <ng-content></ng-content>
         </button>

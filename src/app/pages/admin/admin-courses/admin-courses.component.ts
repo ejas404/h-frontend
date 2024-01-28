@@ -13,7 +13,8 @@ import { DashboardCourseService } from 'app/core/services/admin/dashboard_course
 @Component({
   selector: 'app-admin-courses',
   templateUrl: './admin-courses.component.html',
-  styleUrl: './admin-courses.component.scss'
+  styleUrl: './admin-courses.component.scss',
+  providers : [DashboardCourseService]
 })
 export class AdminCoursesComponent implements OnInit, OnDestroy {
 

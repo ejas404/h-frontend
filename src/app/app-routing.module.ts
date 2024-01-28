@@ -39,6 +39,7 @@ import { StudentVideoPreviewComponent } from './pages/student/student-video-prev
 import { UpcomingCoursesComponent } from './pages/admin/admin-others-componets/upcoming-courses/upcoming-courses.component';
 import { AdminAccountComponent } from './pages/admin/admin-others-componets/account/account.component';
 import { BannerComponent } from './pages/admin/admin-others-componets/banner/banner.component';
+import { AdminVideoPreviewComponent } from './pages/admin/admin-video-preview/admin-video-preview.component';
 
 
 const routes: Routes = [
@@ -61,7 +62,6 @@ const routes: Routes = [
       { path: 'students', component: AdminStudentsComponent },
       { path: 'tutors', component: AdminTutorsComponent },
       { path: 'courses', component: AdminCoursesComponent },
-      { path: 'course/:id/:video', canActivate: [adminGuard], component: StudentVideoPreviewComponent },
       {
         path: 'others', component: AdminOthersComponent,
         children : [
@@ -99,6 +99,7 @@ const routes: Routes = [
   },
   { path: 'admin/login', component: AdminLoginComponent },
   { path: 'admin/course/:id', canActivate: [adminGuard], component: SingleCourseAdminComponent },
+  { path: 'admin/course/:id/:video', canActivate: [adminGuard], component: AdminVideoPreviewComponent },
   { path: 'tutor/login', component: TutorLoginComponent },
   { path: 'tutor/signup', component: TutorSignupComponent },
   { path: '**', component: SnotfoundComponent }

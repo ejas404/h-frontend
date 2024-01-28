@@ -25,6 +25,7 @@ import { VideoPreviewComponent } from "app/reusables/templates/video-preview/vid
 import { CourseSectionsListComponent } from "app/reusables/templates/course-sections-list/course-sections-list.component";
 import { CartBtnReusableComponent } from "app/reusables/buttons/cart-btn-component";
 import { QuantityCounterComponent } from "app/reusables/templates/quantity-counter/quantity-counter.component";
+import { ProgressSpinnerReusableComponent } from "app/reusables/animations/progress_spinner";
 
 
 
@@ -50,8 +51,8 @@ import { QuantityCounterComponent } from "app/reusables/templates/quantity-count
         VideoPreviewComponent,
         CourseSectionsListComponent,
         CartBtnReusableComponent,
-        QuantityCounterComponent
-
+        QuantityCounterComponent,
+        ProgressSpinnerReusableComponent,
 
     ],
     exports : [
@@ -75,7 +76,8 @@ import { QuantityCounterComponent } from "app/reusables/templates/quantity-count
         VideoPreviewComponent,
         CourseSectionsListComponent,
         CartBtnReusableComponent,
-        QuantityCounterComponent
+        QuantityCounterComponent,
+        ProgressSpinnerReusableComponent
 
     ],
     imports :[

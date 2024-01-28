@@ -59,7 +59,8 @@ import { CategoryPopupComponent } from "app/shared/popups/course-popups/category
         RequestCoursePopupComponent,
         SnotfoundComponent,
         SelectCategoryComponentComponent,
-        CategoryPopupComponent
+        CategoryPopupComponent,
+        
 
     ],
     imports: [
