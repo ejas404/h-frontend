@@ -1,0 +1,46 @@
+
+<div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
+    <div class="px-4 pt-8">
+        <p class="text-xl font-medium">Order Summary</p>
+        <p class="text-gray-400">Check your items. And select a suitable payment method.</p>
+        <div class="my-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
+            <div *ngFor="let each of courseList$" class="flex flex-col rounded-lg bg-white sm:flex-row">
+                <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
+                    src="{{each.details[0].cover | customImageUrl}}"
+                    alt="" />
+                <div class="flex w-full flex-col px-4 py-4">
+                    <span class="font-semibold">{{each.details[0].title}}</span>
+                    <p class="text-lg font-bold">{{each.details[0].fee | currency : 'INR'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0 ">
+        <p class="mt-8 text-lg font-medium">Payment Methods</p>
+       <div class="mb-4">
+        <form class="mt-5 grid gap-6">
+            <div class="relative">
+                <input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
+                <span
+                    class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                <label
+                    class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                    for="radio_1">
+                    <img class="w-14 object-contain" src="../../../../../assets/icons/istockphoto-1195705227-612x612.jpg" alt="" />
+                    <div class="ml-5 flex items-center">
+                        <span class="block font-semibold">Online Payment</span>
+                    </div>
+                </label>
+            </div>
+        </form>
+       </div>
+
+        <checkout-box class="w-full"
+        [subTotal]="subTotal"
+        [checkOutDisable]="checkOutDisable"
+        [btnTitle]="'Proceed'"
+        (clickedEvent)="proceed()"
+        ></checkout-box>
+
+    </div>
+</div>

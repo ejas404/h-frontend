@@ -67,6 +67,7 @@ export class CartProfileComponent {
     })
   }
 
+
   onProgress(){
     console.log('on progress clicked')
     this.progressService.startSpinner(true)
@@ -74,10 +75,6 @@ export class CartProfileComponent {
 
   offProgress(){
     this.progressService.startSpinner(false)
-  }
-
-  checkOut(){
-    alert('checkout clicked')
   }
 
 }

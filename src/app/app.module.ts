@@ -27,10 +27,9 @@ import { AdminDashboardModule } from './modules/feature_modules/admin_dashboard_
 import { HomePageModule } from './modules/feature_modules/home_page_module';
 import { TutorModule } from './modules/feature_modules/tutor_module';
 import { UserProfileModule } from './modules/feature_modules/user_profile_module';
-import { AdminOtherTopbarComponent } from './pages/admin/admin-others-componets/admin-other-topbar/admin-other-topbar.component';
-import { AdminVideoPreviewComponent } from './pages/admin/admin-video-preview/admin-video-preview.component';
 import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
 import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner_interceptor';
+import { CheckOutPageComponent } from './pages/student/profile/check-out-page/check-out-page.component';
 
 
 @NgModule({

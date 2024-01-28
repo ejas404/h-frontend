@@ -1,5 +1,4 @@
 <app-navbar [user]="'profile'"></app-navbar>
-<button (click)="onProgress()" class="border p-1 m-1">open</button> <button (click)="offProgress()" class="border p-1 m-1" >close</button>
 <section class="flex py-5 min-h-[80vh]">
     <div class="cart-items basis-3/5 px-[5rem] mb-5">
         <h1 class="text-3xl font-bold my-3">Cart</h1>
@@ -7,25 +6,11 @@
         <cart-product-template [cartProducts]="cartDetails" (removeEvent)="removeItemClicked($event)"></cart-product-template>
     </div>
     <div class="cart-summary basis-2/5 px-10 h-[80vh] flex items-center sticky top-[10%]">
-        <div class="border rounded border-light-gray px-4 py-6 sm:px-6 w-full">
-            <div class="flex justify-between text-base font-medium my-2 text-gray-900">
-                <p>Subtotal</p>
-                <p>{{subTotal | currency :'INR'}}</p>
-            </div>
-
-            <div class="mt-6">
-                <button [disabled]="checkOutDisable" (click)="checkOut()"
-                    class="flex items-center justify-center w-full rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button>
-            </div>
-            <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
-                <p>
-                    or
-                    <button  type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
-                        Continue Shopping
-                        <span aria-hidden="true"> &rarr;</span>
-                    </button>
-                </p>
-            </div>
-        </div>
+        <checkout-box class="w-full"
+        [subTotal]="subTotal"
+        [checkOutDisable]="checkOutDisable"
+        [btnTitle]="'Checkout'"
+        [cartCheckout]="'/checkout'"
+        ></checkout-box>
     </div>
 </section>

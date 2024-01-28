@@ -40,6 +40,7 @@ import { UpcomingCoursesComponent } from './pages/admin/admin-others-componets/u
 import { AdminAccountComponent } from './pages/admin/admin-others-componets/account/account.component';
 import { BannerComponent } from './pages/admin/admin-others-componets/banner/banner.component';
 import { AdminVideoPreviewComponent } from './pages/admin/admin-video-preview/admin-video-preview.component';
+import { CheckOutPageComponent } from './pages/student/profile/check-out-page/check-out-page.component';
 
 
 const routes: Routes = [
@@ -85,6 +86,7 @@ const routes: Routes = [
 
   },
   { path: 'cart', canActivate: [studentGuard, studentBlockGuard], component: CartProfileComponent },
+  { path: 'checkout', canActivate: [studentGuard, studentBlockGuard], component: CheckOutPageComponent },
   { path: 'course/:id/:video', canActivate: [studentGuard, studentBlockGuard], component: StudentVideoPreviewComponent },
   {
     path: 'tutor', canActivate: [tutorGuard, tutorBlockGuard], component: TutorProfilePageComponent,

@@ -26,6 +26,7 @@ import { CourseSectionsListComponent } from "app/reusables/templates/course-sect
 import { CartBtnReusableComponent } from "app/reusables/buttons/cart-btn-component";
 import { QuantityCounterComponent } from "app/reusables/templates/quantity-counter/quantity-counter.component";
 import { ProgressSpinnerReusableComponent } from "app/reusables/animations/progress_spinner";
+import { CheckoutBoxComponent } from "app/reusables/templates/checkout-box/checkout-box.component";
 
 
 
@@ -53,6 +54,7 @@ import { ProgressSpinnerReusableComponent } from "app/reusables/animations/progr
         CartBtnReusableComponent,
         QuantityCounterComponent,
         ProgressSpinnerReusableComponent,
+        CheckoutBoxComponent
 
     ],
     exports : [
@@ -77,7 +79,8 @@ import { ProgressSpinnerReusableComponent } from "app/reusables/animations/progr
         CourseSectionsListComponent,
         CartBtnReusableComponent,
         QuantityCounterComponent,
-        ProgressSpinnerReusableComponent
+        ProgressSpinnerReusableComponent,
+        CheckoutBoxComponent
 
     ],
     imports :[

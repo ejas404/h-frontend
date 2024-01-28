@@ -12,6 +12,7 @@ import { SharedModules } from "../shared_modules";
 import { CartProfileComponent } from "app/pages/student/profile/cart-profile/cart-profile.component";
 import { CartProductTemplateComponent } from "app/pages/student/profile/cart-product-template/cart-product-template.component";
 import { StudentVideoPreviewComponent } from "app/pages/student/student-video-preview/student-video-preview.component";
+import { CheckOutPageComponent } from "app/pages/student/profile/check-out-page/check-out-page.component";
 
 @NgModule({
     declarations : [
@@ -23,7 +24,8 @@ import { StudentVideoPreviewComponent } from "app/pages/student/student-video-pr
         SidebarProfileComponent,
         CartProfileComponent,
         CartProductTemplateComponent,
-        StudentVideoPreviewComponent
+        StudentVideoPreviewComponent,
+        CheckOutPageComponent
     ],
     imports : [
         SharedModules,

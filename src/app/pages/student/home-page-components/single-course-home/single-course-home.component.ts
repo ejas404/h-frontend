@@ -21,13 +21,13 @@ export class SingleCourseHomeComponent {
   courseDetails !: CourseDetailsResponse;
 
   constructor(
-    private activateRoute : ActivatedRoute,
+    private activatedRoute : ActivatedRoute,
     private courseService : CourseService,
     private homePageCourseService : HomePageCourseService
   ){}
 
   ngOnInit(){
-    const search = this.activateRoute.snapshot.params['id']
+    const search = this.activatedRoute.snapshot.params['id']
 
     this.fetchCourseData(search)
     this.fetchCourseVideoList(search)
