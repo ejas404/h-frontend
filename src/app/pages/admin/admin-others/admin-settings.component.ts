@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
 
 @Component({
   selector: 'app-admin-settings',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './admin-settings.component.scss'
 })
 export class AdminOthersComponent {
-  
+
 }

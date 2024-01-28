@@ -6,32 +6,44 @@
             </div>
 
             <div class="content my-2">
-                <form  [formGroup]="profileUpdate" (ngSubmit)="updateUser()">
+                <form [formGroup]="profileUpdate" (ngSubmit)="updateUser()">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="name">
                             <h1 class="text-lg font-semibold">Name</h1>
-                            <input class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1 text-black'}}" [readOnly]="!edit" type="text" value="Enter Your Name" formControlName="name"><br>
-                            <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('required')">name is required !</p>
-                            <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('minlength')">name should contain atleast 3 characters !</p>
+                            <input
+                                class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1 text-black'}}"
+                                [readOnly]="!edit" type="text" value="Enter Your Name" formControlName="name"><br>
+                            <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('required')">name is
+                                required !</p>
+                            <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('minlength')">name should
+                                contain atleast 3 characters !</p>
                         </div>
                         <div class="email">
                             <h1 class="text-lg font-semibold">Email</h1>
-                            <input class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1'}}" [readOnly]="!edit" type="email" placeholder="Enter Your Name" formControlName="email"><br>
-                            <p class="text-red-600" *ngIf="profileUpdate.get('email')?.hasError('required')">email is required !</p>
-                            <p class="text-red-600" *ngIf="profileUpdate.get('email')?.hasError('email')">enter a valid email !</p>
-                    
+                            <input class="w-full rounded  py-1 {{'outline-none text-gray'}}" readonly type="email"
+                                placeholder="{{userData$.email}}"><br>
                         </div>
                         <div class="contact">
                             <h1 class="text-lg font-semibold">Mobile</h1>
-                            <input class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1'}}" [readOnly]="!edit" type="text" placeholder="Add Your Contact Number" formControlName="contact"><br>
-                            <p class="text-red-600" *ngIf="profileUpdate.get('contact')?.hasError('pattern')">enter a valid number</p>
+                            <input
+                                class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1'}}"
+                                [readOnly]="!edit" type="text" placeholder="Add Your Contact Number"
+                                formControlName="contact"><br>
+                            <p class="text-red-600" *ngIf="profileUpdate.get('contact')?.hasError('pattern')">enter a
+                                valid number</p>
                         </div>
-                       
+
                     </div>
                     <div class="button my-2 text-end">
-                        <button  *ngIf="!edit" type="button" class="text-md font-semibold rounded text-white bg-admin-primary px-3 py-1" (click)="onEditClick()">Edit profile</button>
+                        <button *ngIf="!edit" type="button"
+                            class="text-md font-semibold rounded text-white bg-admin-primary px-3 py-1"
+                            (click)="onEditClick()">Edit profile</button>
 
-                      <button *ngIf="edit" [disabled]="profileUpdate.invalid" type="submit" class="text-md font-semibold rounded text-white bg-primary px-3 py-1">Update</button>
+                        <button *ngIf="edit" type="button"
+                            class="text-md font-semibold rounded text-white bg-blue-700 me-2 px-3 py-1"
+                            (click)="cancelEdit()">cancel</button>
+                        <button *ngIf="edit" [disabled]="profileUpdate.invalid" type="submit"
+                            class="text-md font-semibold rounded text-white bg-primary px-3 py-1">Update</button>
 
 
                     </div>

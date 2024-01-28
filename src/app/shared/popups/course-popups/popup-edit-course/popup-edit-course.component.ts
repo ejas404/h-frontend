@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DashboardService } from '../../../../core/services/admin/dashboard';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { TutorModel } from '../../../../core/models/tutor';
@@ -11,11 +10,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { courseUpdateSuccess, singleCourseDetailsSuccess } from '../../../../core/state/admin/courses/action';
 import { getSingleCourseData } from '../../../../core/state/admin/courses/reducer';
 import { Subject, takeUntil } from 'rxjs';
+import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
 
 @Component({
   selector: 'app-popup-edit-course',
   templateUrl: './popup-edit-course.component.html',
-  styleUrl: './popup-edit-course.component.scss'
+  styleUrl: './popup-edit-course.component.scss',
+  providers : [DashboardCourseService]
 })
 export class PopupEditCourseComponent {
 
@@ -25,7 +26,7 @@ export class PopupEditCourseComponent {
   courseDetail !: CourseDetailsResponse;
 
   constructor(
-    private service: DashboardService,
+    private service: DashboardCourseService,
     private store: Store,
     private messageService: MessageService,
     @Inject(MAT_DIALOG_DATA) public data: { id: string }

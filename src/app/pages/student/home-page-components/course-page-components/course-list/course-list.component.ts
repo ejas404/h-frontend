@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { CourseDetailsResponse } from 'app/core/models/course';
 import { ToastService } from 'app/core/services/shared/toast_service';
 import { StudentCourseService } from 'app/core/services/student/student_course_service';
+import { checkCategoryType } from 'app/core/utils/check_category';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -13,6 +14,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class CourseListComponent {
 
   destroy$ = new Subject<void>()
+  courseListPreview !: CourseDetailsResponse[];
 
   constructor(
     private studentCourseService : StudentCourseService,
@@ -21,14 +23,21 @@ export class CourseListComponent {
 
   @Input()courseList !: CourseDetailsResponse[];
   @Input()cartList !: string[] 
-  @ViewChild('addToCartBtn',{static : false})cartBtn !: ElementRef
+  @Input()search !: string
 
-
+  ngOnInit(){
+    this.courseListPreview = this.courseList
+  }
 
   addToCart(course_id : string | undefined){
     if(typeof(course_id) !== 'string') return;
+    
+    if(this.cartList){
+      this.cartList = [...this.cartList.slice() ,course_id]
+    }else{
+      this.cartList = [course_id]
+    }
 
-    this.cartList.push(course_id)
     this.studentCourseService.addToCart(course_id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
@@ -41,7 +50,27 @@ export class CourseListComponent {
     })
   }
 
+  ngDoCheck(){
+    if(this.search){
+      const searchVal = this.search.toLowerCase()
+      this.courseListPreview = this.courseList.filter((each) : any  =>  {
+        if(each.title.toLowerCase().includes(searchVal)){
+          return each
+        }
+        if(each.subCategory && typeof(each.subCategory)!== 'string' && each.subCategory.name.toLowerCase().includes(searchVal)){
+          return each
+        }
+      })
+    }else{
+      this.courseListPreview = this.courseList
+    }
+  }
 
+  checkCategory(data : any){
+    if(checkCategoryType(data)){
+      return data.name
+    }
+  }
 
 
   ngOnDestroy(){

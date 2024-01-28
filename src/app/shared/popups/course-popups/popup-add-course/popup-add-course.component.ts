@@ -38,7 +38,6 @@ export class PopupAddCourseComponent {
   selectedCategory !: string;
 
   constructor(
-    private service: DashboardService,
     private dbcService: DashboardCourseService,
     private store: Store,
     private dialogRef: MatDialog,
@@ -94,7 +93,7 @@ export class PopupAddCourseComponent {
     formData.append('details', JSON.stringify(form.value))
 
     const submitFunction : Observable<{ newCourse : CourseDetailsResponse} | {newCourse : UpcomingCourse}> = this.data.calledFor === 'upcoming' ?
-      this.dbcService.addUpcoming(formData) : this.service.addCourse(formData);
+      this.dbcService.addUpcoming(formData) : this.dbcService.addCourse(formData);
 
     submitFunction
       .pipe(takeUntil(this.destroy$))

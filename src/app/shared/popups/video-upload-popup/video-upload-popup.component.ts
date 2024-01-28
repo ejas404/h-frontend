@@ -1,17 +1,19 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { DashboardService } from 'app/core/services/admin/dashboard';
 import { ToastService } from 'app/core/services/shared/toast_service';
 import { Subject, takeUntil } from 'rxjs';
 import { SectionPopupComponent } from '../course-popups/section-popup/section-popup.component';
 import { CourseService } from 'app/core/services/course_service';
 import { SectionResponse } from 'app/core/models/section_video_model';
+import { ComponetCommunicationService } from 'app/core/services/shared/communicate_service';
+import { DashboardVideoService } from 'app/core/services/admin/dashboard_video_service';
 
 @Component({
   selector: 'app-video-upload-popup',
   templateUrl: './video-upload-popup.component.html',
-  styleUrl: './video-upload-popup.component.scss'
+  styleUrl: './video-upload-popup.component.scss',
+  providers : [DashboardVideoService]
 })
 export class VideoUploadPopupComponent {
 
@@ -26,9 +28,10 @@ export class VideoUploadPopupComponent {
 
   constructor(
     private toast : ToastService,
-    private dashboardService : DashboardService,
+    private dashboardService : DashboardVideoService,
     private courseService : CourseService,
     private dialogRef : MatDialog,
+    private communicateService : ComponetCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data : {course_id : string}
     ){}
 
@@ -52,7 +55,6 @@ export class VideoUploadPopupComponent {
 
     const reader = new FileReader
     const file = input.files[0] as any
-
     this.file = file
 
     // if(file.size > 20000000) {
@@ -107,6 +109,18 @@ export class VideoUploadPopupComponent {
     this.dialogRef.open(SectionPopupComponent,{
       data : {
         id : this.data.course_id
+      }
+    })
+
+    this.communicateService.isDone
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res =>{
+        if(this.sectionList){
+          this.sectionList.push(res)
+        }else{
+          this.sectionList = [res]
+        }
       }
     })
   }

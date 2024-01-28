@@ -2,22 +2,19 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseDetailsResponse, CourseVideoResponseList } from 'app/core/models/course';
 import { VideoWithUrl } from 'app/core/models/section_video_model';
+import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
+import { DashboardVideoService } from 'app/core/services/admin/dashboard_video_service';
 import { CourseService } from 'app/core/services/course_service';
-import { HomePageCourseService } from 'app/core/services/home/homepage-course';
-import { StudentCourseService } from 'app/core/services/student/student_course_service';
-import { isStudentToken } from 'app/core/utils/check_token';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-student-video-preview',
-  templateUrl: './student-video-preview.component.html',
-  styleUrl: './student-video-preview.component.scss',
-  providers : [HomePageCourseService, CourseService, StudentCourseService]
+  selector: 'admin-video-preview',
+  templateUrl: './admin-video-preview.component.html',
+  styleUrl: './admin-video-preview.component.scss',
+  providers : [DashboardCourseService,DashboardVideoService]
 })
-export class StudentVideoPreviewComponent {
-
-  user : string = 'student'
- 
+export class AdminVideoPreviewComponent {
+  
   destroy$ = new Subject<void>()
 
   courseVideoList !: CourseVideoResponseList[];
@@ -26,19 +23,15 @@ export class StudentVideoPreviewComponent {
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private courseService: CourseService,
-    private homePageCourseService: HomePageCourseService,
-    private studentCourseSevice : StudentCourseService
+    private dbcService : DashboardCourseService,
+    private dbVideoService : DashboardVideoService,
+    private courseService: CourseService
   ) { }
 
   ngOnInit() {
 
-    const token = sessionStorage.getItem('auth_token')
-    
-    this.user = token && isStudentToken(token)? 'profile': this.user;
-
     const search = this.activateRoute.snapshot.params['id']
-    const video_id  = this.activateRoute.snapshot.params['video']
+    const video_id = this.activateRoute.snapshot.params['video']
 
     this.fetchCourseData(search)
     this.fetchCourseVideoList(search)
@@ -46,7 +39,7 @@ export class StudentVideoPreviewComponent {
   }
 
   fetchCourseData(id: string) {
-    this.homePageCourseService.getSingleCourse(id)
+    this.dbcService.getSingleCourse(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: data => {
@@ -71,19 +64,18 @@ export class StudentVideoPreviewComponent {
       })
   }
 
-  fetchVideo(id : string){
-    this.studentCourseSevice.getVideo(id, )
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: res => {
-        this.videoDetails = res.video
-      },
-      error: err => {
-        console.log(err)
-      }
-    })
+  fetchVideo(id: string) {
+    this.dbVideoService.getVideo(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          this.videoDetails = res.video
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
   }
-
 
 
 }

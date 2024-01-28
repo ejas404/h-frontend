@@ -20,8 +20,8 @@ export interface CourseDetailsResponse{
     isTutorMade ?: boolean,
     isApproved ?: boolean,
     request ?: string,
-    category ?: string,
-    subCategory ?: string
+    category ?: string | {name : string},
+    subCategory ?: string | {name : string}
 }
 
 export interface UpcomingCourse{

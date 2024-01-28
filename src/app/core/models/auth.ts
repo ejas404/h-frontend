@@ -31,3 +31,10 @@ export interface AuthSuccessResponse{
     user : UserModel
 }
 
+export interface JWTDecodeModel{
+    userId : string
+    role : string
+    exp : number
+    iat : number
+}
+

@@ -39,26 +39,6 @@ export class DashboardService {
     return this.http.put<UserModel>(`${BASE_URL}/admin/users/unblock/${id}`, {})
   }
 
-  addCourse(data: FormData) {
-    return this.http.post<{ newCourse: CourseDetailsResponse }>(`${BASE_URL}/admin/add-course`, data)
-  }
-
-  getCourses() {
-    return this.http.get<AdminCourseTutorResponse>(`${BASE_URL}/admin/courses`)
-  }
-
-  updateCourseCover(Data: FormData, id: string): Observable<{ msg: string, path: string }> {
-    return this.http.put<{ msg: string, path: string }>(`${BASE_URL}/admin/course-cover/${id}`, Data)
-  }
-
-  getSingleCourse(id : string){
-    return this.http.get<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course/${id}`)
-  }
-
-  updateCourse(data : CourseDetails , id : string){
-    return this.http.put<{ updatedCourse: CourseDetailsResponse }>(`${BASE_URL}/admin/update-course/${id}`, data)
-  }
-
   deleteTutor(id: string): Observable<{tutor : TutorModel}> {
     return this.http.delete<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/${id}`)
   }
@@ -69,14 +49,6 @@ export class DashboardService {
 
   unblockTutor(id: string) {
     return this.http.put<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/unblock/${id}`, {})
-  }
-
-  approveCourseRequest(id : string){
-    return this.http.put<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course-approve/${id}`, {})
-  }
-
-  uploadVideo(Data: FormData): Observable<{ msg: string, path: string }> {
-    return this.http.put<{ msg: string, path: string }>(`${BASE_URL}/admin/add-video`, Data)
   }
 
 }

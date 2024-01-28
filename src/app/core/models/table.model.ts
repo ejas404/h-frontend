@@ -12,7 +12,7 @@ export interface UserDetailsTableModel extends UserModel {
 }
 
 export interface CourseDetailsTableModel extends CourseDetailsResponse{
-    [tBodyKey : string] : string | undefined | null | boolean | number | TutorDetailsWithCourse
+    [tBodyKey : string] : string | undefined | null | boolean | number | TutorDetailsWithCourse | {name : string}
 }
 
 export interface DropdownFilterModel {

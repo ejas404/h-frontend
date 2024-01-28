@@ -61,6 +61,7 @@ const routes: Routes = [
       { path: 'students', component: AdminStudentsComponent },
       { path: 'tutors', component: AdminTutorsComponent },
       { path: 'courses', component: AdminCoursesComponent },
+      { path: 'course/:id/:video', canActivate: [adminGuard], component: StudentVideoPreviewComponent },
       {
         path: 'others', component: AdminOthersComponent,
         children : [

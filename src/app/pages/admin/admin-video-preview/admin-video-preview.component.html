@@ -1,4 +1,4 @@
-<app-navbar [user]="user"></app-navbar>
+<app-navbar [user]="'admin'"></app-navbar>
 <section class="course-class px-10 my-3 flex">
     <video-preview class="basis-2/3"
      [course]="courseDetails" 
@@ -6,7 +6,7 @@
     </video-preview>
     <div class="secions-list 1/3 w-[40%]">
         <course-sections-list 
-            [user]="'student'" 
+            [user]="'admin'" 
             [bg]="'bg-light-gray'" 
             [text]="'text-black'"
             [bg_section_list]="'bg-slate-100'" 

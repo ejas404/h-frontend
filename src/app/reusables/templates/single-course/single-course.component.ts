@@ -66,4 +66,9 @@ export class SingleCourseReusableComponent {
   addVideo(){
     this.video.emit(null)
   }
+
+  checkCategory(data : string | {name : string} | undefined){
+    if(typeof(data) === 'string' || typeof(data)=== 'undefined') return;
+    return data.name
+  }
 }

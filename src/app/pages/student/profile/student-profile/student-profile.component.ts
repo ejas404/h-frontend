@@ -57,6 +57,10 @@ export class StudentProfileComponent implements OnInit{
     this.edit = true
   }
 
+  cancelEdit(){
+    this.edit = false
+  }
+
   updateUser(){
     this.edit = false
     let userData : StudentUpdateModel = this.profileUpdate.value as StudentUpdateModel

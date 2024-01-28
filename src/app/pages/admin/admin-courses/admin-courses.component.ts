@@ -8,6 +8,7 @@ import { courseDetailsSuccess } from '../../../core/state/admin/dashboard/action
 import { getCourseList } from '../../../core/state/admin/dashboard/reducer';
 import { CourseDetailsTableModel, DropdownFilterModel, TableHeaderModel } from '../../../core/models/table.model';
 import { Subject, takeUntil } from 'rxjs';
+import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
 
 @Component({
   selector: 'app-admin-courses',
@@ -30,7 +31,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialogRef: MatDialog,
-    private service: DashboardService,
+    private service: DashboardCourseService,
     private store: Store
   ) { }
 

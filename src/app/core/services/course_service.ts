@@ -14,7 +14,7 @@ export class CourseService{
     //parameter route is to specify which route to request eg : admin / tutor
 
     addSection(Data : SectionFormDetails,route : string){
-        return this.http.post<{ msg: string }>(`${BASE_URL}/${route}/add-section`, Data)
+        return this.http.post<{ msg: string , newSection : SectionResponse}>(`${BASE_URL}/${route}/add-section`, Data)
     }
 
     editSection(Data : SectionFormDetails,id : string,route : string){

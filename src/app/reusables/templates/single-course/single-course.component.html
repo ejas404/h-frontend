@@ -14,6 +14,7 @@
                 <span class=" mx-1 text-sm">1,400 students</span>
             </div>
             <div class="creator">
+                <p>{{checkCategory(courseDetails.category) | titlecase}}</p>
                 <p class="">Created by : {{courseDetails.tutor.name | titlecase}}</p>
             </div>
             <div class="approval my-2"

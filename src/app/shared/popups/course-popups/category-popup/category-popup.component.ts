@@ -43,9 +43,7 @@ export class CategoryPopupComponent {
       .subscribe({
         next : res =>{
           this.toastService.success('subcategory added successfully')
-          console.log('b4 calling set')
           this.communicateService.setAction(res.newSubCategory)
-          console.log('after calling set')
         },
         error : err =>{
           this.toastService.fail(err.error.message || 'failed to add subcategory')

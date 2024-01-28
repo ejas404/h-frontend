@@ -19,7 +19,7 @@
        
         <textarea ngModel name="description"
             class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-            placeholder="Section description" #description="ngModel" required maxlength="255"></textarea>
+            placeholder="Category description" #description="ngModel" required maxlength="255"></textarea>
 
         <span *ngIf="!description.valid && description.touched" class="text-sm text-red-600">Enter a description for
             your section</span>

@@ -1,15 +1,15 @@
 <section class="flex flex-col h-full">
     <div class="search-bar">
-        <app-course-search-bar></app-course-search-bar>
+        <app-course-search-bar (searchedEvent)="courseSearch($event)" ></app-course-search-bar>
     </div>
     <div class="bottom border border-light-gray flex-grow my-2 rounded-lg p-2">
-        <div class="upcoming-courses h-[50%] overflow-y-scroll">
-            <h1 class="text-md font-bold"> <book-mark-icon></book-mark-icon> Upcoming Courses</h1>
-            <div class="upcoming-item my-2 flex items-center">
+        <div  class="upcoming-courses h-[50%] overflow-y-scroll">
+            <h1 class="text-md font-bold"> <book-mark-icon [styleClass]="'text-indigo-600'" ></book-mark-icon> Upcoming Courses</h1>
+            <div *ngFor="let each of upcomingList" class="upcoming-item my-2 flex items-center">
                 <div class="img-template w-[7rem] h-[5rem] rounded overflow-hidden">
-                    <img class="w-full h-full object-cover" src="{{img | customImageUrl}}" alt="">
+                    <img class="w-full h-full object-cover" src="{{each.cover| customImageUrl}}" alt="">
                 </div>
-                <p class="mx-2 font-bold">Learn Angular</p>
+                <p class="mx-2 font-bold">{{each.title}}</p>
             </div>
 
         </div>

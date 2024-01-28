@@ -16,6 +16,7 @@ import { AdminAccountComponent } from "app/pages/admin/admin-others-componets/ac
 import { BannerComponent } from "app/pages/admin/admin-others-componets/banner/banner.component";
 import { AdminOtherTopbarComponent } from "app/pages/admin/admin-others-componets/admin-other-topbar/admin-other-topbar.component";
 import {TabViewModule} from "primeng/tabview"
+import { AdminVideoPreviewComponent } from "app/pages/admin/admin-video-preview/admin-video-preview.component";
 
 @NgModule({
     declarations : [
@@ -31,7 +32,8 @@ import {TabViewModule} from "primeng/tabview"
         UpcomingCoursesComponent,
         AdminAccountComponent,
         BannerComponent,
-        AdminOtherTopbarComponent
+        AdminOtherTopbarComponent,
+        AdminVideoPreviewComponent
     ],
     imports : [
         SharedModules,

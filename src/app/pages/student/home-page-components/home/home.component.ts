@@ -1,4 +1,6 @@
-import {Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { isStudentToken } from 'app/core/utils/check_token';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Component({
@@ -6,14 +8,12 @@ import {Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent  implements OnInit{
-  user : string = 'student'
+export class HomeComponent implements OnInit {
+  user: string = 'student'
 
   ngOnInit(): void {
-    let isLogged = sessionStorage.getItem('auth_token')
-
-    if(isLogged){
-      this.user = 'profile'
-    }
+    const token = sessionStorage.getItem('auth_token')
+    if (!token) return;
+    this.user = isStudentToken(token) ? 'profile' : this.user;
   }
 }

@@ -8,18 +8,20 @@ import { courseCoverUpdateSuccess } from '../../../../core/state/admin/courses/a
 import { Subject, takeUntil } from 'rxjs';
 import { ImageCropperService } from 'app/core/services/shared/image_crop_service';
 import { ToastService } from 'app/core/services/shared/toast_service';
+import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
 
 @Component({
   selector: 'app-course-image-popup',
   templateUrl: './course-image-popup.component.html',
-  styleUrl: './course-image-popup.component.scss'
+  styleUrl: './course-image-popup.component.scss',
+  providers : [DashboardCourseService]
 })
 export class CourseImagePopupComponent {
 
   private destroy$ = new Subject<void>();
 
   constructor(
-    private service: DashboardService,
+    private service: DashboardCourseService,
     private store: Store,
     private croppedRespone : ImageCropperService,
     private toastService : ToastService,

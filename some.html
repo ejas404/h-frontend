@@ -1,0 +1,25 @@
+button component
+<div *ngIf="isSignup" class="signup-container">
+    <button type="button" (click)="onClick()" [disabled]="disabled" class="signup-button">
+        <ng-content></ng-content>
+    </button>
+</div>
+
+
+<!-- enable button-->
+
+<div *ngIf="!disabled else disabledBtn" class="enable-container">
+    <button type="button" (click)="onClick()" class="enable-button">
+        <ng-content></ng-content>
+    </button>
+</div>
+
+<!-- disable button-->
+
+<ng-template #disabledBtn>
+    <div class="disable-container">
+        <button type="button" (click)="onClick()" class="disable-button">
+            <ng-content></ng-content>
+        </button>
+    </div>
+</ng-template>

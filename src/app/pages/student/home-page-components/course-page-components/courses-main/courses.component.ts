@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CourseDetailsResponse } from 'app/core/models/course';
 import { HomePageCourseService } from 'app/core/services/home/homepage-course';
 import { StudentCourseService } from 'app/core/services/student/student_course_service';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 
 
@@ -18,6 +18,7 @@ export class CoursesComponent {
   courses !: CourseDetailsResponse[];
   previewCourse !: CourseDetailsResponse[];
   cartList !: string[];
+  search !: string;
 
   constructor(
     private service: HomePageCourseService,
@@ -74,6 +75,11 @@ export class CoursesComponent {
         }
       })
     }
+  }
+
+  courseSearched(val : string){
+    if(typeof(val) !== 'string') return;
+    this.search = val
   }
 
 

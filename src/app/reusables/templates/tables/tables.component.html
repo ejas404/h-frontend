@@ -7,7 +7,7 @@
                 </th>
 
                 <th class="py-2 px-4 border-b" *ngIf="head.title === 'add'">
-                    <admin-add-btn (click)="addEventEmitted()"></admin-add-btn>
+                    <admin-add-btn [size]="'6'" (click)="addEventEmitted()"></admin-add-btn>
                 </th>
 
                 <th class="py-2 px-4 border-b" *ngIf="head.title === 'filter'">

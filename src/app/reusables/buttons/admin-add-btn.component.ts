@@ -5,13 +5,7 @@ import { Component, Input } from '@angular/core';
   template:`<button type="button" class="bg-admin-primary text-white text-sm w-{{size}} h-{{size}} font-bold rounded-full">+</button>`
 })
 export class AdminAddBtnReusableComponent {
-  @Input()size !: string
-
-  ngOnInit(){
-    if(!this.size){
-      this.size = '8'
-    }
-  }
+  @Input()size !: any
 }
 
 

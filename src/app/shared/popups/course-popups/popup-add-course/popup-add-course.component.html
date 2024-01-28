@@ -64,7 +64,7 @@
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" for="file_input">Upload
             Image file</label>
         <input class="block w-full text-md  border border-gray-300 rounded-lg cursor-pointer  focus:outline-none"
-            aria-describedby="file_input_help" id="file_input" type="file" (change)="inputUpload($event)">
+            aria-describedby="file_input_help" id="file_input" type="file" (change)="inputUpload($event)" required >
 
         <button type="submit" [disabled]="!addCourse.valid"
             class="bg-admin-primary font-bold text-white w-full border border-light-gray py-1 rounded my-2">Save</button>

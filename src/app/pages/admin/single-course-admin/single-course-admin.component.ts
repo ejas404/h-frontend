@@ -13,11 +13,13 @@ import { Subject, takeUntil } from 'rxjs';
 import { VideoUploadPopupComponent } from 'app/shared/popups/video-upload-popup/video-upload-popup.component';
 import { CourseService } from 'app/core/services/course_service';
 import { ToastService } from 'app/core/services/shared/toast_service';
+import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
 
 @Component({
   selector: 'app-single-course-admin',
   templateUrl: './single-course-admin.component.html',
-  styleUrl: './single-course-admin.component.scss'
+  styleUrl: './single-course-admin.component.scss',
+  providers : [DashboardCourseService]
 })
 export class SingleCourseAdminComponent {
 
@@ -32,7 +34,7 @@ export class SingleCourseAdminComponent {
   constructor(
     private activateRoute: ActivatedRoute,
     private store: Store,
-    private service: DashboardService,
+    private service: DashboardCourseService,
     private courseService : CourseService,
     private dialogRef: MatDialog,
     private toastService: ToastService
