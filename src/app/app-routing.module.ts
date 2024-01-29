@@ -87,6 +87,7 @@ const routes: Routes = [
   },
   { path: 'cart', canActivate: [studentGuard, studentBlockGuard], component: CartProfileComponent },
   { path: 'checkout', canActivate: [studentGuard, studentBlockGuard], component: CheckOutPageComponent },
+  { path: 'checkout/:id', canActivate: [studentGuard, studentBlockGuard], component: CheckOutPageComponent },
   { path: 'course/:id/:video', canActivate: [studentGuard, studentBlockGuard], component: StudentVideoPreviewComponent },
   {
     path: 'tutor', canActivate: [tutorGuard, tutorBlockGuard], component: TutorProfilePageComponent,

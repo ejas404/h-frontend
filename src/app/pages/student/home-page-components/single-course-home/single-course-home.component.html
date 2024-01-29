@@ -1,4 +1,4 @@
-<app-navbar [user]="'student'"></app-navbar>
+<app-navbar [user]="user"></app-navbar>
 <single-course-reusable
 [user]="'student'"
 [bg]="'bg-light-gray'"
@@ -6,7 +6,8 @@
 [bg_section_list]="'bg-slate-100'"
 [courseDetails]="courseDetails"
 [videoList]="courseVideoList"
-(sub)="subscribeCourse()"
+[isCartItem]="cartItem"
+(sub)="addToCart($event)"
 (buy)="getCourse()"
 >
 

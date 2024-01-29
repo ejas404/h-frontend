@@ -13,10 +13,8 @@ export class ProgressSpinnerReusableComponent{
     ){}
 
     ngOnInit(){
-        console.log('initializeddd')
         this.spinnerService.isStarted.subscribe({
             next : res => {
-                console.log('onchage called',res)
                 this.start = res as boolean
             }
         })

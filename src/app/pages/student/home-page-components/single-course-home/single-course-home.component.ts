@@ -1,36 +1,47 @@
 import { Component } from '@angular/core';
 import { BASE_URL } from '../../../../core/constant/uri';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseDetailsResponse, CourseVideoResponseList } from '../../../../core/models/course';
 import { HomePageCourseService } from '../../../../core/services/home/homepage-course';
 import { Subject, takeUntil } from 'rxjs';
 import { CourseService } from 'app/core/services/course_service';
+import { StudentCourseService } from 'app/core/services/student/student_course_service';
+import { ToastService } from 'app/core/services/shared/toast_service';
+import { isStudentToken } from 'app/core/utils/check_token';
 
 @Component({
   selector: 'app-single-course-home',
   templateUrl: './single-course-home.component.html',
   styleUrl: './single-course-home.component.scss',
-  providers : [HomePageCourseService, CourseService]
+  providers : [HomePageCourseService, CourseService, StudentCourseService]
 })
 export class SingleCourseHomeComponent {
 
   private destroy$ = new Subject<void>();
 
+  user : string = 'student' 
   selectedSection !: number ;
   courseVideoList !:  CourseVideoResponseList[];
   courseDetails !: CourseDetailsResponse;
+  cartItem !: boolean
 
   constructor(
     private activatedRoute : ActivatedRoute,
     private courseService : CourseService,
-    private homePageCourseService : HomePageCourseService
+    private homePageCourseService : HomePageCourseService,
+    private studentCourseService : StudentCourseService,
+    private toastService : ToastService,
+    private router : Router
   ){}
 
   ngOnInit(){
     const search = this.activatedRoute.snapshot.params['id']
+    
+    this.user = isStudentToken()? 'profile': this.user;
 
     this.fetchCourseData(search)
     this.fetchCourseVideoList(search)
+    this.fetchCartList(search)
   }
 
   fetchCourseData(id : string){
@@ -59,12 +70,39 @@ export class SingleCourseHomeComponent {
     })
   }
 
-  subscribeCourse(){
+  
+  fetchCartList(id : string){
+      this.studentCourseService.getCartList()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next : res =>{
+         if(res.cartList.includes(id)){
+            this.cartItem = true
+         }
+        },
+        error : err =>{
+          console.log(err.error.message)
+        }
+      })
+  }
 
+  addToCart(course_id : string | undefined){
+    if(typeof(course_id) !== 'string') return;
+    this.studentCourseService.addToCart(course_id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res =>{
+        this.cartItem = true
+        this.toastService.success(res.msg)
+      },
+      error : err =>{
+        this.toastService.fail(err.error.message || 'failed to add to cart')
+      }
+    })
   }
 
   getCourse(){
-
+    this.router.navigateByUrl(`/checkout/${this.courseDetails._id}`)
   }
 
   ngOnDestroy(){

@@ -32,10 +32,8 @@ export class StudentVideoPreviewComponent {
   ) { }
 
   ngOnInit() {
-
-    const token = sessionStorage.getItem('auth_token')
     
-    this.user = token && isStudentToken(token)? 'profile': this.user;
+    this.user = isStudentToken()? 'profile': this.user;
 
     const search = this.activateRoute.snapshot.params['id']
     const video_id  = this.activateRoute.snapshot.params['video']

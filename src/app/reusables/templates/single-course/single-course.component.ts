@@ -16,6 +16,7 @@ export class SingleCourseReusableComponent {
   @Input()bg !: string
   @Input()text !: string
   @Input()bg_section_list !: string
+  @Input()isCartItem : boolean = false
 
 
   @Input()courseDetails !: CourseDetailsResponse
@@ -44,8 +45,9 @@ export class SingleCourseReusableComponent {
     this.cover.emit(null)
   }
 
-  subscribe(){
-    this.sub.emit(null)
+  addtoCart(id : string | undefined){
+    if(typeof(id) !== 'string') return;
+    this.sub.emit(id)
   }
   buyNow(){
     this.buy.emit(null)

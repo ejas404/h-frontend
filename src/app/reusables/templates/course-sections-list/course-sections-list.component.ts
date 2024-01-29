@@ -19,9 +19,9 @@ export class CourseSectionsListComponent {
   @Input()videoList !:  CourseVideoResponseList[] 
 
 
-  totalSectionDuration(videoList :VideoResponseModel[] ) : string{
+  totalSectionDuration(videoList :VideoResponseModel[] ) : number{
     if(!videoList[0]){
-      return '0'
+      return 0
     }
 
     let res = 0
@@ -30,7 +30,7 @@ export class CourseSectionsListComponent {
       res+=each.duration
     })
 
-    return Math.floor(res)+''
+    return Math.floor(res)
 
   }
 

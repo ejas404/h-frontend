@@ -23,10 +23,12 @@ import { SignupReusableTempComponent } from "app/reusables/templates/signup-reus
 import { LoginReusableTempComponent } from "app/reusables/templates/login-reusable-temp/login-reusable-temp.component";
 import { VideoPreviewComponent } from "app/reusables/templates/video-preview/video-preview.component";
 import { CourseSectionsListComponent } from "app/reusables/templates/course-sections-list/course-sections-list.component";
-import { CartBtnReusableComponent } from "app/reusables/buttons/cart-btn-component";
+import { CartBtnReusableComponent } from "app/reusables/buttons/carticon-btn-component";
 import { QuantityCounterComponent } from "app/reusables/templates/quantity-counter/quantity-counter.component";
 import { ProgressSpinnerReusableComponent } from "app/reusables/animations/progress_spinner";
 import { CheckoutBoxComponent } from "app/reusables/templates/checkout-box/checkout-box.component";
+import { CartBtnComponent } from "app/reusables/buttons/add-go-btn-component";
+import { CommonBtnReusableComponent } from "app/reusables/buttons/common-btn-component";
 
 
 
@@ -54,7 +56,9 @@ import { CheckoutBoxComponent } from "app/reusables/templates/checkout-box/check
         CartBtnReusableComponent,
         QuantityCounterComponent,
         ProgressSpinnerReusableComponent,
-        CheckoutBoxComponent
+        CheckoutBoxComponent,
+        CartBtnComponent,
+        CommonBtnReusableComponent
 
     ],
     exports : [
@@ -80,7 +84,9 @@ import { CheckoutBoxComponent } from "app/reusables/templates/checkout-box/check
         CartBtnReusableComponent,
         QuantityCounterComponent,
         ProgressSpinnerReusableComponent,
-        CheckoutBoxComponent
+        CheckoutBoxComponent,
+        CartBtnComponent,
+        CommonBtnReusableComponent
 
     ],
     imports :[

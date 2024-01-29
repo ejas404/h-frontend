@@ -12,8 +12,6 @@ export class HomeComponent implements OnInit {
   user: string = 'student'
 
   ngOnInit(): void {
-    const token = sessionStorage.getItem('auth_token')
-    if (!token) return;
-    this.user = isStudentToken(token) ? 'profile' : this.user;
+    this.user = isStudentToken() ? 'profile' : this.user;
   }
 }

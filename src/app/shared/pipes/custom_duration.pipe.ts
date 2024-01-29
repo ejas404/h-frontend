@@ -6,14 +6,15 @@ import { checkDecimal } from "app/core/utils/check_decimal";
 })
 
 export class CustomDurationPipe implements PipeTransform{
-    transform(value: any) {
-        if(Number(value) <= 59){
-            return `${value} s`
-        }else if(Number(value) > 59 && Number(value) < 3600){
-            return `${checkDecimal(Number(value)/60)} mins`
-        }else{
-            return `${checkDecimal(Number(value)/(60*60))} hrs`
-        }
+
+    transform(n: number) {
+
+        if(typeof(n) !== 'number') return ''
+
+        if(n <= 59) return `${n} s` ;
+        if(n > 59 && n < 3600) return `${checkDecimal(n/60)} mins` ;
+        return `${checkDecimal(n/(60*60))} hrs` ;
+        
     }
 
 }

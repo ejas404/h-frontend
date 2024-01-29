@@ -1,25 +1,49 @@
-button component
-<div *ngIf="isSignup" class="signup-container">
-    <button type="button" (click)="onClick()" [disabled]="disabled" class="signup-button">
-        <ng-content></ng-content>
-    </button>
+<div class="section-lists">
+    <ng-container *ngIf="videoList else noVideoList">
+        <div *ngFor="let each of videoList; let i = index ;" class="section">
+            <div class="group section-title flex justify-between px-2 py-3 border-b border-b-white relative {{bg}} {{text}}"
+                (click)="selectedSection = i">
+                <h1 class="text-md">{{each.title}}</h1>
+                <p class="text-md">{{each.courseVideos.length}} classes -
+                    {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
+
+                <div  *ngIf="user !== 'student'"
+                    class="absolute right-[-3rem] invisible text-admin-primary group-hover:visible children:cursor-pointer">
+                    <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
+                        name="bootstrapTrash3Fill"></ng-icon>
+                </div>
+            </div>
+            <ul *ngIf="selectedSection === i" class="{{bg_section_list}}">
+                <ng-container *ngIf="each.courseVideos.length else noVideos">
+                    <li *ngFor="let video of each.courseVideos ; let k = index"
+                        class="p-2 flex justify-between border-b border-b-black">
+
+                        <a routerLink="{{setUserRoute()}}/{{courseDetails._id}}/{{video._id}}">
+
+                        
+                            <p>{{k+1}}. <span
+                                    class="hover:text-blue-700 hover:underline cursor-pointer">{{video.title}}</span>
+                            </p>
+                        </a>
+                        <p>{{video.duration | customDuration}} </p>
+                    </li>
+                </ng-container>
+                <ng-template #noVideos>
+                    <li class="p-2 flex justify-between border-b border-b-black">
+                        <p><span class="hover:text-blue-700 hover:underline cursor-pointer">No videos are
+                                available</span></p>
+
+                    </li>
+                </ng-template>
+            </ul>
+        </div>
+    </ng-container>
+    <ng-template #noVideoList>
+        <h1 *ngIf="user !== 'student' else studentCoursePage" class="text-lg text-gray">Add classes in the
+            course</h1>
+        <ng-template #studentCoursePage>
+            <h1 class="text-lg text-gray">No classes yet provided in the course</h1>
+        </ng-template>
+    </ng-template>
+
 </div>
-
-
-<!-- enable button-->
-
-<div *ngIf="!disabled && !isSignup else disabledBtn" class="enable-container">
-    <button type="button" (click)="onClick()" class="enable-button">
-        <ng-content></ng-content>
-    </button>
-</div>
-
-<!-- disable button-->
-
-<ng-template #disabledBtn>
-    <div *ngIf="!isSignup" class="disable-container">
-        <button type="button" (click)="onClick()" class="disable-button">
-            <ng-content></ng-content>
-        </button>
-    </div>
-</ng-template>
