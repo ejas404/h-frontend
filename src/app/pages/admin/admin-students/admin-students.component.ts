@@ -33,7 +33,9 @@ export class AdminStudentsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(DashboardActions.dashboardRequest());
 
-    this.store.select(getUsersList).subscribe((state) => {
+    this.store.select(getUsersList)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((state) => {
       this.userList = state as UserDetailsTableModel[]
     })
   }
