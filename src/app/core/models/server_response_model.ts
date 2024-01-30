@@ -8,3 +8,9 @@ export interface CheckOutResponse {
     paid: boolean
     enid: string
 }
+
+export interface ConnectionsResponse{
+    _id : string
+    name : string
+    profile ?: string
+}
