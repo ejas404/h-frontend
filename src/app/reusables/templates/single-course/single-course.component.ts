@@ -56,15 +56,6 @@ export class SingleCourseReusableComponent {
     this.video.emit(null)
   }
 
-  // set the course videolist route url dynamically
-  setUserRoute(){
-    let route = '/course'
-    if(this.user === 'admin') route = '/admin/course' ;
-    if(this.user === 'tutor') route = '/tutor/course' ;
-
-    return route;
-  }
-
   // calculate the sections video duration
   totalSectionDuration(videoList :VideoResponseModel[] ) : string{
     

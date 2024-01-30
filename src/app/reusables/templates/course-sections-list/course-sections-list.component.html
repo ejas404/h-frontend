@@ -10,7 +10,7 @@
                 <ng-container *ngIf="each.courseVideos.length else noVideos">
                     <li *ngFor="let video of each.courseVideos ; let k = index"
                         class="p-2 flex justify-between border-b border-b-black">
-                        <p>{{k+1}} <span
+                        <p>{{k+1}} <span routerLink="{{setUserRoute()}}/{{courseDetails._id}}/{{video._id}}" (click)="videoClick(video._id)"
                                 class="hover:text-blue-700 hover:underline cursor-pointer">{{video.title}}</span>
                         </p>
                         <p>{{video.duration | customDuration}} </p>
