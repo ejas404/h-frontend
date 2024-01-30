@@ -83,8 +83,11 @@ export class CheckOutPageComponent {
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : res =>{
+        // navigates to the payment interface
         if(res.paid) window.location.href = res.url ;
-        if(res.success) alert('successfully enrolled');
+
+        //navigates to the successpage
+        if(res.success) this.router.navigateByUrl(`processing/${res.enid}`)
       },
       error : err =>{
         console.log(err)
@@ -94,7 +97,8 @@ export class CheckOutPageComponent {
   }
 
   ngOnDestroy(){
-
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
 }

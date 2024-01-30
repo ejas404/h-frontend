@@ -12,8 +12,8 @@ export interface VideoModel {
     title : string,
     description : string,
     section : string,
-    duration : number
-
+    duration : number,
+    isPaid ?: boolean
 }
 
 

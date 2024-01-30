@@ -1,6 +1,6 @@
 <app-navbar [user]="user"></app-navbar>
 <single-course-reusable
-[user]="'student'"
+[user]="user"
 [bg]="'bg-light-gray'"
 [text]="'text-black'"
 [bg_section_list]="'bg-slate-100'"
@@ -9,6 +9,7 @@
 [isCartItem]="cartItem"
 (sub)="addToCart($event)"
 (buy)="getCourse()"
+[isEnrolled]="isEnrolled"
 >
 
 </single-course-reusable>

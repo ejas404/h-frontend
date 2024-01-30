@@ -26,6 +26,7 @@ export class CoursesProfileComponent {
 
   select(val: string) {
     if (typeof (val) !== 'string') return;
+    if(this.selected === val) return;
     this.selected = val;
     this.filterList()
   }
@@ -33,7 +34,6 @@ export class CoursesProfileComponent {
   ngOnInit() {
     this.fetchEnrollList()
     this.fetchEnrollCat()
-    this.filterList()
   }
 
   fetchEnrollList() {
@@ -42,6 +42,7 @@ export class CoursesProfileComponent {
       .subscribe({
         next: res => {
           this.enrollList = res.list
+          this.filterList()
         },
         error: err => {
           console.log(err)

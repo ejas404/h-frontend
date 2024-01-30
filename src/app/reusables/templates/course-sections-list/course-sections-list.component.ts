@@ -10,11 +10,14 @@ import { VideoResponseModel } from 'app/core/models/section_video_model';
 export class CourseSectionsListComponent {
 
   selectedSection !: number
+  isHyper = true
 
   @Input() user !: string
   @Input() bg !: string
   @Input() text !: string
   @Input() bg_section_list !: string
+  @Input() isEnrolled !: boolean
+
 
   @Input() calledFor !: string
   @Input() courseDetails !: CourseDetailsResponse
@@ -24,14 +27,33 @@ export class CourseSectionsListComponent {
 
 
   // set the course videolist route url dynamically
-  setUserRoute() {
-    let route = '/course'
-    if (this.user === 'admin') route = '/admin/course';
-    if (this.user === 'tutor') route = '/tutor/course';
+  setUserRoute(id: string | undefined, video: VideoResponseModel) : string | undefined  {
+    if (typeof (id) !== 'string') return;
+    
+    if (this.user === 'student' || this.user === 'profile' && !this.isEnrolled) {
+      let route = !video.isPaid?`/course/${id}/${video._id}`: undefined;
+      return route;
+    }
 
-    return route;
+    if(this.user === 'profile' && this.isEnrolled){
+      return `/course/${id}/${video._id}`
+    }
+
+    if (this.user === 'admin') return `/admin/course/${id}/${video._id}`
+    if (this.user === 'tutor') return `/tutor/course/${id}/${video._id}`
+
+    return ''
+
   }
 
+  checkHyper( video: VideoResponseModel) : boolean {
+    if (this.user === 'student' || this.user === 'profile' && !this.isEnrolled) {
+      if(video.isPaid) { return false }
+      else { return true } 
+    }
+
+    return true;
+  }
 
 
   totalSectionDuration(videoList: VideoResponseModel[]): number {

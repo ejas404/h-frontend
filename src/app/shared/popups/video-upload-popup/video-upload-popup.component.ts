@@ -85,7 +85,7 @@ export class VideoUploadPopupComponent {
   onFormSubmit(form : NgForm){
 
     if(!this.file) return;
-
+    
     const formData = new FormData()
     formData.append('file', this.file)
     formData.append('details', JSON.stringify(form.value))

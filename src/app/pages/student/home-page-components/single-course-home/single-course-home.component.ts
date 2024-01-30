@@ -8,28 +8,31 @@ import { CourseService } from 'app/core/services/course_service';
 import { StudentCourseService } from 'app/core/services/student/student_course_service';
 import { ToastService } from 'app/core/services/shared/toast_service';
 import { isStudentToken } from 'app/core/utils/check_token';
+import { StudentEnrollService } from 'app/core/services/student/student_enroll_service';
 
 @Component({
   selector: 'app-single-course-home',
   templateUrl: './single-course-home.component.html',
   styleUrl: './single-course-home.component.scss',
-  providers : [HomePageCourseService, CourseService, StudentCourseService]
+  providers : [HomePageCourseService, CourseService, StudentCourseService , StudentEnrollService]
 })
 export class SingleCourseHomeComponent {
 
   private destroy$ = new Subject<void>();
 
-  user : string = 'student' 
+  user : 'student'|'profile' = 'student' 
   selectedSection !: number ;
   courseVideoList !:  CourseVideoResponseList[];
   courseDetails !: CourseDetailsResponse;
   cartItem !: boolean
+  isEnrolled !: boolean 
 
   constructor(
     private activatedRoute : ActivatedRoute,
     private courseService : CourseService,
     private homePageCourseService : HomePageCourseService,
     private studentCourseService : StudentCourseService,
+    private enrollService : StudentEnrollService,
     private toastService : ToastService,
     private router : Router
   ){}
@@ -42,6 +45,7 @@ export class SingleCourseHomeComponent {
     this.fetchCourseData(search)
     this.fetchCourseVideoList(search)
     this.fetchCartList(search)
+    this.fetchEnrollStatus(search)
   }
 
   fetchCourseData(id : string){
@@ -84,6 +88,21 @@ export class SingleCourseHomeComponent {
           console.log(err.error.message)
         }
       })
+  }
+
+  fetchEnrollStatus(id : string){
+    this.enrollService.isCourseEnrolled(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res => {
+        console.log('is enrolled ', res.success)
+        this.isEnrolled = res.success
+      },
+      error : err =>{
+        console.log(err)
+        this.isEnrolled = false
+      }
+    })
   }
 
   addToCart(course_id : string | undefined){

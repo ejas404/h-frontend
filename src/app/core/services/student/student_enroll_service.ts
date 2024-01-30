@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { BASE_URL } from "app/core/constant/uri";
 import { keyString } from "app/core/models/common_model";
 import { EnrollCourseModels, EnrollSubcat } from "app/core/models/enroll_models";
+import { CheckOutResponse } from "app/core/models/server_response_model";
 
 
 @Injectable()
@@ -12,7 +13,7 @@ export class StudentEnrollService{
     ){}
 
     checkOut(data : FormData){
-        return this.http.post<{success : boolean, url : string,paid : boolean}>(`${BASE_URL}/student/checkout`,data)
+        return this.http.post<CheckOutResponse>(`${BASE_URL}/student/checkout`,data)
     }
 
     checkPayment(id : string){
@@ -29,5 +30,9 @@ export class StudentEnrollService{
 
     isEnrolled(id : string){
         return this.http.get<{success : boolean}>(`${BASE_URL}/student/enroll-status/${id}`)
+    }
+
+    isCourseEnrolled(id : string){
+        return this.http.get<{success : boolean}>(`${BASE_URL}/student/course-enroll/${id}`)
     }
 }

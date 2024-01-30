@@ -31,6 +31,7 @@ import { CartBtnComponent } from "app/reusables/buttons/add-go-btn-component";
 import { CommonBtnReusableComponent } from "app/reusables/buttons/common-btn-component";
 import { SmallCourseListComponent } from "app/reusables/templates/small-course-list/small-course-list.component";
 import { SuccessFailTemplateComponent } from "app/reusables/templates/success-fail-template/success-fail-template.component";
+import { HyperLinkTextComponent } from "app/reusables/typography/hyper_link_text";
 
 
 
@@ -62,7 +63,8 @@ import { SuccessFailTemplateComponent } from "app/reusables/templates/success-fa
         CartBtnComponent,
         CommonBtnReusableComponent,
         SmallCourseListComponent,
-        SuccessFailTemplateComponent
+        SuccessFailTemplateComponent,
+        HyperLinkTextComponent
 
     ],
     exports : [
@@ -92,7 +94,8 @@ import { SuccessFailTemplateComponent } from "app/reusables/templates/success-fa
         CartBtnComponent,
         CommonBtnReusableComponent,
         SmallCourseListComponent,
-        SuccessFailTemplateComponent
+        SuccessFailTemplateComponent,
+        HyperLinkTextComponent
 
     ],
     imports :[

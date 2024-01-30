@@ -5,20 +5,20 @@
             <div class="w-[50%] my-2">
                 <p class=" text-xl">{{courseDetails.description}}</p>
             </div>
-            <div class="rating">
+            <div class="rating inline">
                 <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
                 <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
                 <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
                 <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
                 <ng-icon class="text-white me-1" name=" bootstrapStarFill"></ng-icon>
-                <span class=" mx-1 text-sm">1,400 students</span>
             </div>
+            <span class=" mx-1 text-sm">1,400 students</span>
             <div class="creator">
                 <p>{{checkCategory(courseDetails.category) | titlecase}}</p>
                 <p class="">Created by : {{courseDetails.tutor.name | titlecase}}</p>
             </div>
             <div class="approval my-2"
-                *ngIf="courseDetails.isTutorMade && !courseDetails.isApproved && user !== 'student'">
+                *ngIf="courseDetails.isTutorMade && !courseDetails.isApproved && user !== 'student' && user !== 'profile' ">
                 <button class="bg-white text-admin-primary rounded py-1 px-2 me-3 font-semibold"
                     (click)="approve()">Approve</button>
                 <button class="bg-primary text-white rounded py-1 px-2 font-semibold"
@@ -29,7 +29,7 @@
     <div class="course-images basis-2/5 ps-[10rem] {{text}}">
         <div class="h-[70%] relative group">
             <img class="w-full h-full object-fill" src="{{courseDetails.cover | customImageUrl}}" alt="">
-            <div *ngIf="user !== 'student'"
+            <div *ngIf="user !== 'student' && user !== 'profile' "
                 class="absolute bottom-0 left-0 w-full bg-gray text-end px-2 py-1 invisible group-hover:visible">
                 <ng-icon class="hover:cursor-pointer" (click)="updateCoverEvent()"
                     name="bootstrapPencilSquare"></ng-icon>
@@ -40,45 +40,58 @@
         </div>
         <p class="my-2">Rs.{{courseDetails.fee}}/-</p>
 
-        <div class="buttons" *ngIf="user === 'student' else editDelete;">
-
-            <addto-goto-cart-btn *ngIf="!isCartItem else cartBtn" [styleClass]="'text-sm'" (click)="addtoCart(courseDetails._id)" ></addto-goto-cart-btn>
+        <!-- buttons for user to add to cart go to cart and buying course -->
+        <div class="buttons" *ngIf="user === 'student' || user === 'profile' else editDelete;">
+            <addto-goto-cart-btn *ngIf="!isCartItem else cartBtn" [styleClass]="'text-sm'"
+                (click)="addtoCart(courseDetails._id)"></addto-goto-cart-btn>
 
             <ng-template #cartBtn>
-                <addto-goto-cart-btn [rLink]="'/cart'" [calledFor]="'goto'" [styleClass]="'text-sm'" ></addto-goto-cart-btn>
+                <addto-goto-cart-btn [rLink]="'/cart'" [calledFor]="'goto'"
+                    [styleClass]="'text-sm'"></addto-goto-cart-btn>
             </ng-template>
-            
-            <common-btn-reusable (click)="buyNow()" [styleClass]="'bg-white text-primary text-sm float-right'">Get Course</common-btn-reusable>
+
+            <common-btn-reusable (click)="buyNow()" [styleClass]="'bg-white text-primary text-sm float-right'">Get
+                Course</common-btn-reusable>
         </div>
 
+        <!-- buttons for admin and tutor to edit and delete the course -->
         <ng-template #editDelete>
             <div class="buttons">
-                <button class="px-2 bg-white text-admin-primary text-sm font-semibold"
-                    (click)="editCourseEvent()">Edit</button>
-                <button class="px-2 bg-white text-primary text-sm font-semibold float-right">Delete</button>
+                <!-- button for editing the course -->
+                <common-btn-reusable (click)="editCourseEvent()"
+                    [styleClass]="'bg-white text-admin-primary text-sm '">Edit</common-btn-reusable>
+                    
+                <!-- button for deleting the course -->
+                <common-btn-reusable
+                    [styleClass]="'bg-white text-primary text-sm float-right'">Delete</common-btn-reusable>
             </div>
         </ng-template>
 
     </div>
 </section>
 
+<!-- bottom section single course lists of course sections -->
+
 <section class="flex justify-center">
     <div class="w-[70%] my-5">
         <div class="flex justify-between">
             <h1 class="text-xl font-semibold my-2">Course Content</h1>
             <div class="py-2">
-                <button *ngIf="user !== 'student'"
+                <button *ngIf="user !== 'student' && user !== 'profile'"
                     class="{{bg}} px-2 text-white rounded text-sm py-1 inline-block my-auto ms-2"
                     (click)="addVideo()">Add Video +</button>
             </div>
         </div>
+        <!-- resuable section listing component -->
         <course-sections-list 
         [user]="user" 
         [bg]="bg" 
-        [text]="text"
-        [bg_section_list]="bg_section_list" 
-        [videoList]="videoList"
-        [courseDetails]="courseDetails">
-    </course-sections-list>
+        [text]="text" 
+        [bg_section_list]="bg_section_list"
+        [videoList]="videoList" 
+        [courseDetails]="courseDetails"
+        [isEnrolled]="isEnrolled"
+        >
+        </course-sections-list>
     </div>
 </section>

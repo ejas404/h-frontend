@@ -1,7 +1,7 @@
 <section class="w-100 p-3 h-full">
     <div class="text-center flex mb-8 justify-between items-center px-3">
         <h2 class="text-[1.5rem] font-bold">Add Video</h2>
-        <button #closeBtn mat-button mat-dialog-close >x</button>
+        <button #closeBtn mat-button mat-dialog-close>x</button>
     </div>
     <form #addVideo="ngForm" (ngSubmit)="onFormSubmit(addVideo)">
         <div class="flex">
@@ -35,6 +35,18 @@
                         for
                         your course</span>
 
+
+                    <div class="flex items-center justify-end">
+                        <p class="me-3 text-sm font-medium text-gray-900 dark:text-gray-300">Is this is a paid class</p>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" ngModel name="isPaid" class="sr-only peer">
+                            <div
+                                class="border border-light-gray w-9 h-5 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                            </div>
+                        </label>
+                    </div>
+
+
                 </div>
 
                 <div class="p-3">
@@ -54,8 +66,8 @@
                         </span>
 
 
-                        <input class="my-auto" type="file" name="file_upload" (change)="onAddedEvent($event)" accept="Video/*"
-                            multiple="false">
+                        <input class="my-auto" type="file" name="file_upload" (change)="onAddedEvent($event)"
+                            accept="Video/*" multiple="false">
 
                     </label>
                     <span *ngIf="isVideo === false" class="text-red-600">input file accepts only video</span>
@@ -69,7 +81,7 @@
             </div>
         </div>
         <div class="text-center">
-            <button type="submit" [disabled]="!addVideo.valid || !isVideo" 
+            <button type="submit" [disabled]="!addVideo.valid || !isVideo"
                 class="bg-blue-700 font-bold text-white w-[6rem] border border-light-gray py-1 rounded my-2">Save</button>
         </div>
     </form>

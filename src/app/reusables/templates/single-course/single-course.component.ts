@@ -12,12 +12,12 @@ export class SingleCourseReusableComponent {
 
   selectedSection !: number
 
-  @Input()user !: 'admin'|'student'|'tutor'
+  @Input()user !: 'admin'|'student'|'tutor'|'profile'
   @Input()bg !: string
   @Input()text !: string
   @Input()bg_section_list !: string
   @Input()isCartItem : boolean = false
-
+  @Input()isEnrolled !: boolean 
 
   @Input()courseDetails !: CourseDetailsResponse
   @Input()videoList !:  CourseVideoResponseList[] 
