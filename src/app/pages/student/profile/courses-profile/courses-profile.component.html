@@ -1,1 +1,22 @@
-<p>courses-profile works!</p>
+<section class="border-b border-light-gray mt-2 mx-2">
+    <ul class="flex children:px-2 children:py-2 children:text-sm">
+        <button *ngFor="let each of titles" (click)="select(each)"
+        [class]="selected === each?'shadow text-primary border-b-2 border-b-primary font-semibold' : ''" 
+         ><li>{{each}}</li></button>
+    </ul>
+</section>
+<section class="course_list px-4">
+    <div class="grid grid-cols-2 gap-x-2">
+        <div *ngFor="let each of viewList"
+            class="relative my-2 flex border border-white hover:border-light-gray rounded">
+    
+            <div class="img-template w-[7rem] h-[5rem] rounded overflow-hidden">
+                <img class="w-full h-full object-cover" src="{{each.course.cover| customImageUrl}}" alt="">
+            </div>
+            <div class="ms-1 my-1 flex flex-col justify-between">
+                <p class="font-bold">{{each.course.title}}</p>
+                <p>{{getCatName(each.course.subCategory) | titlecase}}</p>
+            </div>
+        </div>
+    </div>
+</section>

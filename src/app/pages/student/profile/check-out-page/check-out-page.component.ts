@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartModel } from 'app/core/models/cart_model';
 import { HomePageCourseService } from 'app/core/services/home/homepage-course';
 import { StudentCourseService } from 'app/core/services/student/student_course_service';
+import { StudentEnrollService } from 'app/core/services/student/student_enroll_service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-check-out-page',
   templateUrl: './check-out-page.component.html',
   styleUrl: './check-out-page.component.scss',
-  providers : [StudentCourseService,HomePageCourseService]
+  providers : [StudentCourseService,HomePageCourseService,StudentEnrollService]
 })
 export class CheckOutPageComponent {
 
@@ -23,7 +24,9 @@ export class CheckOutPageComponent {
   constructor(
     private studentCourseService: StudentCourseService,
     private homeCourseService : HomePageCourseService,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private enrollService : StudentEnrollService,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -76,11 +79,12 @@ export class CheckOutPageComponent {
       isCart : this.course_id === undefined
     }
     
-    this.studentCourseService.checkOut(reqBody)
+    this.enrollService.checkOut(reqBody)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : res =>{
-        console.log(res)
+        if(res.paid) window.location.href = res.url ;
+        if(res.success) alert('successfully enrolled');
       },
       error : err =>{
         console.log(err)

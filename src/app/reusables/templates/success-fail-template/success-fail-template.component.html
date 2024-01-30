@@ -1,0 +1,25 @@
+<section>
+    <div *ngIf="!success" class="wrapper red">
+        <div class="header__wrapper">
+            <div class="header">
+                <div class="sign"><span></span></div>
+            </div>
+        </div>
+        <h1>Whooops</h1>
+        <p>Something went wrong, please try again.</p>
+        
+        <button routerLink="/courses" >back to courses</button>
+    </div>
+    
+    <div *ngIf="success" class="wrapper green">
+        <div class="header__wrapper">
+            <div class="header">
+                <div class="sign"><span></span></div>
+            </div>
+        </div>
+        <h1>Yeah</h1>
+        <p>payment successful!</p>
+        
+        <button routerLink="/courses" >start learning</button>
+    </div>
+</section>

@@ -30,7 +30,4 @@ export class StudentCourseService{
         return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/student/get-video/${id}`)
     }
 
-    checkOut(data : FormData){
-        return this.http.post<{msg : string, isEnrolled : boolean}>(`${BASE_URL}/student/checkout`,data)
-    }
 }
