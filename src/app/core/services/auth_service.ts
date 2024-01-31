@@ -31,4 +31,8 @@ export class AuthService{
         return this.http.post(`${BASE_URL}/tutor/register`,reqBody)
     }
 
+    getGoogleAuth(code : string){
+        return this.http.get(`${BASE_URL}/student/oauth?code=${code}`)
+    }
+
 }

@@ -16,6 +16,7 @@ import { CheckOutPageComponent } from "app/pages/student/profile/check-out-page/
 import { PaymentSuccessComponent } from "app/pages/payment_sucess";
 import { PaymentProcessingComponent } from "app/pages/student/payment-components.ts/payment-processing/payment-processing.component";
 import { FreeBuyComponent } from "app/pages/student/payment-components.ts/free-buy/free-buy.component";
+import { OauthComponentComponent } from "app/pages/student/auth-page-components/oauth-component/oauth-component.component";
 
 @NgModule({
     declarations : [
@@ -31,7 +32,8 @@ import { FreeBuyComponent } from "app/pages/student/payment-components.ts/free-b
         CheckOutPageComponent,
         PaymentSuccessComponent,
         PaymentProcessingComponent,
-        FreeBuyComponent
+        FreeBuyComponent,
+        OauthComponentComponent
     ],
     imports : [
         SharedModules,

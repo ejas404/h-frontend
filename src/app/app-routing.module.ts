@@ -43,6 +43,7 @@ import { AdminVideoPreviewComponent } from './pages/admin/admin-video-preview/ad
 import { CheckOutPageComponent } from './pages/student/profile/check-out-page/check-out-page.component';
 import { PaymentProcessingComponent } from './pages/student/payment-components.ts/payment-processing/payment-processing.component';
 import { FreeBuyComponent } from './pages/student/payment-components.ts/free-buy/free-buy.component';
+import { OauthComponentComponent } from './pages/student/auth-page-components/oauth-component/oauth-component.component';
 
 
 const routes: Routes = [
@@ -107,6 +108,7 @@ const routes: Routes = [
   { path: 'admin/course/:id/:video', canActivate: [adminGuard], component: AdminVideoPreviewComponent },
   { path: 'tutor/login', component: TutorLoginComponent },
   { path: 'tutor/signup', component: TutorSignupComponent },
+  {path : 'oauth', component : OauthComponentComponent},
   {path : 'payment/check/:id',canActivate: [studentGuard, studentBlockGuard],component : PaymentProcessingComponent},
   {path : 'processing/:id',canActivate: [studentGuard, studentBlockGuard],component : FreeBuyComponent},
   { path: '**', component: SnotfoundComponent }
