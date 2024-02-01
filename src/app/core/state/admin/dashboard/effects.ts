@@ -3,13 +3,16 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { exhaustMap , catchError, map , of } from "rxjs";
 import { DashboardService } from "../../../services/admin/dashboard";
 import * as DashboardActions from "./action";
+import { ToastService } from "app/core/services/shared/toast_service";
+import { checkActionUser } from "app/core/utils/check_user";
 
 
 @Injectable()
 export class DashboardEffects{
     constructor(
         private action$ : Actions,
-        private service : DashboardService
+        private service : DashboardService,
+        private toastService : ToastService
     ){}
 
     dashboardRequest$ = createEffect(()=>
@@ -23,9 +26,7 @@ export class DashboardEffects{
                       }
                           
                       ),
-                        catchError((error) => { 
-                            return of(DashboardActions.dashboardFailure({error}))}
-                      )
+                        catchError((error) => of(DashboardActions.dashboardFailure({error})))
                 )
             })
         )
@@ -35,15 +36,16 @@ export class DashboardEffects{
         this.action$.pipe(
             ofType(DashboardActions.deleteUser),
             exhaustMap((action)=>{
-               return this.service.deleteUser(action.id)
+               return this.service.deleteUser(action.id, action.user)
                 .pipe(
                     map((user) =>{
-                        return  DashboardActions.deleteSuccess({ user })
+                        this.toastService.success(`Deleted ${user.role || 'user'} successfully`)
+                        const listName = checkActionUser(action.user)
+                        return  DashboardActions.deleteSuccess({ user,listName })
                       }
                           
                       ),
-                      catchError((error) => of(DashboardActions.deletefailure({error}))
-                      )
+                      catchError((error) => of(DashboardActions.deletefailure({error})))
                 )
             })
         )
@@ -56,14 +58,17 @@ export class DashboardEffects{
     this.action$.pipe(
         ofType(DashboardActions.blockRequest),
         exhaustMap((action)=>{
-           return this.service.blockUser(action.user_id)
+           return this.service.blockUser(action.user_id,action.user)
             .pipe(
                 map((user) =>{
-                    return  DashboardActions.blockSuccess({ user })
+                    this.toastService.success(`Blocked ${user.role || 'user'} successfully`)
+                    const listName = checkActionUser(action.user)
+                    return  DashboardActions.blockSuccess({ user, listName })
                   }
                       
                   ),
                   catchError((error) => {
+                    this.toastService.fail('failed to block')
                     return of(DashboardActions.blockFailure({error}))}
                   )
             )
@@ -76,10 +81,12 @@ unblockUser$ = createEffect(()=>
 this.action$.pipe(
     ofType(DashboardActions.unblockRequest),
     exhaustMap((action)=>{
-       return this.service.unblockUser(action.user_id)
+       return this.service.unblockUser(action.user_id,action.user)
         .pipe(
             map((user) =>{
-                return  DashboardActions.unblockSuccess({ user })
+                this.toastService.success(`Unblocked ${user.role || 'user'} successfully`)
+                const listName = checkActionUser(action.user)
+                return  DashboardActions.unblockSuccess({ user ,listName })
               }
                   
               ),

@@ -1,0 +1,17 @@
+<section class="w-full h-full bg-black rounded-md flex flex-col justify-between content-center py-3 text-light-gray">
+    <div class="text-center">
+        
+        <!-- loops the nav list items -->
+        <a *ngFor="let each of navList" routerLink="{{each.path}}" routerLinkActive="text-tutor-secondary" [routerLinkActiveOptions]="{exact : true}">
+            <ng-icon class="text-2xl mb-3" name="{{each.icon}}"></ng-icon><br>
+        </a>
+
+    </div>
+    <div class="text-center ">
+        <a routerLink="/tutor/account" routerLinkActive="text-tutor-secondary">
+            <ng-icon class="text-2xl" name="bootstrapGearFill"></ng-icon>
+        </a>
+
+    </div>
+</section>
+

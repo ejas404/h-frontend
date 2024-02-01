@@ -2,20 +2,17 @@ import { CanActivateFn, Router } from "@angular/router";
 import { StudentProfileService } from "../services/student/profile";
 import { inject } from "@angular/core";
 import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
-
-
-
+import { ToastService } from "../services/shared/toast_service";
 
 
 export const studentGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
-
+  const toastService = inject(ToastService)
 
   let check = sessionStorage.getItem('auth_token')
   if (!check) {
     router.navigateByUrl('/login')
-    failed('Session time out login again')
+    toastService.fail('Session time out login again')
     return false
   }
 
@@ -24,7 +21,6 @@ export const studentGuard: CanActivateFn = (route, state) => {
 
 export const studentBlockGuard: CanActivateFn = async (route, state) => {
   const service = inject(StudentProfileService);
-
   try {
     await checkUser(service);
     return true;  // User is authenticated
@@ -35,6 +31,7 @@ export const studentBlockGuard: CanActivateFn = async (route, state) => {
 };
 
 async function checkUser(service: StudentProfileService): Promise<void> {
+  const toastService = inject(ToastService)
   return new Promise((resolve, reject) => {
     const studentSub = service.getData().subscribe({
       next: (data) => {
@@ -44,23 +41,11 @@ async function checkUser(service: StudentProfileService): Promise<void> {
       error: (err) => {
         studentSub.unsubscribe();
         service.logout();
-        failed('Entry restricted connect authority');
+        toastService.fail('Entry restricted connect authority');
         reject(err);  // User is not valid
       }
     });
   });
-}
-
-function failed(msg : string) {
-  const messageService = inject(MessageService)
-
-  messageService.add({
-    severity: 'error',
-    summary: 'Blocked',
-    detail:msg 
-  })
-
-  
 }
 
 

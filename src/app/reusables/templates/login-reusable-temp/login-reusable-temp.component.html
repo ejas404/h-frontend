@@ -15,9 +15,9 @@
     <span *ngIf="!password.valid && password.touched" class="text-sm text-red-600">Please enter your
         password</span>
 
-    <button (click)="otpLogin()" *ngIf="usedFor === 'admin'" class="w-full border border-admin-primary py-2 rounded my-2 text-sm" type="button">
+    <!-- <button (click)="otpLogin()" *ngIf="usedFor === 'admin'" class="w-full border border-admin-primary py-2 rounded my-2 text-sm" type="button">
         <span>Login with otp</span>
-    </button>
+    </button> -->
 
 
     <button (click)="googleSign()" *ngIf="usedFor !== 'admin'" class="w-full border border-light-gray py-2 rounded my-2 text-sm" type="button">

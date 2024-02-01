@@ -43,7 +43,7 @@
         <!-- buttons for user to add to cart go to cart and buying course -->
         <div class="buttons" *ngIf="user === 'student' ||  user === 'profile' else editDelete;">
 
-            <ng-container *ngIf="user !== 'profile' && !isEnrolled ">
+            <ng-container>
                 <addto-goto-cart-btn *ngIf="!isCartItem else cartBtn" [styleClass]="'text-sm'"
                 (click)="addtoCart(courseDetails._id)"></addto-goto-cart-btn>
 

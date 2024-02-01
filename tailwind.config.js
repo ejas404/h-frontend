@@ -19,7 +19,8 @@ module.exports = {
         'admin-primary':'#11333D',
         'tutor-primary':'#470808',
         'tutor-secondary':'#FBBC04',
-        'link-blue':'#3366CC'
+        'link-blue':'#3366CC',
+        
       }
     }
   },

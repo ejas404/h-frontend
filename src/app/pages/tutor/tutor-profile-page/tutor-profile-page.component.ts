@@ -17,46 +17,52 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-tutor-profile-page',
   templateUrl: './tutor-profile-page.component.html',
   styleUrl: './tutor-profile-page.component.scss',
-  providers:[TutorProfileService]
+  providers: [TutorProfileService]
 })
-export class TutorProfilePageComponent implements OnInit{
+export class TutorProfilePageComponent implements OnInit {
 
   private destroy$ = new Subject<void>();
 
-  tutorData !: TutorModel ;
-  edit : boolean = false;
+  tutorData !: TutorModel;
+  edit: boolean = false;
   constructor(
-    private store : Store , 
-    private service : TutorProfileService,
-    private dialogRef : MatDialog,
-    private messageService : MessageService
-    ){}
+    private store: Store,
+    private service: TutorProfileService,
+    private dialogRef: MatDialog,
+    private messageService: MessageService
+  ) { }
 
   profileUpdate = new FormGroup({
     'name': new FormControl('', [Validators.required, Validators.minLength(3)]),
     'email': new FormControl('', [Validators.required, Validators.email]),
-    'contact': new FormControl('',[Validators.pattern(/^\d{10}$/)])
+    'contact': new FormControl('', [Validators.pattern(/^\d{10}$/)])
   })
 
 
   ngOnInit(): void {
+    this.getData()
+  }
+
+  getData() {
     this.store.dispatch(getTutorData())
 
     this.store.select(getTutorStoreData)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : data =>{
-        this.tutorData = data as unknown as TutorModel
-        this.setFormValues()
-      }
-    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.tutorData = data as unknown as TutorModel
+          this.setFormValues()
+        }
+      })
 
   }
 
+  
+
   setFormValues() {
-    
+
     // converting the name into title case
-    let name : string = titleCase(this.tutorData?.name as string)
+    let name: string = titleCase(this.tutorData?.name as string)
 
     this.profileUpdate.patchValue({
       'name': name,
@@ -66,51 +72,51 @@ export class TutorProfilePageComponent implements OnInit{
   }
 
 
-  onEditClick(){
+  onEditClick() {
     this.edit = true
   }
 
-  cancelEdit(){
+  cancelEdit() {
     this.edit = false
   }
 
-  updateUser(){
+  updateUser() {
     this.edit = false
-    let userData : StudentUpdateModel = this.profileUpdate.value as StudentUpdateModel
+    let userData: StudentUpdateModel = this.profileUpdate.value as StudentUpdateModel
     this.service.updateProfile(userData)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : data =>{
-        this.makeToast('success', 'Success','Updated successfully')
-      },
-      error : err =>{
-        this.makeToast('error', 'Failed','failed to update')
-      }
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.makeToast('success', 'Success', 'Updated successfully')
+        },
+        error: err => {
+          this.makeToast('error', 'Failed', 'failed to update')
+        }
+      })
+  }
+
+  editProfImage() {
+    this.dialogRef.open(ProfileImagePopupComponent, {
+      data: { calledFor: 'tutor' }
     })
   }
 
-  editProfImage(){
-    this.dialogRef.open(ProfileImagePopupComponent,{
-      data : {calledFor : 'tutor'}
+  editTag(data: string) {
+    this.dialogRef.open(TagsPopupTutorComponent, {
+      data: { tagFor: data }
     })
   }
 
-  editTag(data : string){
-    this.dialogRef.open(TagsPopupTutorComponent,{
-      data : {tagFor : data}
-    })
-  }
-
-  makeToast(s1 : string , s2 : string, msg : string){
+  makeToast(s1: string, s2: string, msg: string) {
     this.messageService.add({
-      severity : s1,
-      summary : s2,
-      detail : msg
+      severity: s1,
+      summary: s2,
+      detail: msg
     })
   }
 
-  
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     this.destroy$.next()
     this.destroy$.complete()
   }

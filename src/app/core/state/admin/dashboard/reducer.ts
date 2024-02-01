@@ -1,36 +1,14 @@
 
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { blockSuccess, blockTutorSuccess, courseAddSuccess, courseDetailsSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, deleteTutorSuccess, unblockSuccess, unblockTutorSuccess } from "./action";
+import { blockSuccess, courseAddSuccess, courseDetailsSuccess, dashboardFailure, dashboardSuccess, deleteSuccess, unblockSuccess } from "./action";
 import { UserModel } from "../../../models/auth";
-import { TutorModel } from "../../../models/tutor";
-import { CourseDetailsResponse, TutorDetailsWithCourse } from "../../../models/course";
-
-
-interface UserLists {
-    userlist: UserModel[],
-    tutorlist: TutorModel[]
-}
-
-interface CourseModel{
-    courseDetails : CourseDetailsResponse[],
-    tutorCourses : TutorDetailsWithCourse[]
-}
-
-
-
-interface DashboardState {
-    list: UserLists,
-    course : CourseModel
-    errormessage: string
-}
+import { DashboardState, UserListsModel } from "app/core/models/dashboard_model";
 
 const initialState: DashboardState = {
     list: { userlist: [], tutorlist: [] },
-    course : {courseDetails : [] , tutorCourses : []},
+    course: { courseDetails: [], tutorCourses: [] },
     errormessage: "",
-
 }
-
 
 const _dashboardReducer = createReducer(
     initialState,
@@ -46,26 +24,20 @@ const _dashboardReducer = createReducer(
         }
     }),
 
-    on(dashboardFailure , (state , action)=>{
-        return{
-            ...state,
-        }
-    }),
-
-    on(deleteSuccess, (state, { user }) => {
-        const newList = state.list.userlist.filter(data => data._id !== user._id)
+    on(deleteSuccess, (state, { user, listName }) => {
+        const newList = state.list[listName as keyof UserListsModel].filter(data => data._id !== user._id)
         return {
             ...state,
             list: {
                 ...state.list,
-                userlist: newList,
+                [listName]: newList,
             },
             errormessage: ""
         }
     }),
 
-    on(blockSuccess, (state, { user }) => {
-        const newList = state.list.userlist.map(data => {
+    on(blockSuccess, (state, { user, listName }) => {
+        const newList = state.list[listName as keyof UserListsModel].map(data => {
             if (data._id === user._id) {
                 return { ...data, isBlocked: true }
             }
@@ -75,14 +47,14 @@ const _dashboardReducer = createReducer(
             ...state,
             list: {
                 ...state.list,
-                userlist : newList
+                [listName]: newList
             },
             errormessage: ""
         }
     }),
 
-    on(unblockSuccess, (state, { user }) => {
-        const newList = state.list.userlist.map(data => {
+    on(unblockSuccess, (state, { user, listName }) => {
+        const newList : UserModel[] = state.list[listName as keyof UserListsModel].map((data: UserModel) => {
             if (data._id === user._id) {
                 return { ...data, isBlocked: false }
             }
@@ -92,79 +64,34 @@ const _dashboardReducer = createReducer(
             ...state,
             list: {
                 ...state.list,
-                userlist : newList
+                [listName]: newList
             },
             errormessage: ""
         }
     }),
 
-    on(courseDetailsSuccess , (state, {successResponse})=>{
-        return{
+    on(courseDetailsSuccess, (state, { successResponse }) => {
+        return {
             ...state,
-            course : {
+            course: {
                 ...state.course,
-                tutorCourses : successResponse.tutorCourses,
-                courseDetails : successResponse.courseDetails
+                tutorCourses: successResponse.tutorCourses,
+                courseDetails: successResponse.courseDetails
             }
         }
     }),
-    on(courseAddSuccess , (state , {newCourse})=>{
+    on(courseAddSuccess, (state, { newCourse }) => {
         let existingCourses = state.course.courseDetails.slice()
         existingCourses.push(newCourse)
-        return{
+        return {
             ...state,
-            course : {
+            course: {
                 ...state.course,
-                courseDetails : existingCourses
+                courseDetails: existingCourses
 
             }
         }
-    }),
-    on(deleteTutorSuccess, (state, { tutor }) => {
-        const newList = state.list.tutorlist.filter(data => data._id !== tutor._id)
-        return {
-            ...state,
-            list: {
-                ...state.list,
-                tutorlist: newList,
-            },
-            errormessage: ""
-        }
-    }),
-    on(blockTutorSuccess, (state, { tutor }) => {
-        const newList = state.list.tutorlist.map(data => {
-            if (data._id === tutor._id) {
-                return { ...data, isBlocked: true }
-            }
-            return data
-        })
-        return {
-            ...state,
-            list: {
-                ...state.list,
-                tutorlist : newList
-            },
-            errormessage: ""
-        }
-    }),
-
-    on(unblockTutorSuccess, (state, { tutor }) => {
-        const newList = state.list.tutorlist.map(data => {
-            if (data._id === tutor._id) {
-                return { ...data, isBlocked: false }
-            }
-            return data
-        })
-        return {
-            ...state,
-            list: {
-                ...state.list,
-                tutorlist : newList
-            },
-            errormessage: ""
-        }
-    }),
-
+    })
 )
 
 export function dashboardReducer(state: any, action: any) {
@@ -187,14 +114,6 @@ export const getCourseList = createSelector(
     selectDashboardState,
     (state) => state.course
 )
-
-
-
-// export const getState = createSelector(
-//     selectAuthState,
-//     (state)=> state
-// )
-
 
 
 
