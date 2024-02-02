@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { getTutorData } from '../../../core/state/tutor/profile/action';
+import { getTutorData, tutorEducationDeleteSuccess } from '../../../core/state/tutor/profile/action';
 import { Store } from '@ngrx/store';
 import { getTutorStoreData } from '../../../core/state/tutor/profile/reducer';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TutorProfileService } from '../../../core/services/tutor/profile';
 import { StudentUpdateModel } from '../../../core/models/student';
 import { titleCase } from 'title-case';
-import { TutorModel } from '../../../core/models/tutor';
+import { TutorEducation, TutorModel } from '../../../core/models/tutor';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileImagePopupComponent } from '../../../shared/popups/profile-image-popup/popup.component';
 import { TagsPopupTutorComponent } from '../../../shared/popups/tags-popup-tutor/tags-popup-tutor.component';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
+import { ToastService } from 'app/core/services/shared/toast_service';
+import { TutorPopupComponent } from 'app/shared/popups/tutor-popup/tutor-popup.component';
+import { ConfirmBoxHelper } from 'app/core/utils/confirm_box-helper';
 
 @Component({
   selector: 'app-tutor-profile-page',
@@ -22,6 +25,8 @@ import { Subject, takeUntil } from 'rxjs';
 export class TutorProfilePageComponent implements OnInit {
 
   private destroy$ = new Subject<void>();
+  educationDetails !: TutorEducation[];
+
 
   tutorData !: TutorModel;
   edit: boolean = false;
@@ -29,7 +34,8 @@ export class TutorProfilePageComponent implements OnInit {
     private store: Store,
     private service: TutorProfileService,
     private dialogRef: MatDialog,
-    private messageService: MessageService
+    private toastService : ToastService,
+    private confirmBox : ConfirmBoxHelper
   ) { }
 
   profileUpdate = new FormGroup({
@@ -37,7 +43,6 @@ export class TutorProfilePageComponent implements OnInit {
     'email': new FormControl('', [Validators.required, Validators.email]),
     'contact': new FormControl('', [Validators.pattern(/^\d{10}$/)])
   })
-
 
   ngOnInit(): void {
     this.getData()
@@ -57,7 +62,7 @@ export class TutorProfilePageComponent implements OnInit {
 
   }
 
-  
+
 
   setFormValues() {
 
@@ -87,10 +92,35 @@ export class TutorProfilePageComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: data => {
-          this.makeToast('success', 'Success', 'Updated successfully')
+          this.toastService.success('Updated successfully')
         },
         error: err => {
-          this.makeToast('error', 'Failed', 'failed to update')
+          this.toastService.fail('failed to update')
+        }
+      })
+  }
+
+  
+  addEducation() {
+    this.dialogRef.open(TutorPopupComponent)
+  }
+
+  async deleteEduEvent(id: string) {
+    const check = await this.confirmBox.call('Are your sure about deleting the education details')
+    if(!check) return ;
+    this.deleteEducation(id)
+         
+  }
+
+  deleteEducation(id: string) {
+    this.service.deleteEducation(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.store.dispatch(tutorEducationDeleteSuccess({ successResponse: { toDelete: data.toDelete } }))
+        },
+        error: err => {
+          console.log(err)
         }
       })
   }
@@ -106,15 +136,6 @@ export class TutorProfilePageComponent implements OnInit {
       data: { tagFor: data }
     })
   }
-
-  makeToast(s1: string, s2: string, msg: string) {
-    this.messageService.add({
-      severity: s1,
-      summary: s2,
-      detail: msg
-    })
-  }
-
 
   ngOnDestroy() {
     this.destroy$.next()

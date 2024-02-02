@@ -21,6 +21,7 @@ import { SectionPopupComponent } from "app/shared/popups/course-popups/section-p
 import { ReusableComponentsModule } from "./reusables_module";
 import { SelectCategoryComponentComponent } from "app/shared/select-category-component/select-category-component.component";
 import { CategoryPopupComponent } from "app/shared/popups/course-popups/category-popup/category-popup.component";
+import { ChatboxSharedComponent } from "app/shared/chatbox-shared/chatbox-shared.component";
 
 
 @NgModule({
@@ -40,10 +41,8 @@ import { CategoryPopupComponent } from "app/shared/popups/course-popups/category
         VideoUploadPopupComponent,
         SectionPopupComponent,
         SelectCategoryComponentComponent,
-        CategoryPopupComponent
-
-
-
+        CategoryPopupComponent,
+        ChatboxSharedComponent
     ],
     exports: [
         ProfileImagePopupComponent,
@@ -60,8 +59,7 @@ import { CategoryPopupComponent } from "app/shared/popups/course-popups/category
         SnotfoundComponent,
         SelectCategoryComponentComponent,
         CategoryPopupComponent,
-        
-
+        ChatboxSharedComponent
     ],
     imports: [
         ImageCropperModule,

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ConnectionsResponse } from 'app/core/models/server_response_model';
 import { StudentConnectionService } from 'app/core/services/student/student_connection_service';
+import { ChatboxSharedComponent } from 'app/shared/chatbox-shared/chatbox-shared.component';
 import { Subject, pipe, takeUntil } from 'rxjs';
 
 @Component({
@@ -14,7 +16,8 @@ export class ConnectionProfileComponent {
   connList !: ConnectionsResponse[];
 
   constructor(
-    private connService : StudentConnectionService
+    private connService : StudentConnectionService,
+    private dialogRef : MatDialog
   ){}
 
   ngOnInit(){
@@ -34,7 +37,10 @@ export class ConnectionProfileComponent {
   }
 
   message(id : string){
-
+    this.dialogRef.open(ChatboxSharedComponent,{
+      width : '500px',
+      height : '500px'
+    })
   }
 
   ngOnDestroy(){

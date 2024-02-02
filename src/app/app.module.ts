@@ -30,6 +30,7 @@ import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
+import { ChatboxSharedComponent } from './shared/chatbox-shared/chatbox-shared.component';
 
 @NgModule({
   declarations: [

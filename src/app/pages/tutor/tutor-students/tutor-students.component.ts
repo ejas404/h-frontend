@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ConnectionsResponse } from 'app/core/models/server_response_model';
 import { TutorConnectionService } from 'app/core/services/tutor/tutor_connection_service';
+import { ChatboxSharedComponent } from 'app/shared/chatbox-shared/chatbox-shared.component';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -16,7 +18,8 @@ export class TutorStudentsComponent {
 
 
   constructor(
-    private connService : TutorConnectionService
+    private connService : TutorConnectionService,
+    private dialogRef : MatDialog
   ){}
 
   ngOnInit(){
@@ -38,7 +41,10 @@ export class TutorStudentsComponent {
   }
 
   message(_id : string){
-
+    this.dialogRef.open(ChatboxSharedComponent,{
+      width : '500px',
+      height : '500px'
+    })
   }
 
   ngOnDestroy(){
