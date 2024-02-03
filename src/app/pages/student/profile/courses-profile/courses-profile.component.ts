@@ -18,7 +18,7 @@ export class CoursesProfileComponent {
   selected = 'enrolled'
   enrollList !: EnrollCourseModels[];
   viewList !: EnrollCourseModels[];
-  enrollCatObj !: EnrollSubcat[];
+  enrollCatObj : EnrollSubcat[] = []
 
   constructor(
     private enrollService: StudentEnrollService

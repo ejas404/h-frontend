@@ -30,7 +30,8 @@ import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
-import { ChatboxSharedComponent } from './shared/chatbox-shared/chatbox-shared.component';
+import { SocketIoModule } from 'ngx-socket-io';
+import { socketConfig } from './core/config/socket.config';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ChatboxSharedComponent } from './shared/chatbox-shared/chatbox-shared.c
     HomePageModule,
     TutorModule,
     UserProfileModule,
+    SocketIoModule.forRoot(socketConfig), 
     StoreModule.forRoot(
       {
         auth: authReducer,
@@ -64,7 +66,8 @@ import { ChatboxSharedComponent } from './shared/chatbox-shared/chatbox-shared.c
         StudentProfileEffect,
         TutorProfileEffect
       ]
-    )
+    ),
+    
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

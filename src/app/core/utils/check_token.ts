@@ -9,9 +9,15 @@ export const checkTokenExpiry = (token : string) : boolean => {
     return check
 }
 
-export const isStudentToken = () : boolean => {
+export const decodeUserToken = ()=>{
     const authToken = sessionStorage.getItem('auth_token')
     if(typeof(authToken) !== 'string') return false; 
     const decodedUser : JWTDecodeModel = (jwtDecode(authToken))
-    return decodedUser.role === 'Student'
+    return decodedUser;
+}
+
+export const isStudentToken = () : boolean => {
+    const user : JWTDecodeModel | false = decodeUserToken()
+    if(!user) return false;
+    return user.role === 'Student'
 }
