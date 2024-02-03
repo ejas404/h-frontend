@@ -9,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-tutor-students',
   templateUrl: './tutor-students.component.html',
   styleUrl: './tutor-students.component.scss',
-  providers : [TutorConnectionService]
+  providers: [TutorConnectionService]
 })
 export class TutorStudentsComponent {
 
@@ -18,36 +18,37 @@ export class TutorStudentsComponent {
 
 
   constructor(
-    private connService : TutorConnectionService,
-    private dialogRef : MatDialog
-  ){}
+    private connService: TutorConnectionService,
+    private dialogRef: MatDialog
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.fetchConnections()
   }
-  fetchConnections(){
+  fetchConnections() {
     this.connService.getConnections()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : res => {
-        console.log('connections printing')
-        console.log(res.connections)
-        this.connList = res.connections
-      },
-      error : err => {
-        console.log(err)
-      }
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          console.log('connections printing')
+          console.log(res.connections)
+          this.connList = res.connections
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
+  }
+
+  message(id: string) {
+    this.dialogRef.open(ChatboxSharedComponent, {
+      width: '500px',
+      height: '500px',
+      data: { id }
     })
   }
 
-  message(_id : string){
-    this.dialogRef.open(ChatboxSharedComponent,{
-      width : '500px',
-      height : '500px'
-    })
-  }
-
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.destroy$.next()
   }
 

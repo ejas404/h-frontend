@@ -10,8 +10,8 @@ export class MessagTextService{
         private socket : Socket
     ){}
 
-    send(text : string){
-        this.socket.emit('msg', text)
+    send(data : {text : string, reciever : string}){
+        this.socket.emit('msg', data)
     }
 
     recieve(): Observable<string>{

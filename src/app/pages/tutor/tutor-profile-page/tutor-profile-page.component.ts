@@ -15,6 +15,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ToastService } from 'app/core/services/shared/toast_service';
 import { TutorPopupComponent } from 'app/shared/popups/tutor-popup/tutor-popup.component';
 import { ConfirmBoxHelper } from 'app/core/utils/confirm_box-helper';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-tutor-profile-page',
@@ -34,8 +35,9 @@ export class TutorProfilePageComponent implements OnInit {
     private store: Store,
     private service: TutorProfileService,
     private dialogRef: MatDialog,
-    private toastService : ToastService,
-    private confirmBox : ConfirmBoxHelper
+    private toastService: ToastService,
+    private confirmBox: ConfirmBoxHelper,
+    private socket: Socket
   ) { }
 
   profileUpdate = new FormGroup({
@@ -45,6 +47,10 @@ export class TutorProfilePageComponent implements OnInit {
   })
 
   ngOnInit(): void {
+
+    // establish connection on socket
+    this.socket.on('connection', () => { })
+
     this.getData()
   }
 
@@ -100,16 +106,16 @@ export class TutorProfilePageComponent implements OnInit {
       })
   }
 
-  
+
   addEducation() {
     this.dialogRef.open(TutorPopupComponent)
   }
 
   async deleteEduEvent(id: string) {
     const check = await this.confirmBox.call('Are your sure about deleting the education details')
-    if(!check) return ;
+    if (!check) return;
     this.deleteEducation(id)
-         
+
   }
 
   deleteEducation(id: string) {

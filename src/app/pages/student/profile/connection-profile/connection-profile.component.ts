@@ -9,41 +9,42 @@ import { Subject, pipe, takeUntil } from 'rxjs';
   selector: 'app-connection-profile',
   templateUrl: './connection-profile.component.html',
   styleUrl: './connection-profile.component.scss',
-  providers : [StudentConnectionService]
+  providers: [StudentConnectionService]
 })
 export class ConnectionProfileComponent {
   destroy$ = new Subject<void>()
   connList !: ConnectionsResponse[];
 
   constructor(
-    private connService : StudentConnectionService,
-    private dialogRef : MatDialog
-  ){}
+    private connService: StudentConnectionService,
+    private dialogRef: MatDialog
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.fetchConnections()
   }
-  fetchConnections(){
+  fetchConnections() {
     this.connService.getConnections()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : res =>{
-        this.connList = res.connections
-      },
-      error : err => {
-        console.log(err)
-      }
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          this.connList = res.connections
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
+  }
+
+  message(id: string) {
+    this.dialogRef.open(ChatboxSharedComponent, {
+      width: '500px',
+      height: '500px',
+      data: { id }
     })
   }
 
-  message(id : string){
-    this.dialogRef.open(ChatboxSharedComponent,{
-      width : '500px',
-      height : '500px'
-    })
-  }
-
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.destroy$.next()
   }
 
