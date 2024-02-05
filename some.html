@@ -1,49 +1,131 @@
-<div class="section-lists">
-    <ng-container *ngIf="videoList else noVideoList">
-        <div *ngFor="let each of videoList; let i = index ;" class="section">
-            <div class="group section-title flex justify-between px-2 py-3 border-b border-b-white relative {{bg}} {{text}}"
-                (click)="selectedSection = i">
-                <h1 class="text-md">{{each.title}}</h1>
-                <p class="text-md">{{each.courseVideos.length}} classes -
-                    {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
+<main class="w-full h-[calc(100vh-3rem)] px-[7rem] py-[2rem] ">
+    <div class="tutor_profile flex h-full w-full">
 
-                <div  *ngIf="user !== 'student'"
-                    class="absolute right-[-3rem] invisible text-admin-primary group-hover:visible children:cursor-pointer">
-                    <ng-icon class="mx-2" name="bootstrapPencilSquare"></ng-icon> <ng-icon
-                        name="bootstrapTrash3Fill"></ng-icon>
+        <div class="tutor-profile-left max-w-[15rem] basis-1/4">
+            <div class="group relative inline-block h-[6rem] w-[6rem] rounded overflow-hidden border border-light-gray">
+                <img class="object-cover w-full h-full" src="{{tutorData.profile | customImageUrl}}" alt="">
+                <div class="absolute left-0 bottom-0 bg-light-gray right-0 opacity-80 text-end px-2 py-1
+                            invisible group-hover:visible"> 
+                    <ng-icon class="text-black block cursor-pointer" (click)="editProfImage()" name="bootstrapPencilSquare"></ng-icon>
                 </div>
             </div>
-            <ul *ngIf="selectedSection === i" class="{{bg_section_list}}">
-                <ng-container *ngIf="each.courseVideos.length else noVideos">
-                    <li *ngFor="let video of each.courseVideos ; let k = index"
-                        class="p-2 flex justify-between border-b border-b-black">
+            <p class="text-sm">“the pulse of the globe is in mathematics, without mathematics globe is a big zero”</p>
 
-                        <a routerLink="{{setUserRoute()}}/{{courseDetails._id}}/{{video._id}}">
-
-                        
-                            <p>{{k+1}}. <span
-                                    class="hover:text-blue-700 hover:underline cursor-pointer">{{video.title}}</span>
-                            </p>
-                        </a>
-                        <p>{{video.duration | customDuration}} </p>
-                    </li>
-                </ng-container>
-                <ng-template #noVideos>
-                    <li class="p-2 flex justify-between border-b border-b-black">
-                        <p><span class="hover:text-blue-700 hover:underline cursor-pointer">No videos are
-                                available</span></p>
-
-                    </li>
-                </ng-template>
-            </ul>
+            <div class="tutor-tags overflow-y-auto">
+                <div class="languages">
+                    <div class="flex justify-between my-2">
+                      <h1 class=" text-sm text-gray">Languages</h1>
+                      <ng-icon class="text-black block cursor-pointer" name="bootstrapPencilSquare" (click)="editTag('language')" ></ng-icon>
+                    </div>
+                    <p *ngFor="let each of tutorData.language" class="bg-tutor-primary text-white me-1 px-2 my-1 inline-block">{{each}}</p>
+                  </div>
+      
+                  <div class="field w-full">
+                      <div class="flex justify-between my-2">
+                          <h1 class=" text-sm text-gray">Field</h1>
+                          <ng-icon class="text-black block cursor-pointer" name="bootstrapPencilSquare" (click)="editTag('field')" ></ng-icon>
+                        </div>
+                      <p  *ngFor="let each of tutorData.field" class="bg-tutor-primary text-white me-1 px-2 my-1 inline-block">{{each}}</p>
+                  </div>
+                  <div class="teaches">
+                      <div class="flex justify-between my-2">
+                          <h1 class=" text-sm text-gray">Teaches</h1>
+                          <ng-icon class="text-black block cursor-pointer" name="bootstrapPencilSquare" (click)="editTag('teaches')" ></ng-icon>
+                        </div>
+                        <p  *ngFor="let each of tutorData.teaches" class="bg-tutor-primary text-white me-1 px-2 my-1 inline-block">{{each}}</p>
+                  </div>
+            </div>
         </div>
-    </ng-container>
-    <ng-template #noVideoList>
-        <h1 *ngIf="user !== 'student' else studentCoursePage" class="text-lg text-gray">Add classes in the
-            course</h1>
-        <ng-template #studentCoursePage>
-            <h1 class="text-lg text-gray">No classes yet provided in the course</h1>
-        </ng-template>
-    </ng-template>
+        <div class="tutor-profile-right px-10 h-full basis-4/5">
+            <div class="top border-y-2 border-stone-400">
+                <div class="my-3">
+                    <form [formGroup]="profileUpdate" (ngSubmit)="updateUser()">
+                        <div class="children:my-1">
+                            <div class="name">
 
-</div>
+                                <input
+                                    class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1 text-black'}}"
+                                    [readOnly]="!edit" type="text" value="Enter Your Name" formControlName="name"><br>
+                                <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('required')">name is
+                                    required !</p>
+                                <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('minlength')">name
+                                    should contain atleast 3 characters !</p>
+                            </div>
+                            <div class="email">
+                                <input
+                                    class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1'}}"
+                                    [readOnly]="!edit" type="email" placeholder="Enter Your Name"
+                                    formControlName="email"><br>
+                                <p class="text-red-600" *ngIf="profileUpdate.get('email')?.hasError('required')">email
+                                    is required !</p>
+                                <p class="text-red-600" *ngIf="profileUpdate.get('email')?.hasError('email')">enter a
+                                    valid email !</p>
+
+                            </div>
+                            <div class="contact">
+                                <input
+                                    class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1'}}"
+                                    [readOnly]="!edit" type="text" placeholder="Add Your Contact Number"
+                                    formControlName="contact"><br>
+                                <p class="text-red-600" *ngIf="profileUpdate.get('contact')?.hasError('pattern')">enter
+                                    a valid number</p>
+                            </div>
+
+                        </div>
+                        <div class="button my-2 text-end">
+                            <button *ngIf="!edit" type="button"
+                                class="text-md font-semibold rounded text-white bg-tutor-primary px-3 py-1"
+                                (click)="onEditClick()">Edit profile</button>
+
+                            <button *ngIf="edit" type="button"
+                                class="text-md font-semibold rounded text-white bg-tutor-primary px-3 py-1 me-3"
+                                (click)="cancelEdit()">Cancel</button>
+
+                            <button *ngIf="edit" [disabled]="profileUpdate.invalid" type="submit"
+                                class="text-md font-semibold rounded text-white bg-primary px-3 py-1">Update</button>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="border-b-2 border-stone-400 h-[2.5rem] children:h-full">
+                    <ul class="flex m-[0] children:mx-2 children:flex children:items-center children:h-full">
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="routers">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</main>
+
+<section class="py-2">
+    <div class="title flex justify-between my-2">
+        <h1 class="text-2xl font-bold">Education</h1>
+        <button class="bg-tutor-primary text-white px-[11px] py-1 font-bold rounded-full" (click)="addEducation()">+</button>
+    </div>
+
+    <div class="education-list my-1 grid grid-cols-2 gap-3">
+        <div *ngFor="let each of educationDetails" class="group education-detail flex border border-transparent rounded
+         hover:border-light-gray relative">
+
+            <div class="absolute right-0 invisible group-hover:visible p-1 cursor-pointer" (click)="deleteEducation(each.ed_id)">
+                <ng-icon name="bootstrapTrash3Fill"></ng-icon>
+            </div>
+
+            <div class="icon p-4 bg-zinc-200 rounded">
+                <img class="w-[3rem] h-auto" src="../../../../assets/icons/graduation-cap-svgrepo-com.svg" alt="">
+            </div>
+            <div class="description px-1">
+                <h3 class="font-bold">{{each.university}}</h3>
+                <p class="text-sm text-light-gray">{{each.stream}}</p>
+                <p class="text-sm text-light-gray">{{each.country}}</p>
+                <p class="text-xs font-semibold">{{each.year}}</p>
+            </div>
+        </div>
+    </div>
+</section>
