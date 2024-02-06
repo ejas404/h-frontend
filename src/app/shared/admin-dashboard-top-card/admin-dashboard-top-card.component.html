@@ -1,11 +1,11 @@
 <a routerLink="/admin/{{title}}">
     <div
-        class="dashboard-card mx-auto flex justify-between items-center border-[1.5px] {{border}} px-2 py-1 w-[70%] rounded-lg">
+        class="dashboard-card flex justify-between items-center border-[1.5px] {{border}} px-2 py-1 w-[70%] rounded-lg">
         <div class="left me-5">
             <h1 class="text-sm font-semibold">Total {{title | titlecase}}</h1>
             <p class="text-lg font-bold">{{count}}</p>
         </div>
-        <div class="right m-2 my-3 w-[3rem] h-[3rem] {{bg}} rounded-full flex items-center justify-center">
+        <div class="right m-2 w-[3rem] h-[3rem] {{bg}} rounded-full flex items-center justify-center">
             <ng-icon class="text-2xl {{text}}" name="{{icon}}"></ng-icon>
         </div>
     </div>
