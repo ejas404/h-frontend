@@ -4,39 +4,34 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { AuthEffects } from './core/state/auth/effect';
-import { dashboardReducer } from './core/state/admin/dashboard/reducer';
-
-
-import { AppComponent } from './app.component';
 import { EffectsModule } from '@ngrx/effects';
-import { authReducer } from './core/state/auth/reducer';
-import { DashboardEffects } from './core/state/admin/dashboard/effects';
-import { studProfReducer } from './core/state/student/profile_page/reducer';
-import { StudentProfileEffect } from './core/state/student/profile_page/effects';
-import { TutorProfileEffect } from './core/state/tutor/profile/effects';
-import { tutorProfReducer } from './core/state/tutor/profile/reducer';
-
-
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { singleCourseReducer } from './core/state/admin/courses/reducer';
-import { AuthTokenInterceptor } from './core/interceptors/auth-token-interceptor';
-import { SharedModules } from './modules/shared_modules';
 import { SharedComponentsModule } from './modules/custom_modules/shared_components_modules';
 import { AdminDashboardModule } from './modules/feature_modules/admin_dashboard_module';
 import { HomePageModule } from './modules/feature_modules/home_page_module';
 import { TutorModule } from './modules/feature_modules/tutor_module';
 import { UserProfileModule } from './modules/feature_modules/user_profile_module';
 import { ReusableComponentsModule } from './modules/custom_modules/reusables_module';
+import { SharedModules } from './modules/shared_modules';
+
+import { AuthEffects } from './core/state/auth/effect';
+import { DashboardEffects } from './core/state/admin/dashboard/effects';
+import { StudentProfileEffect } from './core/state/student/profile_page/effects';
+import { TutorProfileEffect } from './core/state/tutor/profile/effects';
+
+import { dashboardReducer } from './core/state/admin/dashboard/reducer';
+import { authReducer } from './core/state/auth/reducer';
+import { tutorProfReducer } from './core/state/tutor/profile/reducer';
+import { studProfReducer } from './core/state/student/profile_page/reducer';
+import { singleCourseReducer } from './core/state/admin/courses/reducer';
+
+import { AuthTokenInterceptor } from './core/interceptors/auth-token-interceptor';
 import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner_interceptor';
-import { CheckOutPageComponent } from './pages/student/profile/check-out-page/check-out-page.component';
+
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
-<<<<<<< Updated upstream
-=======
 import { AppComponent } from './app.component';
-import { AdminDashboardTopCardComponent } from './shared/admin-dashboard-top-card/admin-dashboard-top-card.component';
->>>>>>> Stashed changes
+
 @NgModule({
   declarations: [
     AppComponent
@@ -69,7 +64,8 @@ import { AdminDashboardTopCardComponent } from './shared/admin-dashboard-top-car
         StudentProfileEffect,
         TutorProfileEffect
       ]
-    )
+    ),
+    
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -78,7 +74,6 @@ import { AdminDashboardTopCardComponent } from './shared/admin-dashboard-top-car
     ConfirmationService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ProgressSpinnerInterceptor, multi: true },
-
   ],
   bootstrap: [AppComponent]
 })

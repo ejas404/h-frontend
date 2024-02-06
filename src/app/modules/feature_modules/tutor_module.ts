@@ -11,6 +11,7 @@ import { TutorStudentsComponent } from "app/pages/tutor/tutor-students/tutor-stu
 import { SharedComponentsModule } from "../custom_modules/shared_components_modules";
 import { ReusableComponentsModule } from "../custom_modules/reusables_module";
 import { SharedModules } from "../shared_modules";
+import { TutorSideNavComponent } from "app/pages/tutor/tutor-side-nav/tutor-side-nav.component";
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { SharedModules } from "../shared_modules";
         TutorStudentsComponent,
         TutorNotificationComponent,
         TutorCourseSinglePageComponent,
+        TutorSideNavComponent
     ],
     imports : [
         SharedModules,

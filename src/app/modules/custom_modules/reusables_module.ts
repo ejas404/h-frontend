@@ -29,6 +29,9 @@ import { ProgressSpinnerReusableComponent } from "app/reusables/animations/progr
 import { CheckoutBoxComponent } from "app/reusables/templates/checkout-box/checkout-box.component";
 import { CartBtnComponent } from "app/reusables/buttons/add-go-btn-component";
 import { CommonBtnReusableComponent } from "app/reusables/buttons/common-btn-component";
+import { SmallCourseListComponent } from "app/reusables/templates/small-course-list/small-course-list.component";
+import { SuccessFailTemplateComponent } from "app/reusables/templates/success-fail-template/success-fail-template.component";
+import { HyperLinkTextComponent } from "app/reusables/typography/hyper_link_text";
 
 
 
@@ -58,7 +61,10 @@ import { CommonBtnReusableComponent } from "app/reusables/buttons/common-btn-com
         ProgressSpinnerReusableComponent,
         CheckoutBoxComponent,
         CartBtnComponent,
-        CommonBtnReusableComponent
+        CommonBtnReusableComponent,
+        SmallCourseListComponent,
+        SuccessFailTemplateComponent,
+        HyperLinkTextComponent
 
     ],
     exports : [
@@ -86,7 +92,10 @@ import { CommonBtnReusableComponent } from "app/reusables/buttons/common-btn-com
         ProgressSpinnerReusableComponent,
         CheckoutBoxComponent,
         CartBtnComponent,
-        CommonBtnReusableComponent
+        CommonBtnReusableComponent,
+        SmallCourseListComponent,
+        SuccessFailTemplateComponent,
+        HyperLinkTextComponent
 
     ],
     imports :[

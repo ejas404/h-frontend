@@ -29,4 +29,5 @@ export class StudentCourseService{
     getVideo(id : string){
         return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/student/get-video/${id}`)
     }
+
 }

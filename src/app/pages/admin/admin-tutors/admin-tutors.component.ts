@@ -2,12 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as DashboardActions from '../../../../app/core/state/admin/dashboard/action'
 import { getTutorList } from '../../../core/state/admin/dashboard/reducer';
 import { Store } from '@ngrx/store';
-import { TutorModel } from '../../../core/models/tutor';
-import { DashboardService } from '../../../core/services/admin/dashboard';
-import { MessageService } from 'primeng/api';
-import { ConfirmBoxService } from '../../../core/services/shared/confirm-dialog';
 import { TableHeaderModel, UserDetailsTableModel } from '../../../core/models/table.model';
 import { Subject, takeUntil } from 'rxjs';
+import { ConfirmBoxHelper } from 'app/core/utils/confirm_box-helper';
 
 @Component({
   selector: 'app-admin-tutors',
@@ -28,9 +25,7 @@ export class AdminTutorsComponent implements OnDestroy, OnInit {
 
   constructor(
     private store: Store,
-    private service: DashboardService,
-    private messageService: MessageService,
-    private confirmService: ConfirmBoxService
+    private confirmBox: ConfirmBoxHelper
   ) { }
 
 
@@ -38,6 +33,7 @@ export class AdminTutorsComponent implements OnDestroy, OnInit {
     this.fetchTutorList()
   }
 
+<<<<<<< HEAD
   fetchTutorList() {
     this.store.select(getTutorList)
       .pipe(takeUntil(this.destroy$))
@@ -73,18 +69,25 @@ export class AdminTutorsComponent implements OnDestroy, OnInit {
           }
         })
 =======
+=======
+>>>>>>> socket
   async deleteUser(id: string) {
 
     if (typeof (id) !== 'string') return;
     const check = await this.confirmBox.call('Are your sure about deleting this tutor')
     if (!check) return;
+<<<<<<< HEAD
     this.store.dispatch(DashboardActions.deleteUser({ id, user: 'tutors' }))
 >>>>>>> Stashed changes
+=======
+    this.store.dispatch(DashboardActions.deleteUser({ id ,user : 'tutors'}))
+>>>>>>> socket
 
-    }
   }
 
+  async blockUser(id: string) {
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
     if (typeof (id) !== 'string') return;
@@ -92,61 +95,18 @@ export class AdminTutorsComponent implements OnDestroy, OnInit {
     if (!check) return;
     this.store.dispatch(DashboardActions.blockRequest({ user_id: id, user: 'tutors' }))
 >>>>>>> Stashed changes
+=======
+    if (typeof (id) !== 'string') return;
+    const check = await this.confirmBox.call('Are your sure about block this tutor')
+    if (!check) return;
+    this.store.dispatch(DashboardActions.blockRequest({ user_id: id,user : 'tutors' }))
+>>>>>>> socket
 
-
-  blockUser(id: string | undefined) {
-    if (typeof (id) === 'string') {
-      this.confirmService
-        .confirmDialog('Are your sure about blocking the tutor')
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: data => {
-            if (data) {
-              this.service.blockTutor(id)
-              .pipe(takeUntil(this.destroy$))
-              .subscribe({
-                next: data => {
-                  this.store.dispatch(DashboardActions.blockTutorSuccess(data))
-                  this.successMessage('blocked')
-                },
-                error: err => {
-                  console.log(err)
-                  this.failureMessage('block')
-                }
-              })
-            }
-          }
-        }
-        )
-    }
   }
 
-  unblockUser(id: string | undefined) {
-    if (typeof (id) === 'string') {
-      this.confirmService
-      .confirmDialog('Are your sure about unblocking the tutor')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: data => {
-          if (data) {
-            this.service.unblockTutor(id)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-              next: data => {
-                this.store.dispatch(DashboardActions.unblockTutorSuccess(data))
-                this.successMessage('unblocked')
-              },
-              error: err => {
-                console.log(err)
-                this.failureMessage('unblock')
-              }
-            })
-          }
-        }
-      })    
-    }
-  }
+  async unblockUser(id: string) {
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   successMessage(data: string) {
     this.messageService.add({
@@ -161,13 +121,13 @@ export class AdminTutorsComponent implements OnDestroy, OnInit {
     if (!check) return;
     this.store.dispatch(DashboardActions.unblockRequest({ user_id: id, user: 'tutors' }))
 >>>>>>> Stashed changes
+=======
+    if (typeof (id) !== 'string') return;
+    const check = await this.confirmBox.call('Are your sure about unblock this tutor')
+    if (!check) return;
+    this.store.dispatch(DashboardActions.unblockRequest({ user_id: id,user : 'tutors' }))
+>>>>>>> socket
 
-  failureMessage(data: string) {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Failed',
-      detail: `failed to ${data} tutor`
-    })
   }
 
   ngOnDestroy() {

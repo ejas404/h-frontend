@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as DashboardActions from '../../../core/state/admin/dashboard/action';
 import { getUsersList } from '../../../core/state/admin/dashboard/reducer';
-import { ConfirmBoxService } from '../../../core/services/shared/confirm-dialog';
 import { TableHeaderModel, UserDetailsTableModel } from '../../../core/models/table.model';
 import { Subject, takeUntil } from 'rxjs';
+import { ConfirmBoxHelper } from 'app/core/utils/confirm_box-helper';
 
 @Component({
   selector: 'app-admin-students',
@@ -26,76 +26,61 @@ export class AdminStudentsComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    private confirmService: ConfirmBoxService
+    private confirmBox: ConfirmBoxHelper
   ) { }
-  
+
 
   ngOnInit(): void {
 <<<<<<< Updated upstream
     this.store.dispatch(DashboardActions.dashboardRequest());
+    this.fetchUserList()
+  }
 
+<<<<<<< HEAD
 =======
     this.fetchStudentList()
   }
 
   fetchStudentList() {
 >>>>>>> Stashed changes
+=======
+  fetchUserList() {
+>>>>>>> socket
     this.store.select(getUsersList)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((state) => {
-      this.userList = state as UserDetailsTableModel[]
-    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((state) => {
+        this.userList = state as UserDetailsTableModel[]
+      })
   }
 
-  deleteUser(id: string) {
-    if (id) {
-      this.confirmService
-        .confirmDialog('Are your sure about deleting the user')
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: data => {
-            if (data) {
-              this.store.dispatch(DashboardActions.deleteUser({ id }))
-            }
-          }
-        })
-    }
+  async deleteUser(id: string) {
+
+    if (typeof (id) !== 'string') return;
+    const check = await this.confirmBox.call('Are your sure about deleting this user')
+    if (!check) return;
+    this.store.dispatch(DashboardActions.deleteUser({ id ,user : 'users'}))
+
   }
 
+  async blockUser(id: string) {
 
+    if (typeof (id) !== 'string') return;
+    const check = await this.confirmBox.call('Are your sure about block this user')
+    if (!check) return;
+    this.store.dispatch(DashboardActions.blockRequest({ user_id: id,user : 'users' }))
 
-
-  blockUser(id: string) {
-    if (id) {
-      this.confirmService
-        .confirmDialog('Are your sure about block this user')
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: data => {
-            if (data) {
-              this.store.dispatch(DashboardActions.blockRequest({ user_id: id }))
-            }
-          }
-        })
-    }
   }
 
-  unblockUser(id: string) {
-    if (id) {
-      this.confirmService
-        .confirmDialog('Are your sure about unblock this user')
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: data => {
-            if (data) {
-              this.store.dispatch(DashboardActions.unblockRequest({ user_id: id }))
-            }
-          }
-        })
-    }
+  async unblockUser(id: string) {
+
+    if (typeof (id) !== 'string') return;
+    const check = await this.confirmBox.call('Are your sure about unblock this user')
+    if (!check) return;
+    this.store.dispatch(DashboardActions.unblockRequest({ user_id: id,user : 'users' }))
+
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.destroy$.next()
     this.destroy$.complete()
   }

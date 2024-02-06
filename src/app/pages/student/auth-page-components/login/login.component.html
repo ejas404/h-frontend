@@ -3,7 +3,9 @@
         <div class="login-page-left basis-2/5 flex flex-col px-5 py-5">
             <div class="login-form-top flex-1 flex items-center">
                 <div class="form px-5 ">
-                    <reusable-login-template [usedFor]="'student'" (submitEvent)="onSubmitClick($event)"></reusable-login-template>
+                    <reusable-login-template [usedFor]="'student'" (submitEvent)="onSubmitClick($event)"
+                    (googleSignUp)="googleSignUp()"
+                    ></reusable-login-template>
                 </div>
             </div>
             <div class="login-form-bottom text-center">

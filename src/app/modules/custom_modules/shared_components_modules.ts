@@ -21,12 +21,8 @@ import { SectionPopupComponent } from "app/shared/popups/course-popups/section-p
 import { ReusableComponentsModule } from "./reusables_module";
 import { SelectCategoryComponentComponent } from "app/shared/select-category-component/select-category-component.component";
 import { CategoryPopupComponent } from "app/shared/popups/course-popups/category-popup/category-popup.component";
-<<<<<<< Updated upstream
-=======
-import { ChatboxSharedComponent } from "app/shared/chatbox-shared/chatbox-shared.component";
 import { AdminDashboardTopCardComponent } from "app/shared/admin-dashboard-top-card/admin-dashboard-top-card.component";
->>>>>>> Stashed changes
-
+import { ChatboxSharedComponent } from "app/shared/chatbox-shared/chatbox-shared.component";
 
 @NgModule({
     declarations: [
@@ -45,16 +41,9 @@ import { AdminDashboardTopCardComponent } from "app/shared/admin-dashboard-top-c
         VideoUploadPopupComponent,
         SectionPopupComponent,
         SelectCategoryComponentComponent,
-<<<<<<< Updated upstream
-        CategoryPopupComponent
-
-
-
-=======
         CategoryPopupComponent,
         ChatboxSharedComponent,
         AdminDashboardTopCardComponent
->>>>>>> Stashed changes
     ],
     exports: [
         ProfileImagePopupComponent,
@@ -71,13 +60,8 @@ import { AdminDashboardTopCardComponent } from "app/shared/admin-dashboard-top-c
         SnotfoundComponent,
         SelectCategoryComponentComponent,
         CategoryPopupComponent,
-<<<<<<< Updated upstream
-        
-
-=======
         ChatboxSharedComponent,
         AdminDashboardTopCardComponent
->>>>>>> Stashed changes
     ],
     imports: [
         ImageCropperModule,

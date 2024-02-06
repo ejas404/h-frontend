@@ -12,15 +12,11 @@ export class ConfirmBoxService{
     constructor(private dialog : MatDialog){}
 
     confirmDialog(msg : string): Observable<boolean> {
-        const message = msg;
-    
-        const dialogData = new ConfirmDialogModel("Confirm Action", message);
-    
+        const dialogData = new ConfirmDialogModel("Confirm Action", msg);
         const dialogRef = this.dialog.open(ConfirmBoxComponent, {
           maxWidth: "400px",
           data: dialogData
         });
-    
         return dialogRef.afterClosed()
       }
 }

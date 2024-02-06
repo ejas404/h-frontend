@@ -10,7 +10,11 @@
             [bg]="'bg-light-gray'" 
             [text]="'text-black'"
             [bg_section_list]="'bg-slate-100'" 
-            [videoList]="courseVideoList">
+            [videoList]="courseVideoList"
+            [courseDetails]="courseDetails"
+            (videoEvent)="videoChanged($event)"
+            calledFor="video"
+            >
         </course-sections-list>
     </div>
 </section>

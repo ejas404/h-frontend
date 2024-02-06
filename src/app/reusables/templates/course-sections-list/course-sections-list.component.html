@@ -1,21 +1,36 @@
 <div class="section-lists w-full p-3">
     <ng-container *ngIf="videoList else noVideoList">
+
         <div *ngFor="let each of videoList; let i = index ;" class="section">
+            
             <div class="section-title flex justify-between px-2 py-3 border-b border-b-white relative {{bg}} {{text}}"
                 (click)="sectionSelected(i)">
                 <h1 class="text-md">{{each.title}}</h1>
                 <p class="text-md">{{each.courseVideos.length |customPluraliser  }} - {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
             </div>
+
             <ul *ngIf="selectedSection === i" class="{{bg_section_list}}">
+                
                 <ng-container *ngIf="each.courseVideos.length else noVideos">
                     <li *ngFor="let video of each.courseVideos ; let k = index"
                         class="p-2 flex justify-between border-b border-b-black">
-                        <p>{{k+1}} <span
-                                class="hover:text-blue-700 hover:underline cursor-pointer">{{video.title}}</span>
+
+                        <p>{{k+1}} 
+                            <hyper-link-text 
+                            [setHyper]="checkHyper(video)"
+                            [routerLink]="setUserRoute(courseDetails._id,video)" 
+                            (click)="videoClick(video._id)"
+                           >
+                           {{video.title}}
+                        </hyper-link-text>        
                         </p>
+
+
                         <p>{{video.duration | customDuration}} </p>
                     </li>
                 </ng-container>
+
+                <!-- else case if no videos in section -->
                 <ng-template #noVideos>
                     <li class="p-2 flex justify-between border-b border-b-black">
                         <p><span class="hover:text-blue-700 hover:underline cursor-pointer">No videos are
@@ -24,8 +39,12 @@
                     </li>
                 </ng-template>
             </ul>
+
         </div>
     </ng-container>
+
+    <!-- if no videos this template will be shown -->
+
     <ng-template #noVideoList>
         <h1 *ngIf="user !== 'student' else studentCoursePage" class="text-lg text-gray">Add classes in the course</h1>
         <ng-template #studentCoursePage>

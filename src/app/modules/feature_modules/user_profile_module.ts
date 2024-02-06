@@ -13,6 +13,11 @@ import { CartProfileComponent } from "app/pages/student/profile/cart-profile/car
 import { CartProductTemplateComponent } from "app/pages/student/profile/cart-product-template/cart-product-template.component";
 import { StudentVideoPreviewComponent } from "app/pages/student/student-video-preview/student-video-preview.component";
 import { CheckOutPageComponent } from "app/pages/student/profile/check-out-page/check-out-page.component";
+import { PaymentSuccessComponent } from "app/pages/payment_sucess";
+import { PaymentProcessingComponent } from "app/pages/student/payment-components.ts/payment-processing/payment-processing.component";
+import { FreeBuyComponent } from "app/pages/student/payment-components.ts/free-buy/free-buy.component";
+import { OauthComponentComponent } from "app/pages/student/auth-page-components/oauth-component/oauth-component.component";
+
 
 @NgModule({
     declarations : [
@@ -25,13 +30,17 @@ import { CheckOutPageComponent } from "app/pages/student/profile/check-out-page/
         CartProfileComponent,
         CartProductTemplateComponent,
         StudentVideoPreviewComponent,
-        CheckOutPageComponent
+        CheckOutPageComponent,
+        PaymentSuccessComponent,
+        PaymentProcessingComponent,
+        FreeBuyComponent,
+        OauthComponentComponent
     ],
     imports : [
         SharedModules,
         SharedComponentsModule,
-        ReusableComponentsModule,
+        ReusableComponentsModule
+    ],
 
-    ]
 })
 export class UserProfileModule{}

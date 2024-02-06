@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { studentLoginReq } from '../../../../core/state/auth/action';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginOtpComponent } from '../login-otp/login-otp.component';
+import { getGoogleOAuthURL } from 'app/core/utils/oauth';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,11 @@ export class LoginComponent {
   onSubmitClick(form : NgForm){
     let credentials = form.value
     this.store.dispatch(studentLoginReq({credentials}))
+  }
+
+  googleSignUp(){
+    const uri = getGoogleOAuthURL()
+    window.location.href = uri
   }
 
   loginWithOtp(){

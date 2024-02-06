@@ -12,12 +12,12 @@ export class SingleCourseReusableComponent {
 
   selectedSection !: number
 
-  @Input()user !: 'admin'|'student'|'tutor'
+  @Input()user !: 'admin'|'student'|'tutor'|'profile'
   @Input()bg !: string
   @Input()text !: string
   @Input()bg_section_list !: string
   @Input()isCartItem : boolean = false
-
+  @Input()isEnrolled !: boolean 
 
   @Input()courseDetails !: CourseDetailsResponse
   @Input()videoList !:  CourseVideoResponseList[] 
@@ -54,15 +54,6 @@ export class SingleCourseReusableComponent {
   }
   addVideo(){
     this.video.emit(null)
-  }
-
-  // set the course videolist route url dynamically
-  setUserRoute(){
-    let route = '/course'
-    if(this.user === 'admin') route = '/admin/course' ;
-    if(this.user === 'tutor') route = '/tutor/course' ;
-
-    return route;
   }
 
   // calculate the sections video duration

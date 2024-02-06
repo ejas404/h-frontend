@@ -3,9 +3,7 @@ import { BASE_URL } from '../../constant/uri';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/auth';
-import { CourseDetails, CourseDetailsResponse } from '../../models/course';
 import { TutorModel } from '../../models/tutor';
-import { AdminCourseTutorResponse } from '../../models/admin_model';
 
 
 interface UserLists {
@@ -19,36 +17,26 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<UserLists> {
+  getUsers() {
     return this.http.get<UserLists>(`${BASE_URL}/admin/users`)
   }
 
-  deleteUser(id: string): Observable<UserModel> {
-    return this.http.delete<UserModel>(`${BASE_URL}/admin/users/${id}`)
-  }
-
-  updateUser(userData: UserModel): Observable<UserModel> {
+  updateUser(userData: UserModel){
     return this.http.put<UserModel>(`${BASE_URL}/admin/users/update`, userData)
   }
 
-  blockUser(id: string): Observable<UserModel> {
-    return this.http.put<UserModel>(`${BASE_URL}/admin/users/block/${id}`, {})
+  // dynamically changes for tutor and users
+
+  deleteUser(id: string,user : string){
+    return this.http.delete<UserModel>(`${BASE_URL}/admin/${user}/${id}`)
   }
 
-  unblockUser(id: string): Observable<UserModel> {
-    return this.http.put<UserModel>(`${BASE_URL}/admin/users/unblock/${id}`, {})
+  blockUser(id: string,user : string){
+    return this.http.put<UserModel>(`${BASE_URL}/admin/${user}/block/${id}`, {})
   }
 
-  deleteTutor(id: string): Observable<{tutor : TutorModel}> {
-    return this.http.delete<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/${id}`)
-  }
-
-  blockTutor(id: string): Observable<{tutor : TutorModel}> {
-    return this.http.put<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/block/${id}`,{})
-  }
-
-  unblockTutor(id: string) {
-    return this.http.put<{tutor : TutorModel}>(`${BASE_URL}/admin/tutors/unblock/${id}`, {})
+  unblockUser(id: string,user : string){
+    return this.http.put<UserModel>(`${BASE_URL}/admin/${user}/unblock/${id}`, {})
   }
 
 }

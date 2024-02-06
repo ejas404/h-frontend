@@ -82,6 +82,9 @@ export class StudentVideoPreviewComponent {
     })
   }
 
-
+  videoChanged(id : string){
+    if(typeof(id) !== 'string' || id === this.videoDetails._id) return;
+    this.fetchVideo(id)
+  }
 
 }
