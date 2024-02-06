@@ -31,21 +31,10 @@ export class AdminStudentsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-<<<<<<< Updated upstream
-    this.store.dispatch(DashboardActions.dashboardRequest());
-    this.fetchUserList()
-  }
-
-<<<<<<< HEAD
-=======
     this.fetchStudentList()
   }
 
   fetchStudentList() {
->>>>>>> Stashed changes
-=======
-  fetchUserList() {
->>>>>>> socket
     this.store.select(getUsersList)
       .pipe(takeUntil(this.destroy$))
       .subscribe((state) => {
@@ -58,7 +47,7 @@ export class AdminStudentsComponent implements OnInit, OnDestroy {
     if (typeof (id) !== 'string') return;
     const check = await this.confirmBox.call('Are your sure about deleting this user')
     if (!check) return;
-    this.store.dispatch(DashboardActions.deleteUser({ id ,user : 'users'}))
+    this.store.dispatch(DashboardActions.deleteUser({ id, user: 'users' }))
 
   }
 
@@ -67,7 +56,7 @@ export class AdminStudentsComponent implements OnInit, OnDestroy {
     if (typeof (id) !== 'string') return;
     const check = await this.confirmBox.call('Are your sure about block this user')
     if (!check) return;
-    this.store.dispatch(DashboardActions.blockRequest({ user_id: id,user : 'users' }))
+    this.store.dispatch(DashboardActions.blockRequest({ user_id: id, user: 'users' }))
 
   }
 
@@ -76,7 +65,7 @@ export class AdminStudentsComponent implements OnInit, OnDestroy {
     if (typeof (id) !== 'string') return;
     const check = await this.confirmBox.call('Are your sure about unblock this user')
     if (!check) return;
-    this.store.dispatch(DashboardActions.unblockRequest({ user_id: id,user : 'users' }))
+    this.store.dispatch(DashboardActions.unblockRequest({ user_id: id, user: 'users' }))
 
   }
 
