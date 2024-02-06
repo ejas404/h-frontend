@@ -31,8 +31,15 @@ export class AdminStudentsComponent implements OnInit, OnDestroy {
   
 
   ngOnInit(): void {
+<<<<<<< Updated upstream
     this.store.dispatch(DashboardActions.dashboardRequest());
 
+=======
+    this.fetchStudentList()
+  }
+
+  fetchStudentList() {
+>>>>>>> Stashed changes
     this.store.select(getUsersList)
     .pipe(takeUntil(this.destroy$))
     .subscribe((state) => {

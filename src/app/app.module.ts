@@ -32,6 +32,11 @@ import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner
 import { CheckOutPageComponent } from './pages/student/profile/check-out-page/check-out-page.component';
 
 
+<<<<<<< Updated upstream
+=======
+import { AppComponent } from './app.component';
+import { AdminDashboardTopCardComponent } from './shared/admin-dashboard-top-card/admin-dashboard-top-card.component';
+>>>>>>> Stashed changes
 @NgModule({
   declarations: [
     AppComponent

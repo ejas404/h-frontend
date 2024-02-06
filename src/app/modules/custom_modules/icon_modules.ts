@@ -17,7 +17,16 @@ import {
     bootstrapStar,
     bootstrapFileEarmarkText,
     bootstrapBookmarkFill,
+<<<<<<< Updated upstream
     bootstrapCart3
+=======
+    bootstrapCart3,
+    bootstrapMortarboardFill,
+    bootstrapBellFill,
+    bootstrapBarChartLineFill,
+    bootstrapBookFill,
+    bootstrapPersonFill
+>>>>>>> Stashed changes
 
 } from '@ng-icons/bootstrap-icons';
 
@@ -41,7 +50,16 @@ import {
                 bootstrapExclamationOctagon,
                 bootstrapFileEarmarkText,
                 bootstrapBookmarkFill,
+<<<<<<< Updated upstream
                 bootstrapCart3
+=======
+                bootstrapCart3,
+                bootstrapMortarboardFill,
+                bootstrapBellFill,
+                bootstrapBarChartLineFill,
+                bootstrapBookFill,
+                bootstrapPersonFill
+>>>>>>> Stashed changes
             })
     ],
     exports: [

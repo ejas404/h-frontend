@@ -14,17 +14,17 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './admin-tutors.component.html',
   styleUrl: './admin-tutors.component.scss'
 })
-export class AdminTutorsComponent implements OnDestroy, OnInit{
+export class AdminTutorsComponent implements OnDestroy, OnInit {
 
   private destroy$ = new Subject<void>();
 
-  userList: UserDetailsTableModel [] = []
-  tableHeaders : TableHeaderModel[] = [
-    {title : 'Name', tBodyKey : 'name'},
-    {title : 'Email', tBodyKey : 'email'},
-    {title : 'Restrict', tBodyKey : 'restrict'},
-    {title : 'Delete', tBodyKey : 'delete'}
-  ] 
+  userList: UserDetailsTableModel[] = []
+  tableHeaders: TableHeaderModel[] = [
+    { title: 'Name', tBodyKey: 'name' },
+    { title: 'Email', tBodyKey: 'email' },
+    { title: 'Restrict', tBodyKey: 'restrict' },
+    { title: 'Delete', tBodyKey: 'delete' }
+  ]
 
   constructor(
     private store: Store,
@@ -35,17 +35,20 @@ export class AdminTutorsComponent implements OnDestroy, OnInit{
 
 
   ngOnInit(): void {
-    this.store.dispatch(DashboardActions.dashboardRequest());
-
-    this.store.select(getTutorList)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : (state) => {
-        this.userList = state as UserDetailsTableModel[]
-      }
-    })
+    this.fetchTutorList()
   }
 
+  fetchTutorList() {
+    this.store.select(getTutorList)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (state) => {
+          this.userList = state as UserDetailsTableModel[]
+        }
+      })
+  }
+
+<<<<<<< Updated upstream
   deleteUser(id: string | undefined) {
     if (id) {
       this.confirmService
@@ -69,11 +72,26 @@ export class AdminTutorsComponent implements OnDestroy, OnInit{
             }
           }
         })
+=======
+  async deleteUser(id: string) {
+
+    if (typeof (id) !== 'string') return;
+    const check = await this.confirmBox.call('Are your sure about deleting this tutor')
+    if (!check) return;
+    this.store.dispatch(DashboardActions.deleteUser({ id, user: 'tutors' }))
+>>>>>>> Stashed changes
 
     }
   }
 
 
+<<<<<<< Updated upstream
+=======
+    if (typeof (id) !== 'string') return;
+    const check = await this.confirmBox.call('Are your sure about block this tutor')
+    if (!check) return;
+    this.store.dispatch(DashboardActions.blockRequest({ user_id: id, user: 'tutors' }))
+>>>>>>> Stashed changes
 
 
   blockUser(id: string | undefined) {
@@ -129,6 +147,7 @@ export class AdminTutorsComponent implements OnDestroy, OnInit{
     }
   }
 
+<<<<<<< Updated upstream
   successMessage(data: string) {
     this.messageService.add({
       severity: 'success',
@@ -136,6 +155,12 @@ export class AdminTutorsComponent implements OnDestroy, OnInit{
       detail: `${data} tutor successfully`
     })
   }
+=======
+    if (typeof (id) !== 'string') return;
+    const check = await this.confirmBox.call('Are your sure about unblock this tutor')
+    if (!check) return;
+    this.store.dispatch(DashboardActions.unblockRequest({ user_id: id, user: 'tutors' }))
+>>>>>>> Stashed changes
 
   failureMessage(data: string) {
     this.messageService.add({
@@ -145,7 +170,7 @@ export class AdminTutorsComponent implements OnDestroy, OnInit{
     })
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.destroy$.next()
     this.destroy$.complete()
   }
