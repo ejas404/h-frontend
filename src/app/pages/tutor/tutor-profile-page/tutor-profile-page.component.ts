@@ -16,6 +16,7 @@ import { ToastService } from 'app/core/services/shared/toast_service';
 import { TutorPopupComponent } from 'app/shared/popups/tutor-popup/tutor-popup.component';
 import { ConfirmBoxHelper } from 'app/core/utils/confirm_box-helper';
 import { Socket } from 'ngx-socket-io';
+import { MessageTextService } from 'app/core/services/message_service';
 
 @Component({
   selector: 'app-tutor-profile-page',
@@ -37,7 +38,7 @@ export class TutorProfilePageComponent implements OnInit {
     private dialogRef: MatDialog,
     private toastService: ToastService,
     private confirmBox: ConfirmBoxHelper,
-    private socket: Socket
+    private messageService : MessageTextService
   ) { }
 
   profileUpdate = new FormGroup({
@@ -49,7 +50,7 @@ export class TutorProfilePageComponent implements OnInit {
   ngOnInit(): void {
 
     // establish connection on socket
-    this.socket.on('connection', () => { })
+    this.listenToMessages()
 
     this.getData()
   }
@@ -140,6 +141,14 @@ export class TutorProfilePageComponent implements OnInit {
   editTag(data: string) {
     this.dialogRef.open(TagsPopupTutorComponent, {
       data: { tagFor: data }
+    })
+  }
+
+  listenToMessages(){
+    this.messageService.recieve().subscribe({
+      next : res =>{
+        this.toastService.success('you have a text message')
+      }
     })
   }
 

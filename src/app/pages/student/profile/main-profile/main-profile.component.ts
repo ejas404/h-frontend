@@ -6,7 +6,8 @@ import { getStudData } from '../../../../core/state/student/profile_page/reducer
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileImagePopupComponent } from '../../../../shared/popups/profile-image-popup/popup.component';
 import { Subject, takeUntil } from 'rxjs';
-import { Socket } from 'ngx-socket-io';
+import { MessageTextService } from 'app/core/services/message_service';
+import { ToastService } from 'app/core/services/shared/toast_service';
 
 @Component({
   selector: 'app-main-profile',
@@ -22,13 +23,14 @@ export class MainProfileComponent implements OnInit {
   constructor(
     private store: Store,
     private dialogRef: MatDialog,
-    private socket : Socket
+    private messageService : MessageTextService,
+    private toast : ToastService
   ) { }
 
   ngOnInit(): void {
 
     // establish connection on socket
-    this.socket.on('connection',()=>{})
+    this.listenToMessages()
    
     //the user data fetch action will be dispatched
     this.store.dispatch(getUserData())
@@ -49,6 +51,14 @@ export class MainProfileComponent implements OnInit {
   openDialog() {
     this.dialogRef.open(ProfileImagePopupComponent,{
       data : {calledFor : 'student'}
+    })
+  }
+
+  listenToMessages(){
+    this.messageService.recieve().subscribe({
+      next : res =>{
+        this.toast.success('you have a text message')
+      }
     })
   }
 

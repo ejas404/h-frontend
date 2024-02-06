@@ -18,6 +18,7 @@ import { PaymentProcessingComponent } from "app/pages/student/payment-components
 import { FreeBuyComponent } from "app/pages/student/payment-components.ts/free-buy/free-buy.component";
 import { OauthComponentComponent } from "app/pages/student/auth-page-components/oauth-component/oauth-component.component";
 
+
 @NgModule({
     declarations : [
         StudentProfileComponent,
@@ -38,8 +39,8 @@ import { OauthComponentComponent } from "app/pages/student/auth-page-components/
     imports : [
         SharedModules,
         SharedComponentsModule,
-        ReusableComponentsModule,
+        ReusableComponentsModule
+    ],
 
-    ]
 })
 export class UserProfileModule{}

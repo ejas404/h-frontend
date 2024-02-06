@@ -30,8 +30,6 @@ export class TutorStudentsComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: res => {
-          console.log('connections printing')
-          console.log(res.connections)
           this.connList = res.connections
         },
         error: err => {

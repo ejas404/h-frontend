@@ -30,9 +30,6 @@ import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
-import { SocketIoModule } from 'ngx-socket-io';
-import { socketConfig } from './core/config/socket.config';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -49,7 +46,6 @@ import { socketConfig } from './core/config/socket.config';
     HomePageModule,
     TutorModule,
     UserProfileModule,
-    SocketIoModule.forRoot(socketConfig), 
     StoreModule.forRoot(
       {
         auth: authReducer,

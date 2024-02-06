@@ -4,6 +4,8 @@ import { decodeUserToken } from "app/core/utils/check_token";
 
 const user = decodeUserToken()
 
+console.log('user details',user)
+
 export const environment = {
     production: false,
     socketUrl: `${BASE_URL}/?user_id=${(user as JWTDecodeModel).userId}` 
