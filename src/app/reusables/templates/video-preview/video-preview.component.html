@@ -3,7 +3,7 @@
         <h1 class="text-2xl font-bold mt-2">{{course.title | titlecase}}</h1>
         <p>By : {{course.tutor.name | titlecase }}</p>
         <div class="video">
-            <video src="{{video.url}}" class="rounded-md aspect-video border border-light-gray" width="600" controls></video>
+            <video src="{{video.url}}" (ended)="videoEnd()" class="rounded-md aspect-video border border-light-gray" width="600" controls></video>
         </div>
         <p class="my-1 font-semibold">{{video.title}}</p>
         <p class="my-1 text-sm">{{video.description}}</p>

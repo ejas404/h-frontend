@@ -43,19 +43,19 @@
         <!-- buttons for user to add to cart go to cart and buying course -->
         <div class="buttons" *ngIf="user === 'student' ||  user === 'profile' else editDelete;">
 
-            <ng-container>
+            <ng-container *ngIf="!isEnrolled">
                 <addto-goto-cart-btn *ngIf="!isCartItem else cartBtn" [styleClass]="'text-sm'"
-                (click)="addtoCart(courseDetails._id)"></addto-goto-cart-btn>
+                    (click)="addtoCart(courseDetails._id)"></addto-goto-cart-btn>
 
-            <ng-template #cartBtn>
-                <addto-goto-cart-btn [rLink]="'/cart'" [calledFor]="'goto'"
-                    [styleClass]="'text-sm'"></addto-goto-cart-btn>
-            </ng-template>
+                <ng-template #cartBtn>
+                    <addto-goto-cart-btn [rLink]="'/cart'" [calledFor]="'goto'"
+                        [styleClass]="'text-sm'"></addto-goto-cart-btn>
+                </ng-template>
 
-            <common-btn-reusable (click)="buyNow()" [styleClass]="'bg-white text-primary text-sm float-right'">Get
-                Course</common-btn-reusable>
+                <common-btn-reusable (click)="buyNow()" [styleClass]="'bg-white text-primary text-sm float-right'">Get
+                    Course</common-btn-reusable>
             </ng-container>
-  
+
         </div>
 
         <!-- buttons for admin and tutor to edit and delete the course -->
@@ -64,13 +64,12 @@
                 <!-- button for editing the course -->
                 <common-btn-reusable (click)="editCourseEvent()"
                     [styleClass]="'bg-white text-admin-primary text-sm '">Edit</common-btn-reusable>
-                    
+
                 <!-- button for deleting the course -->
                 <common-btn-reusable
                     [styleClass]="'bg-white text-primary text-sm float-right'">Delete</common-btn-reusable>
             </div>
         </ng-template>
-
     </div>
 </section>
 
@@ -87,15 +86,8 @@
             </div>
         </div>
         <!-- resuable section listing component -->
-        <course-sections-list 
-        [user]="user" 
-        [bg]="bg" 
-        [text]="text" 
-        [bg_section_list]="bg_section_list"
-        [videoList]="videoList" 
-        [courseDetails]="courseDetails"
-        [isEnrolled]="isEnrolled"
-        >
+        <course-sections-list [user]="user" [bg]="bg" [text]="text" [bg_section_list]="bg_section_list"
+            [videoList]="videoList" [courseDetails]="courseDetails" [isEnrolled]="isEnrolled">
         </course-sections-list>
     </div>
 </section>

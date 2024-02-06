@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { PopularCourseModel } from 'app/core/models/dashboard_model';
 import { CourseDetailsTableModel, UserDetailsTableModel } from 'app/core/models/table.model';
+import { DashboardSalesService } from 'app/core/services/admin/dashboard_sales_service';
 import { getCourseList, getTutorList, getUsersList } from 'app/core/state/admin/dashboard/reducer';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.scss'
+  styleUrl: './admin-dashboard.component.scss',
+  providers : [DashboardSalesService]
 })
 export class AdminDashboardComponent {
 
@@ -15,17 +18,22 @@ export class AdminDashboardComponent {
   userList !: UserDetailsTableModel[];
   tutorList !: UserDetailsTableModel[];
   courseList !: CourseDetailsTableModel[];
+  popularCourseList : PopularCourseModel[] = []
   students !: number;
   tutors !: number;
   courses !: number;
 
-  constructor(private store: Store) { }
+  constructor(
+    private store: Store,
+    private salesService : DashboardSalesService
+    ) { }
 
   ngOnInit() {
 
     this.fetchStudentList()
     this.fetchTutorList()
     this.fetchCourseList()
+    this.getPopularCourses()
 
     this.students = this.userList.filter(each => !each.isBlocked).length
     this.tutors = this.tutorList.filter(each => !each.isBlocked).length
@@ -66,6 +74,14 @@ export class AdminDashboardComponent {
       })
   }
 
+
+  getPopularCourses(){
+    this.salesService.getPopularCourses().subscribe({
+      next : res => {
+        this.popularCourseList = res.popularCourses
+      }
+    })
+  }
 
 
 }

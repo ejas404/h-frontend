@@ -30,4 +30,8 @@ export class StudentCourseService{
         return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/student/get-video/${id}`)
     }
 
+    addProgress(course_id : string, video_id : string){
+        return this.http.post(`${BASE_URL}/student/add-progress`,{course_id,video_id})
+    }
+
 }

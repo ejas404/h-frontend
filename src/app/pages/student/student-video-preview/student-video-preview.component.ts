@@ -4,6 +4,7 @@ import { CourseDetailsResponse, CourseVideoResponseList } from 'app/core/models/
 import { VideoWithUrl } from 'app/core/models/section_video_model';
 import { CourseService } from 'app/core/services/course_service';
 import { HomePageCourseService } from 'app/core/services/home/homepage-course';
+import { ToastService } from 'app/core/services/shared/toast_service';
 import { StudentCourseService } from 'app/core/services/student/student_course_service';
 import { isStudentToken } from 'app/core/utils/check_token';
 import { Subject, takeUntil } from 'rxjs';
@@ -12,12 +13,14 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-student-video-preview',
   templateUrl: './student-video-preview.component.html',
   styleUrl: './student-video-preview.component.scss',
-  providers : [HomePageCourseService, CourseService, StudentCourseService]
+  providers: [HomePageCourseService, CourseService, StudentCourseService]
 })
 export class StudentVideoPreviewComponent {
 
-  user : string = 'student'
- 
+  user: string = 'student'
+  course_id !: string;
+  video_id !: string;
+
   destroy$ = new Subject<void>()
 
   courseVideoList !: CourseVideoResponseList[];
@@ -28,19 +31,20 @@ export class StudentVideoPreviewComponent {
     private activateRoute: ActivatedRoute,
     private courseService: CourseService,
     private homePageCourseService: HomePageCourseService,
-    private studentCourseSevice : StudentCourseService
+    private studentCourseSevice: StudentCourseService,
+    private toastService : ToastService
   ) { }
 
   ngOnInit() {
-    
-    this.user = isStudentToken()? 'profile': this.user;
 
-    const search = this.activateRoute.snapshot.params['id']
-    const video_id  = this.activateRoute.snapshot.params['video']
+    this.user = isStudentToken() ? 'profile' : this.user;
 
-    this.fetchCourseData(search)
-    this.fetchCourseVideoList(search)
-    this.fetchVideo(video_id)
+    this.course_id = this.activateRoute.snapshot.params['id']
+    this.video_id = this.activateRoute.snapshot.params['video']
+
+    this.fetchCourseData(this.course_id)
+    this.fetchCourseVideoList(this.course_id)
+    this.fetchVideo(this.video_id)
   }
 
   fetchCourseData(id: string) {
@@ -69,22 +73,37 @@ export class StudentVideoPreviewComponent {
       })
   }
 
-  fetchVideo(id : string){
-    this.studentCourseSevice.getVideo(id, )
+  fetchVideo(id: string) {
+    this.studentCourseSevice.getVideo(id,)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          this.videoDetails = res.video
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
+  }
+
+  videoChanged(id: string) {
+    if (typeof (id) !== 'string' || id === this.videoDetails._id) return;
+    this.fetchVideo(id)
+  }
+
+  endOfVideo() {
+    this.studentCourseSevice.addProgress(this.course_id, this.video_id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
-      next: res => {
-        this.videoDetails = res.video
-      },
-      error: err => {
-        console.log(err)
+      next : res => {
+        this.toastService.success('class completed')
       }
     })
   }
 
-  videoChanged(id : string){
-    if(typeof(id) !== 'string' || id === this.videoDetails._id) return;
-    this.fetchVideo(id)
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
 }

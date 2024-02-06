@@ -22,21 +22,18 @@ export class CourseListComponent {
   ){}
 
   @Input()courseList !: CourseDetailsResponse[];
-  @Input()cartList !: string[] 
+  @Input()cartList : string[] = [] 
   @Input()search !: string
+  @Input()enrollList !: string[]
 
   ngOnInit(){
     this.courseListPreview = this.courseList
+    console.log('enroll lists',this.enrollList)
   }
 
   addToCart(course_id : string | undefined){
     if(typeof(course_id) !== 'string') return;
-    
-    if(this.cartList){
-      this.cartList = [...this.cartList.slice() ,course_id]
-    }else{
-      this.cartList = [course_id]
-    }
+    this.cartList.push(course_id)
 
     this.studentCourseService.addToCart(course_id)
     .pipe(takeUntil(this.destroy$))
@@ -45,6 +42,7 @@ export class CourseListComponent {
         this.toastService.success(res.msg)
       },
       error : err =>{
+        this.cartList.pop()
         this.toastService.fail(err.error.message || 'failed to add to cart')
       }
     })

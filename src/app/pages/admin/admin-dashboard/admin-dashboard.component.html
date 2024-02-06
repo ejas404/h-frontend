@@ -1,11 +1,27 @@
 <section class="pt-3 px-4">
     <div class="cards grid grid-cols-3">
-        <admin-dashboard-top-card [title]="'students'" [count]="students" ></admin-dashboard-top-card>
-        <admin-dashboard-top-card [title]="'tutors'" [count]="tutors" ></admin-dashboard-top-card>
-        <admin-dashboard-top-card [title]="'courses'" [count]="courses" ></admin-dashboard-top-card>
+        <admin-dashboard-top-card [title]="'students'" [count]="students"></admin-dashboard-top-card>
+        <admin-dashboard-top-card [title]="'tutors'" [count]="tutors"></admin-dashboard-top-card>
+        <admin-dashboard-top-card [title]="'courses'" [count]="courses"></admin-dashboard-top-card>
     </div>
 
     <div class="popular-courses mt-4">
         <h1 class="font-bold my-2">Popular Courses</h1>
+        <div class="course_list grid grid-cols-3">
+            <div *ngFor="let each of popularCourseList"
+                class="relative group my-2 me-8 p-2 rounded-lg bg-slate-200">
+
+                <div class="top flex justify-between">
+                    <div class="img-template w-[4rem] h-[3rem] rounded overflow-hidden">
+                        <img class="w-full h-full object-cover" src="{{each.course.cover| customImageUrl}}" alt="">
+                    </div>
+                    <h1 class="font-bold">{{each.count}}+</h1>
+                </div>
+                <div class="ms-1 my-1 flex flex-col justify-between">
+                    <p class="font-bold">{{each.course.title | titlecase}}</p>
+                    <p>{{each.tutorDetails.name | titlecase}}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
