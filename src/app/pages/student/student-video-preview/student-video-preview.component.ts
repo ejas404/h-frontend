@@ -28,7 +28,7 @@ export class StudentVideoPreviewComponent {
   courseDetails !: CourseDetailsResponse;
   videoDetails !: VideoWithUrl;
   progressList : string[] = []
-  isEnrolled !: boolean; 
+  isEnrolled : boolean = false; 
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -80,7 +80,8 @@ export class StudentVideoPreviewComponent {
   }
 
   fetchVideo(id: string) {
-    this.studentCourseSevice.getVideo(id,)
+    const route = isStudentToken() ? 'student':'course';
+    this.studentCourseSevice.getVideo(id,route)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: res => {
@@ -109,11 +110,11 @@ export class StudentVideoPreviewComponent {
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : res => {
+        console.log('enrollment printing', res)
         this.isEnrolled = res.success
       },
       error : err =>{
         console.log(err)
-        this.isEnrolled = false
       }
     })
   }

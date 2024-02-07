@@ -27,8 +27,8 @@ export class StudentCourseService{
         return this.http.get<{cartList : string[] }>(`${BASE_URL}/student/cart-list`)
     }
 
-    getVideo(id : string){
-        return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/student/get-video/${id}`)
+    getVideo(id : string,route : string){
+        return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/${route}/get-video/${id}`)
     }
 
 
