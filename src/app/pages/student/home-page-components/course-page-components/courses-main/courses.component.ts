@@ -4,6 +4,7 @@ import { EnrollCourseModels } from 'app/core/models/enroll_models';
 import { HomePageCourseService } from 'app/core/services/home/homepage-course';
 import { StudentCourseService } from 'app/core/services/student/student_course_service';
 import { StudentEnrollService } from 'app/core/services/student/student_enroll_service';
+import { isStudentToken } from 'app/core/utils/check_token';
 import { Subject, takeUntil } from 'rxjs';
 
 
@@ -32,7 +33,9 @@ export class CoursesComponent {
   ngOnInit() {
     this.checkUserCart()
     this.fertchCourseDetails()
-    this.fetchEnrollList()
+    if(isStudentToken()){
+      this.fetchEnrollList()
+    }
   }
 
   fertchCourseDetails() {

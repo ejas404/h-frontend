@@ -26,6 +26,7 @@ export class StudentVideoPreviewComponent {
   courseVideoList !: CourseVideoResponseList[];
   courseDetails !: CourseDetailsResponse;
   videoDetails !: VideoWithUrl;
+  progressList : string[] = []
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -45,6 +46,7 @@ export class StudentVideoPreviewComponent {
     this.fetchCourseData(this.course_id)
     this.fetchCourseVideoList(this.course_id)
     this.fetchVideo(this.video_id)
+    this.fetchProgress(this.course_id)
   }
 
   fetchCourseData(id: string) {
@@ -86,16 +88,28 @@ export class StudentVideoPreviewComponent {
       })
   }
 
+  fetchProgress(id : string){
+    this.studentCourseSevice.getProgress(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res => {
+        this.progressList = res.progress
+      }
+    })
+  }
+
   videoChanged(id: string) {
     if (typeof (id) !== 'string' || id === this.videoDetails._id) return;
     this.fetchVideo(id)
   }
 
   endOfVideo() {
+    if(!isStudentToken()) return;
     this.studentCourseSevice.addProgress(this.course_id, this.video_id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : res => {
+        this.progressList.push(this.video_id)
         this.toastService.success('class completed')
       }
     })

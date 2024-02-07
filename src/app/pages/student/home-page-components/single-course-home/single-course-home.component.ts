@@ -23,6 +23,7 @@ export class SingleCourseHomeComponent {
   user : 'student'|'profile' = 'student' 
   selectedSection !: number ;
   courseVideoList !:  CourseVideoResponseList[];
+  progressList !: string[];
   courseDetails !: CourseDetailsResponse;
   cartItem !: boolean
   isEnrolled !: boolean 
@@ -38,6 +39,7 @@ export class SingleCourseHomeComponent {
   ){}
 
   ngOnInit(){
+    //gets course id from the route path params
     const search = this.activatedRoute.snapshot.params['id']
     
     this.user = isStudentToken()? 'profile': this.user;
@@ -46,6 +48,7 @@ export class SingleCourseHomeComponent {
     this.fetchCourseVideoList(search)
     this.fetchCartList(search)
     this.fetchEnrollStatus(search)
+    this.fetchProgress(search)
   }
 
   fetchCourseData(id : string){
@@ -101,6 +104,18 @@ export class SingleCourseHomeComponent {
       error : err =>{
         console.log(err)
         this.isEnrolled = false
+      }
+    })
+  }
+
+  
+  fetchProgress(id : string){
+    this.studentCourseService.getProgress(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res => {
+        console.log('progress printing',res.progress)
+        this.progressList = res.progress
       }
     })
   }

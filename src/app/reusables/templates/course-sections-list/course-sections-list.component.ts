@@ -10,7 +10,6 @@ import { VideoResponseModel } from 'app/core/models/section_video_model';
 export class CourseSectionsListComponent {
 
   selectedSection !: number
-  isHyper = true
 
   @Input() user !: string
   @Input() bg !: string
@@ -22,20 +21,25 @@ export class CourseSectionsListComponent {
   @Input() calledFor !: string
   @Input() courseDetails !: CourseDetailsResponse
   @Input() videoList !: CourseVideoResponseList[]
+  @Input() progressList !: string[]
 
   @Output() videoEvent = new EventEmitter()
 
+  ngOnInit(){
+    console.log('printing the list from sections', this.progressList)
+  }
+
 
   // set the course videolist route url dynamically
-  setUserRoute(id: string | undefined, video: VideoResponseModel) : string | undefined  {
+  setUserRoute(id: string | undefined, video: VideoResponseModel): string | undefined {
     if (typeof (id) !== 'string') return;
-    
+
     if (this.user === 'student' || this.user === 'profile' && !this.isEnrolled) {
-      let route = !video.isPaid?`/course/${id}/${video._id}`: undefined;
+      let route = !video.isPaid ? `/course/${id}/${video._id}` : undefined;
       return route;
     }
 
-    if(this.user === 'profile' && this.isEnrolled){
+    if (this.user === 'profile' && this.isEnrolled) {
       return `/course/${id}/${video._id}`
     }
 
@@ -46,10 +50,9 @@ export class CourseSectionsListComponent {
 
   }
 
-  checkHyper( video: VideoResponseModel) : boolean {
+  checkHyper(video: VideoResponseModel): boolean {
     if (this.user === 'student' || this.user === 'profile' && !this.isEnrolled) {
-      if(video.isPaid) { return false }
-      else { return true } 
+      if (video.isPaid) return false;
     }
 
     return true;
@@ -57,23 +60,26 @@ export class CourseSectionsListComponent {
 
 
   totalSectionDuration(videoList: VideoResponseModel[]): number {
-    if (!videoList[0]) {
-      return 0
+    if (!videoList[0]) return 0;
+    let res = 0;
+    videoList.forEach(each => res += each.duration);
+    return Math.floor(res);
+  }
+
+  sectionProgress(videoList: VideoResponseModel[]){
+    let count = 0
+    for(let each of videoList){
+      if(this.progressList.includes(each._id)){
+        count++
+      }
     }
 
-    let res = 0
-
-    videoList.forEach(each => {
-      res += each.duration
-    })
-
-    return Math.floor(res)
-
+    return count?`${count}/` : '';
   }
 
   videoClick(id: string) {
     if (typeof (id) !== 'string') return;
-    if (this.calledFor !== 'video') return
+    if (this.calledFor !== 'video') return;
     this.videoEvent.emit(id)
   }
 

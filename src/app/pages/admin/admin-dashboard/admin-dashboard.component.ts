@@ -10,23 +10,23 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
-  providers : [DashboardSalesService]
+  providers: [DashboardSalesService]
 })
 export class AdminDashboardComponent {
 
-  destroy$ = new Subject()
+  destroy$ = new Subject<void>()
   userList !: UserDetailsTableModel[];
   tutorList !: UserDetailsTableModel[];
   courseList !: CourseDetailsTableModel[];
-  popularCourseList : PopularCourseModel[] = []
+  popularCourseList: PopularCourseModel[] = []
   students !: number;
   tutors !: number;
   courses !: number;
 
   constructor(
     private store: Store,
-    private salesService : DashboardSalesService
-    ) { }
+    private salesService: DashboardSalesService
+  ) { }
 
   ngOnInit() {
 
@@ -34,11 +34,6 @@ export class AdminDashboardComponent {
     this.fetchTutorList()
     this.fetchCourseList()
     this.getPopularCourses()
-
-    this.students = this.userList.filter(each => !each.isBlocked).length
-    this.tutors = this.tutorList.filter(each => !each.isBlocked).length
-    this.courses = this.courseList.length
-
   }
 
 
@@ -48,6 +43,7 @@ export class AdminDashboardComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((state) => {
         this.userList = state as UserDetailsTableModel[]
+        this.students = this.userList.filter(each => !each.isBlocked).length
       })
   }
 
@@ -57,6 +53,7 @@ export class AdminDashboardComponent {
       .subscribe({
         next: (state) => {
           this.tutorList = state as UserDetailsTableModel[]
+          this.tutors = this.tutorList.filter(each => !each.isBlocked).length
         }
       })
   }
@@ -67,6 +64,7 @@ export class AdminDashboardComponent {
       .subscribe({
         next: data => {
           this.courseList = data.courseDetails as CourseDetailsTableModel[];
+          this.courses = this.courseList.length
         },
         error: err => {
           console.log(err)
@@ -75,12 +73,17 @@ export class AdminDashboardComponent {
   }
 
 
-  getPopularCourses(){
+  getPopularCourses() {
     this.salesService.getPopularCourses().subscribe({
-      next : res => {
+      next: res => {
         this.popularCourseList = res.popularCourses
       }
     })
+  }
+
+  ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
 

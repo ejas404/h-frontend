@@ -32,6 +32,7 @@ import { CommonBtnReusableComponent } from "app/reusables/buttons/common-btn-com
 import { SmallCourseListComponent } from "app/reusables/templates/small-course-list/small-course-list.component";
 import { SuccessFailTemplateComponent } from "app/reusables/templates/success-fail-template/success-fail-template.component";
 import { HyperLinkTextComponent } from "app/reusables/typography/hyper_link_text";
+import { CheckIconReusableComponent } from "app/reusables/buttons/check-icon-component";
 
 
 
@@ -64,7 +65,8 @@ import { HyperLinkTextComponent } from "app/reusables/typography/hyper_link_text
         CommonBtnReusableComponent,
         SmallCourseListComponent,
         SuccessFailTemplateComponent,
-        HyperLinkTextComponent
+        HyperLinkTextComponent,
+        CheckIconReusableComponent
 
     ],
     exports : [
@@ -95,7 +97,8 @@ import { HyperLinkTextComponent } from "app/reusables/typography/hyper_link_text
         CommonBtnReusableComponent,
         SmallCourseListComponent,
         SuccessFailTemplateComponent,
-        HyperLinkTextComponent
+        HyperLinkTextComponent,
+        CheckIconReusableComponent
 
     ],
     imports :[

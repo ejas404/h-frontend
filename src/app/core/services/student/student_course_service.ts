@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BASE_URL } from "app/core/constant/uri";
 import { CartModel } from "app/core/models/cart_model";
+import { UpcomingCourse } from "app/core/models/course";
 import { VideoWithUrl } from "app/core/models/section_video_model";
 
 @Injectable()
@@ -30,8 +31,13 @@ export class StudentCourseService{
         return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/student/get-video/${id}`)
     }
 
+
     addProgress(course_id : string, video_id : string){
         return this.http.post(`${BASE_URL}/student/add-progress`,{course_id,video_id})
+    }
+
+    getProgress(course_id : string ){
+        return this.http.get<{progress : string[]}>(`${BASE_URL}/student/get-progress/${course_id}`)
     }
 
 }

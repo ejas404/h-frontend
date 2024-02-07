@@ -6,16 +6,17 @@
      (ended)="endOfVideo()"
      >
     </video-preview>
-    <div class="secions-list 1/3 w-[40%]">
+    <div class="secions-list 1/3 w-[50%]">
         <course-sections-list 
             [user]="'student'" 
+            calledFor="video"
             [bg]="'bg-light-gray'" 
             [text]="'text-black'"
             [bg_section_list]="'bg-slate-100'" 
             [videoList]="courseVideoList"
             [courseDetails]="courseDetails"
             (videoEvent)="videoChanged($event)"
-            calledFor="video"
+            [progressList]="progressList"
             >
         </course-sections-list>
     </div>

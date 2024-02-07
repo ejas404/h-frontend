@@ -28,6 +28,9 @@ export class CourseListComponent {
 
   ngOnInit(){
     this.courseListPreview = this.courseList
+  }
+
+  ngAfterViewInit(){
     console.log('enroll lists',this.enrollList)
   }
 

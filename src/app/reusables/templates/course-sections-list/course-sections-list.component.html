@@ -6,7 +6,7 @@
             <div class="section-title flex justify-between px-2 py-3 border-b border-b-white relative {{bg}} {{text}}"
                 (click)="sectionSelected(i)">
                 <h1 class="text-md">{{each.title}}</h1>
-                <p class="text-md">{{each.courseVideos.length |customPluraliser  }} - {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
+                <p class="text-sm">{{sectionProgress(each.courseVideos)}}{{each.courseVideos.length |customPluraliser  }} - {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
             </div>
 
             <ul *ngIf="selectedSection === i" class="{{bg_section_list}}">
@@ -22,7 +22,8 @@
                             (click)="videoClick(video._id)"
                            >
                            {{video.title}}
-                        </hyper-link-text>        
+                        </hyper-link-text> 
+                        <check-icon *ngIf="progressList && progressList.includes(video._id)" [styleClass]="'text-xs text-blue-700'" ></check-icon>       
                         </p>
 
 

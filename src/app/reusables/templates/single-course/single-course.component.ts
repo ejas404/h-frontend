@@ -22,6 +22,7 @@ export class SingleCourseReusableComponent {
   @Input()courseDetails !: CourseDetailsResponse
   @Input()videoList !:  CourseVideoResponseList[] 
   @Input()sections !: {title : string, class : string}[]
+  @Input()progressList !: string[];
 
   @Output()approveCourse = new EventEmitter()
   @Output()disAppproveCourse = new EventEmitter()

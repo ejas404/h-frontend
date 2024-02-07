@@ -22,7 +22,8 @@ import {
     bootstrapBellFill,
     bootstrapBarChartLineFill,
     bootstrapBookFill,
-    bootstrapPersonFill
+    bootstrapPersonFill,
+    bootstrapCheckCircleFill
 
 
 } from '@ng-icons/bootstrap-icons';
@@ -52,7 +53,8 @@ import {
                 bootstrapBellFill,
                 bootstrapBarChartLineFill,
                 bootstrapBookFill,
-                bootstrapPersonFill
+                bootstrapPersonFill,
+                bootstrapCheckCircleFill
 
             })
     ],
