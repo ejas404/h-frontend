@@ -9,6 +9,7 @@
                 <p class="text-sm">{{sectionProgress(each.courseVideos)}}{{each.courseVideos.length |customPluraliser  }} - {{totalSectionDuration(each.courseVideos) | customDuration}}</p>
             </div>
 
+            <!-- shows the section list items base on click -->
             <ul *ngIf="selectedSection === i" class="{{bg_section_list}}">
                 
                 <ng-container *ngIf="each.courseVideos.length else noVideos">
@@ -16,14 +17,28 @@
                         class="p-2 flex justify-between border-b border-b-black">
 
                         <p>{{k+1}} 
+
+                            <!-- add route link and make the text clickable if the videos is accessible -->
                             <hyper-link-text 
-                            [setHyper]="checkHyper(video)"
-                            [routerLink]="setUserRoute(courseDetails._id,video)" 
-                            (click)="videoClick(video._id)"
-                           >
-                           {{video.title}}
-                        </hyper-link-text> 
-                        <check-icon *ngIf="progressList && progressList.includes(video._id)" [styleClass]="'text-xs text-blue-700'" ></check-icon>       
+                                [setHyper]="checkHyper(video)"
+                                [routerLink]="setUserRoute(courseDetails._id,video)" 
+                                (click)="videoClick(video._id)"
+                            >
+                            {{video.title}}
+                            </hyper-link-text>
+                            
+                            <!-- adds check icon if the videos is already watched -->
+                            <check-icon 
+                            *ngIf="progressList && progressList.includes(video._id)" 
+                            [styleClass]="'text-xs text-blue-700'" 
+                            ></check-icon>
+                            
+                            <!-- add block btn icon if the vides is premium and not enrolled -->
+                            <app-block-btn 
+                            *ngIf="isEnrolled === false && video.isPaid"  
+                            [text]="'text-xs'" 
+                            ></app-block-btn>       
+                        
                         </p>
 
 

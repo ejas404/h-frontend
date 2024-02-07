@@ -6,6 +6,7 @@ import { CourseService } from 'app/core/services/course_service';
 import { HomePageCourseService } from 'app/core/services/home/homepage-course';
 import { ToastService } from 'app/core/services/shared/toast_service';
 import { StudentCourseService } from 'app/core/services/student/student_course_service';
+import { StudentEnrollService } from 'app/core/services/student/student_enroll_service';
 import { isStudentToken } from 'app/core/utils/check_token';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -13,7 +14,7 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-student-video-preview',
   templateUrl: './student-video-preview.component.html',
   styleUrl: './student-video-preview.component.scss',
-  providers: [HomePageCourseService, CourseService, StudentCourseService]
+  providers: [HomePageCourseService, CourseService, StudentCourseService,StudentEnrollService]
 })
 export class StudentVideoPreviewComponent {
 
@@ -27,12 +28,14 @@ export class StudentVideoPreviewComponent {
   courseDetails !: CourseDetailsResponse;
   videoDetails !: VideoWithUrl;
   progressList : string[] = []
+  isEnrolled !: boolean; 
 
   constructor(
     private activateRoute: ActivatedRoute,
     private courseService: CourseService,
     private homePageCourseService: HomePageCourseService,
     private studentCourseSevice: StudentCourseService,
+    private enrollService : StudentEnrollService,
     private toastService : ToastService
   ) { }
 
@@ -47,6 +50,7 @@ export class StudentVideoPreviewComponent {
     this.fetchCourseVideoList(this.course_id)
     this.fetchVideo(this.video_id)
     this.fetchProgress(this.course_id)
+    this.fetchEnrollStatus(this.course_id)
   }
 
   fetchCourseData(id: string) {
@@ -89,11 +93,27 @@ export class StudentVideoPreviewComponent {
   }
 
   fetchProgress(id : string){
+    if(!isStudentToken()) return;
     this.studentCourseSevice.getProgress(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : res => {
         this.progressList = res.progress
+      }
+    })
+  }
+
+  fetchEnrollStatus(id : string){
+    if(!isStudentToken()) return;
+    this.enrollService.isCourseEnrolled(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res => {
+        this.isEnrolled = res.success
+      },
+      error : err =>{
+        console.log(err)
+        this.isEnrolled = false
       }
     })
   }

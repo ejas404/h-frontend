@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-block-btn',
-  template: ` <ng-icon class="text-admin-primary  hover:cursor-pointer"
-              name="bootstrapLockFill" title="block user"></ng-icon>`
+  template: ` <ng-icon class="{{text}} text-admin-primary  hover:cursor-pointer"
+              name="bootstrapLockFill" title=""></ng-icon>`
 })
 export class BlockBtnReusableComponent {
-
+  @Input()text !: string;
 }

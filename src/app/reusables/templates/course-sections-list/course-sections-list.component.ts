@@ -51,10 +51,9 @@ export class CourseSectionsListComponent {
   }
 
   checkHyper(video: VideoResponseModel): boolean {
-    if (this.user === 'student' || this.user === 'profile' && !this.isEnrolled) {
+    if (this.user === 'student' || this.user === 'profile' && this.isEnrolled === false ) {
       if (video.isPaid) return false;
     }
-
     return true;
   }
 
@@ -67,7 +66,9 @@ export class CourseSectionsListComponent {
   }
 
   sectionProgress(videoList: VideoResponseModel[]){
+    if(!this.progressList) return '';
     let count = 0
+    const list = this.progressList;
     for(let each of videoList){
       if(this.progressList.includes(each._id)){
         count++

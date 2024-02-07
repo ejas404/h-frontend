@@ -8,7 +8,7 @@
     </video-preview>
     <div class="secions-list 1/3 w-[50%]">
         <course-sections-list 
-            [user]="'student'" 
+            [user]="user" 
             calledFor="video"
             [bg]="'bg-light-gray'" 
             [text]="'text-black'"
@@ -17,6 +17,7 @@
             [courseDetails]="courseDetails"
             (videoEvent)="videoChanged($event)"
             [progressList]="progressList"
+            [isEnrolled]="isEnrolled"
             >
         </course-sections-list>
     </div>
