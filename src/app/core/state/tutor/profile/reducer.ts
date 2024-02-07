@@ -70,22 +70,6 @@ const _profileReducer = createReducer(
         }
     })
 
-
-    // on(updateEducationSuccess, (state, { successResponse }) => {
-
-    //     let list : TutorEducation[] | undefined = state.tutorData?.education
-
-    //     list?.push(successResponse)
-
-    //     return {
-    //         ...state,
-    //         tutorData: {
-    //             ...state.tutorData,
-    //             education: list
-    //         }
-    //     }
-    // })
-
 )
 
 

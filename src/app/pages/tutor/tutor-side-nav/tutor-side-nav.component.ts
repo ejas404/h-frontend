@@ -10,6 +10,6 @@ export class TutorSideNavComponent {
     {path : '/tutor',icon : 'bootstrapBarChartLineFill'},
     {path : '/tutor/courses',icon : 'bootstrapFileEarmarkMedicalFill'},
     {path : '/tutor/students',icon : 'bootstrapPeopleFill'},
-    {path : '/tutor/notifications',icon : 'bootstrapBellFill'},
+    {path : '/tutor/education',icon : 'bootstrapMortarboardFill'}
   ]
 }

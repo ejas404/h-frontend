@@ -3,7 +3,6 @@ import { TutorAccountComponent } from "app/pages/tutor/tutor-account/tutor-accou
 import { TutorCourseSinglePageComponent } from "app/pages/tutor/tutor-course-single-page/tutor-course-single-page.component";
 import { TutorCourseComponent } from "app/pages/tutor/tutor-course/tutor-course.component";
 import { TutorLoginComponent } from "app/pages/tutor/tutor-login/tutor-login.component";
-import { TutorNotificationComponent } from "app/pages/tutor/tutor-notification/tutor-notification.component";
 import { TutorProfilePageComponent } from "app/pages/tutor/tutor-profile-page/tutor-profile-page.component";
 import { TutorProfileComponent } from "app/pages/tutor/tutor-profile/tutor-profile.component";
 import { TutorSignupComponent } from "app/pages/tutor/tutor-signup/tutor-signup.component";
@@ -12,6 +11,8 @@ import { SharedComponentsModule } from "../custom_modules/shared_components_modu
 import { ReusableComponentsModule } from "../custom_modules/reusables_module";
 import { SharedModules } from "../shared_modules";
 import { TutorSideNavComponent } from "app/pages/tutor/tutor-side-nav/tutor-side-nav.component";
+import { TutorRightSideComponent } from "app/pages/tutor/tutor-right-side/tutor-right-side.component";
+import { TutorEducationComponent } from "app/pages/tutor/tutor-education/tutor-education.component";
 
 @NgModule({
     declarations: [
@@ -22,9 +23,10 @@ import { TutorSideNavComponent } from "app/pages/tutor/tutor-side-nav/tutor-side
         TutorAccountComponent,
         TutorCourseComponent,
         TutorStudentsComponent,
-        TutorNotificationComponent,
         TutorCourseSinglePageComponent,
-        TutorSideNavComponent
+        TutorSideNavComponent,
+        TutorRightSideComponent,
+        TutorEducationComponent
     ],
     imports : [
         SharedModules,

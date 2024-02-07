@@ -17,6 +17,6 @@ export interface PasswordUpdate{
 
 export interface TutorUpdateModel{
     name : string,
-    email : string,
+    email ?: string,
     contact ?: string
 }

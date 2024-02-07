@@ -1,12 +1,31 @@
 <app-navbar [user]="'tutor'"></app-navbar>
 <main class="min-h-[calc(100vh-50px)] flex justify-between px-4">
-    
+    <!-- tutor navigation side bar -->
     <section class="bg-white w-[4rem] h-[calc(100vh-50px)] sticky top-[48px] py-4 p-1">
         <tutor-side-nav></tutor-side-nav>
     </section>
+    <!--/ end tutor navigation side bar -->
+
+    <!-- tutor pages router outlet -->
     <section class="m-4 p-2 w-[5rem] h-[1000px] flex-grow">
         <router-outlet></router-outlet>
     </section>
-    <section class="ms-4 bg-blue-400 w-[17rem] h-[calc(100vh-50px)] sticky top-[48px]"></section>
+    <!-- /end tutor pages router outlet -->
+
+    <!-- tutor right profile section -->
+    <section class="ms-4 w-[17rem] h-[calc(100vh-50px)] sticky top-[48px] p-2">
+
+        <!-- course-requesting button  -->
+        <div class="text-end">
+            <common-btn-reusable
+            (click)="requestCourse()" 
+            [styleClass]="'bg-tutor-primary text-white text-sm mb-2'">
+            Add Course</common-btn-reusable>
+        </div>
+        <!-- /end course-requesting button  -->
+
+        <tutor-right-side [tutorData]="tutorData" ></tutor-right-side>
+    </section>
+    <!--/end tutor right profile section -->
     
 </main>

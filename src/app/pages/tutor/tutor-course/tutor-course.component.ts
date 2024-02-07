@@ -24,8 +24,7 @@ export class TutorCourseComponent {
 
     constructor(
       private service : TutorProfileService,
-      private store : Store,
-      private dialogRef : MatDialog
+      private store : Store
       ){}
 
 
@@ -58,10 +57,6 @@ export class TutorCourseComponent {
             console.log(err)
           }
         })
-      }
-
-      requestCourse(){
-        this.dialogRef.open(RequestCoursePopupComponent)
       }
 
       ngOnDestroy(){

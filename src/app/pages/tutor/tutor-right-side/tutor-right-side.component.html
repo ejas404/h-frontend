@@ -1,0 +1,80 @@
+<aside class="rounded-md border border-light-gray h-[90%] p-1 px-2">
+    <div class="flex justify-between items-center">
+        <h2 class="font-bold">Account Info</h2>
+        <button *ngIf="!edit" class="text-sm text-blue-700 font-semibold" (click)="onEditClick()">Edit Profile</button>
+        <button *ngIf="edit" class="text-sm text-red-700 font-semibold" (click)="cancelEdit()">Cancel Edit</button>
+    </div>
+
+    <!-- tutor profile image -->
+    <div class="group relative my-2 inline-block h-[6rem] w-full rounded overflow-hidden border border-light-gray">
+        <img class="object-contain w-full h-full" src="{{tutorData.profile | customProfileUrl}}" alt="">
+        <div class="absolute left-0 bottom-0 bg-light-gray right-0 opacity-80 text-end px-2 py-1
+                    invisible group-hover:visible">
+                    <ng-icon class="text-black block cursor-pointer" (click)="editProfImage()" name="bootstrapPencilSquare"></ng-icon>
+        </div>
+        
+    </div>
+    <!-- /end tutor profile image -->
+
+    <div class="my-1">
+        <form [formGroup]="profileUpdate" (ngSubmit)="updateUser()">
+            <div class="children:my-1 flex items-center">
+
+                <div class="name w-full">
+                    <input
+                        class="w-full rounded  py-1 px-1 {{!edit?'outline-none text-gray border border-light-gray':'border border-black outline-blue-600  px-1 text-black'}}"
+                        [readOnly]="!edit" type="text" value="Enter Your Name" formControlName="name"><br>
+                    <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('required')">name is
+                        required !</p>
+                    <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('minlength')">name
+                        should contain atleast 3 characters !</p>
+                </div>
+
+                <div *ngIf="edit">
+                    <button class="bg-blue-700 text-white font-bold p-1 px-2 mx-1 rounded" [disabled]="profileUpdate.invalid" type="submit"> <upload-icon ></upload-icon> </button>
+                </div>
+               
+            </div>
+           
+        </form>
+    </div>
+
+    
+    <div class="border border-light-gray p-2 rounded text-gray mb-2">
+        <p class="text-sm">“the pulse of the globe is in mathematics, without mathematics globe is a big zero”</p>
+    </div>
+
+    <div class="border border-light-gray p-2 rounded text-gray mb-2">
+        <p class="text-sm">{{tutorData.email}}</p>
+    </div>
+
+    <div class="h-[9rem] overflow-hidden hover:overflow-y-auto">
+        <div class="group teaches border border-light-gray mb-2 p-1">
+            <div class="flex justify-between">
+                <h1 class=" text-sm text-gray">Teaches</h1>
+                <ng-icon class="text-black block cursor-pointer invisible group-hover:visible" name="bootstrapPencilSquare" (click)="editTag('teaches')" ></ng-icon>
+            </div>
+            
+            <p  *ngFor="let each of tutorData.teaches" 
+            class="bg-tutor-primary text-sm text-white me-1 px-2 my-1 inline-block">
+            {{each}}
+            </p>
+
+        </div>
+
+        <div class="group teaches border border-light-gray mb-2 p-1">
+            <div class="flex justify-between">
+                <h1 class=" text-sm text-gray">Languages</h1>
+                <ng-icon class="text-black block cursor-pointer invisible group-hover:visible" name="bootstrapPencilSquare" (click)="editTag('teaches')" ></ng-icon>
+            </div>
+            
+            <p  *ngFor="let each of tutorData.language" 
+            class="bg-tutor-primary text-sm text-white me-1 px-2 my-1 inline-block">
+            {{each}}
+            </p>
+
+        </div>
+
+    </div>
+
+</aside>

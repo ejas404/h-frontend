@@ -4,6 +4,7 @@ import * as TutorProfActions from "./action";
 import { catchError, exhaustMap, map, of, tap } from "rxjs";
 import { TutorProfileService } from "../../../services/tutor/profile";
 import { MessageService } from "primeng/api";
+import { ToastService } from "app/core/services/shared/toast_service";
 
 
 @Injectable()
@@ -11,7 +12,7 @@ export class TutorProfileEffect{
     constructor(
         private actions$ : Actions,
         private service : TutorProfileService,
-        private messageService : MessageService
+        private toastService : ToastService
     ){}
 
     getTutorData$ = createEffect(() =>
@@ -25,11 +26,7 @@ export class TutorProfileEffect{
             }),
             catchError((res : any ) =>{ 
               let msg = res.error.message 
-              this.messageService.add({
-                severity : 'error',
-                summary : 'Data fetch Error',
-                detail : msg
-              })
+              this.toastService.fail('data fetch error')
               return of(TutorProfActions.getTutorFail({error : msg}))})
           )
 
@@ -55,20 +52,12 @@ export class TutorProfileEffect{
         this.service.updateEducation(action.educationDetails)
           .pipe(
             map((successResponse)=>{
-              this.messageService.add({
-                severity : 'success',
-                summary : 'Success',
-                detail : 'Details Updated Successfully'
-              })
+              this.toastService.success('Details Updated Successfully')
               return TutorProfActions.updateEducationSuccess({successResponse})
             }),
             catchError((res : any)=>{
               let msg = res.error.message 
-              this.messageService.add({
-                severity : 'error',
-                summary : 'Updation Error',
-                detail : msg
-              })
+              this.toastService.fail(msg)
               return of(TutorProfActions.updateEducationFail({ error: res.error.message }));
             })
           )

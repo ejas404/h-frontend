@@ -33,6 +33,7 @@ import { SmallCourseListComponent } from "app/reusables/templates/small-course-l
 import { SuccessFailTemplateComponent } from "app/reusables/templates/success-fail-template/success-fail-template.component";
 import { HyperLinkTextComponent } from "app/reusables/typography/hyper_link_text";
 import { CheckIconReusableComponent } from "app/reusables/buttons/check-icon-component";
+import { UploadIconReusableComponent } from "app/reusables/buttons/upload-icon";
 
 
 
@@ -66,7 +67,8 @@ import { CheckIconReusableComponent } from "app/reusables/buttons/check-icon-com
         SmallCourseListComponent,
         SuccessFailTemplateComponent,
         HyperLinkTextComponent,
-        CheckIconReusableComponent
+        CheckIconReusableComponent,
+        UploadIconReusableComponent
 
     ],
     exports : [
@@ -98,7 +100,8 @@ import { CheckIconReusableComponent } from "app/reusables/buttons/check-icon-com
         SmallCourseListComponent,
         SuccessFailTemplateComponent,
         HyperLinkTextComponent,
-        CheckIconReusableComponent
+        CheckIconReusableComponent,
+        UploadIconReusableComponent
 
     ],
     imports :[

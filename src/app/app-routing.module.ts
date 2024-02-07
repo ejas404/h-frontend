@@ -31,7 +31,6 @@ import { TutorAccountComponent } from './pages/tutor/tutor-account/tutor-account
 import { tutorBlockGuard, tutorGuard } from './core/guards/tutor_guard';
 import { TutorCourseComponent } from './pages/tutor/tutor-course/tutor-course.component';
 import { TutorStudentsComponent } from './pages/tutor/tutor-students/tutor-students.component';
-import { TutorNotificationComponent } from './pages/tutor/tutor-notification/tutor-notification.component';
 import { SingleCourseAdminComponent } from './pages/admin/single-course-admin/single-course-admin.component';
 import { SingleCourseHomeComponent } from './pages/student/home-page-components/single-course-home/single-course-home.component';
 import { CartProfileComponent } from './pages/student/profile/cart-profile/cart-profile.component';
@@ -44,6 +43,7 @@ import { CheckOutPageComponent } from './pages/student/profile/check-out-page/ch
 import { PaymentProcessingComponent } from './pages/student/payment-components.ts/payment-processing/payment-processing.component';
 import { FreeBuyComponent } from './pages/student/payment-components.ts/free-buy/free-buy.component';
 import { OauthComponentComponent } from './pages/student/auth-page-components/oauth-component/oauth-component.component';
+import { TutorEducationComponent } from './pages/tutor/tutor-education/tutor-education.component';
 
 
 const routes: Routes = [
@@ -99,7 +99,7 @@ const routes: Routes = [
       { path: 'account', component: TutorAccountComponent },
       { path: 'courses', component: TutorCourseComponent },
       { path: 'students', component: TutorStudentsComponent },
-      { path: 'notification', component: TutorNotificationComponent },
+      { path: 'education', component: TutorEducationComponent },
 
     ]
   },

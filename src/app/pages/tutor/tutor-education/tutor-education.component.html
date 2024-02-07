@@ -1,0 +1,27 @@
+<h1 class="text-2xl font-bold ms-5">Teacher Education</h1>
+
+<section class="py-2">
+    <div class="title text-end">
+        <button class="bg-tutor-primary text-white px-[11px] py-1 font-bold rounded-full" (click)="addEducation()">+</button>
+    </div>
+
+    <div class="education-list my-1 grid grid-cols-2 gap-3">
+        <div *ngFor="let each of educationDetails" class="group education-detail flex border border-light-gray rounded
+         relative">
+
+            <div class="absolute right-0 invisible group-hover:visible p-1 cursor-pointer" (click)="deleteEducation(each.ed_id)">
+                <ng-icon name="bootstrapTrash3Fill"></ng-icon>
+            </div>
+
+            <div class="icon p-4 bg-zinc-200 rounded">
+                <img class="w-[3rem] h-auto" src="../../../../assets/icons/graduation-cap-svgrepo-com.svg" alt="">
+            </div>
+            <div class="description px-1">
+                <h3 class="font-bold">{{each.university}}</h3>
+                <p class="text-sm text-light-gray">{{each.stream}}</p>
+                <p class="text-sm text-light-gray">{{each.country}}</p>
+                <p class="text-xs font-semibold">{{each.year}}</p>
+            </div>
+        </div>
+    </div>
+</section>

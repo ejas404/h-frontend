@@ -29,8 +29,8 @@ import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
-
 import { AppComponent } from './app.component';
+import { TutorEducationComponent } from './pages/tutor/tutor-education/tutor-education.component';
 
 @NgModule({
   declarations: [
