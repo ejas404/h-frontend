@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class AdminOtherTopbarComponent {
   otherComponents : {title : string, path : string}[] = [
     {title : 'upcoming courses', path :'upcoming-courses'},
-    {title : 'banners', path :'banner'},
     {title : 'account', path :'account'}
   ] 
 }

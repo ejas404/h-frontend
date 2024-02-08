@@ -34,6 +34,10 @@ import { SuccessFailTemplateComponent } from "app/reusables/templates/success-fa
 import { HyperLinkTextComponent } from "app/reusables/typography/hyper_link_text";
 import { CheckIconReusableComponent } from "app/reusables/buttons/check-icon-component";
 import { UploadIconReusableComponent } from "app/reusables/buttons/upload-icon";
+import { TwofactorAuthComponent } from "app/reusables/templates/twofactor-auth/twofactor-auth.component";
+import { NgApexchartsModule } from "ng-apexcharts";
+import { PieChartReusableComponent } from "app/reusables/charts/pie-chart-reusable/pie-chart-reusable.component";
+import { BargraphChartReusableComponent } from "app/reusables/charts/bargraph-chart-reusable/bargraph-chart-reusable.component";
 
 
 
@@ -68,7 +72,10 @@ import { UploadIconReusableComponent } from "app/reusables/buttons/upload-icon";
         SuccessFailTemplateComponent,
         HyperLinkTextComponent,
         CheckIconReusableComponent,
-        UploadIconReusableComponent
+        UploadIconReusableComponent,
+        TwofactorAuthComponent,
+        PieChartReusableComponent,
+        BargraphChartReusableComponent
 
     ],
     exports : [
@@ -101,13 +108,17 @@ import { UploadIconReusableComponent } from "app/reusables/buttons/upload-icon";
         SuccessFailTemplateComponent,
         HyperLinkTextComponent,
         CheckIconReusableComponent,
-        UploadIconReusableComponent
+        UploadIconReusableComponent,
+        TwofactorAuthComponent,
+        PieChartReusableComponent,
+        BargraphChartReusableComponent
 
     ],
     imports :[
         RouterModule,
         AppRoutingModule,
-        SharedModules
+        SharedModules,
+        NgApexchartsModule
     ]
 })
 export class ReusableComponentsModule{}

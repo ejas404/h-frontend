@@ -12,66 +12,66 @@ export class SingleCourseReusableComponent {
 
   selectedSection !: number
 
-  @Input()user !: 'admin'|'student'|'tutor'|'profile'
-  @Input()bg !: string
-  @Input()text !: string
-  @Input()bg_section_list !: string
-  @Input()isCartItem : boolean = false
-  @Input()isEnrolled !: boolean 
-  @Input()totalStudents !: number 
-  @Input()rating !: number 
+  @Input() user !: 'admin' | 'student' | 'tutor' | 'profile'
+  @Input() bg !: string
+  @Input() text !: string
+  @Input() bg_section_list !: string
+  @Input() isCartItem: boolean = false
+  @Input() isEnrolled !: boolean
+  @Input() totalStudents !: number
+  @Input() rating !: number
 
-  @Input()courseDetails !: CourseDetailsResponse
-  @Input()videoList !:  CourseVideoResponseList[] 
-  @Input()sections !: {title : string, class : string}[]
-  @Input()progressList !: string[];
+  @Input() courseDetails !: CourseDetailsResponse
+  @Input() videoList !: CourseVideoResponseList[]
+  @Input() sections !: { title: string, class: string }[]
+  @Input() progressList !: string[];
 
-  @Output()approveCourse = new EventEmitter()
-  @Output()disAppproveCourse = new EventEmitter()
-  @Output()edit = new EventEmitter()
-  @Output()cover = new EventEmitter()
-  @Output()sub = new EventEmitter()
-  @Output()buy = new EventEmitter()
-  @Output()video = new EventEmitter()
+  @Output() approveCourse = new EventEmitter()
+  @Output() disAppproveCourse = new EventEmitter()
+  @Output() edit = new EventEmitter()
+  @Output() cover = new EventEmitter()
+  @Output() sub = new EventEmitter()
+  @Output() buy = new EventEmitter()
+  @Output() video = new EventEmitter()
 
 
-  approve(){
+  approve() {
     this.approveCourse.emit(null)
   }
-  disApprove(){
+  disApprove() {
     this.disAppproveCourse.emit(null)
   }
-  editCourseEvent(){
+  editCourseEvent() {
     this.edit.emit(null)
   }
-  updateCoverEvent(){
+  updateCoverEvent() {
     this.cover.emit(null)
   }
 
-  addtoCart(id : string | undefined){
-    if(typeof(id) !== 'string') return;
+  addtoCart(id: string | undefined) {
+    if (typeof (id) !== 'string') return;
     this.sub.emit(id)
   }
-  buyNow(){
+  buyNow() {
     this.buy.emit(null)
   }
-  addVideo(){
+  addVideo() {
     this.video.emit(null)
   }
 
   // calculate the sections video duration
-  totalSectionDuration(videoList :VideoResponseModel[] ) : string{
-    
-    if(!videoList[0]) return '0';
-    let res = 0
-    videoList.forEach(each => res+=each.duration )
+  totalSectionDuration(videoList: VideoResponseModel[]): string {
 
-    return Math.floor(res)+''
+    if (!videoList[0]) return '0';
+    let res = 0
+    videoList.forEach(each => res += each.duration)
+
+    return Math.floor(res) + ''
 
   }
 
-  checkCategory(data :any ){
-    if(!checkCategoryType(data)) return;
+  checkCategory(data: any) {
+    if (!checkCategoryType(data)) return;
     return data.name
   }
 }

@@ -9,16 +9,18 @@
                     type="password" placeholder="Current password" autocomplete="off" required pattern="^[0-9a-zA-Z]+$"
                     #current_password="ngModel">
 
-                <span *ngIf="!current_password.valid && current_password.touched" class="text-sm text-red-600">Please enter your
+                <span *ngIf="!current_password.valid && current_password.touched" class="text-sm text-red-600">Please
+                    enter your
                     password</span>
 
 
                 <input ngModel name="newPassword"
                     class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-                    type="password" placeholder="New Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$"
-                    #new_password="ngModel">
+                    type="password" placeholder="New Password" required
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$" #new_password="ngModel">
 
-                <span *ngIf="!new_password.valid && new_password.touched" class="text-sm text-red-600">Password must be 8 to 16
+                <span *ngIf="!new_password.valid && new_password.touched" class="text-sm text-red-600">Password must be
+                    8 to 16
                     characters and include at least one letter and one digit</span>
 
 
@@ -30,18 +32,21 @@
                 <span *ngIf="!confirm.valid && confirm.touched" class="text-sm text-red-600">Password does not
                     match</span>
 
-                   
+
             </div>
 
 
             <div class="text-end">
                 <button type="submit" [disabled]="!resetpass.valid"
-                class="bg-primary font-bold text-white w-[6rem] border border-light-gray py-1 rounded my-2">Update</button>
+                    class="bg-primary text-sm font-bold text-white px-4 border border-light-gray py-1 rounded my-2">Update</button>
             </div>
         </form>
 
     </div>
-    <div class="logout-btn my-3">
-        <button class="text-white bg-admin-primary px-5 py-1 rounded" (click)="logout()">Logout</button>
+    <div class="flex justify-between items-center">
+        <twofactor-auth class="flex-grow" (twoFactEnable)="twoFactorAuth($event)"></twofactor-auth>
+        <div class="logout-btn my-3">
+            <button class="text-primary border text-sm font-bold border-light-gray  shadow px-5 py-1 rounded" (click)="logout()">Logout</button>
+        </div>
     </div>
 </section>

@@ -1,0 +1,14 @@
+<section class="border border-light-gray p-4 w-[50%] my-5 rounded flex justify-between items-center">
+    <div>
+        <h1 class="font-bold ">Two factor</h1>
+        <p class="text-sm">Enable two factor authentication for extra security</p>
+    </div>
+    <div>
+        <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" #twoFact (change)="changed(twoFact)" class="sr-only peer">
+            <div
+                class="border border-light-gray w-9 h-5 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+            </div>
+        </label>
+    </div>
+</section>

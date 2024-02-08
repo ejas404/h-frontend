@@ -5,14 +5,14 @@
             <div class="w-[50%] my-2">
                 <p class=" text-xl">{{courseDetails.description}}</p>
             </div>
-            <div class="rating inline">
-                <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
-                <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
-                <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
-                <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
-                <ng-icon class="text-white me-1" name=" bootstrapStarFill"></ng-icon>
+            <div class="rating">
+                <p-rating
+                [(ngModel)]="rating"  
+                [readonly]="true" 
+                [cancel]="false"
+                ></p-rating>
             </div>
-            <span class=" mx-1 text-sm">{{totalStudents}} students</span>
+            <span class="text-sm">{{totalStudents}} students</span>
             <div class="creator">
                 <p>{{checkCategory(courseDetails.category) | titlecase}}</p>
                 <p class="">Created by : {{courseDetails.tutor.name | titlecase}}</p>

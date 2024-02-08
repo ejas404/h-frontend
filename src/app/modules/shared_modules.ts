@@ -7,6 +7,7 @@ import { CustomAlertsModule } from "./custom_modules/custom_alerts_modules";
 import { RouterModule } from "@angular/router";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
     imports : [
@@ -17,7 +18,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
         CustomAlertsModule,
         RouterModule,
         ReactiveFormsModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        RatingModule
     ],
     exports : [
         FormsModule,
@@ -28,7 +30,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
         RouterModule,
         ReactiveFormsModule,
         MatDialogModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        RatingModule
     ]
 })
 export class SharedModules{

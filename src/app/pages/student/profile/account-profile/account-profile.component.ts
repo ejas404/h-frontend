@@ -13,6 +13,7 @@ import { MessageService } from 'primeng/api';
 })
 export class AccountProfileComponent {
 
+
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -38,6 +39,10 @@ export class AccountProfileComponent {
         this.serverUploadFail(err.error.message)
       }
     })
+
+  }
+
+  twoFactorAuth(e : boolean) {
 
   }
 

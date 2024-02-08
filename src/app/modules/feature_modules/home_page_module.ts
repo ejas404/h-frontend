@@ -17,6 +17,7 @@ import { CoursesComponent } from "app/pages/student/home-page-components/course-
 import { CourseListComponent } from "app/pages/student/home-page-components/course-page-components/course-list/course-list.component";
 import { CourseSidebarComponent } from "app/pages/student/home-page-components/course-page-components/course-sidebar/course-sidebar.component";
 import { CourseTopFilterBtnsComponent } from "app/pages/student/home-page-components/course-page-components/course-top-filter-btns/course-top-filter-btns.component";
+import { AboutComponent } from "app/pages/student/home-page-components/about/about.component";
 
 
 
@@ -36,7 +37,8 @@ import { CourseTopFilterBtnsComponent } from "app/pages/student/home-page-compon
         FooterComponent,
         CourseListComponent,
         CourseSidebarComponent,
-        CourseTopFilterBtnsComponent
+        CourseTopFilterBtnsComponent,
+        AboutComponent
     ],
     imports : [
         SharedModules,

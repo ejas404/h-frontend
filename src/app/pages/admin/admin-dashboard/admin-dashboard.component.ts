@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { PieChartResModel } from 'app/core/models/chart_model';
 import { PopularCourseModel } from 'app/core/models/dashboard_model';
 import { CourseDetailsTableModel, UserDetailsTableModel } from 'app/core/models/table.model';
 import { DashboardSalesService } from 'app/core/services/admin/dashboard_sales_service';
@@ -22,6 +23,8 @@ export class AdminDashboardComponent {
   students !: number;
   tutors !: number;
   courses !: number;
+  pieChartList !: PieChartResModel
+  num !: number;
 
   constructor(
     private store: Store,
@@ -34,6 +37,7 @@ export class AdminDashboardComponent {
     this.fetchTutorList()
     this.fetchCourseList()
     this.getPopularCourses()
+    this.fetchChartDetails()
   }
 
 
@@ -77,6 +81,17 @@ export class AdminDashboardComponent {
     this.salesService.getPopularCourses().subscribe({
       next: res => {
         this.popularCourseList = res.popularCourses
+      }
+    })
+  }
+
+
+  fetchChartDetails(){
+    this.salesService.getChartDetails().subscribe({
+      next: res => {
+       this.pieChartList = res.pieChart
+       this.num = 4
+       console.log('response came')
       }
     })
   }

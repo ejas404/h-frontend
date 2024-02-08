@@ -26,6 +26,9 @@ export class SingleCourseTutorComponent {
   courseVideoList !: CourseVideoResponseList[] ;
   selectedSection !: number;
   course_id !: string;
+  rating !:number;
+  totalUsers !: number;
+
 
 
   constructor(
@@ -44,6 +47,7 @@ export class SingleCourseTutorComponent {
     this.fetchCourseData(search)
     this.setCourseData(search)
     this.fetchCourseVideoList(search)
+    this.fetchRating(search)
   }
 
   fetchCourseData(id: string) {
@@ -109,6 +113,15 @@ export class SingleCourseTutorComponent {
       data : {
         course_id : this.course_id,
         calledFor : 'tutor'
+      }
+    })
+  }
+
+  fetchRating(id : string){
+    this.courseService.getCourseRating(id).subscribe({
+      next : res =>{
+        this.totalUsers = res.count
+        this.rating =  Math.round(res.rating)
       }
     })
   }

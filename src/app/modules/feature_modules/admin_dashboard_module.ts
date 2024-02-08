@@ -17,6 +17,7 @@ import { BannerComponent } from "app/pages/admin/admin-others-componets/banner/b
 import { AdminOtherTopbarComponent } from "app/pages/admin/admin-others-componets/admin-other-topbar/admin-other-topbar.component";
 import {TabViewModule} from "primeng/tabview"
 import { AdminVideoPreviewComponent } from "app/pages/admin/admin-video-preview/admin-video-preview.component";
+import { NgApexchartsModule } from "ng-apexcharts";
 
 @NgModule({
     declarations : [
