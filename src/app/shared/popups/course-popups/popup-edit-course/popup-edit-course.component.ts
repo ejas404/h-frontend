@@ -1,22 +1,23 @@
 import { Component, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { MessageService } from 'primeng/api';
 import { TutorModel } from '../../../../core/models/tutor';
 import { CourseDetailsResponse } from '../../../../core/models/course';
 import { getTutorList } from '../../../../core/state/admin/dashboard/reducer';
-import * as DashboardActions from '../../../../core/state/admin/dashboard/action' 
+import * as DashboardActions from '../../../../core/state/admin/dashboard/action'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { courseUpdateSuccess, singleCourseDetailsSuccess } from '../../../../core/state/admin/courses/action';
 import { getSingleCourseData } from '../../../../core/state/admin/courses/reducer';
 import { Subject, takeUntil } from 'rxjs';
 import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
+import { CourseService } from 'app/core/services/course_service';
+import { ToastService } from 'app/core/services/shared/toast_service';
 
 @Component({
   selector: 'app-popup-edit-course',
   templateUrl: './popup-edit-course.component.html',
   styleUrl: './popup-edit-course.component.scss',
-  providers : [DashboardCourseService]
+  providers: [DashboardCourseService, CourseService]
 })
 export class PopupEditCourseComponent {
 
@@ -26,88 +27,63 @@ export class PopupEditCourseComponent {
   courseDetail !: CourseDetailsResponse;
 
   constructor(
-    private service: DashboardCourseService,
+    private courseService: CourseService,
     private store: Store,
-    private messageService: MessageService,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string }
+    private toastService : ToastService,
+    @Inject(MAT_DIALOG_DATA) public data: { id: string, calledFor: string }
   ) { }
 
 
 
   ngOnInit(): void {
-    this.store.dispatch(DashboardActions.dashboardRequest());
-
-    this.store.select(getTutorList)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : state => {
-        this.tutorList = state
-      }
-    })
-
-    this.fetchCourseData(this.data.id)
+    this.fetchTutorList()
     this.setCourseData()
   }
 
-  fetchCourseData(id : string){
-    this.service.getSingleCourse(id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : data =>{
-        this.store.dispatch(singleCourseDetailsSuccess(data))
-      },
-      error  : err =>{
-        console.log(err)
-      }
-    })
+  fetchTutorList() {
+    if(this.data.calledFor === 'tutor') return;
+    this.store.dispatch(DashboardActions.dashboardRequest());
+
+    this.store.select(getTutorList)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: state => {
+          this.tutorList = state
+        }
+      })
   }
 
-  setCourseData(){
-    this.store.select(getSingleCourseData)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next : data =>{
-       this.courseDetail = data
 
-      },
-      error  : err =>{
-        console.log(err)
-      }
-    })
+  setCourseData() {
+    this.store.select(getSingleCourseData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.courseDetail = data
+
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
   }
 
 
   onFormSubmit(formData: NgForm) {
-    this.service.updateCourse(formData.value , this.courseDetail._id as string)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: data => {
-        this.store.dispatch(courseUpdateSuccess(data))
-        this.successMessage()
-      },
-      error: err => {
-        this.failureMessage()
-      }
-    })
+    this.courseService.updateCourse(formData.value, this.courseDetail._id as string, this.data.calledFor)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: data => {
+          this.store.dispatch(courseUpdateSuccess(data))
+         this.toastService.success('Course Updated Successfully')
+        },
+        error: err => {
+          this.toastService.fail('Failed to update course')
+        }
+      })
   }
 
-  successMessage() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Course Updated Successfully'
-    })
-  }
-
-  failureMessage() {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Failed',
-      detail: 'Failed to update course'
-    })
-  }
-
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.destroy$.next()
     this.destroy$.complete()
   }

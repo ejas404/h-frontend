@@ -35,10 +35,6 @@ export class DashboardCourseService {
         return this.http.get<{ courseDetails: CourseDetailsResponse }>(`${BASE_URL}/admin/course/${id}`)
     }
 
-    updateCourse(data: CourseDetails, id: string) {
-        return this.http.put<{ updatedCourse: CourseDetailsResponse }>(`${BASE_URL}/admin/update-course/${id}`, data)
-    }
-
     approveCourseRequest(id : string){
         return this.http.put<{courseDetails : CourseDetailsResponse}>(`${BASE_URL}/admin/course-approve/${id}`, {})
     }

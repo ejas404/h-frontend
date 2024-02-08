@@ -1,28 +1,25 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { DashboardService } from '../../../core/services/admin/dashboard';
-import { CourseDetailsResponse, CourseVideoResponseList } from '../../../core/models/course';
-import { MatDialog } from '@angular/material/dialog';
-import { CourseImagePopupComponent } from '../../../shared/popups/course-popups/course-image-popup/course-image-popup.component';
-import { courseApproveSuccess, singleCourseDetailsSuccess } from '../../../core/state/admin/courses/action';
-import { getSingleCourseData } from '../../../core/state/admin/courses/reducer';
-import { PopupEditCourseComponent } from '../../../shared/popups/course-popups/popup-edit-course/popup-edit-course.component';
-import { MessageService } from 'primeng/api';
-import { Subject, takeUntil } from 'rxjs';
-import { VideoUploadPopupComponent } from 'app/shared/popups/video-upload-popup/video-upload-popup.component';
+import { CourseDetailsResponse, CourseVideoResponseList } from 'app/core/models/course';
 import { CourseService } from 'app/core/services/course_service';
 import { ToastService } from 'app/core/services/shared/toast_service';
-import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
+import { TutorCourseService } from 'app/core/services/tutor/tutor_course_service';
+import { singleCourseDetailsSuccess } from 'app/core/state/admin/courses/action';
+import { getSingleCourseData } from 'app/core/state/admin/courses/reducer';
+import { CourseImagePopupComponent } from 'app/shared/popups/course-popups/course-image-popup/course-image-popup.component';
+import { PopupEditCourseComponent } from 'app/shared/popups/course-popups/popup-edit-course/popup-edit-course.component';
+import { VideoUploadPopupComponent } from 'app/shared/popups/video-upload-popup/video-upload-popup.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-single-course-admin',
-  templateUrl: './single-course-admin.component.html',
-  styleUrl: './single-course-admin.component.scss',
-  providers : [DashboardCourseService]
+  selector: 'app-single-course-tutor',
+  templateUrl: './single-course-tutor.component.html',
+  styleUrl: './single-course-tutor.component.scss',
+  providers : [TutorCourseService,CourseService]
 })
-export class SingleCourseAdminComponent {
-
+export class SingleCourseTutorComponent {
   private destroy$ = new Subject<void>();
 
   courseDetails !: CourseDetailsResponse;
@@ -34,7 +31,7 @@ export class SingleCourseAdminComponent {
   constructor(
     private activateRoute: ActivatedRoute,
     private store: Store,
-    private service: DashboardCourseService,
+    private service: TutorCourseService,
     private courseService : CourseService,
     private dialogRef: MatDialog,
     private toastService: ToastService
@@ -76,7 +73,7 @@ export class SingleCourseAdminComponent {
   }
 
   fetchCourseVideoList(id : string){
-    this.courseService.getCourseVideoList(id,'admin')
+    this.courseService.getCourseVideoList(id,'tutor')
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : res =>{
@@ -90,7 +87,6 @@ export class SingleCourseAdminComponent {
 
   updateCover() {
     const id = this.course_id
-
     this.dialogRef.open(CourseImagePopupComponent, {
       data: { id }
     })
@@ -100,24 +96,11 @@ export class SingleCourseAdminComponent {
     this.dialogRef.open(PopupEditCourseComponent, {
       data: {
         id: this.course_id,
-        calledFor : 'admin'
+        calledFor : 'tutor'
       }
     })
   }
 
-  approveCourse() {
-    this.service.approveCourseRequest(this.course_id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: data => {
-          this.store.dispatch(courseApproveSuccess(data))
-          this.toastService.success('Course approval successfully completed')
-        },
-        error: err => {
-          this.toastService.fail(err.error.message || 'Course approval failed to complete')
-        }
-      })
-  }
 
   addCourseVideo() {
     this.dialogRef.open(VideoUploadPopupComponent,{
@@ -125,14 +108,11 @@ export class SingleCourseAdminComponent {
       width : '90%',
       data : {
         course_id : this.course_id,
-        calledFor : 'admin'
+        calledFor : 'tutor'
       }
     })
   }
 
-  cancelApprove() {
-
-  }
 
   ngOnDestroy() {
     this.destroy$.next()

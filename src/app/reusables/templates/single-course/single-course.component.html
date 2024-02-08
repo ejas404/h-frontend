@@ -12,13 +12,13 @@
                 <ng-icon class="text-orange-400 me-1" name=" bootstrapStarFill"></ng-icon>
                 <ng-icon class="text-white me-1" name=" bootstrapStarFill"></ng-icon>
             </div>
-            <span class=" mx-1 text-sm">1,400 students</span>
+            <span class=" mx-1 text-sm">{{totalStudents}} students</span>
             <div class="creator">
                 <p>{{checkCategory(courseDetails.category) | titlecase}}</p>
                 <p class="">Created by : {{courseDetails.tutor.name | titlecase}}</p>
             </div>
             <div class="approval my-2"
-                *ngIf="courseDetails.isTutorMade && !courseDetails.isApproved && user !== 'student' && user !== 'profile' ">
+                *ngIf="courseDetails.isTutorMade && !courseDetails.isApproved && user === 'admin'">
                 <button class="bg-white text-admin-primary rounded py-1 px-2 me-3 font-semibold"
                     (click)="approve()">Approve</button>
                 <button class="bg-primary text-white rounded py-1 px-2 font-semibold"
@@ -60,14 +60,14 @@
 
         <!-- buttons for admin and tutor to edit and delete the course -->
         <ng-template #editDelete>
-            <div class="buttons">
+            <div class="buttons text-end">
                 <!-- button for editing the course -->
                 <common-btn-reusable (click)="editCourseEvent()"
                     [styleClass]="'bg-white text-admin-primary text-sm '">Edit</common-btn-reusable>
 
-                <!-- button for deleting the course -->
+                <!-- button for deleting the course
                 <common-btn-reusable
-                    [styleClass]="'bg-white text-primary text-sm float-right'">Delete</common-btn-reusable>
+                    [styleClass]="'bg-white text-primary text-sm float-right'">Delete</common-btn-reusable> -->
             </div>
         </ng-template>
     </div>

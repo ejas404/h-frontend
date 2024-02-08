@@ -10,11 +10,11 @@ export class DashboardVideoService{
         private http : HttpClient
     ){}
 
-    uploadVideo(Data: FormData): Observable<{ msg: string, path: string }> {
-        return this.http.put<{ msg: string, path: string }>(`${BASE_URL}/admin/add-video`, Data)
+    uploadVideo(Data: FormData ,route : string): Observable<{ msg: string, path: string }> {
+        return this.http.put<{ msg: string, path: string }>(`${BASE_URL}/${route}/add-video`, Data)
     }
-    getVideo(id : string){
-        return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/admin/get-video/${id}`)
+    getVideo(id : string,route : string){
+        return this.http.get<{video : VideoWithUrl}>(`${BASE_URL}/${route}/get-video/${id}`)
     }
     
 }

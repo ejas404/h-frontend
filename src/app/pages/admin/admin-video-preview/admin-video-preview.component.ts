@@ -65,7 +65,7 @@ export class AdminVideoPreviewComponent {
   }
 
   fetchVideo(id: string) {
-    this.dbVideoService.getVideo(id)
+    this.dbVideoService.getVideo(id,'admin')
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: res => {

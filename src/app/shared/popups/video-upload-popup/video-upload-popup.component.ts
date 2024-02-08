@@ -32,7 +32,7 @@ export class VideoUploadPopupComponent {
     private courseService : CourseService,
     private dialogRef : MatDialog,
     private communicateService : ComponetCommunicationService,
-    @Inject(MAT_DIALOG_DATA) public data : {course_id : string}
+    @Inject(MAT_DIALOG_DATA) public data : {course_id : string,calledFor : string}
     ){}
 
   ngOnInit(){
@@ -91,7 +91,7 @@ export class VideoUploadPopupComponent {
     formData.append('details', JSON.stringify(form.value))
     formData.append('duration',this.duration.toString())
 
-    this.dashboardService.uploadVideo(formData)
+    this.dashboardService.uploadVideo(formData,this.data.calledFor)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : data =>{
@@ -108,7 +108,8 @@ export class VideoUploadPopupComponent {
   onAddSection(){
     this.dialogRef.open(SectionPopupComponent,{
       data : {
-        id : this.data.course_id
+        id : this.data.course_id,
+        calledFor : this.data.calledFor
       }
     })
 

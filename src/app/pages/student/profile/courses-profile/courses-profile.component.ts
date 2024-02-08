@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { keyString } from 'app/core/models/common_model';
 import { EnrollCourseModels, EnrollSubcat } from 'app/core/models/enroll_models';
+import { ToastService } from 'app/core/services/shared/toast_service';
 import { StudentEnrollService } from 'app/core/services/student/student_enroll_service';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, Subscription, take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-courses-profile',
@@ -16,12 +17,14 @@ export class CoursesProfileComponent {
 
   titles = ['enrolled', 'not enrolled']
   selected = 'enrolled'
+  starValue !: number;
   enrollList !: EnrollCourseModels[];
   viewList !: EnrollCourseModels[];
   enrollCatObj : EnrollSubcat[] = []
 
   constructor(
-    private enrollService: StudentEnrollService
+    private enrollService: StudentEnrollService,
+    private toastService : ToastService
   ) { }
 
   select(val: string) {
@@ -81,6 +84,22 @@ export class CoursesProfileComponent {
       }
     }
     return ''
+  }
+
+  starChange(val : number,enid : string){
+    if(!enid) return;
+    if(val >=1 && val <=5){
+      this.enrollService.rateEnrollment(val,enid)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next : res =>{
+          this.toastService.success(res.msg)
+        },
+        error : err =>{
+          this.toastService.fail(err.error.message || 'failed to rate course')
+        }
+      })
+    }
   }
 
   ngOnDestroy() {

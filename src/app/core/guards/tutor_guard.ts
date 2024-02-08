@@ -2,8 +2,6 @@ import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 import { TutorProfileService } from "../services/tutor/profile";
 import { MessageService } from "primeng/api";
-import { StudentProfileService } from "../services/student/profile";
-
 
 export const tutorGuard: CanActivateFn = (route, state) => {
 

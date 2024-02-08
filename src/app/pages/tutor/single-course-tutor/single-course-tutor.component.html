@@ -1,0 +1,14 @@
+<app-navbar [user]="'tutor'"></app-navbar>
+<single-course-reusable
+[user]="'tutor'"
+[bg]="'bg-tutor-primary'"
+[text]="'text-white'"
+[bg_section_list]="'bg-zinc-200'"
+[courseDetails]="courseDetails"
+[videoList]="courseVideoList"
+(edit)="editCourse()"
+(cover)="updateCover()"
+(video)="addCourseVideo()"
+>
+
+</single-course-reusable>

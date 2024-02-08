@@ -13,27 +13,21 @@
                 <th class="py-2 px-4 border-b" *ngIf="head.title === 'filter'">
                     <dropdown-filter (change)="onFilter($event)" [dropList]="dropFilterList"></dropdown-filter>
                 </th>
-
-
             </ng-container>
-
-
-
         </tr>
     </thead>
     <tbody class="text-center">
-        <tr *ngFor="let row of tBody; index as i " class="{{row.isBlocked ? 'bg-light-gray':''}}">
+        <tr *ngFor="let row of tBody; index as i " class="{{row.isBlocked ? 'bg-light-gray':''}}{{row.isTutorMade && !row.isApproved ? 'text-red-600':'' }}">
             <td class="py-2 px-4 border-b">{{ i + 1 }}</td>
 
             <ng-container *ngFor="let head of tHeaders">
 
                 <!-- conditionally check for the restrict button / delete button and for tutor else will be printed -->
-    
-                <td *ngIf="head.tBodyKey !== 'restrict' &&  head.tBodyKey !== 'delete' && head.tBodyKey !== 'tutor' &&  head.tBodyKey !== 'courseLink'"
-                            
-                class="py-2 px-4 border-b">{{row[head.tBodyKey] }}</td>
 
-                 <!-- if theres any delete restrict and tutor then it will goes below -->
+                <td *ngIf="head.tBodyKey !== 'restrict' &&  head.tBodyKey !== 'delete' && head.tBodyKey !== 'tutor' &&  head.tBodyKey !== 'courseLink'"
+                    class="py-2 px-4 border-b">{{row[head.tBodyKey] }}</td>
+
+                <!-- if theres any delete restrict and tutor then it will goes below -->
 
                 <td *ngIf=" head.tBodyKey === 'tutor'" class="py-2 px-4 border-b">{{tutorNames[i]}}</td>
 

@@ -35,4 +35,8 @@ export class StudentEnrollService{
     isCourseEnrolled(id : string){
         return this.http.get<{success : boolean}>(`${BASE_URL}/student/course-enroll/${id}`)
     }
+
+    rateEnrollment(val : number,enid : string){
+        return this.http.put<{msg : string}>(`${BASE_URL}/student/rate-enrollment`,{val, enid})
+    }
 }

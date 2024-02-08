@@ -21,7 +21,7 @@ export class SectionPopupComponent {
     private courseService: CourseService,
     private toastService: ToastService,
     private communicateService : ComponetCommunicationService,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string }
+    @Inject(MAT_DIALOG_DATA) public data: { id: string , calledFor : string }
   ) { }
 
   ngOnInIt() {
@@ -29,7 +29,7 @@ export class SectionPopupComponent {
   }
 
   onFormSubmit(form: NgForm) {
-    this.courseService.addSection(form.value, 'admin')
+    this.courseService.addSection(form.value, this.data.calledFor)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: res => {

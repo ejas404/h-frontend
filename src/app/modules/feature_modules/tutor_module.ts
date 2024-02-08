@@ -13,6 +13,7 @@ import { SharedModules } from "../shared_modules";
 import { TutorSideNavComponent } from "app/pages/tutor/tutor-side-nav/tutor-side-nav.component";
 import { TutorRightSideComponent } from "app/pages/tutor/tutor-right-side/tutor-right-side.component";
 import { TutorEducationComponent } from "app/pages/tutor/tutor-education/tutor-education.component";
+import { SingleCourseTutorComponent } from "app/pages/tutor/single-course-tutor/single-course-tutor.component";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { TutorEducationComponent } from "app/pages/tutor/tutor-education/tutor-e
         TutorCourseSinglePageComponent,
         TutorSideNavComponent,
         TutorRightSideComponent,
-        TutorEducationComponent
+        TutorEducationComponent,
+        SingleCourseTutorComponent
     ],
     imports : [
         SharedModules,

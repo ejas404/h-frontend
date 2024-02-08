@@ -4,28 +4,33 @@
 
         <input ngModel name="title"
             class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-            type="text" placeholder="Title" #title="ngModel" required pattern=".*[a-zA-Z].*" [(ngModel)]="courseDetail.title">
+            type="text" placeholder="Title" #title="ngModel" required pattern=".*[a-zA-Z].*"
+            [(ngModel)]="courseDetail.title">
 
         <span *ngIf="!title.valid && title.touched" class="text-sm text-red-600">Enter a title for the course</span>
 
         <input ngModel name="fee"
             class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-            type="text" placeholder="fee" #fee="ngModel" required pattern="^(?:0|[1-9]\d{0,5})$" [(ngModel)]="courseDetail.fee">
+            type="text" placeholder="fee" #fee="ngModel" required pattern="^(?:0|[1-9]\d{0,5})$"
+            [(ngModel)]="courseDetail.fee">
 
         <span *ngIf="!fee.valid && fee.touched" class="text-sm text-red-600">fee should be a number</span>
 
-        <select ngModel name="tutor"
-            class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-            #tutor="ngModel" required [(ngModel)]="courseDetail.tutor._id" >
-            <option value=""  selected >Select a tutor</option>
-            <option *ngFor="let each of tutorList" value="{{ each._id}}">{{each.name}}</option>
+        <ng-container *ngIf="data.calledFor !== 'tutor'">
+            <select ngModel name="tutor"
+                class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
+                #tutor="ngModel" required [(ngModel)]="courseDetail.tutor._id">
+                <option value="" selected>Select a tutor</option>
+                <option *ngFor="let each of tutorList" value="{{ each._id}}">{{each.name}}</option>
 
-        </select>
-        <span *ngIf="!tutor.valid && fee.touched" class="text-sm text-red-600">select a tutor</span>
+            </select>
+            <span *ngIf="!tutor.valid && fee.touched" class="text-sm text-red-600">select a tutor</span>
+        </ng-container>
 
         <textarea ngModel name="description"
             class="border border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-            placeholder="Course description" #description="ngModel" required maxlength="255"  [(ngModel)]="courseDetail.description"></textarea>
+            placeholder="Course description" #description="ngModel" required maxlength="255"
+            [(ngModel)]="courseDetail.description"></textarea>
 
         <span *ngIf="!description.valid && description.touched" class="text-sm text-red-600">Enter a description for
             your course</span>

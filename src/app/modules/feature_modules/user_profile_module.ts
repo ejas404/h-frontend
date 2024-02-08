@@ -17,6 +17,7 @@ import { PaymentSuccessComponent } from "app/pages/payment_sucess";
 import { PaymentProcessingComponent } from "app/pages/student/payment-components.ts/payment-processing/payment-processing.component";
 import { FreeBuyComponent } from "app/pages/student/payment-components.ts/free-buy/free-buy.component";
 import { OauthComponentComponent } from "app/pages/student/auth-page-components/oauth-component/oauth-component.component";
+import { RatingModule } from 'primeng/rating';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { OauthComponentComponent } from "app/pages/student/auth-page-components/
     imports : [
         SharedModules,
         SharedComponentsModule,
-        ReusableComponentsModule
+        ReusableComponentsModule,
+        RatingModule
     ],
 
 })

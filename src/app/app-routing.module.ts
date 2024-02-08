@@ -44,6 +44,7 @@ import { PaymentProcessingComponent } from './pages/student/payment-components.t
 import { FreeBuyComponent } from './pages/student/payment-components.ts/free-buy/free-buy.component';
 import { OauthComponentComponent } from './pages/student/auth-page-components/oauth-component/oauth-component.component';
 import { TutorEducationComponent } from './pages/tutor/tutor-education/tutor-education.component';
+import { SingleCourseTutorComponent } from './pages/tutor/single-course-tutor/single-course-tutor.component';
 
 
 const routes: Routes = [
@@ -103,11 +104,13 @@ const routes: Routes = [
 
     ]
   },
+  
+  { path: 'tutor/login', component: TutorLoginComponent },
+  { path: 'tutor/signup', component: TutorSignupComponent },
+  { path: 'tutor/course/:id', canActivate: [tutorGuard, tutorBlockGuard], component: SingleCourseTutorComponent },
   { path: 'admin/login', component: AdminLoginComponent },
   { path: 'admin/course/:id', canActivate: [adminGuard], component: SingleCourseAdminComponent },
   { path: 'admin/course/:id/:video', canActivate: [adminGuard], component: AdminVideoPreviewComponent },
-  { path: 'tutor/login', component: TutorLoginComponent },
-  { path: 'tutor/signup', component: TutorSignupComponent },
   {path : 'oauth', component : OauthComponentComponent},
   {path : 'payment/check/:id',canActivate: [studentGuard, studentBlockGuard],component : PaymentProcessingComponent},
   {path : 'processing/:id',canActivate: [studentGuard, studentBlockGuard],component : FreeBuyComponent},

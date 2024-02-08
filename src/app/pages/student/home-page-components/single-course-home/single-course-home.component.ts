@@ -27,6 +27,8 @@ export class SingleCourseHomeComponent {
   courseDetails !: CourseDetailsResponse;
   cartItem !: boolean
   isEnrolled !: boolean 
+  rating !:number;
+  totalUsers !: number;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -49,6 +51,7 @@ export class SingleCourseHomeComponent {
     this.fetchCartList(search)
     this.fetchEnrollStatus(search)
     this.fetchProgress(search)
+    this.fetchRating(search)
   }
 
   fetchCourseData(id : string){
@@ -131,6 +134,15 @@ export class SingleCourseHomeComponent {
       },
       error : err =>{
         this.toastService.fail(err.error.message || 'failed to add to cart')
+      }
+    })
+  }
+
+  fetchRating(id : string){
+    this.courseService.getCourseRating(id).subscribe({
+      next : res =>{
+        this.totalUsers = res.count
+        this.rating =  res.rating
       }
     })
   }

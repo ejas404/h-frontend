@@ -18,6 +18,8 @@ export class SingleCourseReusableComponent {
   @Input()bg_section_list !: string
   @Input()isCartItem : boolean = false
   @Input()isEnrolled !: boolean 
+  @Input()totalStudents !: number 
+  @Input()rating !: number 
 
   @Input()courseDetails !: CourseDetailsResponse
   @Input()videoList !:  CourseVideoResponseList[] 

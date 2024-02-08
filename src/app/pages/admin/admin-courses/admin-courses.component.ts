@@ -24,7 +24,6 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   tableHeaders: TableHeaderModel[] = [
     { title: 'Course', tBodyKey: 'title' },
     { title: 'filter', tBodyKey: 'tutor' },
-    { title: 'restrict', tBodyKey: 'restrict' },
     { title: 'add', tBodyKey: 'courseLink' }
   ]
 
@@ -92,15 +91,6 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
         calledFor: 'courseAdd'
       }
     })
-  }
-  deleteCourse(arg0: any) {
-
-  }
-  blockCourse(arg0: any) {
-
-  }
-  unblockCourse(arg0: any) {
-
   }
 
   ngOnDestroy() {
