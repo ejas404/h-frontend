@@ -45,6 +45,7 @@ import { FreeBuyComponent } from './pages/student/payment-components.ts/free-buy
 import { OauthComponentComponent } from './pages/student/auth-page-components/oauth-component/oauth-component.component';
 import { TutorEducationComponent } from './pages/tutor/tutor-education/tutor-education.component';
 import { SingleCourseTutorComponent } from './pages/tutor/single-course-tutor/single-course-tutor.component';
+import { AdminSalesPageComponent } from './pages/admin/admin-sales-page/admin-sales-page.component';
 
 
 const routes: Routes = [
@@ -67,6 +68,7 @@ const routes: Routes = [
       { path: 'students', component: AdminStudentsComponent },
       { path: 'tutors', component: AdminTutorsComponent },
       { path: 'courses', component: AdminCoursesComponent },
+      {path : 'sales',component : AdminSalesPageComponent},
       {
         path: 'others', component: AdminOthersComponent,
         children : [

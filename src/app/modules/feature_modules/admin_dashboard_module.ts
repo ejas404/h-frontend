@@ -18,6 +18,7 @@ import { AdminOtherTopbarComponent } from "app/pages/admin/admin-others-componet
 import {TabViewModule} from "primeng/tabview"
 import { AdminVideoPreviewComponent } from "app/pages/admin/admin-video-preview/admin-video-preview.component";
 import { NgApexchartsModule } from "ng-apexcharts";
+import { AdminSalesPageComponent } from "app/pages/admin/admin-sales-page/admin-sales-page.component";
 
 @NgModule({
     declarations : [
@@ -34,7 +35,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
         AdminAccountComponent,
         BannerComponent,
         AdminOtherTopbarComponent,
-        AdminVideoPreviewComponent
+        AdminVideoPreviewComponent,
+        AdminSalesPageComponent
     ],
     imports : [
         SharedModules,

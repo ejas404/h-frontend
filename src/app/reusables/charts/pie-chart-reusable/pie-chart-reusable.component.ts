@@ -1,7 +1,8 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, ViewChild } from '@angular/core';
 import { PieChartOptions, PieChartResModel } from 'app/core/models/chart_model';
 import { DashboardSalesService } from 'app/core/services/admin/dashboard_sales_service';
-import { ApexNonAxisChartSeries, ChartComponent } from 'ng-apexcharts';
+import { ChartComponent } from 'ng-apexcharts';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'pie-chart-reusable',
@@ -10,29 +11,27 @@ import { ApexNonAxisChartSeries, ChartComponent } from 'ng-apexcharts';
   providers: [DashboardSalesService]
 })
 export class PieChartReusableComponent {
+
+  destroy$ !: Subscription;
+
   @Input() pieChartList !: PieChartResModel;
-  @Input() num !: number;
+  @Input() loadEvent !: EventEmitter<null>;
   @ViewChild("chart") chart !: ChartComponent;
   public chartOptions: Partial<PieChartOptions>;
+  
 
-  constructor(private salesService: DashboardSalesService) {
+  constructor() {
     this.chartOptions = {}; // Initialize chartOptions
   }
 
   ngOnInit() {
-    this.fetchChartDetails();
-  }
-
-  fetchChartDetails() {
-    this.salesService.getChartDetails().subscribe({
-      next: res => {
-        this.pieChartList = res.pieChart;
-        this.setChartOptions()
-      },
-      error: err => {
-        console.error('Error fetching chart details:', err);
-      }
-    });
+   this.destroy$ = this.loadEvent
+   .subscribe({
+    next : (response : PieChartResModel) =>{
+      this.pieChartList = response;
+      this.setChartOptions();
+    }
+   })
   }
 
   setChartOptions() {
@@ -47,7 +46,7 @@ export class PieChartReusableComponent {
           breakpoint: 480,
           options: {
             chart: {
-              width: 50
+              height : 200
             },
             legend: {
               position: "bottom"
@@ -56,6 +55,10 @@ export class PieChartReusableComponent {
         }
       ]
     };
+  }
+
+  ngOnDestroy(){
+    this.destroy$.unsubscribe()
   }
 
 }

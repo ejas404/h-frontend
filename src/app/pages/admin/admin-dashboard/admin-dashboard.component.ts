@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PieChartResModel } from 'app/core/models/chart_model';
 import { PopularCourseModel } from 'app/core/models/dashboard_model';
@@ -24,7 +24,8 @@ export class AdminDashboardComponent {
   tutors !: number;
   courses !: number;
   pieChartList !: PieChartResModel
-  num !: number;
+  
+  @Output()chartLoad = new EventEmitter()
 
   constructor(
     private store: Store,
@@ -78,23 +79,30 @@ export class AdminDashboardComponent {
 
 
   getPopularCourses() {
-    this.salesService.getPopularCourses().subscribe({
+    this.salesService.getPopularCourses()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next: res => {
         this.popularCourseList = res.popularCourses
       }
     })
   }
 
-
-  fetchChartDetails(){
-    this.salesService.getChartDetails().subscribe({
+  fetchChartDetails() {
+    this.salesService.getChartDetails()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next: res => {
-       this.pieChartList = res.pieChart
-       this.num = 4
-       console.log('response came')
+        this.pieChartList = res.pieChart;
+        this.chartLoad.emit(res.pieChart)
+      },
+      error: err => {
+        console.error('Error fetching chart details:', err);
       }
-    })
+    });
   }
+
+
 
   ngOnDestroy(){
     this.destroy$.next()

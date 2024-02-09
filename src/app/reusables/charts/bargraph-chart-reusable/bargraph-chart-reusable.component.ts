@@ -1,10 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { LineChartOptions } from 'app/core/models/chart_model';
+import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
-  selector: 'app-bargraph-chart-reusable',
+  selector: 'bargraph-chart-reusable',
   templateUrl: './bargraph-chart-reusable.component.html',
   styleUrl: './bargraph-chart-reusable.component.scss'
 })
 export class BargraphChartReusableComponent {
+  @ViewChild("chart") chart !: ChartComponent;
+  public chartOptions: Partial<LineChartOptions>;
+
+  constructor() {
+    this.chartOptions = {
+      series: [
+        {
+          name: "Desktops",
+          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+        }
+      ],
+      chart: {
+        height: 200,
+        type: "line",
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "straight"
+      },
+      title: {
+        text: "Sales",
+        align: "left"
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          opacity: 0.5
+        }
+      },
+      xaxis: {
+        categories: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep"
+        ]
+      }
+    };
+  }
 
 }

@@ -8,8 +8,7 @@
     <div class="popular-courses mt-4">
         <h1 class="font-bold my-2">Popular Courses</h1>
         <div class="course_list grid grid-cols-3">
-            <div *ngFor="let each of popularCourseList"
-                class="relative group my-2 me-8 p-2 rounded-lg bg-slate-200">
+            <div *ngFor="let each of popularCourseList" class="relative group my-2 me-8 p-2 rounded-lg bg-slate-200">
 
                 <div class="top flex justify-between">
                     <div class="img-template w-[4rem] h-[3rem] rounded overflow-hidden">
@@ -26,6 +25,15 @@
     </div>
 </section>
 
-<section class="charts">
-    <pie-chart-reusable [pieChartList]="pieChartList" [num]="num"></pie-chart-reusable>
-</section>
+<div class="charts mt-3">
+    <a class="flex" routerLink="/admin/sales">
+        <!-- bar-graph-chart -->
+        <bargraph-chart-reusable></bargraph-chart-reusable>
+       
+        <!-- pie-graph-chart -->
+        <pie-chart-reusable 
+        [pieChartList]="pieChartList" 
+        [loadEvent]="chartLoad"
+        ></pie-chart-reusable>  
+    </a>
+</div>
