@@ -24,7 +24,8 @@ import {
     bootstrapBookFill,
     bootstrapPersonFill,
     bootstrapCheckCircleFill,
-    bootstrapUpload
+    bootstrapUpload,
+    bootstrapCaretRightFill
 
 
 } from '@ng-icons/bootstrap-icons';
@@ -56,7 +57,8 @@ import {
                 bootstrapBookFill,
                 bootstrapPersonFill,
                 bootstrapCheckCircleFill,
-                bootstrapUpload
+                bootstrapUpload,
+                bootstrapCaretRightFill
             })
     ],
     exports: [

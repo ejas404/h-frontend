@@ -38,6 +38,7 @@ import { TwofactorAuthComponent } from "app/reusables/templates/twofactor-auth/t
 import { NgApexchartsModule } from "ng-apexcharts";
 import { PieChartReusableComponent } from "app/reusables/charts/pie-chart-reusable/pie-chart-reusable.component";
 import { BargraphChartReusableComponent } from "app/reusables/charts/bargraph-chart-reusable/bargraph-chart-reusable.component";
+import { NextPrevBtnComponent } from "app/reusables/buttons/next-prev-btn-component";
 
 
 
@@ -75,7 +76,8 @@ import { BargraphChartReusableComponent } from "app/reusables/charts/bargraph-ch
         UploadIconReusableComponent,
         TwofactorAuthComponent,
         PieChartReusableComponent,
-        BargraphChartReusableComponent
+        BargraphChartReusableComponent,
+        NextPrevBtnComponent
 
     ],
     exports : [
@@ -111,7 +113,8 @@ import { BargraphChartReusableComponent } from "app/reusables/charts/bargraph-ch
         UploadIconReusableComponent,
         TwofactorAuthComponent,
         PieChartReusableComponent,
-        BargraphChartReusableComponent
+        BargraphChartReusableComponent,
+        NextPrevBtnComponent
 
     ],
     imports :[

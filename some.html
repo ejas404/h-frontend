@@ -1,130 +1,40 @@
-<main class="w-full h-[calc(100vh-3rem)] px-[7rem] py-[2rem] ">
-    <div class="tutor_profile flex h-full w-full">
+<section class="courses my-10 px-32 h-[100vh] bg-gray-bg relative snap-start">
+    <div class="text-center w-full h-[20%] flex justify-center items-center">
+        <h1 class="text-3xl font-extrabold">Courses</h1>
+    </div>
 
-        <div class="tutor-profile-left max-w-[15rem] basis-1/4">
-            <div class="group relative inline-block h-[6rem] w-[6rem] rounded overflow-hidden border border-light-gray">
-                <img class="object-cover w-full h-full" src="{{tutorData.profile | customImageUrl}}" alt="">
-                <div class="absolute left-0 bottom-0 bg-light-gray right-0 opacity-80 text-end px-2 py-1
-                            invisible group-hover:visible"> 
-                    <ng-icon class="text-black block cursor-pointer" (click)="editProfImage()" name="bootstrapPencilSquare"></ng-icon>
-                </div>
-            </div>
-            <p class="text-sm">“the pulse of the globe is in mathematics, without mathematics globe is a big zero”</p>
+    
+    <!-- <button class="absolute left-4 bg-black text-white">Left</button>
+    <button class="absolute right-4 bg-black text-white">Right</button> -->
 
-            <div class="tutor-tags overflow-y-auto">
-                <div class="languages">
-                    <div class="flex justify-between my-2">
-                      <h1 class=" text-sm text-gray">Languages</h1>
-                      <ng-icon class="text-black block cursor-pointer" name="bootstrapPencilSquare" (click)="editTag('language')" ></ng-icon>
+    <div class="courses-list h-[80%] w-full flex justify-center items-center ">
+
+        <div class="items flex overflow-x-scroll px-5 no-scrollbar">
+            <div *ngFor="let each of courses"
+                class="flex-none mx-5 course-card w-[18rem] h-[22rem] border border-light-gray rounded-xl overflow-hidden bg-white">
+
+                <a routerLink="/course/{{each._id}}">
+
+                    <div class="card-img w-full h-[12rem]">
+                        <img class="object-contain h-full w-full" src="{{each.cover | customImageUrl}}" alt="">
                     </div>
-                    <p *ngFor="let each of tutorData.language" class="bg-tutor-primary text-white me-1 px-2 my-1 inline-block">{{each}}</p>
-                  </div>
-      
-                  <div class="field w-full">
-                      <div class="flex justify-between my-2">
-                          <h1 class=" text-sm text-gray">Field</h1>
-                          <ng-icon class="text-black block cursor-pointer" name="bootstrapPencilSquare" (click)="editTag('field')" ></ng-icon>
-                        </div>
-                      <p  *ngFor="let each of tutorData.field" class="bg-tutor-primary text-white me-1 px-2 my-1 inline-block">{{each}}</p>
-                  </div>
-                  <div class="teaches">
-                      <div class="flex justify-between my-2">
-                          <h1 class=" text-sm text-gray">Teaches</h1>
-                          <ng-icon class="text-black block cursor-pointer" name="bootstrapPencilSquare" (click)="editTag('teaches')" ></ng-icon>
-                        </div>
-                        <p  *ngFor="let each of tutorData.teaches" class="bg-tutor-primary text-white me-1 px-2 my-1 inline-block">{{each}}</p>
-                  </div>
-            </div>
-        </div>
-        <div class="tutor-profile-right px-10 h-full basis-4/5">
-            <div class="top border-y-2 border-stone-400">
-                <div class="my-3">
-                    <form [formGroup]="profileUpdate" (ngSubmit)="updateUser()">
-                        <div class="children:my-1">
-                            <div class="name">
-
-                                <input
-                                    class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1 text-black'}}"
-                                    [readOnly]="!edit" type="text" value="Enter Your Name" formControlName="name"><br>
-                                <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('required')">name is
-                                    required !</p>
-                                <p class="text-red-600" *ngIf="profileUpdate.get('name')?.hasError('minlength')">name
-                                    should contain atleast 3 characters !</p>
-                            </div>
-                            <div class="email">
-                                <input
-                                    class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1'}}"
-                                    [readOnly]="!edit" type="email" placeholder="Enter Your Name"
-                                    formControlName="email"><br>
-                                <p class="text-red-600" *ngIf="profileUpdate.get('email')?.hasError('required')">email
-                                    is required !</p>
-                                <p class="text-red-600" *ngIf="profileUpdate.get('email')?.hasError('email')">enter a
-                                    valid email !</p>
-
-                            </div>
-                            <div class="contact">
-                                <input
-                                    class="w-full rounded  py-1 {{!edit?'outline-none text-gray':'border border-black outline-blue-600  px-1'}}"
-                                    [readOnly]="!edit" type="text" placeholder="Add Your Contact Number"
-                                    formControlName="contact"><br>
-                                <p class="text-red-600" *ngIf="profileUpdate.get('contact')?.hasError('pattern')">enter
-                                    a valid number</p>
-                            </div>
+                    <div class="card-bottom h-[10rem] flex flex-col justify-between">
+                        <div class="course-details-top text-gray p-2
+                        children:text-sm children:inline">
+                            <p class="">Angular</p>
+                            <p class="float-right">4:00 hrs</p>
 
                         </div>
-                        <div class="button my-2 text-end">
-                            <button *ngIf="!edit" type="button"
-                                class="text-md font-semibold rounded text-white bg-tutor-primary px-3 py-1"
-                                (click)="onEditClick()">Edit profile</button>
-
-                            <button *ngIf="edit" type="button"
-                                class="text-md font-semibold rounded text-white bg-tutor-primary px-3 py-1 me-3"
-                                (click)="cancelEdit()">Cancel</button>
-
-                            <button *ngIf="edit" [disabled]="profileUpdate.invalid" type="submit"
-                                class="text-md font-semibold rounded text-white bg-primary px-3 py-1">Update</button>
-
-
+                        <div class="course-title p-2 overflow-hidden">
+                            <h1 class="font-bold [font-size:_clamp(20px,2rem,5rem)]">{{each.title}}</h1>
                         </div>
-                    </form>
-                </div>
-            </div>
-            <div class="bottom">
-                <div class="border-b-2 border-stone-400 h-[2.5rem] children:h-full">
-                    <ul class="flex m-[0] children:mx-2 children:flex children:items-center children:h-full">
-                        
-                    </ul>
-                </div>
-            </div>
-            <div class="routers">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-    </div>
-</main>
 
-<section class="py-2">
-    <div class="title flex justify-between my-2">
-        <h1 class="text-2xl font-bold">Education</h1>
-        <button class="bg-tutor-primary text-white px-[11px] py-1 font-bold rounded-full" (click)="addEducation()">+</button>
-    </div>
-
-    <div class="education-list my-1 grid grid-cols-2 gap-3">
-        <div *ngFor="let each of educationDetails" class="group education-detail flex border border-transparent rounded
-         hover:border-light-gray relative">
-
-            <div class="absolute right-0 invisible group-hover:visible p-1 cursor-pointer" (click)="deleteEducation(each.ed_id)">
-                <ng-icon name="bootstrapTrash3Fill"></ng-icon>
-            </div>
-
-            <div class="icon p-4 bg-zinc-200 rounded">
-                <img class="w-[3rem] h-auto" src="../../../../assets/icons/graduation-cap-svgrepo-com.svg" alt="">
-            </div>
-            <div class="description px-1">
-                <h3 class="font-bold">{{each.university}}</h3>
-                <p class="text-sm text-light-gray">{{each.stream}}</p>
-                <p class="text-sm text-light-gray">{{each.country}}</p>
-                <p class="text-xs font-semibold">{{each.year}}</p>
+                        <div class="course-detail-bottom p-2 ">
+                            <p class="text-sm text-gray inline my-auto">44Videos</p>
+                            <a class="text-sm ms-2 bg-primary font-bold float-right text-white p-1 px-2 rounded">add to cart</a>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

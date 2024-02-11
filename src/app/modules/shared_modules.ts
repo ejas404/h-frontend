@@ -19,7 +19,8 @@ import { RatingModule } from 'primeng/rating';
         RouterModule,
         ReactiveFormsModule,
         ProgressSpinnerModule,
-        RatingModule
+        RatingModule,
+        MatDialogModule
     ],
     exports : [
         FormsModule,
@@ -34,6 +35,4 @@ import { RatingModule } from 'primeng/rating';
         RatingModule
     ]
 })
-export class SharedModules{
-
-}
+export class SharedModules{}

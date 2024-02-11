@@ -1,17 +1,15 @@
-<section class="courses my-10 px-32 h-[100vh] bg-gray-bg relative snap-start">
-    <div class="text-center w-full h-[20%] flex justify-center items-center">
-        <h1 class="text-3xl font-extrabold">Courses</h1>
-    </div>
-
-    
-    <!-- <button class="absolute left-4 bg-black text-white">Left</button>
-    <button class="absolute right-4 bg-black text-white">Right</button> -->
-
-    <div class="courses-list h-[80%] w-full flex justify-center items-center ">
-
-        <div class="items flex overflow-x-scroll px-5 no-scrollbar">
-            <div *ngFor="let each of courses"
-                class="flex-none mx-5 course-card w-[18rem] h-[22rem] border border-light-gray rounded-xl overflow-hidden bg-white">
+<section  class="courses my-10 px-32 h-[100vh] bg-gray-bg flex" >
+    <div class=" relative w-[60rem] h-[23rem] block my-auto flex-grow">
+        <swiper #swiper
+        [slidesPerView]="3"
+        [spaceBetween]="10"
+        [pagination]="{ clickable: true }"
+        [scrollbar]="{ draggable: true }"
+        [virtual]="true"
+        >
+        <ng-template swiperSlide *ngFor="let each of courses" >
+            <div 
+                class="flex-none mx-5 my-10 course-card w-[18rem] h-[22rem] border border-light-gray rounded-xl overflow-hidden bg-white">
 
                 <a routerLink="/course/{{each._id}}">
 
@@ -36,6 +34,14 @@
                     </div>
                 </a>
             </div>
-        </div>
+        </ng-template>
+    </swiper>
+    <next-prev-btn class="absolute top-[50%] left-[-5%] rotate-180" (click)="slidePrev()"></next-prev-btn>
+    <next-prev-btn class="absolute top-[50%] right-[-5%]" (click)="slideNext()"></next-prev-btn>
     </div>
 </section>
+
+
+
+<!-- (swiper)="onSwiper($event)"
+(slideChange)="onSlideChange()" -->

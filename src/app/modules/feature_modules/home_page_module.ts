@@ -18,8 +18,7 @@ import { CourseListComponent } from "app/pages/student/home-page-components/cour
 import { CourseSidebarComponent } from "app/pages/student/home-page-components/course-page-components/course-sidebar/course-sidebar.component";
 import { CourseTopFilterBtnsComponent } from "app/pages/student/home-page-components/course-page-components/course-top-filter-btns/course-top-filter-btns.component";
 import { AboutComponent } from "app/pages/student/home-page-components/about/about.component";
-
-
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
     declarations : [
@@ -44,10 +43,8 @@ import { AboutComponent } from "app/pages/student/home-page-components/about/abo
         SharedModules,
         ReusableComponentsModule,
         SharedComponentsModule,
-      
+        SwiperModule
     ]
     
 })
-export class HomePageModule{
-
-}
+export class HomePageModule{}
