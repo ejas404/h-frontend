@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'dashboard-date-picker',
@@ -9,6 +9,8 @@ export class DatePickerComponent {
   selectedDay !: any;
   selectedMonth !: any;
   selectedYear !: number;
+
+  @Output() selectEvent = new EventEmitter()
 
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   years: number[] = [];
@@ -28,12 +30,28 @@ export class DatePickerComponent {
   }
 
   updateDays(): void {
-    if(!this.selectedMonth) return;
-    const days = new Date(this.selectedYear, this.selectedMonth, 0).getDate();
-    this.daysInMonth = Array.from({ length: days }, (_, i) => i + 1);
-    const selectedDay = this.selectedDay;
-    if (typeof(selectedDay)=== 'number' && selectedDay > days) {
-      this.selectedDay = ''
+    if (this.selectedMonth) {
+      const days = new Date(this.selectedYear, this.selectedMonth, 0).getDate();
+      this.daysInMonth = Array.from({ length: days }, (_, i) => i + 1);
+      const selectedDay = this.selectedDay;
+      if (typeof (selectedDay) === 'number' && selectedDay > days) {
+        this.selectedDay = ''
+      }
     }
+
+    this.dateSelect()
   }
+
+  dateSelect() {
+    if (this.selectedMonth === '') this.selectedMonth = null;
+    if (this.selectedDay === '') this.selectedDay = null;
+    const date = {
+      year: Number(this.selectedYear),
+      month:Number(this.selectedMonth),
+      date: Number(this.selectedDay)
+    }
+    this.selectEvent.emit(date)
+  }
+
+
 }

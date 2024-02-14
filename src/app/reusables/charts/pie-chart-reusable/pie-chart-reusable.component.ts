@@ -14,7 +14,7 @@ export class PieChartReusableComponent {
 
   destroy$ !: Subscription;
 
-  @Input() pieChartList !: PieChartResModel;
+  pieChartList !: PieChartResModel;
   @Input() loadEvent !: EventEmitter<null>;
   @ViewChild("chart") chart !: ChartComponent;
   public chartOptions: Partial<PieChartOptions>;

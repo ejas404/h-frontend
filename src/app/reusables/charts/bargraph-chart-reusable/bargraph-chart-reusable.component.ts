@@ -1,6 +1,7 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, ViewChild } from '@angular/core';
 import { LineChartOptions } from 'app/core/models/chart_model';
 import { ChartComponent } from 'ng-apexcharts';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'bargraph-chart-reusable',
@@ -8,20 +9,35 @@ import { ChartComponent } from 'ng-apexcharts';
   styleUrl: './bargraph-chart-reusable.component.scss'
 })
 export class BargraphChartReusableComponent {
-  @Input()viewList : any;
+
+  destroy$ !: Subscription;
+  viewList: any;
   @ViewChild("chart") chart !: ChartComponent;
+  @Input() loadEvent !: EventEmitter<null>;
   public chartOptions: Partial<LineChartOptions>;
 
   constructor() {
     this.chartOptions = {};
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.destroy$ = this.loadEvent
+      .subscribe({
+        next: (response: any) => {
+          this.viewList = response;
+          this.loadChart()
+        }
+      })
+
+  }
+
+
+  loadChart() {
     this.chartOptions = {
       series: [
         {
-          name: "Desktops",
-          data: [this?.viewList?.data]
+          name: "courses",
+          data: this.viewList.data
         }
       ],
       chart: {
@@ -48,9 +64,12 @@ export class BargraphChartReusableComponent {
         }
       },
       xaxis: {
-        categories: [this?.viewList?.categories]
+        categories: this.viewList.categories
       }
     };
   }
 
+  ngOnDestroy() {
+    this.destroy$.unsubscribe()
+  }
 }

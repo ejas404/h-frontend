@@ -1,8 +1,10 @@
 <section class="overflow-y-auto">
-    <dashboard-date-picker></dashboard-date-picker>
+    <dashboard-date-picker (selectEvent)="dateSelected($event)" ></dashboard-date-picker>
     <div class="px-2">
         <!-- bar-graph-chart -->
-        <bargraph-chart-reusable [viewList]="viewList"></bargraph-chart-reusable>
+        <bargraph-chart-reusable 
+        [loadEvent]="chartLoad"
+        ></bargraph-chart-reusable>
     </div>
 
 </section>
