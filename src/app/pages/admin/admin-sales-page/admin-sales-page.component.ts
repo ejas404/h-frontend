@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { PieChartResModel } from 'app/core/models/chart_model';
+import { OrderResModel } from 'app/core/models/enroll_models';
 import { DashboardSalesService } from 'app/core/services/admin/dashboard_sales_service';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -12,7 +13,8 @@ import { Subject, takeUntil } from 'rxjs';
 export class AdminSalesPageComponent {
 
   destroy$ = new Subject<void>()
-  pieChartList !: PieChartResModel;
+  orderList !: OrderResModel[];
+  viewList !: any;
   
   @Output()chartLoad = new EventEmitter()
 
@@ -30,7 +32,9 @@ export class AdminSalesPageComponent {
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: res => {
-        this.pieChartList = res.pieChart;
+        this.orderList = res.orders;
+        console.log('data', res.orders)
+        console.log(this.orderList)
         this.chartLoad.emit(res.pieChart)
       },
       error: err => {

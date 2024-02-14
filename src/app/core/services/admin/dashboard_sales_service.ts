@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core"
 import { BASE_URL } from "app/core/constant/uri"
 import { PieChartResModel } from "app/core/models/chart_model"
 import { PopularCourseModel } from "app/core/models/dashboard_model"
+import { OrderResModel } from "app/core/models/enroll_models"
 
 @Injectable()
 export class DashboardSalesService{
@@ -16,7 +17,7 @@ export class DashboardSalesService{
     }
 
     getChartDetails(){
-        return this.http.get<{pieChart : PieChartResModel}>(`${BASE_URL}/admin/chart`)
+        return this.http.get<{pieChart : PieChartResModel , orders : OrderResModel[]}>(`${BASE_URL}/admin/chart`)
     }
     
 }

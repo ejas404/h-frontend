@@ -30,8 +30,6 @@ import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
-import { AdminSalesPageComponent } from './pages/admin/admin-sales-page/admin-sales-page.component';
-
 
 @NgModule({
   declarations: [

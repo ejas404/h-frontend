@@ -1,0 +1,26 @@
+<section class="flex justify-end p-2 children:ms-1">
+    <div>
+        <select [(ngModel)]="selectedDay"
+            class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+            <option value="" selected disabled>Select Day</option>
+            <option *ngFor="let day of daysInMonth" [value]="day">{{ day }}</option>
+        </select>
+    </div>
+
+    <div>
+        <select [(ngModel)]="selectedMonth" (change)="updateDays()"
+            class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+            <option value="" selected disabled>Select Month</option>
+            <option *ngFor="let month of months; let i = index" [value]="i+1">{{ month }}</option>
+        </select>
+    </div>
+
+    <div>
+        <select [(ngModel)]="selectedYear" (change)="updateDays()"
+            class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+            <option value="" disabled>Select Year</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+    </div>
+
+</section>

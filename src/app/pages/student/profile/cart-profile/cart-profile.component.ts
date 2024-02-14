@@ -26,8 +26,10 @@ export class CartProfileComponent {
   ngOnInit() {
     this.studentCourseService.getCartData().subscribe({
       next: res => {
-        this.cartDetails = res.cartItems
-        this.subTotal = res.cartTotal
+        if(res.success){
+          this.cartDetails = res.cartItems
+          this.subTotal = res.cartTotal
+        }
 
         if(this.cartDetails){
           this.checkOutDisable = false

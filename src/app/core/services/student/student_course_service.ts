@@ -20,7 +20,7 @@ export class StudentCourseService{
     }
     
     getCartData(){
-        return this.http.get<{cartItems : CartModel[] , cartTotal : number }>(`${BASE_URL}/student/cart`)
+        return this.http.get<{success : boolean ,cartItems : CartModel[] , cartTotal : number }>(`${BASE_URL}/student/cart`)
     }
 
     getCartList(){

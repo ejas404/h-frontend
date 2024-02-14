@@ -25,15 +25,15 @@
     </div>
 </section>
 
-<div class="charts mt-3">
-    <a class="flex" routerLink="/admin/sales">
+<div class="charts mt-3 flex">
+    <a routerLink="/admin/sales">
         <!-- bar-graph-chart -->
         <bargraph-chart-reusable></bargraph-chart-reusable>
+    </a>
        
         <!-- pie-graph-chart -->
         <pie-chart-reusable 
         [pieChartList]="pieChartList" 
         [loadEvent]="chartLoad"
         ></pie-chart-reusable>  
-    </a>
 </div>

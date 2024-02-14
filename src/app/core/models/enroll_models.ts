@@ -14,3 +14,9 @@ export interface EnrollSubcat{
         _id : string
     }
 }
+
+export interface OrderResModel{
+    _id : string
+    amountPayable : number
+    createdAt : Date
+}

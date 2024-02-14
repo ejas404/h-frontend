@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { LineChartOptions } from 'app/core/models/chart_model';
 import { ChartComponent } from 'ng-apexcharts';
 
@@ -8,15 +8,20 @@ import { ChartComponent } from 'ng-apexcharts';
   styleUrl: './bargraph-chart-reusable.component.scss'
 })
 export class BargraphChartReusableComponent {
+  @Input()viewList : any;
   @ViewChild("chart") chart !: ChartComponent;
   public chartOptions: Partial<LineChartOptions>;
 
   constructor() {
+    this.chartOptions = {};
+  }
+
+  ngOnInit(){
     this.chartOptions = {
       series: [
         {
           name: "Desktops",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+          data: [this?.viewList?.data]
         }
       ],
       chart: {
@@ -43,17 +48,7 @@ export class BargraphChartReusableComponent {
         }
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep"
-        ]
+        categories: [this?.viewList?.categories]
       }
     };
   }

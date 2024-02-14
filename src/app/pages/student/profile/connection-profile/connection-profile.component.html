@@ -16,4 +16,7 @@
 
         </div>
     </div>
+    <div *ngIf="!connList || !connList[0]" class="no-connections">
+        <h1 class="text-light-gray text-xl">No Connections Yet</h1>
+    </div>
 </section>
