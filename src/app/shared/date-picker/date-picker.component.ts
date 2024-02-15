@@ -22,10 +22,8 @@ export class DatePickerComponent {
       this.years.push(i);
     }
     this.selectedYear = currentYear;
-
     this.selectedMonth = '';
     this.selectedDay = ''
-
     this.updateDays();
   }
 
@@ -43,12 +41,19 @@ export class DatePickerComponent {
   }
 
   dateSelect() {
-    if (this.selectedMonth === '') this.selectedMonth = null;
-    if (this.selectedDay === '') this.selectedDay = null;
+
+    let dd = this.selectedDay
+    let mm = this.selectedMonth
+    let yyyy = this.selectedYear
+
+    if(dd === '') dd = null;
+    if(mm === '') mm = null;
+    
+
     const date = {
-      year: Number(this.selectedYear),
-      month:Number(this.selectedMonth),
-      date: Number(this.selectedDay)
+      year: Number(yyyy),
+      month:Number(mm),
+      date: Number(dd)
     }
     this.selectEvent.emit(date)
   }

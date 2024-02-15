@@ -64,7 +64,6 @@ export class AdminSalesPageComponent {
     if (!month && !date) {
       return this.getYearly(yyyy)
     }
-
     if(!date){
       return this.getMonthly(yyyy,mm)
     }
