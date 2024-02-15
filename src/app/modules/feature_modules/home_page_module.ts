@@ -19,9 +19,15 @@ import { CourseSidebarComponent } from "app/pages/student/home-page-components/c
 import { CourseTopFilterBtnsComponent } from "app/pages/student/home-page-components/course-page-components/course-top-filter-btns/course-top-filter-btns.component";
 import { AboutComponent } from "app/pages/student/home-page-components/about/about.component";
 import { SwiperModule } from 'swiper/angular';
+import { AdminLoginComponent } from "app/pages/admin/admin-login/admin-login.component";
+import { TutorSignupComponent } from "app/pages/tutor/tutor-signup/tutor-signup.component";
+import { TutorLoginComponent } from "app/pages/tutor/tutor-login/tutor-login.component";
 
 @NgModule({
     declarations : [
+        AdminLoginComponent,
+        TutorSignupComponent,
+        TutorLoginComponent,
         LoginComponent,
         SignupComponent,
         LoginOtpComponent,

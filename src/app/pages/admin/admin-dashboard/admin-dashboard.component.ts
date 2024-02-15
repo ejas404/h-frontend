@@ -7,6 +7,10 @@ import { DashboardSalesService } from 'app/core/services/admin/dashboard_sales_s
 import { getCourseList, getTutorList, getUsersList } from 'app/core/state/admin/dashboard/reducer';
 import { Subject, takeUntil } from 'rxjs';
 
+
+console.log('admin module loading printed dashboard');
+
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',

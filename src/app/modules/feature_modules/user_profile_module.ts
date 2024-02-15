@@ -17,7 +17,16 @@ import { PaymentSuccessComponent } from "app/pages/payment_sucess";
 import { PaymentProcessingComponent } from "app/pages/student/payment-components.ts/payment-processing/payment-processing.component";
 import { FreeBuyComponent } from "app/pages/student/payment-components.ts/free-buy/free-buy.component";
 import { OauthComponentComponent } from "app/pages/student/auth-page-components/oauth-component/oauth-component.component";
+import { RouterModule, Routes } from "@angular/router";
+import { NotificationProfileComponent } from "app/pages/student/profile/notification-profile/notification-profile.component";
 
+const routes: Routes = [
+    { path: '', component: StudentProfileComponent },
+      { path: 'courses', component: CoursesProfileComponent },
+      { path: 'connection', component: ConnectionProfileComponent },
+      { path: 'account', component: AccountProfileComponent },
+      { path: 'notification', component: NotificationProfileComponent },
+]
 
 
 @NgModule({
@@ -38,6 +47,7 @@ import { OauthComponentComponent } from "app/pages/student/auth-page-components/
         OauthComponentComponent
     ],
     imports : [
+        RouterModule.forChild(routes),
         SharedModules,
         SharedComponentsModule,
         ReusableComponentsModule

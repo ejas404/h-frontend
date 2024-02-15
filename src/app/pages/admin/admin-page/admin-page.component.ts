@@ -4,8 +4,6 @@ import * as DashboardActions from '../../../core/state/admin/dashboard/action';
 import { Subject, takeUntil } from 'rxjs';
 import { DashboardCourseService } from 'app/core/services/admin/dashboard_course_service';
 
-console.log('admin module loading printed');
-
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',

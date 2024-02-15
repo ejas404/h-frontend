@@ -30,6 +30,7 @@ import { ProgressSpinnerInterceptor } from './core/interceptors/progress_spinner
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
+import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,6 @@ import { AppComponent } from './app.component';
     SharedModules,
     SharedComponentsModule,
     ReusableComponentsModule,
-    AdminDashboardModule,
     HomePageModule,
     TutorModule,
     UserProfileModule,

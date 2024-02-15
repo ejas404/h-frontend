@@ -14,11 +14,19 @@ import { TutorSideNavComponent } from "app/pages/tutor/tutor-side-nav/tutor-side
 import { TutorRightSideComponent } from "app/pages/tutor/tutor-right-side/tutor-right-side.component";
 import { TutorEducationComponent } from "app/pages/tutor/tutor-education/tutor-education.component";
 import { SingleCourseTutorComponent } from "app/pages/tutor/single-course-tutor/single-course-tutor.component";
+import { RouterModule, Routes } from "@angular/router";
+
+const routes: Routes = [
+    { path: '', component: TutorProfileComponent },
+    { path: 'account', component: TutorAccountComponent },
+    { path: 'courses', component: TutorCourseComponent },
+    { path: 'students', component: TutorStudentsComponent },
+    { path: 'education', component: TutorEducationComponent },
+]
+
 
 @NgModule({
     declarations: [
-        TutorSignupComponent,
-        TutorLoginComponent,
         TutorProfilePageComponent,
         TutorProfileComponent,
         TutorAccountComponent,
@@ -31,6 +39,7 @@ import { SingleCourseTutorComponent } from "app/pages/tutor/single-course-tutor/
         SingleCourseTutorComponent
     ],
     imports : [
+        RouterModule.forChild(routes),
         SharedModules,
         SharedComponentsModule,
         ReusableComponentsModule,

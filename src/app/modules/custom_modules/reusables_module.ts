@@ -119,7 +119,6 @@ import { NextPrevBtnComponent } from "app/reusables/buttons/next-prev-btn-compon
     ],
     imports :[
         RouterModule,
-        AppRoutingModule,
         SharedModules,
         NgApexchartsModule
     ]

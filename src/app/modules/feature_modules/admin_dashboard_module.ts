@@ -2,10 +2,10 @@ import { NgModule } from "@angular/core";
 import { AdminCoursesComponent } from "app/pages/admin/admin-courses/admin-courses.component";
 import { AdminDashboardComponent } from "app/pages/admin/admin-dashboard/admin-dashboard.component";
 import { AdminLoginComponent } from "app/pages/admin/admin-login/admin-login.component";
-import {  AdminPageComponent } from "app/pages/admin/admin-page/admin-page.component";
+import { AdminPageComponent } from "app/pages/admin/admin-page/admin-page.component";
 import { AdminOthersComponent } from "app/pages/admin/admin-others/admin-settings.component";
 import { AdminSidebarComponent } from "app/pages/admin/admin-sidebar/admin-sidebar.component";
-import {  AdminStudentsComponent } from "app/pages/admin/admin-students/admin-students.component";
+import { AdminStudentsComponent } from "app/pages/admin/admin-students/admin-students.component";
 import { AdminTutorsComponent } from "app/pages/admin/admin-tutors/admin-tutors.component";
 import { SingleCourseAdminComponent } from "app/pages/admin/single-course-admin/single-course-admin.component";
 import { SharedComponentsModule } from "../custom_modules/shared_components_modules";
@@ -15,14 +15,31 @@ import { UpcomingCoursesComponent } from "app/pages/admin/admin-others-componets
 import { AdminAccountComponent } from "app/pages/admin/admin-others-componets/account/account.component";
 import { BannerComponent } from "app/pages/admin/admin-others-componets/banner/banner.component";
 import { AdminOtherTopbarComponent } from "app/pages/admin/admin-others-componets/admin-other-topbar/admin-other-topbar.component";
-import {TabViewModule} from "primeng/tabview"
+import { TabViewModule } from "primeng/tabview"
 import { AdminVideoPreviewComponent } from "app/pages/admin/admin-video-preview/admin-video-preview.component";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { AdminSalesPageComponent } from "app/pages/admin/admin-sales-page/admin-sales-page.component";
+import { Router, RouterModule, Routes } from "@angular/router";
+
+const routes: Routes = [
+    { path: '', component: AdminDashboardComponent },
+    { path: 'students', component: AdminStudentsComponent },
+    { path: 'tutors', component: AdminTutorsComponent },
+    { path: 'courses', component: AdminCoursesComponent },
+    { path: 'sales', component: AdminSalesPageComponent },
+    {
+        path: 'others', component: AdminOthersComponent,
+        children: [
+            { path: 'upcoming-courses', component: UpcomingCoursesComponent },
+            { path: 'account', component: AdminAccountComponent },
+            { path: 'banner', component: BannerComponent },
+            { path: '', redirectTo: 'upcoming-courses', pathMatch: 'full' },
+        ]
+    }
+]
 
 @NgModule({
-    declarations : [
-        AdminLoginComponent,
+    declarations: [
         AdminDashboardComponent,
         AdminStudentsComponent,
         AdminTutorsComponent,
@@ -38,13 +55,14 @@ import { AdminSalesPageComponent } from "app/pages/admin/admin-sales-page/admin-
         AdminVideoPreviewComponent,
         AdminSalesPageComponent
     ],
-    imports : [
+    imports: [
+        RouterModule.forChild(routes),
         SharedModules,
         SharedComponentsModule,
         ReusableComponentsModule,
         TabViewModule
     ]
 })
-export class AdminDashboardModule{
+export class AdminDashboardModule {
 
 }

@@ -61,58 +61,35 @@ const routes: Routes = [
       { path: '', component: HomepageComponent },
     ]
   },
+  { path: 'admin/login', component: AdminLoginComponent },
+  { path: 'admin/course/:id', canActivate: [adminGuard], component: SingleCourseAdminComponent },
+  { path: 'admin/course/:id/:video', canActivate: [adminGuard], component: AdminVideoPreviewComponent },
   {
-    path: 'admin', canActivate: [adminGuard], component: AdminPageComponent,
-    children: [
-      { path: '', component: AdminDashboardComponent },
-      { path: 'students', component: AdminStudentsComponent },
-      { path: 'tutors', component: AdminTutorsComponent },
-      { path: 'courses', component: AdminCoursesComponent },
-      {path : 'sales',component : AdminSalesPageComponent},
-      {
-        path: 'others', component: AdminOthersComponent,
-        children : [
-          {path : 'upcoming-courses',component : UpcomingCoursesComponent},
-          {path : 'account',component : AdminAccountComponent},
-          {path : 'banner',component : BannerComponent},
-          {path : '', redirectTo : 'upcoming-courses', pathMatch : 'full'},
-        ]
-      }
-    ]
+    path: 'admin',
+     canActivate: [adminGuard], 
+     component: AdminPageComponent,
+     loadChildren : ()=> import('./modules/feature_modules/admin_dashboard_module').then(m => m.AdminDashboardModule)
+  },
+  { path: 'tutor/login', component: TutorLoginComponent },
+  { path: 'tutor/signup', component: TutorSignupComponent },
+  { path: 'tutor/course/:id', canActivate: [tutorGuard, tutorBlockGuard], component: SingleCourseTutorComponent },
+  {
+    path: 'tutor', 
+    canActivate: [tutorGuard, tutorBlockGuard], 
+    component: TutorProfilePageComponent,
+    loadChildren : ()=> import('./modules/feature_modules/tutor_module').then(m=>m.TutorModule)
   },
   {
-    path: 'profile', canActivate: [studentGuard, studentBlockGuard], component: MainProfileComponent,
-    children: [
-      { path: '', component: StudentProfileComponent },
-      { path: 'courses', component: CoursesProfileComponent },
-      { path: 'connection', component: ConnectionProfileComponent },
-      { path: 'account', component: AccountProfileComponent },
-      { path: 'notification', component: NotificationProfileComponent },
-    ]
+    path: 'profile', 
+    canActivate: [studentGuard, studentBlockGuard], 
+    component: MainProfileComponent,
+    loadChildren : () => import('./modules/feature_modules/user_profile_module').then(m=> m.UserProfileModule)
 
   },
   { path: 'cart', canActivate: [studentGuard, studentBlockGuard], component: CartProfileComponent },
   { path: 'checkout', canActivate: [studentGuard, studentBlockGuard], component: CheckOutPageComponent },
   { path: 'checkout/:id', canActivate: [studentGuard, studentBlockGuard], component: CheckOutPageComponent },
   { path: 'course/:id/:video', component: StudentVideoPreviewComponent },
-  {
-    path: 'tutor', canActivate: [tutorGuard, tutorBlockGuard], component: TutorProfilePageComponent,
-    children: [
-      { path: '', component: TutorProfileComponent },
-      { path: 'account', component: TutorAccountComponent },
-      { path: 'courses', component: TutorCourseComponent },
-      { path: 'students', component: TutorStudentsComponent },
-      { path: 'education', component: TutorEducationComponent },
-
-    ]
-  },
-  
-  { path: 'tutor/login', component: TutorLoginComponent },
-  { path: 'tutor/signup', component: TutorSignupComponent },
-  { path: 'tutor/course/:id', canActivate: [tutorGuard, tutorBlockGuard], component: SingleCourseTutorComponent },
-  { path: 'admin/login', component: AdminLoginComponent },
-  { path: 'admin/course/:id', canActivate: [adminGuard], component: SingleCourseAdminComponent },
-  { path: 'admin/course/:id/:video', canActivate: [adminGuard], component: AdminVideoPreviewComponent },
   {path : 'oauth', component : OauthComponentComponent},
   {path : 'payment/check/:id',canActivate: [studentGuard, studentBlockGuard],component : PaymentProcessingComponent},
   {path : 'processing/:id',canActivate: [studentGuard, studentBlockGuard],component : FreeBuyComponent},
@@ -127,7 +104,7 @@ const routes: Routes = [
   providers: []
 })
 export class AppRoutingModule {
-  static forRoot(appRoutes: any): any[] | import("@angular/core").Type<any> | import("@angular/core").ModuleWithProviders<{}> {
-    throw new Error('Method not implemented.');
-  }
+  // static forRoot(appRoutes: any): any[] | import("@angular/core").Type<any> | import("@angular/core").ModuleWithProviders<{}> {
+  //   throw new Error('Method not implemented.');
+  // }
 }
