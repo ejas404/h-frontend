@@ -55,7 +55,9 @@ export class MainProfileComponent implements OnInit {
   }
 
   listenToMessages(){
-    this.messageService.recieve().subscribe({
+    this.messageService.recieve()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next : res =>{
         this.toast.success('you have a text message')
       }
