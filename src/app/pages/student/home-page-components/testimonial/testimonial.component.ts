@@ -11,17 +11,17 @@ export class TestimonialComponent {
     {
       name: 'Max',
       message: 'something work stuff',
-      img: 'assets/student/faces/portrait-white-man-isolated_53876-40306.avif'
+      img: 'assets/student/faces/stud1.avif'
     },
     {
       name: 'Karl',
       message: '"The digital nature of e-learning allows for real-time updates and ensures that educational content remains current."',
-      img: 'assets/student/faces/indian-man-smiling-mockup-psd-cheerful-expression-closeup-portra_53876-143269.jpg'
+      img: 'assets/student/faces/stud2.jpg'
     },
     {
       name: 'Some',
       message: '"The digital nature of e-learning allows for real-time updates and ensures that educational content remains current."',
-      img: 'assets/student/faces/young-beautiful-woman-looking-camera-trendy-girl-casual-summer-white-t-shirt-jeans-shorts-positive-female-shows-facial-emotions-funny-model-isolated-yellow.avif'
+      img: 'assets/student/faces/stud2.jpg'
     }
   ]
 
