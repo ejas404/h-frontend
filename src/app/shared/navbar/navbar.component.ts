@@ -1,5 +1,8 @@
 import { Component, DoCheck, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { FirebaseConfigService } from 'app/core/services/shared/firebase_config_srevice';
+import { Subject, Subscription, takeUntil } from 'rxjs';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 
 @Component({
   selector: 'app-navbar',
@@ -7,20 +10,27 @@ import { Router } from '@angular/router';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements DoCheck {
+
   @Input() user !: string;
+  destroy$ !: Subscription;
+  destroySub$ = new Subject<void>()
   isLogged: boolean = false;
   visible: boolean = true;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private fcmConfig : FirebaseConfigService,
+    private afMessaging: AngularFireMessaging
+    ) { }
   prevScrollpos = window.scrollY;
 
   ngOnInit(){
-    console.log('previous', this.prevScrollpos)
+   this.subscribeFirebase()
   }
 
   // hide and show the navbar on the socroll event;
   @HostListener('window:scroll', ['$event'])
-  onScroll(event: any) {
+  onScroll() {
     const currentScrollPos = window.scrollY;
     if (this.prevScrollpos > currentScrollPos) this.visible = true;  
     else this.visible = false;
@@ -37,5 +47,30 @@ export class NavbarComponent implements DoCheck {
     }
   }
 
+  subscribeFirebase(){
+    this.destroy$ = this.fcmConfig.isAction.subscribe({
+      next : res => {
+        if(res === true){
+          this.serverNotification()
+        }else{
+          this.destroySub$.next()
+          this.destroySub$.complete()
+        }
+      }
+    })
+  }
+
+  serverNotification(){
+    this.afMessaging.messages
+    .pipe(takeUntil(this.destroySub$))
+    .subscribe((msg) => {
+        alert('server side messages')
+        console.log(msg)
+    });
+  }
+
+  ngOnDestroy(){
+    this.destroy$.unsubscribe()
+  }
 
 }

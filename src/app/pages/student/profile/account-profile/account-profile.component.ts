@@ -5,6 +5,7 @@ import { StudentProfileService } from '../../../../core/services/student/profile
 import { SuccessMessage } from '../../../../core/models/server_response_model';
 import { Subject, takeUntil } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { FirebaseConfigService } from 'app/core/services/shared/firebase_config_srevice';
 
 @Component({
   selector: 'app-account-profile',
@@ -18,7 +19,8 @@ export class AccountProfileComponent {
 
   constructor(
     private service: StudentProfileService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private fcmConfig : FirebaseConfigService
     ) {}
 
   resetPassword(data: NgForm) {
@@ -47,6 +49,7 @@ export class AccountProfileComponent {
   }
 
   logout() {
+    this.fcmConfig.setAction(false)
     this.service.logout()
   }
 

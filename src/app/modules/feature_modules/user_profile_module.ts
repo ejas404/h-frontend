@@ -19,18 +19,20 @@ import { FreeBuyComponent } from "app/pages/student/payment-components.ts/free-b
 import { OauthComponentComponent } from "app/pages/student/auth-page-components/oauth-component/oauth-component.component";
 import { RouterModule, Routes } from "@angular/router";
 import { NotificationProfileComponent } from "app/pages/student/profile/notification-profile/notification-profile.component";
+import { environment } from "environments/environment";
+import { AngularFireModule } from '@angular/fire/compat';
 
 const routes: Routes = [
     { path: '', component: StudentProfileComponent },
-      { path: 'courses', component: CoursesProfileComponent },
-      { path: 'connection', component: ConnectionProfileComponent },
-      { path: 'account', component: AccountProfileComponent },
-      { path: 'notification', component: NotificationProfileComponent },
+    { path: 'courses', component: CoursesProfileComponent },
+    { path: 'connection', component: ConnectionProfileComponent },
+    { path: 'account', component: AccountProfileComponent },
+    { path: 'notification', component: NotificationProfileComponent },
 ]
 
 
 @NgModule({
-    declarations : [
+    declarations: [
         StudentProfileComponent,
         ConnectionProfileComponent,
         AccountProfileComponent,
@@ -46,7 +48,7 @@ const routes: Routes = [
         FreeBuyComponent,
         OauthComponentComponent
     ],
-    imports : [
+    imports: [
         RouterModule.forChild(routes),
         SharedModules,
         SharedComponentsModule,
@@ -54,4 +56,4 @@ const routes: Routes = [
     ],
 
 })
-export class UserProfileModule{}
+export class UserProfileModule { }

@@ -15,6 +15,8 @@ import { TutorRightSideComponent } from "app/pages/tutor/tutor-right-side/tutor-
 import { TutorEducationComponent } from "app/pages/tutor/tutor-education/tutor-education.component";
 import { SingleCourseTutorComponent } from "app/pages/tutor/single-course-tutor/single-course-tutor.component";
 import { RouterModule, Routes } from "@angular/router";
+import { AngularFireModule } from "@angular/fire/compat";
+import { environment } from "environments/environment";
 
 const routes: Routes = [
     { path: '', component: TutorProfileComponent },

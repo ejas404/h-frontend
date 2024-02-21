@@ -8,6 +8,7 @@ import { ProfileImagePopupComponent } from '../../../../shared/popups/profile-im
 import { Subject, takeUntil } from 'rxjs';
 import { MessageTextService } from 'app/core/services/message_service';
 import { ToastService } from 'app/core/services/shared/toast_service';
+import { FirebaseConfigService } from 'app/core/services/shared/firebase_config_srevice';
 
 @Component({
   selector: 'app-main-profile',
@@ -24,10 +25,13 @@ export class MainProfileComponent implements OnInit {
     private store: Store,
     private dialogRef: MatDialog,
     private messageService : MessageTextService,
-    private toast : ToastService
+    private toast : ToastService,
+    private fcmConfig : FirebaseConfigService
   ) { }
 
   ngOnInit(): void {
+    // emit action to navbar
+    this.fcmConfig.setAction(true)
 
     // establish connection on socket
     this.listenToMessages()

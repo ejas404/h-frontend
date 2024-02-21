@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { SharedComponentsModule } from './modules/custom_modules/shared_components_modules';
-import { AdminDashboardModule } from './modules/feature_modules/admin_dashboard_module';
 import { HomePageModule } from './modules/feature_modules/home_page_module';
 import { TutorModule } from './modules/feature_modules/tutor_module';
 import { UserProfileModule } from './modules/feature_modules/user_profile_module';
@@ -31,6 +30,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'environments/environment';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.compo
     HomePageModule,
     TutorModule,
     UserProfileModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     StoreModule.forRoot(
       {
         auth: authReducer,
