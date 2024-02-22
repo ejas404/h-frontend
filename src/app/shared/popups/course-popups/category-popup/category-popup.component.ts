@@ -29,7 +29,7 @@ export class CategoryPopupComponent {
       .subscribe({
         next: res => {
           this.toastService.success('category added successfully')
-          this.communicateService.setAction(res.newCategory)
+          this.communicateService.setAction(res.newCategory,'mainCat')
         },
         error : err =>{
           this.toastService.fail(err.error.message || 'failed to add category')
@@ -43,7 +43,7 @@ export class CategoryPopupComponent {
       .subscribe({
         next : res =>{
           this.toastService.success('subcategory added successfully')
-          this.communicateService.setAction(res.newSubCategory)
+          this.communicateService.setAction(res.newSubCategory,'subCat')
         },
         error : err =>{
           this.toastService.fail(err.error.message || 'failed to add subcategory')

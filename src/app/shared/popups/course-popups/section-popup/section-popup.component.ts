@@ -34,7 +34,7 @@ export class SectionPopupComponent {
       .subscribe({
         next: res => {
           this.toastService.success(res.msg)
-          this.communicateService.setAction(res.newSection)
+          this.communicateService.setAction(res.newSection,'section')
         },
         error: err => {
           this.toastService.fail(err.error.message)

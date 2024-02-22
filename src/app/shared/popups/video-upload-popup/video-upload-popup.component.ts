@@ -117,11 +117,9 @@ export class VideoUploadPopupComponent {
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next : res =>{
-        if(this.sectionList){
-          this.sectionList.push(res)
-        }else{
-          this.sectionList = [res]
-        }
+        if(res.data !== 'section') return;
+        if(this.sectionList){ this.sectionList.push(res.data)}
+        else{this.sectionList = [res.data]}
       }
     })
   }

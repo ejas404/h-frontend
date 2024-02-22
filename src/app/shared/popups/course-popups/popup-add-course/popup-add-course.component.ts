@@ -143,7 +143,8 @@ export class PopupAddCourseComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: res => {
-          this.categoryList = [...this.categoryList.slice(), res]
+          if(res.called !== 'mainCat') return;
+          this.categoryList = [...this.categoryList.slice(), res.data]
         }
       })
   }
@@ -169,8 +170,9 @@ export class PopupAddCourseComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: res => {
-          this.filteredSubCat = [...this.filteredSubCat.slice(), res]
-          this.subCategoryList = [...this.subCategoryList.slice(), res]
+          if(res.called !== 'subCat') return;
+          this.filteredSubCat = [...this.filteredSubCat.slice(), res.data]
+          this.subCategoryList = [...this.subCategoryList.slice(), res.data]
         }
       })
 

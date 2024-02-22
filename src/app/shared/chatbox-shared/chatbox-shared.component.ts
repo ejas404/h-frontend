@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MessageModel } from 'app/core/models/chat_model';
 import { MessageTextService } from 'app/core/services/message_service';
 import { decodeUserToken } from 'app/core/utils/check_token';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, take, takeUntil } from 'rxjs';
 import { ChatImagePopupComponent } from '../popups/chat-image-popup/chat-image-popup.component';
+import { ComponetCommunicationService } from 'app/core/services/shared/communicate_service';
 
 @Component({
   selector: 'app-chatbox-shared',
@@ -14,13 +15,16 @@ import { ChatImagePopupComponent } from '../popups/chat-image-popup/chat-image-p
 export class ChatboxSharedComponent {
 
   user_id !: string;
-  oldChats : MessageModel[] = []
+  oldChats: MessageModel[] = []
   text !: string
-  destroy$ !: Subscription
+  blob !: Blob;
+  destroy$ = new Subject<void>()
+  @ViewChild('messageContainer') messageContainer!: ElementRef;
 
   constructor(
     private textMsgService: MessageTextService,
     private dialogRef: MatDialog,
+    private communicateService: ComponetCommunicationService,
     @Inject(MAT_DIALOG_DATA) public data: { id: string }
   ) { }
 
@@ -29,48 +33,78 @@ export class ChatboxSharedComponent {
     this.subReply()
   }
 
-  getOldMessages(){
+  getOldMessages() {
     const user = decodeUserToken()
-    if(!user) return;
+    if (!user) return;
     this.user_id = user.userId;
-    const route = user.role === 'Student'? 'student':'tutor';
-    this.textMsgService.getOldMessages(this.data.id,route).subscribe({
-      next : res => {
-        this.oldChats = res
-      }
-    })   
+    const route = user.role === 'Student' ? 'student' : 'tutor';
+    this.textMsgService.getOldMessages(this.data.id, route)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          this.oldChats = res
+        }
+      })
   }
 
   subReply() {
-    this.destroy$ = this.textMsgService.recieve().subscribe({
-      next: res => {
-        this.oldChats.push(res)
-      },
-      error: err => {
-        console.log('error occured ' + err)
-      }
-    })
+    this.textMsgService.recieve()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          this.oldChats.push(res)
+        },
+        error: err => {
+          console.log('error occured ' + err)
+        }
+      })
   }
 
-  send(event : string) {
-    if(!this.text) return;
-    const data = { message: this.text, receiver: this.data.id, sender : this.user_id}
-    this.textMsgService.send(data,event)
+  send(event: string) {
+    if (!this.text) return;
+    const data = { message: this.text, receiver: this.data.id, sender: this.user_id, contentType: "IMAGE" as "IMAGE" }
+    // this.textMsgService.send(data, event)
     this.oldChats.push(data)
+    this.scrollToBottom()
     this.text = ''
   }
 
-  imageSend(){
-    this.dialogRef.open( ChatImagePopupComponent, {
+  imageSelect() {
+    this.dialogRef.open(ChatImagePopupComponent, {
       width: '400px',
       height: '400px'
     })
+
+    this.communicateService.isDone
+      .pipe(take(1))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: res => {
+          if (res.called !== 'chat') return;
+          this.blob = res.data
+        }
+      })
   }
 
-  
+  imageSend() {
+    const blob = this.blob
+    const file = new File([blob], `${this.user_id}-${Date.now()}.jpg`, { type: blob.type })
+    const uploadForm = new FormData()
+    uploadForm.append('chat_image', file, file.name)
+  }
+
+
+
+  scrollToBottom(): void {
+    setTimeout(() => {
+      this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight ;
+    }, 100);
+    
+  }
 
   ngOnDestroy() {
-    this.destroy$.unsubscribe()
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
 }

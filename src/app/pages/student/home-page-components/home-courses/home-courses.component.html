@@ -16,18 +16,18 @@
                     <div class="card-img w-full h-[12rem]">
                         <img class="object-contain h-full w-full" src="{{each.cover | customImageUrl}}" alt="">
                     </div>
-                    <div class="card-bottom h-[10rem] flex flex-col justify-between">
+                    <div class="card-bottom h-[10rem] flex flex-col justify-between px-2">
                         <div class="course-details-top text-gray p-2
                         children:text-sm children:inline">
                             <p class="">Angular</p>
                             <p class="float-right">4:00 hrs</p>
 
                         </div>
-                        <div class="course-title p-2 overflow-hidden">
-                            <h1 class="font-bold [font-size:_clamp(20px,2rem,5rem)]">{{each.title}}</h1>
+                        <div class="course-title p-1">
+                            <h1 class="font-bold text-3xl truncate">{{each.title | titlecase}}</h1>
                         </div>
 
-                        <div class="course-detail-bottom p-2 ">
+                        <div class="course-detail-bottom p-1 mb-2">
                             <p class="text-sm text-gray inline my-auto">44Videos</p>
                             <a class="text-sm ms-2 bg-primary font-bold float-right text-white p-1 px-2 rounded">add to cart</a>
                         </div>

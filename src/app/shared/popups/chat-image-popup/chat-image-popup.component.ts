@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ComponetCommunicationService } from 'app/core/services/shared/communicate_service';
 import { ToastService } from 'app/core/services/shared/toast_service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 
@@ -18,6 +19,7 @@ export class ChatImagePopupComponent {
 
   constructor(
     private toastService: ToastService,
+    private communicate : ComponetCommunicationService
   ) { }
 
   inputUpload(event: any) {
@@ -38,8 +40,9 @@ export class ChatImagePopupComponent {
     this.toastService.fail('Image failed to load')
   }
 
-  uploadImage() {
-  
+  selectImage() {
+    const blob: any = this.cropResponse.blob
+    this.communicate.setAction(blob,'chat')
   }
 
 

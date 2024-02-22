@@ -1,15 +1,22 @@
 <section class="message-container">
     <!-- message -->
     <div class="w-full px-2 flex flex-col justify-between">
-        <div class="flex flex-col mt-5 overflow-y-auto h-[370px]">
+        <div #messageContainer class="flex flex-col mt-5 overflow-y-auto h-[370px]">
 
             <ng-container *ngFor="let each of oldChats">
 
                 <!-- send -->
                 <div *ngIf="each.sender === this.user_id else recieved" class="flex justify-end mb-4">
-                    <div class="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                    <div *ngIf="each.contentType === 'TEXT' "
+                        class="mr-2 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                         {{each.message}}
                     </div>
+
+                    <div *ngIf="each.contentType === 'IMAGE'"
+                        class="h-[10rem] border border-light-gray rounded mr-2 p-1">
+                        <img class="object-contain w-full h-full" src="../../../assets/student/faces/stud2.jpg" alt="">
+                    </div>
+
                     <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full"
                         alt="" />
                 </div>
@@ -20,9 +27,16 @@
                     <div class="flex justify-start mb-4">
                         <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
                             class="object-cover h-8 w-8 rounded-full" alt="" />
-                        <div
+
+                        <div *ngIf="each.contentType === 'TEXT'"
                             class="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl bg-black text-white">
                             {{each.message}}
+                        </div>
+
+                        <div *ngIf="each.contentType === 'IMAGE'"
+                            class="h-[10rem] border border-light-gray rounded ml-2 p-1">
+                            <img class="object-contain w-full h-full" src="../../../assets/student/faces/stud2.jpg"
+                                alt="">
                         </div>
                     </div>
                     <!-- /recieved -->
@@ -32,13 +46,16 @@
 
         </div>
         <div class="py-5 relative ">
-            <input [(ngModel)]="text" class="w-full bg-gray-300 py-5 border border-light-gray px-3 pe-5 rounded-xl"
-                type="text" placeholder="type your message here..." />
-           
-            <common-btn-reusable (click)="imageSend()" class="absolute right-[4.5rem] top-9"
+            <input [(ngModel)]="text" [disabled]="!!this.blob"
+                class="w-full bg-gray-300 py-5 border border-light-gray px-3 pe-5 rounded-xl" type="text"
+                placeholder="type your message here..." />
+
+            <common-btn-reusable *ngIf="!this.text && !this.blob" (click)="imageSelect()" class="absolute right-2 top-9"
                 [styleClass]="'bg-black text-white'">img</common-btn-reusable>
-            <common-btn-reusable (click)="send('msg')" class="absolute right-2 top-9"
+            <common-btn-reusable *ngIf="this.text" (click)="send('msg')" class="absolute right-2 top-9"
                 [styleClass]="'bg-black text-white'">send</common-btn-reusable>
+            <common-btn-reusable *ngIf="this.blob" (click)="imageSend()" class="absolute right-2 top-9"
+                [styleClass]="'bg-black text-white'">send img</common-btn-reusable>
         </div>
     </div>
     <!-- /message -->
