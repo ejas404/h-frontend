@@ -1,17 +1,20 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { BASE_URL } from "../../core/constant/uri";
+import { environment } from "environments/environment";
+
+const production = environment.production
+const SERVER_URL = environment.SERVER_URL
 
 @Pipe({
-    name : 'customProfileUrl'
+    name: 'customProfileUrl'
 })
 
-export class CustomProfileUrlPipe implements PipeTransform{
+export class CustomProfileUrlPipe implements PipeTransform {
     transform(value: string | undefined) {
-        if(typeof(value) === 'string'){
-            // return `${BASE_URL}/${value.slice(11)}`
+        if (typeof (value) !== 'string') { return '../../../../assets/student/fixed-images/634682.png' }
+        
+        if (production === true) {
             return `${value.slice(11)}`
         }
-
-        return '../../../../assets/student/fixed-images/634682.png'
+        return `${SERVER_URL}/${value.slice(11)}`
     }
 }

@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core"
 import { HttpClient } from "@angular/common/http"
 import { Router } from "@angular/router"
 import { Observable } from "rxjs"
-import { BASE_URL } from "../../constant/uri"
 import { PasswordUpdate, TutorUpdateModel } from "../../models/student"
 import { TutorEducation, TutorModel, TutorTagResponse} from "../../models/tutor"
 import { CourseDetails, CourseDetailsResponse } from "../../models/course"
-import { TutorProfilePageComponent } from "../../../pages/tutor/tutor-profile-page/tutor-profile-page.component"
+import { environment } from "environments/environment"
 
+const BASE_URL = environment.BASE_URL
 
 @Injectable({providedIn  :'root'})
 export class TutorProfileService{

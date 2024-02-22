@@ -1,12 +1,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BASE_URL } from "../../constant/uri";
 import { Observable } from "rxjs";
 import { OtpModel, UserModel } from "../../models/auth";
 import { PasswordUpdate, StudentUpdateModel } from "../../models/student";
 import { Router } from "@angular/router";
+import { environment } from "environments/environment";
 
-
+const BASE_URL = environment.BASE_URL
 
 @Injectable({
     providedIn : 'root'

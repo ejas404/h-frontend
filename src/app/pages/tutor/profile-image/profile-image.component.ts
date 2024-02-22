@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TutorModel } from '../../../core/models/tutor';
 import { Store } from '@ngrx/store';
-import { BASE_URL } from '../../../core/constant/uri';
-import { getTutorData } from '../../../core/state/tutor/profile/action';
 import { getTutorStoreData } from '../../../core/state/tutor/profile/reducer';
 import { Subject, takeUntil } from 'rxjs';
 

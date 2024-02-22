@@ -32,6 +32,7 @@ import { AppComponent } from './app.component';
 import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'environments/environment';
+import { ChatImagePopupComponent } from './shared/popups/chat-image-popup/chat-image-popup.component';
 
 @NgModule({
   declarations: [

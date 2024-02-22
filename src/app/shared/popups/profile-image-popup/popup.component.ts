@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { profilePicUpdateSuccess } from '../../../core/state/tutor/profile/action';
 import { studentPicUpdateSuccess } from '../../../core/state/student/profile_page/action';
 import { Subject, takeUntil } from 'rxjs';
+import { ToastService } from 'app/core/services/shared/toast_service';
 
 @Component({
   selector: 'app-popup',
@@ -21,7 +22,7 @@ export class ProfileImagePopupComponent {
   constructor(
     private studService: StudentProfileService,
     private tutorService: TutorProfileService,
-    private messageService: MessageService,
+    private toastService: ToastService,
     private store : Store,
     @Inject(MAT_DIALOG_DATA) public data: { calledFor: string }
   ) { }
@@ -48,11 +49,7 @@ export class ProfileImagePopupComponent {
 
   loadImageFailed() {
     this.button = true
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Load Fail',
-      detail: 'Image failed to load'
-    })
+    this.toastService.fail('Image failed to load')
   }
 
 
@@ -69,11 +66,11 @@ export class ProfileImagePopupComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next :  (data) => {
-          this.serverUploadSuccess()
+          this.toastService.success('Profile Image updated successfully')
           this.store.dispatch(studentPicUpdateSuccess(data))
         },
         error : (err)=>{
-          this.serverUploadFail()
+          this.toastService.fail('Profile Image Failed to Update')
         }
       })
     } else if (this.data.calledFor === 'tutor') {
@@ -81,32 +78,16 @@ export class ProfileImagePopupComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next : (data) => {
-          this.serverUploadSuccess()
+          this.toastService.success('Profile Image updated successfully')
           this.store.dispatch(profilePicUpdateSuccess(data))
         },
         error : (err)=>{
-          this.serverUploadFail()
+          this.toastService.fail('Profile Image Failed to Update')
         }
        
       })
     }
 
-  }
-
-  serverUploadSuccess(){
-    this.messageService.add({
-      severity : 'success',
-      summary : 'Success',
-      detail : 'Profile Image updated successfully'
-    })
-  }
-
-  serverUploadFail(){
-    this.messageService.add({
-      severity : 'error',
-      summary : 'Failed',
-      detail : 'Profile Image Failed to Update'
-    })
   }
 
   ngOnDestroy(){

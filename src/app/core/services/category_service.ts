@@ -1,8 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { CategoryModel, SubCategoryModel } from "../models/course";
-import { BASE_URL } from "../constant/uri";
-import { Subject } from "rxjs";
+import { environment } from "environments/environment";
+
+
+const BASE_URL = environment.BASE_URL
 
 @Injectable()
 export class CategoryService{

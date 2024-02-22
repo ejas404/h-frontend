@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BASE_URL } from "app/core/constant/uri";
 import { ConnectionsResponse } from "app/core/models/server_response_model";
+import { environment } from "environments/environment";
 
+const BASE_URL = environment.BASE_URL
 
 @Injectable()
 export class StudentConnectionService{

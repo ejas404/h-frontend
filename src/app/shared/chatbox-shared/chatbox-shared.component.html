@@ -32,9 +32,12 @@
 
         </div>
         <div class="py-5 relative ">
-            <input [(ngModel)]="text" class="w-full bg-gray-300 py-5 border border-light-gray px-3 rounded-xl"
+            <input [(ngModel)]="text" class="w-full bg-gray-300 py-5 border border-light-gray px-3 pe-5 rounded-xl"
                 type="text" placeholder="type your message here..." />
-            <common-btn-reusable (click)="send()" class="absolute right-2 top-9"
+           
+            <common-btn-reusable (click)="imageSend()" class="absolute right-[4.5rem] top-9"
+                [styleClass]="'bg-black text-white'">img</common-btn-reusable>
+            <common-btn-reusable (click)="send('msg')" class="absolute right-2 top-9"
                 [styleClass]="'bg-black text-white'">send</common-btn-reusable>
         </div>
     </div>

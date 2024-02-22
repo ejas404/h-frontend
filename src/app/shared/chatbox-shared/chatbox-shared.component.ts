@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MessageModel } from 'app/core/models/chat_model';
 import { MessageTextService } from 'app/core/services/message_service';
 import { decodeUserToken } from 'app/core/utils/check_token';
 import { Subscription } from 'rxjs';
+import { ChatImagePopupComponent } from '../popups/chat-image-popup/chat-image-popup.component';
 
 @Component({
   selector: 'app-chatbox-shared',
@@ -19,6 +20,7 @@ export class ChatboxSharedComponent {
 
   constructor(
     private textMsgService: MessageTextService,
+    private dialogRef: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: { id: string }
   ) { }
 
@@ -50,12 +52,22 @@ export class ChatboxSharedComponent {
     })
   }
 
-  send() {
+  send(event : string) {
+    if(!this.text) return;
     const data = { message: this.text, receiver: this.data.id, sender : this.user_id}
-    this.textMsgService.send(data)
+    this.textMsgService.send(data,event)
     this.oldChats.push(data)
     this.text = ''
   }
+
+  imageSend(){
+    this.dialogRef.open( ChatImagePopupComponent, {
+      width: '400px',
+      height: '400px'
+    })
+  }
+
+  
 
   ngOnDestroy() {
     this.destroy$.unsubscribe()

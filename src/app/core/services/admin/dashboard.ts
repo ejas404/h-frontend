@@ -1,9 +1,10 @@
-import { Observable } from 'rxjs';
-import { BASE_URL } from '../../constant/uri';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/auth';
-import { TutorModel } from '../../models/tutor';
+import { environment } from 'environments/environment';
+
+
+const BASE_URL = environment.BASE_URL
 
 
 interface UserLists {

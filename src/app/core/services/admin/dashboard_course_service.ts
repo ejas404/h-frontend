@@ -1,9 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BASE_URL } from "app/core/constant/uri";
 import { AdminCourseTutorResponse } from "app/core/models/admin_model";
-import { CourseDetails, CourseDetailsResponse, UpcomingCourse } from "app/core/models/course";
+import { CourseDetailsResponse, UpcomingCourse } from "app/core/models/course";
+import { environment } from "environments/environment";
 import { Observable } from "rxjs";
+
+const BASE_URL = environment.BASE_URL
 
 @Injectable()
 export class DashboardCourseService {

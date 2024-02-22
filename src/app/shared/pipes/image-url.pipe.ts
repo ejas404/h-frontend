@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { BASE_URL } from "../../core/constant/uri";
+import { environment } from "environments/environment";
+
+const SERVER_URL = environment.SERVER_URL
+const production = environment.production
 
 @Pipe({
     name : 'customImageUrl'
@@ -8,8 +11,10 @@ import { BASE_URL } from "../../core/constant/uri";
 export class CustomImageUrlPipe implements PipeTransform{
     transform(value: string | undefined) {
         if(typeof(value) === 'string'){
-            // return `${BASE_URL}/${value.slice(11)}`
-            return `${value.slice(11)}`
+            if (production === true) {
+                return `${value.slice(11)}`
+            }
+            return `${SERVER_URL}/${value.slice(11)}`
         }
 
         return '../../../../assets/fixed/depositphotos_132018592-stock-photo-online-courses-concept-with-hand.jpg'

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from '../../../../core/models/auth';
-import { BASE_URL } from '../../../../core/constant/uri';
 import { Store } from '@ngrx/store';
-import { getUserData } from '../../../../core/state/student/profile_page/action';
 import { getStudData } from '../../../../core/state/student/profile_page/reducer';
 import { Subject, takeUntil } from 'rxjs';
 

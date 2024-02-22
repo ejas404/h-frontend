@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BASE_URL } from '../../../../core/constant/uri';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseDetailsResponse, CourseVideoResponseList } from '../../../../core/models/course';
 import { HomePageCourseService } from '../../../../core/services/home/homepage-course';

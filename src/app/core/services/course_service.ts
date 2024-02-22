@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { SectionFormDetails, SectionResponse } from "../models/section_video_model";
 import { HttpClient } from "@angular/common/http";
-import { BASE_URL } from "../constant/uri";
 import { CourseDetails, CourseDetailsResponse, CourseVideoResponseList, UpcomingCourse } from "../models/course";
+import { environment } from "environments/environment";
+
+const BASE_URL = environment.BASE_URL
 
 @Injectable({
     providedIn : 'root'

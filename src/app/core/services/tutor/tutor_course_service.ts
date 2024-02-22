@@ -1,9 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BASE_URL } from "app/core/constant/uri";
 import { CourseDetails, CourseDetailsResponse } from "app/core/models/course";
 import { VideoWithUrl } from "app/core/models/section_video_model";
+import { environment } from "environments/environment";
 import { Observable } from "rxjs";
+
+const BASE_URL = environment.BASE_URL
 
 @Injectable()
 export class TutorCourseService {

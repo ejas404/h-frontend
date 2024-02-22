@@ -3,8 +3,9 @@ import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
 import { Socket, io } from "socket.io-client";
-import { BASE_URL } from "../constant/uri";
 import { MessageModel } from "../models/chat_model";
+
+const BASE_URL = environment.BASE_URL
 
 @Injectable({
     providedIn : 'root'
@@ -17,8 +18,8 @@ export class MessageTextService{
         this.socket = io(environment.socketUrl)
     }
 
-    send(data : {message : string, receiver : string}){
-        this.socket.emit('msg', data)
+    send(data : {message : string, receiver : string},event : string){
+        this.socket.emit(event, data)
     }
 
     recieve(): Observable<MessageModel>{

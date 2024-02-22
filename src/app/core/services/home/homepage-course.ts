@@ -1,7 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BASE_URL } from "../../constant/uri";
-import { CourseDetailsResponse, CourseVideoResponseList } from "../../models/course";
+import { CourseDetailsResponse } from "../../models/course";
+import { environment } from "environments/environment";
+
+const BASE_URL = environment.BASE_URL
 
 @Injectable()
 export class HomePageCourseService {

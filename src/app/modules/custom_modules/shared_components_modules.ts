@@ -24,6 +24,7 @@ import { CategoryPopupComponent } from "app/shared/popups/course-popups/category
 import { AdminDashboardTopCardComponent } from "app/shared/admin-dashboard-top-card/admin-dashboard-top-card.component";
 import { ChatboxSharedComponent } from "app/shared/chatbox-shared/chatbox-shared.component";
 import { DatePickerComponent } from "app/shared/date-picker/date-picker.component";
+import { ChatImagePopupComponent } from "app/shared/popups/chat-image-popup/chat-image-popup.component";
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { DatePickerComponent } from "app/shared/date-picker/date-picker.componen
         CategoryPopupComponent,
         ChatboxSharedComponent,
         AdminDashboardTopCardComponent,
-        DatePickerComponent
+        DatePickerComponent,
+        ChatImagePopupComponent
     ],
     exports: [
         ProfileImagePopupComponent,
@@ -64,7 +66,8 @@ import { DatePickerComponent } from "app/shared/date-picker/date-picker.componen
         CategoryPopupComponent,
         ChatboxSharedComponent,
         AdminDashboardTopCardComponent,
-        DatePickerComponent
+        DatePickerComponent,
+        ChatImagePopupComponent
     ],
     imports: [
         ImageCropperModule,

@@ -4,10 +4,10 @@ import { Store } from '@ngrx/store';
 import { tutorCourseSuccess } from '../../../core/state/tutor/profile/action';
 import { CourseDetailsResponse } from '../../../core/models/course';
 import { getTutorStoreData } from '../../../core/state/tutor/profile/reducer';
-import { BASE_URL } from '../../../core/constant/uri';
-import { MatDialog } from '@angular/material/dialog';
-import { RequestCoursePopupComponent } from '../../../shared/popups/course-popups/request-course-popup/request-course-popup.component';
 import { Subject, takeUntil } from 'rxjs';
+import { environment } from 'environments/environment';
+
+const BASE_URL = environment.BASE_URL
 
 @Component({
   selector: 'app-tutor-course',
