@@ -22,9 +22,21 @@ export const isStudentToken = () : boolean => {
     return user.role === 'Student'
 }
 
+export const isTutorToken = () : boolean => {
+    const user : JWTDecodeModel | false = decodeUserToken()
+    if(!user) return false;
+    return user.role === 'Tutor'
+}
+
+
 
 export const isAdminToken = () : boolean => {
     const user : JWTDecodeModel | false = decodeUserToken()
     if(!user) return false;
     return user.role === 'Admin'
+}
+
+export const checkUser = () : any => {
+    if (isStudentToken()) return 'student';
+    if (isTutorToken()) return 'tutor';
 }

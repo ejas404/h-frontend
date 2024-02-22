@@ -14,7 +14,7 @@
 
                     <div *ngIf="each.contentType === 'IMAGE'"
                         class="h-[10rem] border border-light-gray rounded mr-2 p-1">
-                        <img class="object-contain w-full h-full" src="../../../assets/student/faces/stud2.jpg" alt="">
+                        <img class="object-contain w-full h-full" src="{{each.message | customImageUrl}}" alt="">
                     </div>
 
                     <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full"
@@ -35,7 +35,7 @@
 
                         <div *ngIf="each.contentType === 'IMAGE'"
                             class="h-[10rem] border border-light-gray rounded ml-2 p-1">
-                            <img class="object-contain w-full h-full" src="../../../assets/student/faces/stud2.jpg"
+                            <img class="object-contain w-full h-full" src="{{each.message | customImageUrl}}"
                                 alt="">
                         </div>
                     </div>

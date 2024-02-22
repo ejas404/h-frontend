@@ -33,4 +33,8 @@ export class MessageTextService{
     getOldMessages(reciever : string,route : string){
         return this.http.get< MessageModel[]>(`${BASE_URL}/${route}/get-messages/${reciever}`)
     }
+
+    sendImage(form : FormData,route : string){
+        return this.http.post<{success : string,newChat : MessageModel}>(`${BASE_URL}/${route}/send-image`,form)
+    }
 }

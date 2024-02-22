@@ -2,10 +2,11 @@ import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MessageModel } from 'app/core/models/chat_model';
 import { MessageTextService } from 'app/core/services/message_service';
-import { decodeUserToken } from 'app/core/utils/check_token';
+import { checkUser, decodeUserToken } from 'app/core/utils/check_token';
 import { Subject, Subscription, take, takeUntil } from 'rxjs';
 import { ChatImagePopupComponent } from '../popups/chat-image-popup/chat-image-popup.component';
 import { ComponetCommunicationService } from 'app/core/services/shared/communicate_service';
+import { ToastService } from 'app/core/services/shared/toast_service';
 
 @Component({
   selector: 'app-chatbox-shared',
@@ -17,7 +18,7 @@ export class ChatboxSharedComponent {
   user_id !: string;
   oldChats: MessageModel[] = []
   text !: string
-  blob !: Blob;
+  blob !: Blob | null;
   destroy$ = new Subject<void>()
   @ViewChild('messageContainer') messageContainer!: ElementRef;
 
@@ -25,6 +26,7 @@ export class ChatboxSharedComponent {
     private textMsgService: MessageTextService,
     private dialogRef: MatDialog,
     private communicateService: ComponetCommunicationService,
+    private toastService : ToastService,
     @Inject(MAT_DIALOG_DATA) public data: { id: string }
   ) { }
 
@@ -42,6 +44,7 @@ export class ChatboxSharedComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: res => {
+          console.log('old chats',res)
           this.oldChats = res
         }
       })
@@ -53,6 +56,7 @@ export class ChatboxSharedComponent {
       .subscribe({
         next: res => {
           this.oldChats.push(res)
+          this.scrollToBottom()
         },
         error: err => {
           console.log('error occured ' + err)
@@ -62,8 +66,8 @@ export class ChatboxSharedComponent {
 
   send(event: string) {
     if (!this.text) return;
-    const data = { message: this.text, receiver: this.data.id, sender: this.user_id, contentType: "IMAGE" as "IMAGE" }
-    // this.textMsgService.send(data, event)
+    const data = { message: this.text, receiver: this.data.id, sender: this.user_id, contentType: "TEXT" as "TEXT" }
+    this.textMsgService.send(data, event)
     this.oldChats.push(data)
     this.scrollToBottom()
     this.text = ''
@@ -87,19 +91,36 @@ export class ChatboxSharedComponent {
   }
 
   imageSend() {
+    if(!this.blob) return;
     const blob = this.blob
     const file = new File([blob], `${this.user_id}-${Date.now()}.jpg`, { type: blob.type })
     const uploadForm = new FormData()
-    uploadForm.append('chat_image', file, file.name)
+    const chatDetails = {receiver : this.data.id}
+    uploadForm.append('image', file, file.name)
+    uploadForm.append('chat', JSON.stringify(chatDetails));
+
+    const route = checkUser()
+    this.textMsgService.sendImage(uploadForm,route)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next : res =>{
+        if(!res.success) this.toastService.fail('failed to send image try later');
+        this.toastService.success(res.success)
+        this.blob = null;
+        this.oldChats.push(res.newChat)
+      },
+      error : err =>{
+        console.log(err)
+        this.blob = null;
+        this.toastService.fail('failed to send image try later');
+      }
+    }) 
   }
-
-
 
   scrollToBottom(): void {
     setTimeout(() => {
       this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight ;
-    }, 100);
-    
+    }, 100);   
   }
 
   ngOnDestroy() {
