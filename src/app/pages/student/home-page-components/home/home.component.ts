@@ -27,6 +27,12 @@ export class HomeComponent implements OnInit {
       if(params['mtid']){
         this.router.navigateByUrl(`/payment/check/${params['mtid']}`)
       }
+
+      
+      if(params['code']){
+        this.router.navigateByUrl(`/oauth?code=${params['mtid']}`)
+      }
+
     });
   }
 

@@ -21,7 +21,6 @@ export class OauthComponentComponent {
   ){}
 
   ngOnInit() {
-    console.log(window.location.href);
     const code = new URL(window.location.href).searchParams.get('code') as string
     this.requestAuth(code)
   }
