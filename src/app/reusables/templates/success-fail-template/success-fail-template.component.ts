@@ -7,11 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SuccessFailTemplateComponent {
   @Input()success !: boolean;
-  fail !: boolean;
 
-  ngOnInit(){
-    if(!this.success){
-      this.fail = true;
-    }
-  }
 }

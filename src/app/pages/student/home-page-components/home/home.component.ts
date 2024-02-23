@@ -30,7 +30,9 @@ export class HomeComponent implements OnInit {
 
       
       if(params['code']){
-        this.router.navigateByUrl(`/oauth?code=${params['mtid']}`)
+        console.log('from home')
+        console.log(params['code'])
+        this.router.navigateByUrl(`/oauth?code=${params['code']}`)
       }
 
     });

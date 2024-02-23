@@ -1,5 +1,5 @@
 <section>
-    <div *ngIf="fail" class="wrapper red">
+    <div *ngIf="success === false" class="wrapper red">
         <div class="header__wrapper">
             <div class="header">
                 <div class="sign"><span></span></div>
@@ -11,7 +11,7 @@
         <button routerLink="/courses" >back to courses</button>
     </div>
     
-    <div *ngIf="success" class="wrapper green">
+    <div *ngIf="success === true" class="wrapper green">
         <div class="header__wrapper">
             <div class="header">
                 <div class="sign"><span></span></div>
