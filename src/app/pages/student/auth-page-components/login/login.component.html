@@ -1,6 +1,6 @@
-<main class="px-[10rem] py-[5rem] w-full h-[100vh]">
-    <section class="login-page flex w-full h-full shadow-2xl shadow-box rounded-lg overflow-hidden">
-        <div class="login-page-left basis-2/5 flex flex-col px-5 py-5">
+<main class="lg:px-[10em] lg:py-[5em] w-full h-[100vh]">
+    <section class="px-10 py-5 md:px-0 md:py-0 login-page flex w-full h-full shadow-2xl shadow-box rounded-lg overflow-hidden">
+        <div class="login-page-left md:basis-2/5 flex flex-col px-5 py-5">
             <div class="login-form-top flex-1 flex items-center">
                 <div class="form px-5 ">
                     <reusable-login-template [usedFor]="'student'" (submitEvent)="onSubmitClick($event)"
@@ -13,7 +13,7 @@
                 </p>
             </div>
         </div>
-        <div class="login-page-right basis-3/5 bg-primary grid justify-items-center content-center">
+        <div class="hidden md:grid login-page-right basis-3/5 bg-primary justify-items-center content-center">
             <h1 class="logo text-white text-3xl"><a routerLink="/">horizon</a></h1>
         </div>
     </section>
