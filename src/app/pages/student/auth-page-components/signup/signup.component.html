@@ -1,21 +1,20 @@
-<main class="px-[10rem] py-[5rem] w-full h-[100vh]">
-    <section class="signup-page flex w-full h-full shadow-2xl shadow-box rounded-lg overflow-hidden">
-
-        <div class="signup-page-left basis-3/5 bg-primary grid justify-items-center content-center">
+<main class="lg:px-[10em] lg:py-[5em] w-full h-[100vh]">
+    <section class="bg-black md:bg-transparent px-10 py-5 md:px-0 md:py-0 login-page flex w-full h-full shadow-2xl shadow-box md:rounded-lg overflow-hidden">
+        
+        <div class="hidden md:grid login-page-right basis-3/5 bg-primary justify-items-center content-center">
             <h1 class="logo text-white text-3xl"><a routerLink="/">horizon</a></h1>
         </div>
-
-        <div class="signup-page-right basis-2/5 flex flex-col px-5 py-5">
-            <div class="signup-form-top flex-1 flex items-center">
+        
+        <div class="bg-white rounded-2xl login-page-left md:basis-2/5 flex flex-col px-5 py-5">
+            <div class="login-form-top flex-1 flex items-center">
                 <div class="form px-5 ">
                     <reusable-signup-template [usedFor]="'student'" (submitEvent)="onSubmitClick($event)"></reusable-signup-template>
                 </div>
             </div>
-            <div class="signup-form-bottom text-center">
+            <div class="login-form-navigate text-center">
                 <p class="text-sm">Already have an account ? <a class="text-primary" routerLink="/login">Login Now</a>
                 </p>
             </div>
         </div>
-
     </section>
 </main>

@@ -1,5 +1,8 @@
 <form (ngSubmit)="onSubmitClick(login)" #login="ngForm">
-    <h2 class="text-[1.5rem] font-bold mb-8">Welcome Back</h2>
+    <div class="">
+        <h2 class="hidden md:block text-[1.5rem] font-bold mb-8">Welcome Back</h2>
+        <h1 class="logo md:hidden text-primary text-3xl mb-8"><a routerLink="/">horizon</a></h1>
+    </div>
     <input ngModel name="email"
         class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
         type="email" placeholder="Email" #email="ngModel" required email>
@@ -20,7 +23,8 @@
     </button> -->
 
 
-    <button (click)="googleSign()" *ngIf="usedFor !== 'admin'" class="w-full border border-light-gray py-2 rounded my-2 text-sm" type="button">
+    <button (click)="googleSign()" *ngIf="usedFor !== 'admin'"
+        class="w-full border border-light-gray py-2 rounded my-2 text-sm" type="button">
         <span><img class="h-3 w-auto inline"
                 src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
                 alt=""> Sign up with Google</span>

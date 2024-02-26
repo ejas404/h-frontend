@@ -1,5 +1,10 @@
 <form (ngSubmit)="onSubmitClick(signup)" #signup="ngForm">
-    <h2 class="text-[1.5rem] font-bold mb-8">Sign Up Now</h2>
+
+    <!-- logo icon changes dynamically based on the the screen size -->
+     <div class="">
+        <h2 class="hidden md:block text-[1.5rem] font-bold mb-8">Welcome Back</h2>
+        <h1 class="logo md:hidden text-primary text-3xl mb-8"><a routerLink="/">horizon</a></h1>
+    </div>
 
     <input ngModel name="name"
         class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
