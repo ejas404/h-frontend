@@ -68,6 +68,7 @@ export class MainProfileComponent implements OnInit {
     })
   }
 
+
   ngOnDestroy(){
     this.destroy$.next()
     this.destroy$.complete()

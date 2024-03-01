@@ -10,5 +10,4 @@ export class CartBtnComponent{
     @Input() rLink !: string;
     @Input() styleClass !: string;
     @Input() calledFor !: string;
-
 }

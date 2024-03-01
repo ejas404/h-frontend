@@ -30,6 +30,10 @@ export class MessageTextService{
        })
     }
 
+    disconnect(){
+        this.socket.disconnect()
+    }
+
     getOldMessages(reciever : string,route : string){
         return this.http.get< MessageModel[]>(`${BASE_URL}/${route}/get-messages/${reciever}`)
     }

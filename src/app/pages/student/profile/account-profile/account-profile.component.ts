@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PasswordUpdate } from '../../../../core/models/student';
 import { StudentProfileService } from '../../../../core/services/student/profile';
-import { SuccessMessage } from '../../../../core/models/server_response_model';
 import { Subject, takeUntil } from 'rxjs';
-import { MessageService } from 'primeng/api';
 import { FirebaseConfigService } from 'app/core/services/shared/firebase_config_srevice';
+import { MessageTextService } from 'app/core/services/message_service';
+import { ToastService } from 'app/core/services/shared/toast_service';
 
 @Component({
   selector: 'app-account-profile',
@@ -19,8 +19,9 @@ export class AccountProfileComponent {
 
   constructor(
     private service: StudentProfileService,
-    private messageService : MessageService,
-    private fcmConfig : FirebaseConfigService
+    private fcmConfig : FirebaseConfigService,
+    private msgService : MessageTextService,
+    private toastService : ToastService
     ) {}
 
   resetPassword(data: NgForm) {
@@ -34,11 +35,10 @@ export class AccountProfileComponent {
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next :  (res) => {
-        this.serverUploadSuccess()
-
+       this.toastService.success('Password changed successfully')
       },
       error : err =>{
-        this.serverUploadFail(err.error.message)
+        this.toastService.fail(err.error.message || 'failed to update password')
       }
     })
 
@@ -50,28 +50,13 @@ export class AccountProfileComponent {
 
   logout() {
     this.fcmConfig.setAction(false)
+    this.msgService.disconnect()
     this.service.logout()
   }
 
   ngOnDestroy(){
     this.destroy$.next()
     this.destroy$.complete()
-  }
-
-  serverUploadSuccess(){
-    this.messageService.add({
-      severity : 'success',
-      summary : 'Success',
-      detail : 'Password changed successfully'
-    })
-  }
-
-  serverUploadFail(msg : string){
-    this.messageService.add({
-      severity : 'error',
-      summary : 'Failed',
-      detail : msg || 'failed to update password'
-    })
   }
 
 }
