@@ -4,12 +4,14 @@ import { decodeUserToken } from "app/core/utils/check_token";
 
 const user = decodeUserToken()
 
-
+const SERVER_URL = 'http://localhost:4440'
+const CLIENT_URL = 'http://localhost:4200'
 
 export const environment = {
     production: false,
-    BASE_URL :'http://localhost:4440/api',
-    SERVER_URL : 'http://localhost:4440',
+    BASE_URL :`${SERVER_URL}/api`,
+    SERVER_URL : SERVER_URL,
+    CLIENT_URL : CLIENT_URL,
     socketUrl: `http://localhost:4440/?user_id=${(user as JWTDecodeModel).userId}`,
     firebaseConfig: {
       apiKey: "AIzaSyCsUQEHma3uNYMzzrj3lX6KEsNce74cj0Q",

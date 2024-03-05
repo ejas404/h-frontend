@@ -5,11 +5,13 @@ import { decodeUserToken } from "app/core/utils/check_token";
 const user = decodeUserToken()
 
 const SERVER_URL = 'https://project-horizon.today'
+const CLIENT_URL = 'https://project-horizon-2.vercel.app'
 
 export const environment = {
   production: true,
   BASE_URL :`${SERVER_URL}/api`,
   SERVER_URL : SERVER_URL,
+  CLIENT_URL : CLIENT_URL,
   socketUrl: `${SERVER_URL}/?user_id=${(user as JWTDecodeModel).userId}`,
   firebaseConfig: {
     apiKey: "AIzaSyCsUQEHma3uNYMzzrj3lX6KEsNce74cj0Q",
