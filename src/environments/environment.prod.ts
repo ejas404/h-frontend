@@ -4,7 +4,7 @@ import { decodeUserToken } from "app/core/utils/check_token";
 
 const user = decodeUserToken()
 
-const SERVER_URL = 'https://project-horizon.today'
+const SERVER_URL = 'https://project-horizon.today/api'
 
 export const environment = {
   production: true,
