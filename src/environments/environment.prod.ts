@@ -8,7 +8,7 @@ const SERVER_URL = 'https://project-horizon.today'
 
 export const environment = {
   production: true,
-  BASE_URL :'https://project-horizon.today/api',
+  BASE_URL :`${SERVER_URL}/api`,
   SERVER_URL : SERVER_URL,
   socketUrl: `${SERVER_URL}/?user_id=${(user as JWTDecodeModel).userId}`,
   firebaseConfig: {

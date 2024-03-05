@@ -2,7 +2,6 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { environment } from "environments/environment";
 
 const SERVER_URL = environment.SERVER_URL
-const production = environment.production
 
 @Pipe({
     name : 'customImageUrl'
@@ -11,9 +10,6 @@ const production = environment.production
 export class CustomImageUrlPipe implements PipeTransform{
     transform(value: string | undefined) {
         if(typeof(value) === 'string'){
-            if (production === true) {
-                return `${value.slice(11)}`
-            }
             return `${SERVER_URL}/${value.slice(11)}`
         }
 
