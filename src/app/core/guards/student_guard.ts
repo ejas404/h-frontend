@@ -1,7 +1,6 @@
 import { CanActivateFn, Router } from "@angular/router";
 import { StudentProfileService } from "../services/student/profile";
 import { inject } from "@angular/core";
-import { MessageService } from "primeng/api";
 import { ToastService } from "../services/shared/toast_service";
 
 

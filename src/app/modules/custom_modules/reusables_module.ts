@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { AppRoutingModule } from "../../app-routing.module";
 import { SharedModules } from "../shared_modules";
 import { RouterModule } from "@angular/router";
 
@@ -39,6 +38,10 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { PieChartReusableComponent } from "app/reusables/charts/pie-chart-reusable/pie-chart-reusable.component";
 import { BargraphChartReusableComponent } from "app/reusables/charts/bargraph-chart-reusable/bargraph-chart-reusable.component";
 import { NextPrevBtnComponent } from "app/reusables/buttons/next-prev-btn-component";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 
 
 
@@ -120,7 +123,11 @@ import { NextPrevBtnComponent } from "app/reusables/buttons/next-prev-btn-compon
     imports :[
         RouterModule,
         SharedModules,
-        NgApexchartsModule
+        NgApexchartsModule,
+        MatFormFieldModule, 
+        MatInputModule,
+         MatButtonModule, 
+         MatIconModule
     ]
 })
 export class ReusableComponentsModule{}

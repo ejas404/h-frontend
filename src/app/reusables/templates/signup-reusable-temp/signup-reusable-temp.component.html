@@ -3,9 +3,10 @@
 
     <input ngModel name="name"
         class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-        type="text" placeholder="Name" #name="ngModel" required pattern="^[a-zA-Z]+$">
+        type="text" placeholder="Name" #name="ngModel" required pattern="^[a-zA-Z]{3,19}$">
 
-    <span *ngIf="!name.valid && name.touched" class="text-sm text-red-600">Enter a valid name</span>
+    <span *ngIf="!name.valid && name.touched" class="text-sm text-red-600">User name should not contain any special
+        character or spaces <br> Minimum 3 characters and should not exceed 20 characters</span>
 
     <input ngModel name="email"
         class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
@@ -15,18 +16,24 @@
         email</span>
     <!-- <span class="text-sm">Enter  your email here</span> -->
 
+
     <input ngModel name="password"
         class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-        type="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$"
-        #password="ngModel">
+        [type]="hide ? 'password' : 'text'" placeholder="Password" required
+        pattern="^(?=.*[A-Za-z])(?=.*\d)[a-z\d]{8,16}$" #password="ngModel">
 
-    <span *ngIf="!password.valid && password.touched" class="text-sm text-red-600">Password must be 8 to 16 characters and include at least one letter and one digit</span>
+    <!-- <button mat-icon-button matSuffix (click)="toggleEvent($event)" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button> -->
+
+    <span *ngIf="!password.valid && password.touched" class="text-sm text-red-600">Password must be 8 to 16 characters
+        and include at least one letter and one digit</span>
 
 
     <input ngModel name="confirmPassword"
         class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
-        type="password" placeholder="Confirm password" required pattern="{{password.value}}"
-        #confirm="ngModel">
+        type="password" placeholder="Confirm password" required pattern="{{password.value}}" #confirm="ngModel">
 
     <span *ngIf="!confirm.valid && confirm.touched" class="text-sm text-red-600">Password does not
         match</span>

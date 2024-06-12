@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 export class SignupReusableTempComponent {
 
   bg : string = ''
+  hide = true;
 
   @Input()usedFor !: string
   @Output()submitEvent = new EventEmitter()
@@ -23,6 +24,13 @@ export class SignupReusableTempComponent {
     }
 
   }
+
+  toggleEvent(event: MouseEvent) {
+    this.hide = !this.hide;
+    event.stopPropagation();
+    event.preventDefault()
+  }
+
 
   onSubmitClick(form : NgForm){
     this.submitEvent.emit(form)
