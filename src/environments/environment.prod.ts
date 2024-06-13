@@ -7,7 +7,7 @@ const user = decodeUserToken()
 const SERVER_URL = 'https://project-horizon.today'
 
 export const environment = {
-  production: true,
+  production: false,
   BASE_URL :'api',
   SERVER_URL : SERVER_URL,
   socketUrl: `${SERVER_URL}/?user_id=${(user as JWTDecodeModel).userId}`,
