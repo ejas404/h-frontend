@@ -7,7 +7,7 @@
 
     <span *ngIf="!name.valid && name.touched" class="text-sm text-red-600">User name should not contain any special
         character or spaces <br> Minimum 3 characters and should not exceed 20 characters</span>
-        
+
 
     <input ngModel name="email"
         class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
@@ -16,7 +16,6 @@
     <span *ngIf="!email.valid && email.touched" class="text-sm text-red-600">Enter a valid
         email</span>
     <!-- <span class="text-sm">Enter  your email here</span> -->
-
 
     <input ngModel name="password"
         class="border  border-light-gray text-black placeholder-light-gray text-sm px-2 py-2 w-full my-2 rounded"
