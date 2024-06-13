@@ -3,9 +3,6 @@ import { JWTDecodeModel } from "app/core/models/auth";
 import { decodeUserToken } from "app/core/utils/check_token";
 
 const user = decodeUserToken()
-
-// const SERVER_URL = 'http://localhost:4440'
-
 const SERVER_URL = 'https://project-horizon.today'
 
 export const environment = {
